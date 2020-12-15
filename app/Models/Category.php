@@ -17,6 +17,6 @@ class Category extends Model
     /* START SCOPES */
     public function scopeSelectCard($query)
     {
-      return $query->select('id','name_'.app()->getLocale().' as name');
+      return $query->select('id','main_category_type','name_'.app()->getLocale().' as name');
     }
 }

@@ -5,17 +5,16 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use App\Models\Category;
 
-class CategoryRule implements Rule
+class MainCategoryTypeRule implements Rule
 {
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($mainCategoryType = null)
+    public function __construct()
     {
         //
-        $this->mainCategoryType = $mainCategoryType;
     }
 
     /**
@@ -27,11 +26,7 @@ class CategoryRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $checkCategory = Category::where('id',$value);
-        if($this->mainCategoryType){
-            $checkCategory = $checkCategory->where('main_category_type',$this->mainCategoryType);
-        }
-        return $checkCategory->count();
+        return in_array($value,['technical','training','consultation']);
     }
 
     /**

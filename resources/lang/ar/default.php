@@ -13,12 +13,13 @@ return [
         'default' => 'نجاح',
         'user_registered' => 'تم تسجيل المستخدم بنجاح',
         'code_already_sent' => 'الرمز مرسل من قبل',
-        'service_added' => 'تم اضافة الخدمة بنجاح',
+        'service_saved' => 'تم حفظ الخدمة بنجاح',
         'service_deleted' => 'تم حذف الخدمة بنجاح',
         'email_sent' => 'تم ارسال الرسالة بنجاح',
         'reset_code_sent' => 'تم ارسال رمز استرجاع كلمة السر على البريد الألكتروني'
     ],
     'other' => [
+        'main_category_types' => ['technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'],
         'all_rights_reserved' => 'جميع الحقوق محفوظة منصة تم :year'
     ]
 ];

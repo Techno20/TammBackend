@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use DB, Storage;
+use DB, Storage,Helper;
+
 class Service extends Model
 {
 
@@ -16,7 +17,9 @@ class Service extends Model
     'is_active' => 'boolean'
   ];
 
-  protected $appends = [];
+  protected $appends = [
+    'main_category_type_string'
+  ];
 
   protected $hidden = [
     'user_id','category_id','deleted_at','updated_at'
@@ -27,12 +30,11 @@ class Service extends Model
   ];
 
   /* START ATTRIBUTES */
-
   /**
-   * Get thumbnail
+   * Get main category type as string
    */
-  public function getThumbnailAttribute(){
-    return Storage::url('services/thumbs/'.$this->image);
+  public function getMainCategoryTypeStringAttribute(){
+    return __('default.other.main_category_types.'.$this->main_category_type);
   }
 
   /**
@@ -56,12 +58,6 @@ class Service extends Model
     return \Carbon\Carbon::createFromTimestamp(strtotime($this->date.' '.$this->time))->timezone(config('app.timezone'))->timestamp;
   }
 
-  /**
-   * Get full-size image
-   */
-  public function getFullsizeImageAttribute(){
-    return ($this->image) ? Storage::url('services/gallery/'.$this->image) : null;
-  }
 
   /**
    * Get meta description
@@ -71,10 +67,68 @@ class Service extends Model
   }
 
 
+  /**
+   * Get basic services list
+   * 
+   */
+  public function getBasicServicesListAttribute($value){
+      return ($value) ? explode('||',$value) : [];
+  }
+
+  /**
+   * Set basic services list
+   * 
+   */
+  public function setBasicServicesListAttribute($value){
+      $this->attributes['basic_services_list'] = join('||',Helper::cleanArraySeperator($value,'||'));
+  }
+
+  /**
+   * Get standard services list
+   * 
+   */
+  public function getStandardServicesListAttribute($value){
+      return ($value) ? explode('||',$value) : [];
+  }
+
+  /**
+   * Set standard services list
+   * 
+   */
+  public function setStandardServicesListAttribute($value){
+      $this->attributes['standard_services_list'] = join('||',Helper::cleanArraySeperator($value,'||'));
+  }
+
+  /**
+   * Get premium services list
+   * 
+   */
+  public function getPremiumServicesListAttribute($value){
+      return ($value) ? explode('||',$value) : [];
+  }
+
+  /**
+   * Set premium services list
+   * 
+   */
+  public function setPremiumServicesListAttribute($value){
+      $this->attributes['premium_services_list'] = join('||',Helper::cleanArraySeperator($value,'||'));
+  }
+
   /* START RELATIONS */
+  // Image
+  public function Image(){
+    return $this->hasOne('App\Models\ServiceGallery')->select('id','service_id','path');
+  }
+  
+  // Gallery
+  public function Gallery(){
+    return $this->hasMany('App\Models\ServiceGallery')->select('id','service_id','path');
+  }
+
   // Category
   public function Category(){
-    return $this->belongsTo('App\Models\Category')->select('id',DB::raw('name_'.app()->getLocale().' as name'),'slug');
+    return $this->belongsTo('App\Models\Category')->select('id',DB::raw('name_'.app()->getLocale().' as name'));
   }
 
   // User
@@ -82,6 +136,10 @@ class Service extends Model
     return $this->belongsTo('App\Models\User','user_id','id')->selectCard()->withTrashed();
   }
 
+  // Extra Services
+  public function Extras(){
+    return $this->hasMany('App\Models\ServiceExtra');
+  }
 
   /* START SCOPES */
 
@@ -118,20 +176,18 @@ class Service extends Model
 
   public function scopeSelectCard($query)
   {
-    return $query->select('id','is_active','is_approved','category_id','title','price','user_id','created_at','deleted_at')
-    ->with('User')->selectRatingAverage();
+    return $query->select(DB::raw($this->table.'.id'),DB::raw($this->table.'.is_active'),DB::raw($this->table.'.is_approved'),DB::raw($this->table.'.category_id'),DB::raw($this->table.'.main_category_type'),DB::raw($this->table.'.title'),DB::raw($this->table.'.basic_price'),DB::raw($this->table.'.user_id'),DB::raw($this->table.'.created_at'),DB::raw($this->table.'.deleted_at'))
+    ->with('User','Image')->selectRatingAverage();
   }
 
-  public function scopeOnlyTopRated($query)
+  public function scopeOrderByTopRated($query)
   {
-    // return $query->whereNotNull('rating_avg')->orderBy('rating_avg','DESC');
-    return $query;
+    return $query->leftJoin(DB::raw('(SELECT AVG(rating) AS rating,service_id FROM services_reviews GROUP BY service_id) AS services_reviews_avg'),'services_reviews_avg.service_id','=','services.id')->orderBy('services_reviews_avg.rating','DESC');
   }
 
-  public function scopeOnlyTopSelling($query)
+  public function scopeOrderByTopSelling($query)
   {
-    // return $query->whereNotNull('rating_avg')->orderBy('rating_avg','DESC');
-    return $query;
+    return $query->orderBy(DB::raw('(SELECT COUNT(o.id) FROM orders o WHERE o.service_id = '.$this->table.'.id)'),'DESC');
   }
 
 

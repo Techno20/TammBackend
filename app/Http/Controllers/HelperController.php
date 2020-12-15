@@ -23,7 +23,7 @@ class HelperController extends Controller
     public function getDefault(Request $q)
     {
         $Settings = Setting::first();
-        $Categories = Category::select('id','name_'.app()->getLocale().' as name')->withCount('Services')->get();
+        $Categories = Category::selectCard()->withCount('Services')->get();
         $Result = [
             'categories' => $Categories,
             'commission_rate' => $Settings->commission_rate

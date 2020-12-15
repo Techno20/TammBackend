@@ -253,7 +253,8 @@ class AuthController extends Controller
     $validator = validator()->make($q->all(), [
       'email' => 'email',
       'country_id' => [new \App\Rules\CountryRule],
-      'bank_id' => [new \App\Rules\BankRule]
+      'bank_id' => [new \App\Rules\BankRule],
+      'educations' => ['array']
     ]);
     if($validator->fails()) {
       return Helper::responseValidationError($validator->messages());
@@ -267,6 +268,9 @@ class AuthController extends Controller
     }
     if($q->avatar){
       $User->avatar = $q->avatar;
+    }
+    if($q->educations){
+      $User->educations = $q->educations;
     }
     if($q->email){
         if($User->email != $q->email) {

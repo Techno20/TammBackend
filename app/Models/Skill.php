@@ -8,6 +8,11 @@ class Skill extends Model
 {
     protected $table = 'list_of_skills';
 
+    // User Skills
+    public function UserSkills(){
+        return $this->hasMany('App\Models\UserSkill');
+    }
+
     /* START SCOPES */
     public function scopeSelectCard($query)
     {

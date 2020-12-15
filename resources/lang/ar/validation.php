@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'invalid_value'             => 'غير صحيح :attribute',
+    'invalid_value'             => 'معرف :attribute غير صحيح',
     'accepted'             => 'يجب قبول :attribute',
     'active_url'           => ':attribute لا يُمثّل رابطًا صحيحًا',
     'after'                => 'يجب على :attribute أن يكون تاريخًا لاحقًا للتاريخ :date',
@@ -156,8 +156,9 @@ return [
         'password' => 'كلمة السر',
         'phone' => 'رقم الجوال',
         'address' => 'العنوان',
-        'responsible_name' => 'اسم الشخص المسؤول',
-        'merchant_name' => 'اسم المتجر'
+        'country_id' => 'الدولة',
+        'price_min' => 'السعر الأدنى',
+        'price_max' => 'السعر الأعلى'
     ],
 
 ];

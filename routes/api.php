@@ -7,6 +7,10 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UploaderController;
 use App\Http\Controllers\HelperController;
 use App\Http\Controllers\User\UserServiceController;
+use App\Http\Controllers\User\UserFavouriteController;
+use App\Http\Controllers\User\UserBuyerController;
+use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\User\UserOrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,6 +36,7 @@ Route::group(['middleware' => 'api-localization'],function(){
             Route::post('verify-code', [AuthController::class, 'postVerifyForgetPasswordCode']);
             Route::post('reset', [AuthController::class, 'postResetPassword']);
         });
+        Route::get('profile/{user_id}', [UserProfileController::class, 'getProfile']);
         
         Route::group(['middleware' => 'auth'],function(){
             Route::get('me', [AuthController::class, 'getMe']);
@@ -42,10 +47,26 @@ Route::group(['middleware' => 'api-localization'],function(){
             Route::post('delete-skill', [AuthController::class, 'deleteSkill']);
 
             Route::group(['prefix' => 'service'],function(){
+                Route::get('list', [UserServiceController::class, 'getList']);
                 Route::get('show/{service_id}', [UserServiceController::class, 'getShow']);
                 Route::post('add', [UserServiceController::class, 'Save']);
                 Route::post('edit/{service_id}', [UserServiceController::class, 'Save']);
+                Route::post('activation/{service_id}', [UserServiceController::class, 'postActivation']);
                 Route::delete('delete/{service_id}', [UserServiceController::class, 'Delete']);
+            });
+
+            Route::group(['prefix' => 'order'],function(){
+                Route::get('list', [UserOrderController::class, 'getList']);
+            });
+            
+            Route::group(['prefix' => 'favourite'],function(){
+                Route::get('list', [UserFavouriteController::class, 'getList']);
+                Route::post('add-service/{service_id}', [UserFavouriteController::class, 'postAddService']);
+                Route::delete('delete-service/{service_id}', [UserFavouriteController::class, 'deleteService']);
+            });
+
+            Route::group(['prefix' => 'buyer'],function(){
+                Route::get('list', [UserBuyerController::class, 'getList']);
             });
         });
         

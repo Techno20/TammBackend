@@ -37,4 +37,18 @@ class Helper {
         return self::responseData('invalid_fields',false,['errors' => $errors],__('default.error_message.invalid_fields'));
     }
 
+
+    /**
+     * Clean array values if has value contains specific seperator
+     * 
+     * @param array $Items
+     * @param string $Seperator
+     */
+    public static function cleanArraySeperator($Items,$Seperator){
+        $newArray = [];
+        foreach($Items as $Item){
+            $newArray[] = str_replace($Seperator,'',$Item);
+        }
+        return $newArray;
+    }
 }

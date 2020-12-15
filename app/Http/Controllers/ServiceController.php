@@ -19,9 +19,9 @@ class ServiceController extends Controller
      */
     public function getShow($serviceId,Request $q)
     {
-        $Service = Service::where('id',$serviceId)->select('*')->selectRatingAverage()->selectIsFavorited()->with(['Category' => function($Category){
-            return $Category->addSelect('parent_id')->with('Parent');
-        },'User']);
+        $Service = Service::where('id',$serviceId)->select('*')->selectRatingAverage()->selectIsFavorited()->with(['Gallery','Category','User' => function($User){
+            return $User->addSelect('about_me');
+        }]);
         if(auth()->user() && !auth()->user()->is_admin){
             $Service = $Service->where(function($qu){
                 return $qu->where([['is_approved',1],['is_active',1]])->orWhere('user_id',user()->id);
@@ -41,9 +41,11 @@ class ServiceController extends Controller
      */
     public function getList(){
         $validator = validator()->make(request()->all(), [
+            'main_category_type' => [new \App\Rules\MainCategoryTypeRule],
             'user_id' => 'integer',
-            'price_min' => 'integer',
-            'price_max' => 'integer'
+            'category_id' => 'integer',
+            'price_min' => 'numeric',
+            'price_max' => 'numeric'
         ]);
         if($validator->fails()) {
         return Helper::responseValidationError($validator->messages());
@@ -52,6 +54,11 @@ class ServiceController extends Controller
         $Services = Service::onlyApproved()->onlyActive()->selectCard();
 
         /* Filters */
+
+        // By main category type
+        if (request()->main_category_type) {
+            $Services = $Services->where('main_category_type',request()->main_category_type);
+        }
 
         // By price range
         if (request()->price_min || request()->price_max) {
@@ -69,27 +76,13 @@ class ServiceController extends Controller
         }
 
         // By category
-        if (request()->category_id || request()->category_slug) {
-            $Services = $Services->whereHas('Category',function($Category){
-                if(request()->category_slug){
-                    return $Category->where('slug',request()->category_slug);
-                }else {
-                    return $Category->where('id',request()->category_id)->orWhere('parent_id',request()->category_id);
-                }
-            });
+        if (request()->category_id) {
+            $Services = $Services->where('category_id',request()->category_id);
         }
 
-        // By parent category
-        if (request()->parent_category_id || request()->parent_category_slug) {
-            $Services = $Services->whereHas('Category',function($Category){
-                if(request()->parent_category_slug){
-                    return $Category->whereHas('Parent',function($ParentCategory){
-                        return $ParentCategory->where('slug',request()->parent_category_slug);
-                    });
-                }else {
-                    return $Category->where('parent_id',request()->parent_category_id);
-                }
-            });
+        // By user
+        if (request()->user_id) {
+            $Services = $Services->where('user_id',request()->user_id);
         }
 
         // Sorting data by
@@ -98,6 +91,10 @@ class ServiceController extends Controller
             if(strpos(request()->order_by,'price_') !== false){
                 $price_sort = (request()->order_by == 'price_asc') ? 'asc' : 'desc';
                 $Services = $Services->orderBy('price',$price_sort);
+            }elseif(request()->order_by == 'top_rating'){
+                $Services = $Services->orderByTopRated();
+            }elseif(request()->order_by == 'top_selling'){
+                $Services = $Services->orderByTopSelling();
             }
         }else {
             $Services = $Services->orderBy('id','DESC');
@@ -152,11 +149,11 @@ class ServiceController extends Controller
         ];
 
         // Top Rated Services
-        $topRatedServices = Service::selectCard()->onlyTopRated()->take(50)->get();
+        $topRatedServices = Service::selectCard()->orderByTopRated()->take(32)->get();
         $result['top_rated_services'] = $topRatedServices;
 
         // Top Selling Services
-        $topSellingServices = Service::selectCard()->onlyTopRated()->take(50)->get();
+        $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
 
 

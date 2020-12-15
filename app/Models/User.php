@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB,Helper;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -26,7 +27,6 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
-        'responsible_name',
         'phone',
         'email',
         'password',
@@ -40,6 +40,13 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'auth_facebook',
+        'auth_google',
+        'is_admin',
+        'is_admin_permissions',
+        'password_reset_code',
+        'password_reset_expire_at',
+        'deleted_at'
     ];
 
     /**
@@ -76,12 +83,22 @@ class User extends Authenticatable implements JWTSubject
 
     // Favourite Services
     public function FavouriteServices(){
-        return $this->hasManyThrough('App\Models\Service','App\Models\UserFavouriteService','user_id','id','id','service_id');
+        return $this->hasManyThrough('App\Models\Service','App\Models\UserFavouriteService','user_id','id','id','service_id')->selectCard();
     }
 
     // Services
     public function Services(){
         return $this->hasMany('App\Models\Service');
+    }
+
+    // Orders
+    public function Orders(){
+        return $this->hasMany('App\Models\Order');
+    }
+
+    // Last Delivered Order
+    public function LastDeliveredOrder(){
+        return $this->hasOne('App\Models\Order')->select('id','user_id',DB::raw('status_updated_at AS delivered_at'))->where('status','delivered')->orderBy('status_updated_at','DESC');
     }
 
     // Skills
@@ -106,10 +123,27 @@ class User extends Authenticatable implements JWTSubject
         return $avatar;
     }
 
+
+    /**
+     * Get educations
+     * 
+     */
+    public function getEducationsAttribute($value){
+        return ($value) ? explode('||',$value) : [];
+    }
+
+    /**
+     * Set educations
+     * 
+     */
+    public function setEducationsAttribute($value){
+        $this->attributes['educations'] = join('||',Helper::cleanArraySeperator($value,'||'));
+    }
+
     /* START SCOPES */
     public function scopeSelectCard($query)
     {
-        return $query->select('id','name','phone','email','fcm_token');
+        return $query->select('id','avatar','name','phone','email','fcm_token');
     }
 
 }

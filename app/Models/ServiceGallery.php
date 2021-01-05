@@ -16,8 +16,8 @@ class ServiceGallery extends Model
   /**
    * Get full path
    */
-  public function getFullPathAttribute($value){
-    return Storage::url('services/gallery/'.$value);
+  public function getFullPathAttribute(){
+    return Storage::url('services/gallery/'.$this->path);
   }
 
   /**
@@ -25,7 +25,7 @@ class ServiceGallery extends Model
    */
   public function getThumbPathAttribute(){
     if(preg_match('/\.(jpg|jpeg|png|bmp|gif)(?:[\?\#].*)?$/i', $this->path)){
-      return str_replace('gallery','thumbs',$this->path);
+      return Storage::url('services/thumbs/'.$this->path);
     }else {
       return null;
     }

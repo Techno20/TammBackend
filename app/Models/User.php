@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use DB,Helper;
+use DB,Helper,Storage;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -46,7 +46,8 @@ class User extends Authenticatable implements JWTSubject
         'is_admin_permissions',
         'password_reset_code',
         'password_reset_expire_at',
-        'deleted_at'
+        'deleted_at',
+        'balance'
     ];
 
     /**
@@ -58,6 +59,8 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password_reset_expire_at' => 'datetime'
     ];
+
+    protected $appends = ['avatar_full_path'];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -91,6 +94,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Models\Service');
     }
 
+    // Financial Transactions
+    public function FinancialTransaction(){
+        return $this->hasMany('App\Models\FinancialTransaction');
+    }
+
+    // Services Reviews
+    public function ServicesReviews(){
+        return $this->hasManyThrough('App\Models\Service','App\Models\ServiceReview','user_id','id','id','service_id');
+    }
+
     // Orders
     public function Orders(){
         return $this->hasMany('App\Models\Order');
@@ -107,6 +120,14 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /* START ATTRIBUTES */
+    public function getCreatedAtAttribute($value){
+        return date('Y-m-d H:i:s',strtotime($value));
+    }
+
+    public function getUpdatedAtAttribute($value){
+        return date('Y-m-d H:i:s',strtotime($value));
+    }
+
 
     /**
      * Get user avatar attribute
@@ -116,7 +137,7 @@ class User extends Authenticatable implements JWTSubject
     public function getAvatarFullPathAttribute()
     {
         if ($this->avatar) {
-            $avatar = Storage::url('users/avatars/'.$this->image);
+            $avatar = Storage::url('users/avatars/'.$this->avatar);
         }else {
             $avatar = asset('assets/images/no-avatar.png');
         }
@@ -140,10 +161,35 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['educations'] = join('||',Helper::cleanArraySeperator($value,'||'));
     }
 
+    /**
+     * Prepare total spending format
+     */
+    public function getTotalSpendingAttribute($value){
+        return json_decode($value);
+    }
+
     /* START SCOPES */
     public function scopeSelectCard($query)
     {
-        return $query->select('id','avatar','name','phone','email','fcm_token');
+        return $query->select('id','avatar','name','email');
     }
 
+    /**
+     * Prepare orders count and total spend amount
+     */
+    public function scopeWithTotalSpending($query)
+    {
+        return $query->withCount(['Orders AS total_spending' => function($orders_amount){
+            return $orders_amount->select(DB::raw('JSON_OBJECT("count",IFNULL(COUNT(id),0),"amount",IFNULL(SUM(paid_total),0)) as total_spending'));
+        }]);
+    }
+
+    /**
+     * Prepare users transactions profit
+     */
+    public function scopeWithTotalProfit($query)
+    {
+        return $query->addSelect(DB::raw('IFNULL((SELECT SUM(amount) FROM financial_transactions ft WHERE ft.user_id = '.$this->table.'.id AND ft.type = "profit" GROUP BY ft.user_id),0) AS total_profit_amount'));
+    }
+    
 }

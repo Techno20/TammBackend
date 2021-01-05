@@ -46,8 +46,10 @@ class Helper {
      */
     public static function cleanArraySeperator($Items,$Seperator){
         $newArray = [];
-        foreach($Items as $Item){
-            $newArray[] = str_replace($Seperator,'',$Item);
+        if(is_array($Items)){
+            foreach($Items as $Item){
+                $newArray[] = str_replace($Seperator,'',$Item);
+            }
         }
         return $newArray;
     }

@@ -30,6 +30,15 @@ class Service extends Model
   ];
 
   /* START ATTRIBUTES */
+
+  public function getCreatedAtAttribute($value){
+      return date('Y-m-d H:i:s',strtotime($value));
+  }
+
+  public function getUpdatedAtAttribute($value){
+      return date('Y-m-d H:i:s',strtotime($value));
+  }
+
   /**
    * Get main category type as string
    */
@@ -37,12 +46,6 @@ class Service extends Model
     return __('default.other.main_category_types.'.$this->main_category_type);
   }
 
-  /**
-   * Get Trainer Experiences
-   */
-  public function getTrainerExperiencesAttribute($value){
-    return ($value) ? explode(',',$value) : [];
-  }
 
   /**
    * Get Rating Average Attribute
@@ -118,7 +121,7 @@ class Service extends Model
   /* START RELATIONS */
   // Image
   public function Image(){
-    return $this->hasOne('App\Models\ServiceGallery')->select('id','service_id','path');
+    return $this->hasOne('App\Models\ServiceGallery')->select('id','service_id','path')->whereRaw('path REGEXP ".(jpg|jpeg|png|bmp|gif)(?:[\?\#].*)?$"');
   }
   
   // Gallery
@@ -139,6 +142,16 @@ class Service extends Model
   // Extra Services
   public function Extras(){
     return $this->hasMany('App\Models\ServiceExtra');
+  }
+
+  // Reviews
+  public function Reviews(){
+    return $this->hasMany('App\Models\ServiceReview');
+  }
+
+  // Orders
+  public function Orders(){
+    return $this->hasMany('App\Models\Order');
   }
 
   /* START SCOPES */
@@ -189,7 +202,6 @@ class Service extends Model
   {
     return $query->orderBy(DB::raw('(SELECT COUNT(o.id) FROM orders o WHERE o.service_id = '.$this->table.'.id)'),'DESC');
   }
-
 
   /**
    * Check if the users is authorized to manage the current service

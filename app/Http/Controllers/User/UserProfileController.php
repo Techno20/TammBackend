@@ -7,9 +7,60 @@ use App\Http\Controllers\Controller;
 use Helper;
 use App\Models\User;
 use App\Models\Skill;
+use App\Models\Order;
+use App\Models\UserFavouriteService;
+use App\Models\Conversation;
+use App\Models\Service;
+use App\Models\ServiceReview;
 
 class UserProfileController extends Controller
 {
+    /**
+     * Get user dashboard
+     * 
+     */
+    public function getDashboard()
+    {
+      $getUserReviews = ServiceReview::selectRaw('COUNT(id) AS ratings_count,AVG(rating) AS rating_avg')->whereHas('Service',function($Service){
+          return $Service->where('user_id',auth()->user()->id);
+        })->first();
+        if($getUserReviews){
+          $userReviews = [
+            'ratings_count' => $getUserReviews->ratings_count,
+            'rating_avg' => floatval(number_format($getUserReviews->rating_avg,2))
+          ];
+        }else {
+          $userReviews = [
+            'ratings_count' => 0,
+            'rating_avg' => 0
+          ];
+        }
+        $User = auth()->user();
+        $User->reviews = $userReviews;
+      $Result = [
+        'user' => $User
+      ];
+
+
+      $Balance = 0;
+
+      $Statistics = [
+        'submitted_services' => Service::where('user_id',auth()->user()->id)->count(),
+        'buyers_count' => User::whereHas('Orders',function($Orders){
+          return $Orders->whereHas('Service',function($Service){
+            return $Service->where('user_id',auth()->user()->id);
+          });
+        })->count(),
+        'balance' => $Balance
+      ];
+
+      $Result['new_orders'] = Order::authorized()->orderBy('created_at','DESC')->take(5)->get();
+      $Result['new_conversations'] = Conversation::selectCard()->authorized()->orderBy('created_at','DESC')->take(5)->get();
+      $Result['new_favourites'] = UserFavouriteService::where('user_id',auth()->user()->id)->orderBy('created_at','DESC')->take(5)->get();
+      $Result['statistics'] = $Statistics;
+
+      return Helper::responseData('success',true,$Result);
+    }
 
     /**
      * Get specific user profile

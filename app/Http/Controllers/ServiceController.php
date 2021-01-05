@@ -24,12 +24,11 @@ class ServiceController extends Controller
         }]);
         if(auth()->user() && !auth()->user()->is_admin){
             $Service = $Service->where(function($qu){
-                return $qu->where([['is_approved',1],['is_active',1]])->orWhere('user_id',user()->id);
+                return $qu->where([['is_approved',1],['is_active',1]])->orWhere('user_id',auth()->user()->id);
             });
         }
         $Service = $Service->first();
         if($Service) {
-            $Service = $Service->append('meta_description')->toArray();
             return Helper::responseData('success',true,$Service);
         }else {
             return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
@@ -48,7 +47,7 @@ class ServiceController extends Controller
             'price_max' => 'numeric'
         ]);
         if($validator->fails()) {
-        return Helper::responseValidationError($validator->messages());
+            return Helper::responseValidationError($validator->messages());
         }
 
         $Services = Service::onlyApproved()->onlyActive()->selectCard();
@@ -156,7 +155,9 @@ class ServiceController extends Controller
         $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
 
-
         return Helper::responseData('success',true,$result);
     }
+
+
+
 }

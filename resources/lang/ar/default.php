@@ -34,7 +34,12 @@ return [
             'refund' => 'استرجاع المبلغ',
             'profit' => 'ربح',
             'charge' => 'استقطاع'
-       ],
+        ],
+        'package' => [
+            'basic' => 'الأساسية',
+            'standard' => 'المتقدمة',
+            'premium' => 'المميزة'
+        ],
        'transaction_withdraw_status' => [
             'requested' => 'بالانتظار',
             'approved' => 'تمت الموافقة',

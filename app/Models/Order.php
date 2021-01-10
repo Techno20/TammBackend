@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Helper, Storage;
 class Order extends Model
 {
-    protected $appends = ['order_no','status_string','commission_amount','net_amount'];
-    
+    protected $appends = ['order_no','status_string','package_string','commission_amount','net_amount'];
+
     /* START RELATIONS */
 
     // Service
@@ -49,6 +49,14 @@ class Order extends Model
      */
     public function getStatusStringAttribute(){
         return __('default.other.order_status.'.$this->status);
+    }
+
+    /**
+     * Get package as string
+     * 
+     */
+    public function getPackageStringAttribute(){
+        return __('default.other.package.'.$this->package);
     }
 
     /**
@@ -122,6 +130,7 @@ class Order extends Model
     public function getNetAmountAttribute(){
         return $this->paid_total-($this->paid_total*(0.01*$this->commission_rate));
     }
+
 
   /**
    * Check if the users is authorized to manage the current order

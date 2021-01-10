@@ -78,6 +78,12 @@ class AdminDatatableController extends Controller
 			case 'services':
                 return $this->Services($q);
 			break;
+			case 'conversations':
+                return $this->Conversations($q);
+			break;
+			case 'services-reviews':
+                return $this->ServicesReviews($q);
+			break;
 			case 'financial-transactions':
                 return $this->FinancialTransactions($q);
 			break;
@@ -119,6 +125,14 @@ class AdminDatatableController extends Controller
 				case 'users':
 					$Model = $Model->get();
 					Excel::store(new \App\Exports\UsersExport($Model), $filePath,$excelStoreDisk);
+				break;
+				case 'conversations':
+					$Model = $Model->get();
+					Excel::store(new \App\Exports\ConversationsExport($Model), $filePath,$excelStoreDisk);
+				break;
+				case 'services-reviews':
+					$Model = $Model->get();
+					Excel::store(new \App\Exports\ServicesReviewsExport($Model), $filePath,$excelStoreDisk);
 				break;
 				case 'financial-transactions':
 					$Model = $Model->get();
@@ -325,7 +339,7 @@ class AdminDatatableController extends Controller
      */
     public function Users($q){
 	
-		$getResults = \App\Models\User::selectRaw('users.id,users.email,users.phone,users.name,users.created_at,
+		$getResults = \App\Models\User::selectRaw('users.id,users.balance,users.email,users.phone,users.name,users.created_at,
 		IFNULL((SELECT COUNT(id) FROM services WHERE services.user_id = users.id GROUP BY services.user_id),0) AS services_count,
 		IFNULL((SELECT COUNT(id) FROM orders WHERE orders.user_id = users.id GROUP BY orders.user_id),0) AS orders_count,
 		IFNULL((SELECT SUM(paid_total) FROM orders WHERE orders.user_id = users.id GROUP BY orders.user_id),0) AS orders_amount,
@@ -388,7 +402,7 @@ class AdminDatatableController extends Controller
 		$getResults = $getResults->groupBy('financial_transactions.id');
 
 
-		// Request date filter
+		// Create date filter
 		$created_date_start_date = ($q->created_date_start_date) ? $q->created_date_start_date : false;
 		$created_date_end_date = ($q->created_date_end_date) ? $q->created_date_end_date : false;
 		if($created_date_start_date || $created_date_end_date){
@@ -506,8 +520,132 @@ class AdminDatatableController extends Controller
             $dt = datatables()->of($getResults);
         }
 		return $dt
+		->filterColumn('service_title', function($query, $keyword) {
+			$query->whereRaw("services.title like ?", ["%{$keyword}%"]);
+		})
 		->filterColumn('user_name', function($query, $keyword) {
-			$query->whereRaw("user_name.name like ?", ["%{$keyword}%"]);
+			$query->whereRaw("user.name like ?", ["%{$keyword}%"]);
+		})
+		->addColumn('DT_RowId','{{ strtolower($id) }}')
+		->make(true);
+	}
+	
+	/**
+     * Get Services Reviews
+	 * 
+	 * @param Request $q
+     */
+    public function ServicesReviews($q){
+
+		$getResults = \App\Models\ServiceReview::selectRaw('services_reviews.*,user.name as user_name,user.email as user_email,service.title as service_title,service_owner.name as service_owner_name,service_owner.email as service_owner_email');
+		$getResults = $getResults->leftJoin('users as user','user.id','=','services_reviews.user_id');
+		$getResults = $getResults->leftJoin('services as service','service.id','=','services_reviews.service_id');
+		$getResults = $getResults->leftJoin('users as service_owner','service_owner.id','=','services.user_id');
+		$getResults = $getResults->groupBy('services_reviews.id');
+
+
+		// Create date filter
+		$create_date_start_date = ($q->create_date_start_date) ? $q->create_date_start_date : false;
+		$create_date_end_date = ($q->create_date_end_date) ? $q->create_date_end_date : false;
+		if($create_date_start_date || $create_date_end_date){
+			$create_date_date_field = 'services_reviews.createed_at';
+			if($create_date_start_date){
+				$getResults = $getResults->whereDate(DB::raw($create_date_date_field),'>=',$create_date_start_date);
+			}
+			if($create_date_end_date){
+				$getResults = $getResults->whereDate(DB::raw($create_date_date_field),'<=',$create_date_end_date);
+			}
+		}
+
+		// Rating filter
+		if($q->rating){
+			$getResults = $getResults->where(DB::raw('services_reviews.rating'),$q->rating);
+		}
+
+		// User filter
+		if($q->user_id && $q->user_id != 'all'){
+			$getResults = $getResults->where(DB::raw('services_reviews.user_id'),$q->user_id);
+		}
+
+		// Service filter
+		if($q->service_id && $q->service_id != 'all'){
+			$getResults = $getResults->where(DB::raw('services_reviews.service_id'),$q->service_id);
+		}
+
+
+        if($this->is_export){
+			return $this->exportToExcel($getResults);
+		}else {
+            $dt = datatables()->of($getResults);
+        }
+		return $dt
+		->filterColumn('user_name', function($query, $keyword) {
+			$query->whereRaw("user.name like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('user_email', function($query, $keyword) {
+			$query->whereRaw("user.email like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('service_title', function($query, $keyword) {
+			$query->whereRaw("services.title like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('service_owner_name', function($query, $keyword) {
+			$query->whereRaw("service_owner.name like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('service_owner_email', function($query, $keyword) {
+			$query->whereRaw("service_owner.email like ?", ["%{$keyword}%"]);
+		})
+		->addColumn('DT_RowId','{{ strtolower($id) }}')
+		->make(true);
+	}
+	
+	/**
+     * Get Conversations
+	 * 
+	 * @param Request $q
+     */
+    public function Conversations($q){
+
+		$getResults = \App\Models\Conversation::selectRaw('conversations.id,conversations.title,conversations.created_at,user_sender.name as user_sender_name,user_sender.email as user_sender_email,user_recipient.name as user_recipient_name,user_recipient.email as user_recipient_email,(SELECT cm.created_at FROM conversations_messages cm WHERE cm.conversation_id = conversations.id ORDER BY cm.created_at LIMIT 1) AS last_message_date')
+		->withCount('Messages')->with(['LastMessage' => function($LastMessage){
+			return  $LastMessage->with('User');
+		}]);
+		$getResults = $getResults->leftJoin('users as user_recipient','user_recipient.id','=','conversations.user_recipient_id');
+		$getResults = $getResults->leftJoin('users as user_sender','user_sender.id','=','conversations.user_sender_id');
+		$getResults = $getResults->groupBy('conversations.id');
+
+
+		// Create date filter
+		$create_date_start_date = ($q->create_date_start_date) ? $q->create_date_start_date : false;
+		$create_date_end_date = ($q->create_date_end_date) ? $q->create_date_end_date : false;
+		if($create_date_start_date || $create_date_end_date){
+			$create_date_date_field = 'conversations.createed_at';
+			if($create_date_start_date){
+				$getResults = $getResults->whereDate(DB::raw($create_date_date_field),'>=',$create_date_start_date);
+			}
+			if($create_date_end_date){
+				$getResults = $getResults->whereDate(DB::raw($create_date_date_field),'<=',$create_date_end_date);
+			}
+		}
+
+
+
+        if($this->is_export){
+			return $this->exportToExcel($getResults);
+		}else {
+            $dt = datatables()->of($getResults);
+        }
+		return $dt
+		->filterColumn('user_sender_name', function($query, $keyword) {
+			$query->whereRaw("user_sender.name like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('user_sender_email', function($query, $keyword) {
+			$query->whereRaw("user_sender.email like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('user_recipient_name', function($query, $keyword) {
+			$query->whereRaw("user_recipient.name like ?", ["%{$keyword}%"]);
+		})
+		->filterColumn('user_recipient_email', function($query, $keyword) {
+			$query->whereRaw("user_recipient.email like ?", ["%{$keyword}%"]);
 		})
 		->addColumn('DT_RowId','{{ strtolower($id) }}')
 		->make(true);

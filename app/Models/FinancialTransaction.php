@@ -27,7 +27,7 @@ class FinancialTransaction extends Model
 
     // Order
     public function Order(){
-        return $this->belongsTo('App\Models\Order')->selectCard();
+        return $this->belongsTo('App\Models\Order');
     }
 
 

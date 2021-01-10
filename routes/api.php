@@ -135,6 +135,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','admin']],function(){
     Route::group(['prefix' => 'user'], function () {
         Route::get('show/{user_id}', [AdminUserController::class, 'getShow']);
         Route::delete('delete/{user_id}', [AdminUserController::class, 'Delete']);
+        Route::post('edit/{user_id}', [AdminUserController::class, 'postEdit']);
     });
 
     Route::group(['prefix' => 'order'], function () {

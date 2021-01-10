@@ -21,7 +21,7 @@ class AdminFinancialTransactionController extends Controller
 	 */
 	public function getShow($transactionId,Request $q)
 	{
-		$FinancialTransaction = FinancialTransaction::where('id',$transactionId)->with(['User'])->first();
+		$FinancialTransaction = FinancialTransaction::where('id',$transactionId)->with(['User','Order','Service'])->first();
 		if(!$FinancialTransaction){
 			return Helper::responseData('transaction_not_found',false,false,__('default.error_message.transaction_not_found'),404);
 		}

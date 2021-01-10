@@ -21,7 +21,7 @@ class AdminServiceController extends Controller
 	 */
 	public function getShow($serviceId,Request $q)
 	{
-		$Service = Service::where('id',$serviceId)->with(['User'])->first();
+		$Service = Service::where('id',$serviceId)->with(['User','Category','Image'])->first();
 		if(!$Service){
 			return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
 		}

@@ -17,6 +17,17 @@ class ServiceReview extends Model
     'updated_at','user_id','service_id'
   ];
 
+  /* START ATTRIBUTES */
+
+  public function getCreatedAtAttribute($value){
+      return date('Y-m-d H:i:s',strtotime($value));
+  }
+
+  public function getUpdatedAtAttribute($value){
+      return date('Y-m-d H:i:s',strtotime($value));
+  }
+
+
   /* START RELATIONS */
   // Service
   public function Service(){

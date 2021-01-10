@@ -39,31 +39,38 @@ class AdminDashboardController extends Controller
 		// increate the length of json_object data
 		DB::statement(DB::raw('SET SESSION group_concat_max_len = 1000000;'));
 		$countOrders = DB::raw('(SELECT JSON_OBJECT("count",COUNT(id),"amount",IFNULL(SUM(orders.paid_total),0),"commission_amount",IFNULL(SUM(orders.paid_total*(0.01*orders.commission_rate)),0),"net_amount",IFNULL(SUM(orders.paid_total-(orders.paid_total*(0.01*orders.commission_rate))),0)) FROM orders WHERE '.$this->dateRange('first','orders.created_at').' LIMIT 1) as count_orders');
-		$countUsers = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_users),"]") FROM (SELECT JSON_OBJECT("count",COUNT(id),"type",type) as sel_users FROM users WHERE is_admin = 0 GROUP BY type) x) as count_users');
+		$countUsers = DB::raw('(SELECT COUNT(users.id) FROM users WHERE '.$this->dateRange('first','users.created_at').' LIMIT 1) AS count_users');
+		$countServices = DB::raw('(SELECT COUNT(services.id) FROM services WHERE '.$this->dateRange('first','services.created_at').' LIMIT 1) AS count_services');
+		$countNotApprovedServices = DB::raw('(SELECT COUNT(services.id) FROM services WHERE services.is_approved = 0 '.$this->basicFilters(true,'services.user_id','services.created_at').' LIMIT 1) AS count_not_approved_services');
 
-		$topServicesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_services_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"service_id",services.id,"service_title",services.title,"service_business_name",users.business_name,"service_datetime",CONCAT(services.date," ",services.time)) AS sel_top_services_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users ON users.id = services.user_id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY orders.service_id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_services_by_orders_count');
-		$topServicesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_services_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"service_id",services.id,"service_title",services.title,"service_business_name",users.business_name,"service_datetime",CONCAT(services.date," ",services.time)) AS sel_top_services_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users ON users.id = services.user_id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY orders.service_id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_services_by_orders_revenue');
+		$topServicesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_services_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"service_id",services.id,"service_title",services.title,"service_owner_name",users.name) AS sel_top_services_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users ON users.id = services.user_id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY orders.service_id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_services_by_orders_count');
+		$topServicesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_services_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"service_id",services.id,"service_title",services.title,"service_owner_name",users.name) AS sel_top_services_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users ON users.id = services.user_id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY orders.service_id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_services_by_orders_revenue');
 		
-		$topCategoriesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_categories_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"category_id",category.id,"category_name",category.name_ar,"parent_category_name",parent_category.name_ar) AS sel_top_categories_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN categories AS category ON services.category_id = category.id LEFT JOIN categories AS parent_category ON category.parent_id = parent_category.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY category.id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_categories_by_orders_count');
-		$topCategoriesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_categories_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"category_id",category.id,"category_name",category.name_ar,"parent_category_name",parent_category.name_ar) AS sel_top_categories_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN categories AS category ON services.category_id = category.id LEFT JOIN categories AS parent_category ON category.parent_id = parent_category.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY category.id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_categories_by_orders_revenue');
+		$topCategoriesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_categories_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"category_id",category.id,"category_name",category.name_ar,"main_category_type",category.main_category_type) AS sel_top_categories_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN categories AS category ON services.category_id = category.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY category.id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_categories_by_orders_count');
+		$topCategoriesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_categories_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"category_id",category.id,"category_name",category.name_ar,"main_category_type",category.main_category_type) AS sel_top_categories_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN categories AS category ON services.category_id = category.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY category.id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_categories_by_orders_revenue');
 		
-		$topBusinessesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_businesses_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"user_id",business.id,"business_name",business.business_name,"business_user_fullname",CONCAT(business.firstname," ",business.lastname)) AS sel_top_businesses_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users AS business ON services.user_id = business.id  WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY business.id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_businesses_by_orders_count');
-		$topBusinessesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_businesses_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"user_id",business.id,"business_name",business.business_name,"business_user_fullname",CONCAT(business.firstname," ",business.lastname)) AS sel_top_businesses_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users AS business ON services.user_id = business.id  WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY business.id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_businesses_by_orders_revenue');
+		$topUsersByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_users_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"user_id",user.id,"user_name",user.name) AS sel_top_users_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users AS user ON services.user_id = user.id  WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY user.id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_users_by_orders_count');
+		$topUsersByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_users_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"user_id",user.id,"user_name",user.name) AS sel_top_users_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN users AS user ON services.user_id = user.id  WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY user.id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_users_by_orders_revenue');
 		
-		$topCitiesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_cities_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"city_id",city.id,"city_name",city.name_ar) AS sel_top_cities_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN list_of_cities AS city ON services.city_id = city.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY city.id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_cities_by_orders_count');
-		$topCitiesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_cities_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"city_id",city.id,"city_name",city.name_ar) AS sel_top_cities_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN list_of_cities AS city ON services.city_id = city.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY city.id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_cities_by_orders_revenue');
+		// $topCitiesByOrdersCount = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_cities_by_orders_count),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"city_id",city.id,"city_name",city.name_ar) AS sel_top_cities_by_orders_count,COUNT(orders.id) AS count_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN list_of_cities AS city ON services.city_id = city.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY city.id ORDER BY count_orders DESC LIMIT '.$topLimit.') x) as top_cities_by_orders_count');
+		// $topCitiesByOrdersRevenue = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_top_cities_by_orders_revenue),"]") FROM (SELECT JSON_OBJECT("amount",IFNULL(SUM(orders.paid_total),0),"count",IFNULL(COUNT(orders.paid_total),0),"city_id",city.id,"city_name",city.name_ar) AS sel_top_cities_by_orders_revenue,SUM(orders.paid_total) AS total_orders FROM orders INNER JOIN services ON services.id = orders.service_id LEFT JOIN list_of_cities AS city ON services.city_id = city.id WHERE '.$this->dateRange('first','orders.created_at').' GROUP BY city.id ORDER BY total_orders DESC LIMIT '.$topLimit.') x) as top_cities_by_orders_revenue');
 		
 
-		$servicesByCategories = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_categories),"]") FROM (SELECT JSON_OBJECT("name",categories.name_ar,"count",
+		$servicesByCategories = DB::raw('(SELECT CONCAT("[",GROUP_CONCAT(sel_categories),"]") FROM (SELECT JSON_OBJECT("main_category_type",categories.main_category_type,"name",categories.name_ar,"count",
 		IFNULL((SELECT COUNT(services.id) FROM services WHERE services.category_id = categories.id GROUP BY services.category_id),0)
-		) as sel_categories FROM categories WHERE parent_id != 0 AND EXISTS(SELECT id FROM services WHERE services.category_id = categories.id)) x) as services_by_categories');
+		) as sel_categories FROM categories WHERE EXISTS(SELECT id FROM services WHERE services.category_id = categories.id)) x) as services_by_categories');
 
-		$this->Statistics = \App\Models\User::select($countOrders,$countUsers,$servicesByCategories,$topServicesByOrdersCount,$topServicesByOrdersRevenue,$topCategoriesByOrdersCount,$topCategoriesByOrdersRevenue,$topBusinessesByOrdersCount,$topBusinessesByOrdersRevenue);
+		$this->Statistics = \App\Models\User::select($countOrders,$countServices,$countNotApprovedServices,$countUsers,$servicesByCategories,$topServicesByOrdersCount,$topServicesByOrdersRevenue,$topCategoriesByOrdersCount,$topCategoriesByOrdersRevenue,$topUsersByOrdersCount,$topUsersByOrdersRevenue);
 		$this->prepareSelectTrendChartData($q);
 		$this->Statistics = $this->Statistics->first();
 
 		$countOrders = ($this->Statistics->count_orders) ? json_decode($this->Statistics->count_orders) : ['count' => 0,'total' => 0];
-		$countUsers = ($this->Statistics->count_users) ? json_decode($this->Statistics->count_users) : [['count' => 0,'type' => 'business'],['count' => 0,'type' => 'trainee']];
+		$countUsers = ($this->Statistics->count_users) ? $this->Statistics->count_users : 0;
+		$countServices = ($this->Statistics->count_services) ? $this->Statistics->count_services : 0;
+		$countNotApprovedServices = ($this->Statistics->count_not_approved_services) ? $this->Statistics->count_not_approved_services : 0;
+		$countServiceProviders = \App\Models\User::whereHas('Services')->whereRaw($this->dateRange('first','created_at'))->count();
+
+
 		$servicesByCategories = ($this->Statistics->services_by_categories) ? json_decode($this->Statistics->services_by_categories) : [];
 
 		$topServicesByOrdersCount = ($this->Statistics->top_services_by_orders_count) ? json_decode($this->Statistics->top_services_by_orders_count) : [];
@@ -72,15 +79,16 @@ class AdminDashboardController extends Controller
 		$topCategoriesByOrdersCount = ($this->Statistics->top_categories_by_orders_count) ? json_decode($this->Statistics->top_categories_by_orders_count) : [];
 		$topCategoriesByOrdersRevenue = ($this->Statistics->top_categories_by_orders_revenue) ? json_decode($this->Statistics->top_categories_by_orders_revenue) : [];
 
-		$topBusinessesByOrdersCount = ($this->Statistics->top_businesses_by_orders_count) ? json_decode($this->Statistics->top_businesses_by_orders_count) : [];
-		$topBusinessesByOrdersRevenue = ($this->Statistics->top_businesses_by_orders_revenue) ? json_decode($this->Statistics->top_businesses_by_orders_revenue) : [];
+		$topUsersByOrdersCount = ($this->Statistics->top_users_by_orders_count) ? json_decode($this->Statistics->top_users_by_orders_count) : [];
+		$topUsersByOrdersRevenue = ($this->Statistics->top_users_by_orders_revenue) ? json_decode($this->Statistics->top_users_by_orders_revenue) : [];
 		
-		$topCitiesByOrdersCount = ($this->Statistics->top_cities_by_orders_count) ? json_decode($this->Statistics->top_cities_by_orders_count) : [];
-		$topCitiesByOrdersRevenue = ($this->Statistics->top_cities_by_orders_revenue) ? json_decode($this->Statistics->top_cities_by_orders_revenue) : [];
-		
+
 		$Result = [
 			'count_orders' => $countOrders,
 			'count_users' => $countUsers,
+			'count_services' => $countServices,
+			'count_service_providers' => $countServiceProviders,
+			'count_not_approved_services' => $countNotApprovedServices,
 			'services_by_categories' => $servicesByCategories,
 			'top_services_by_orders' => [
 				'by_count' => $topServicesByOrdersCount,
@@ -90,13 +98,9 @@ class AdminDashboardController extends Controller
 				'by_count' => $topCategoriesByOrdersCount,
 				'by_revenue' => $topCategoriesByOrdersRevenue
 			],
-			'top_businesses_by_orders' => [
-				'by_count' => $topBusinessesByOrdersCount,
-				'by_revenue' => $topBusinessesByOrdersRevenue
-			],
-			'top_cities_by_orders' => [
-				'by_count' => $topCitiesByOrdersCount,
-				'by_revenue' => $topCitiesByOrdersRevenue
+			'top_users_by_orders' => [
+				'by_count' => $topUsersByOrdersCount,
+				'by_revenue' => $topUsersByOrdersRevenue
 			]
 		];
 
@@ -152,11 +156,8 @@ class AdminDashboardController extends Controller
 	* Function to set filters to query
 	* @return string
 	**/
-	private function basicFilters($has_first_and = false,$business_user_col = 'user_id',$date_col = 'created_at'){
+	private function basicFilters($has_first_and = false,$user_col = 'user_id',$date_col = 'created_at'){
 		$r = '';
-		if (request()->user_id) {
-			$r .= ' AND '.$business_user_col.' = '.request()->user_id;
-		}
 		if (request()->start_date) {
 			$r .= ' AND DATE('.$date_col.') >= "'.request()->start_date.'"';
 		}
@@ -178,12 +179,6 @@ class AdminDashboardController extends Controller
 		$whereOrders = [];
 		if($this->user_id){
 			$whereOrders[] = ' services.user_id = '.$this->user_id.' ';
-		}
-		if($this->city_id){
-			$whereOrders[] = ' services.city_id = '.$this->city_id.' ';
-		}
-		if($this->town_id){
-			$whereOrders[] = ' services.town_id = '.$this->town_id.' ';
 		}
 		$whereOrders = (count($whereOrders)) ? join('AND',$whereOrders) : '';
 

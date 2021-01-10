@@ -67,4 +67,40 @@ class AdminUserController extends Controller
 		$User->save();
 		return Helper::responseData('success',true);
 	}
+
+	/**
+	 * Edit user information
+	 * 
+	 * @param object $q Request data
+	 */
+	public function postEdit($userId,Request $q)
+	{
+		/* Start Validation */
+		$validationRules = [
+			'name' => 'required',
+			'email' => 'required|email',
+			'phone' => [new \App\Rules\PhoneRule]
+		];
+		$validator = Validator::make($q->all(), $validationRules);
+		
+		if($validator->fails()) {
+			return Helper::responseValidationError($validator->messages());
+		}
+		/* End Validation */
+		$User = User::where('id',$userId)->first();
+		if(!$User){
+			return Helper::responseData('user_not_found',false,__('default.error_message.user_not_found'));
+		}
+		$User->name = $q->name;
+		$User->phone = $q->phone;
+		$User->email = $q->email;
+		if($q->password){
+			$User->password = bcrypt($q->password);
+		}
+		$User->bank_id = $q->bank_id;
+		$User->bank_iban = $q->bank_iban;
+		$User->bank_account_owner_name = $q->bank_account_owner_name;
+		$User->save();
+		return Helper::responseData('success',true);
+	}
 }

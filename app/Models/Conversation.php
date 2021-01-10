@@ -20,6 +20,11 @@ class Conversation extends Model
         return $this->hasMany('App\Models\ConversationMessage');
     }
 
+    // Last Message
+    public function LastMessage(){
+        return $this->hasOne('App\Models\ConversationMessage')->orderBy('created_at');
+    }
+
     // Sender
     public function Sender(){
         return $this->belongsTo('App\Models\User','user_sender_id','id')->selectCard();

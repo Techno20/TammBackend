@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderExtra extends Model
 {
     protected $table = 'orders_extras';
-    protected $timestamps = false;
+    public $timestamps = false;
     /* START RELATIONS */
     
     // Service Extra Details

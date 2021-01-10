@@ -25,7 +25,7 @@ class PhoneRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/^(05)(5|0|3|6|4|9|1|8|7)([0-9]{6})/i", $value);
+        return ($value) ? preg_match("/^(05)(5|0|3|6|4|9|1|8|7)([0-9]{6})/i", $value) : true;
     }
 
     /**

@@ -121,7 +121,8 @@ class Service extends Model
   /* START RELATIONS */
   // Image
   public function Image(){
-    return $this->hasOne('App\Models\ServiceGallery')->select('id','service_id','path')->whereRaw('path REGEXP ".(jpg|jpeg|png|bmp|gif)(?:[\?\#].*)?$"');
+    return $this->hasOne('App\Models\ServiceGallery')->select('id','service_id','path');
+    // ->whereRaw('path REGEXP "^.(jpg|jpeg|png|bmp|gif)(?:[\?\#].*)?$"');
   }
   
   // Gallery

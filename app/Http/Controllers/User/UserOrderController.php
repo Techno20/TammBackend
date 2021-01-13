@@ -117,7 +117,20 @@ class UserOrderController extends Controller
         $Order->service_delivery_attachments = $q->service_delivery_attachments;
         $Order->save();
 
-        $Order = Order::where('id',$orderId)->with('Extras')->first();
+        $Order = Order::where('id',$orderId)->with('Service','Extras')->first();
+
+        /**
+         * Log a financial transaction for both order submitter and service provider
+         */
+        User::logFinancialTransaction(
+            [
+                'user_id' => $Order->Service->user_id,
+                'type' => 'profit',
+                'amount' => $Order->net_amount,
+                'order_id' => $Order->id,
+                'service_id' => $Order->Service->id
+            ]
+        );
         return Helper::responseData('success',true,$Order);
     }
 
@@ -146,6 +159,19 @@ class UserOrderController extends Controller
         $Order->status = 'canceled';
         $Order->status_updated_at = date('Y-m-d H:i:s');
         $Order->save();
+
+        /**
+         * Log a financial transaction for both order submitter and service provider
+         */
+        User::logFinancialTransaction(
+            [
+                'user_id' => $Order->user_id,
+                'type' => 'refund',
+                'amount' => $Order->paid_total,
+                'order_id' => $Order->id,
+                'service_id' => $Order->service_id
+            ]
+        );
 
         return Helper::responseData('success',true);
     }

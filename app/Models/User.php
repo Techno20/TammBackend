@@ -7,6 +7,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB,Helper,Storage;
+use App\Models\FinancialTransaction;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -190,6 +191,52 @@ class User extends Authenticatable implements JWTSubject
     public function scopeWithTotalProfit($query)
     {
         return $query->addSelect(DB::raw('IFNULL((SELECT SUM(amount) FROM financial_transactions ft WHERE ft.user_id = '.$this->table.'.id AND ft.type = "profit" GROUP BY ft.user_id),0) AS total_profit_amount'));
+    }
+
+    /**
+     * Log financial transaction and this function do so:
+     * Generate different types of financial transactions such as Deposit, Withdraw, Profit, Charge and Refund.
+     * 
+     * @param array $transactionDetails
+     */
+    public static function logFinancialTransaction($transactionDetails = []){
+        if(isset($transactionDetails['user_id']) && isset($transactionDetails['type'])){            
+            $FinancialTransaction = new FinancialTransaction;
+            $FinancialTransaction->user_id = $transactionDetails['user_id'];
+            $FinancialTransaction->no = md5(uniqid(rand(), true));
+            $FinancialTransaction->type = $transactionDetails['type'];
+            $FinancialTransaction->amount = (isset($transactionDetails['amount'])) ? $transactionDetails['amount'] : 0;
+            $FinancialTransaction->order_id = (isset($transactionDetails['order_id'])) ? $transactionDetails['order_id'] : null;
+            $FinancialTransaction->service_id = (isset($transactionDetails['service_id'])) ? $transactionDetails['service_id'] : null;
+            $FinancialTransaction->save();
+
+            User::logTransactionUpdateBalance($FinancialTransaction->user_id,$FinancialTransaction->type,$FinancialTransaction->amount);
+            
+        }
+    }
+
+    /**
+     * Update user balance after logging the transaction
+     * 
+     * @param integer $userId
+     * @param string $transactionType
+     * @param integer $amount
+     */
+    private static function logTransactionUpdateBalance($userId,$transactionType,$amount){
+        if($transactionType != 'charge'){
+            // Update User Balance
+            $User = User::where('id',$userId)->select('id','balance')->first();
+            if($transactionType == 'withdraw'){
+                $User->balance = $User->balance - $amount;
+            }
+            if(in_array($transactionType,['refund','profit'])){
+                $User->balance = $User->balance + $amount;
+            }
+            if($User->balance < 0){
+                $User->balance = 0;
+            }
+            $User->save();
+        }
     }
     
 }

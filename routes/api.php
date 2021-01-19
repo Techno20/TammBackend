@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\AdminHelpersController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminFinancialTransactionController;
+use App\Http\Controllers\Admin\AdminSettingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -126,19 +127,19 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','admin']],function(){
         Route::get('general', [AdminDashboardController::class, 'getGeneral']);
     });
     
-    Route::group(['prefix' => 'service'], function () {
+    Route::group(['prefix' => 'service','middleware' => 'can:services'], function () {
         Route::get('show/{service_id}', [AdminServiceController::class, 'getShow']);
         Route::put('set-approval/{service_id}', [AdminServiceController::class, 'putSetApproval']);
         Route::delete('delete/{service_id}', [AdminServiceController::class, 'Delete']);
     });
 
-    Route::group(['prefix' => 'user'], function () {
+    Route::group(['prefix' => 'user','middleware' => 'can:users'], function () {
         Route::get('show/{user_id}', [AdminUserController::class, 'getShow']);
         Route::delete('delete/{user_id}', [AdminUserController::class, 'Delete']);
         Route::post('edit/{user_id}', [AdminUserController::class, 'postEdit']);
     });
 
-    Route::group(['prefix' => 'order'], function () {
+    Route::group(['prefix' => 'order','middleware' => 'can:orders'], function () {
         Route::get('show/{id}', [AdminOrderController::class, 'getShow']);
     });
 
@@ -146,16 +147,19 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','admin']],function(){
         Route::get('list/{type}', [AdminHelpersController::class, 'getList']);
     });
 
-    Route::group(['prefix' => 'settings'], function () {
-        Route::get('show', [AdminHelpersController::class, 'getSettings']);
-        Route::post('save', [AdminHelpersController::class, 'postSaveSettings']);
+    Route::group(['prefix' => 'setting','middleware' => 'can:settings'], function () {
+        Route::get('general', [AdminSettingController::class, 'getGeneral']);
+        Route::post('save-general', [AdminSettingController::class, 'postSaveGeneral']);
+        Route::post('save-setting-type/{settingType}', [AdminSettingController::class, 'postSaveListItem'])->where('settingType','(categories|skills|banks|countries|admins)');
+        Route::post('save-setting-type/{settingType}', [AdminSettingController::class, 'postSaveListItem'])->where('settingType','(categories|skills|banks|countries|admins)');
+        Route::delete('delete-setting-type/{settingType}/{settingTypeId}', [AdminSettingController::class, 'postDeleteListItem'])->where('settingType','(categories|skills|banks|countries|admins|contactus-messages)');
     });
 
-    Route::group(['prefix' => 'financial-transaction'], function () {
+    Route::group(['prefix' => 'financial-transaction','middleware' => 'can:financials'], function () {
         Route::get('show/{id}', [AdminFinancialTransactionController::class, 'getShow']);
-        Route::post('reject/{id}', [AdminFinancialTransactionController::class, 'postReject']);
-        Route::post('pay/{id}', [AdminFinancialTransactionController::class, 'postPay']);
-        Route::post('requested/{id}', [AdminFinancialTransactionController::class, 'postRequested']);
+        Route::get('withdraw-request-details/{id}', [AdminFinancialTransactionController::class, 'getWithdrawRequest']);
+        Route::post('reject/{id}', [AdminFinancialTransactionController::class, 'postWithdrawReject']);
+        Route::post('pay/{id}', [AdminFinancialTransactionController::class, 'postWithdrawPay']);
     });
 
 });

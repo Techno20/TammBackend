@@ -47,6 +47,29 @@ class AdminDatatableController extends Controller
 	*/
 	private $subModuleId;
 
+	/**
+	 * Constructor
+	 * usually includes authorization of the user for current request
+	 */
+	public function __construct(){
+		switch (request()->module) {
+			case 'users':
+				$this->middleware('can:users');
+			break;
+			case 'orders':
+				$this->middleware('can:orders');
+			break;
+			case 'services': case 'services-reviews':
+				$this->middleware('can:services');
+			break;
+			case 'financial-transactions': case 'financial-withdraw-requests':
+                $this->middleware('can:financials');
+			break;
+			case 'setting':
+                $this->middleware('can:settings');
+            break;
+		}
+	}
 
 	/**
 	* Prepare and response module data either to excel or to datatable
@@ -89,6 +112,9 @@ class AdminDatatableController extends Controller
 			break;
 			case 'financial-withdraw-requests':
                 return $this->FinancialWithdrawRequests($q);
+			break;
+			case 'setting':
+                return $this->Setting($q);
             break;
 			default:
 			abort(403);
@@ -137,6 +163,14 @@ class AdminDatatableController extends Controller
 				case 'financial-transactions':
 					$Model = $Model->get();
 					Excel::store(new \App\Exports\FinancialTransactionsExport($Model), $filePath,$excelStoreDisk);
+				break;
+				case 'financial-withdraw-requests':
+					$Model = $Model->get();
+					Excel::store(new \App\Exports\FinancialWithdrawRequestsExport($Model), $filePath,$excelStoreDisk);
+				break;
+				case 'setting':
+					$Model = $Model->get();
+					Excel::store(new \App\Exports\SettingExport($Model), $filePath,$excelStoreDisk);
 				break;
 				default:
 					return response()->json(['message' => 'invalid_export','message_string' => __('messages.errors.default'),'status' => false],404);
@@ -339,10 +373,10 @@ class AdminDatatableController extends Controller
      */
     public function Users($q){
 	
-		$getResults = \App\Models\User::selectRaw('users.id,users.balance,users.email,users.phone,users.name,users.created_at,
+		$getResults = \App\Models\User::selectRaw('users.id,users.balance AS user_balance,users.email,users.phone,users.name,users.created_at,
 		IFNULL((SELECT COUNT(id) FROM services WHERE services.user_id = users.id GROUP BY services.user_id),0) AS services_count,
 		IFNULL((SELECT COUNT(id) FROM orders WHERE orders.user_id = users.id GROUP BY orders.user_id),0) AS orders_count,
-		IFNULL((SELECT SUM(paid_total) FROM orders WHERE orders.user_id = users.id GROUP BY orders.user_id),0) AS orders_amount,
+		IFNULL((SELECT SUM(paid_total) FROM orders WHERE orders.user_id = users.id AND orders.status != "canceled" GROUP BY orders.user_id),0) AS orders_amount,
 		IFNULL((SELECT SUM(amount) FROM financial_transactions ft WHERE ft.user_id = users.id AND ft.type = "profit" GROUP BY ft.user_id),0) AS profit_amount
 		');
 		$getResults = $getResults->groupBy('users.id');
@@ -460,22 +494,20 @@ class AdminDatatableController extends Controller
      */
     public function FinancialWithdrawRequests($q){
 
-		$getResults = \App\Models\FinancialWithdrawRequest::selectRaw('financial_withdraw_requests.*,user.name as user_name');
+		$getResults = \App\Models\FinancialWithdrawRequest::selectRaw('financial_withdraw_requests.*,user.name as user_name,user.balance as user_balance');
 		$getResults = $getResults->leftJoin('users as user','user.id','=','financial_withdraw_requests.user_id');
 		$getResults = $getResults->groupBy('financial_withdraw_requests.id');
 
 
-		// Request date filter
-		$request_date_start_date = ($q->request_date_start_date) ? $q->request_date_start_date : false;
-		$request_date_end_date = ($q->request_date_end_date) ? $q->request_date_end_date : false;
-		if($request_date_start_date || $request_date_end_date){
-			$request_date_date_field = 'financial_withdraw_requests.requested_at';
-			if($request_date_start_date){
-				$getResults = $getResults->whereDate(DB::raw($request_date_date_field),'>=',$request_date_start_date);
-			}
-			if($request_date_end_date){
-				$getResults = $getResults->whereDate(DB::raw($request_date_date_field),'<=',$request_date_end_date);
-			}
+		// Date
+		$date_field = 'financial_withdraw_requests.requested_at';
+		$start_date = ($q->created_date_start_date) ? $q->created_date_start_date : false;
+		$end_date = ($q->created_date_end_date) ? $q->created_date_end_date : false;
+		if($start_date){
+			$getResults = $getResults->whereDate(DB::raw($date_field),'>=',$start_date);
+		}
+		if($end_date){
+			$getResults = $getResults->whereDate(DB::raw($date_field),'<=',$end_date);
 		}
 
 		// Status date filter
@@ -493,7 +525,7 @@ class AdminDatatableController extends Controller
 
 
 		// Status filter
-		if($q->status){
+		if($q->status && $q->status != 'all'){
 			$getResults = $getResults->where('status',$q->status);
 		}
 
@@ -647,6 +679,46 @@ class AdminDatatableController extends Controller
 		->filterColumn('user_recipient_email', function($query, $keyword) {
 			$query->whereRaw("user_recipient.email like ?", ["%{$keyword}%"]);
 		})
+		->addColumn('DT_RowId','{{ strtolower($id) }}')
+		->make(true);
+	}
+	
+	/**
+     * Get Setting
+	 * 
+	 * @param Request $q
+     */
+    public function Setting($q){
+
+		switch($q->setting_type){
+			case 'banks':
+				$getResults = \App\Models\Bank::withCount('Users');
+			break;
+			case 'categories':
+				$getResults = \App\Models\Category::withCount('Services');
+			break;
+			case 'countries':
+				$getResults = \App\Models\Country::withCount('Users');
+			break;
+			case 'skills':
+				$getResults = \App\Models\Skill::withCount('UserSkills');	
+			break;
+			case 'admins':
+				$getResults = \App\Models\User::selectRaw('id,name,email,created_at,is_admin_permissions')->where('is_admin',1)->get()->makeVisible('is_admin_permissions');	
+			break;
+			case 'contactus-messages':
+				$getResults = \App\Models\ContactusMessage::select('*');	
+			break;
+		}
+
+
+
+        if($this->is_export){
+			return $this->exportToExcel($getResults);
+		}else {
+            $dt = datatables()->of($getResults);
+        }
+		return $dt
 		->addColumn('DT_RowId','{{ strtolower($id) }}')
 		->make(true);
     }

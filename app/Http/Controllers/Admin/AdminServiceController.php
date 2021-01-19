@@ -21,7 +21,7 @@ class AdminServiceController extends Controller
 	 */
 	public function getShow($serviceId,Request $q)
 	{
-		$Service = Service::where('id',$serviceId)->with(['User','Category','Image'])->first();
+		$Service = Service::where('id',$serviceId)->with(['User','Category','Image','Extras'])->first();
 		if(!$Service){
 			return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
 		}
@@ -64,6 +64,6 @@ class AdminServiceController extends Controller
 		}
 
 		$DeleteService->delete();
-		return response()->json(['message' => 'success','message_string' => __('messages.success.default'),'status' => true]);
+		return Helper::responseData('success',true);
 	}
 }

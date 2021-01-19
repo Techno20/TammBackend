@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use DB, Helper;
 use App\Models\FinancialTransaction;
 use App\Models\FinancialWithdrawRequest;
+use App\Models\User;
 
 class AdminFinancialTransactionController extends Controller
 {
@@ -27,6 +28,23 @@ class AdminFinancialTransactionController extends Controller
 			return Helper::responseData('transaction_not_found',false,false,__('default.error_message.transaction_not_found'),404);
 		}
 		return Helper::responseData('success',true,$FinancialTransaction);
+	}
+
+	/**
+	 * Get financial withdraw request details
+	 * 
+	 * @param integer $financialWithdrawRequestId
+	 * @param object $q Request data
+	 */
+	public function getWithdrawRequest($financialWithdrawRequestId,Request $q)
+	{
+		$FinancialWithdrawRequest = FinancialWithdrawRequest::where('id',$financialWithdrawRequestId)->with(['User' => function($User){
+			return $User->addSelect('bank_id','bank_iban','bank_account_owner_name')->with('Bank');
+		}])->first();
+		if(!$FinancialWithdrawRequest){
+			return Helper::responseData('financial_withdraw_request_not_found',false,false);
+		}
+		return Helper::responseData('success',true,$FinancialWithdrawRequest);
 	}
 
 	/**
@@ -54,7 +72,7 @@ class AdminFinancialTransactionController extends Controller
 	 * 
 	 * @param object $q Request data
 	 */
-	public function postWithdrawPay($financialTransactionId,Request $q)
+	public function postWithdrawPay($financialWithdrawRequestId,Request $q)
 	{
 		$FinancialWithdrawRequest = FinancialWithdrawRequest::where('id',$financialWithdrawRequestId)->first();
 		if(!$FinancialWithdrawRequest){

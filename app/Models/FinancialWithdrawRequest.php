@@ -8,6 +8,7 @@ class FinancialWithdrawRequest extends Model
 {
     protected $table = 'financial_withdraw_requests';
     protected $appends = [
+        'status_string'
     ];
     public $timestamps = false;
 
@@ -26,7 +27,7 @@ class FinancialWithdrawRequest extends Model
 
     /* START ATTRIBUTES */
     public function getStatusStringAttribute(){
-        return __('default.other.transaction_withdraw_status.'.$this->type);
+        return __('default.other.transaction_withdraw_status.'.$this->status);
     }
 
     /* START SCOPES */

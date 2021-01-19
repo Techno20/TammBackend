@@ -42,7 +42,7 @@ return [
         ],
        'transaction_withdraw_status' => [
             'requested' => 'بالانتظار',
-            'approved' => 'تمت الموافقة',
+            'paid' => 'مدفوع',
             'rejected' => 'مرفوض'
        ],
         'main_category_types' => ['technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'],

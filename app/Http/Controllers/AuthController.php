@@ -105,6 +105,9 @@ class AuthController extends Controller
   public function getMe(Request $q)
   {
     $User = auth()->user();
+    if($User->is_admin){
+      $User = $User->makeVisible(['is_admin_permissions']);
+    }
     if ($User) {
       return Helper::responseData('success',true,['user' => $User]);
     }else {

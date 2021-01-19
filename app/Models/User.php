@@ -120,6 +120,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasManyThrough('App\Models\Skill','App\Models\UserSkill','user_id','id','id','skill_id')->selectCard();
     }
 
+    // Bank
+    public function Bank(){
+        return $this->belongsTo('App\Models\Bank')->selectCard();
+    }
+
     /* START ATTRIBUTES */
     public function getCreatedAtAttribute($value){
         return date('Y-m-d H:i:s',strtotime($value));
@@ -129,6 +134,12 @@ class User extends Authenticatable implements JWTSubject
         return date('Y-m-d H:i:s',strtotime($value));
     }
 
+    /**
+     * Get is admin permissions as object
+     */
+    public function getIsAdminPermissionsAttribute($value){
+        return ($value) ? json_decode($value) : null;
+    }
 
     /**
      * Get user avatar attribute
@@ -181,7 +192,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopeWithTotalSpending($query)
     {
         return $query->withCount(['Orders AS total_spending' => function($orders_amount){
-            return $orders_amount->select(DB::raw('JSON_OBJECT("count",IFNULL(COUNT(id),0),"amount",IFNULL(SUM(paid_total),0)) as total_spending'));
+            return $orders_amount->where('status','!=','canceled')->select(DB::raw('JSON_OBJECT("count",IFNULL(COUNT(id),0),"amount",IFNULL(SUM(paid_total),0)) as total_spending'));
         }]);
     }
 

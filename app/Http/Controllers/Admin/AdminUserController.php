@@ -24,7 +24,7 @@ class AdminUserController extends Controller
 			return $Orders->with(['Service' => function($Service){
 				return $Service->selectCard();
 			}])->orderBy('created_at','DESC')->take(6);
-		}])->withTotalSpending()->withTotalProfit()->first();
+		}])->withTotalSpending()->withTotalProfit()->first()->makeVisible('balance');
 		if(!$User){
 			return Helper::responseData('user_not_found',false,__('default.error_message.user_not_found'));
 		}

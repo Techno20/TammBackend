@@ -23,6 +23,16 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Gate::before(function($user, $ability) {
+            $abilities = ['orders','services','financials','settings','users'];
+            if(in_array($ability,$abilities) && auth()->user()->is_admin && isset(auth()->user()->is_admin_permissions->{$ability}) && auth()->user()->is_admin_permissions->{$ability}){
+                return true;
+            }else {
+                return false;
+            }
+        });
+
+
         $this->registerPolicies();
 
         //

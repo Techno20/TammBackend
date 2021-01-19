@@ -13,6 +13,16 @@ class Skill extends Model
         return $this->hasMany('App\Models\UserSkill');
     }
 
+    /* START ATTRIBUTES */
+    public function getCreatedAtAttribute($value){
+        return date('Y-m-d H:i:s',strtotime($value));
+    }
+
+    public function getUpdatedAtAttribute($value){
+        return date('Y-m-d H:i:s',strtotime($value));
+    }
+
+
     /* START SCOPES */
     public function scopeSelectCard($query)
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -11,6 +12,7 @@ use Helper;
 
 class ServiceController extends Controller
 {
+
     /**
      * Get service details
      * 
@@ -29,7 +31,10 @@ class ServiceController extends Controller
         }
         $Service = $Service->first();
         if($Service) {
-            return Helper::responseData('success',true,$Service);
+            $result['category'] = Category::selectCard()->find($Service->category_id);
+            $result['main_categories'] = $this->getMainCategoriesType();
+//            return Helper::responseData('success',true,$Service);
+            return view('site.services.show')->with('service',$Service)->with('result',$result);
         }else {
             return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
         }
@@ -74,9 +79,12 @@ class ServiceController extends Controller
             $Services = $Services->where('title','LIKE','%'.request()->title.'%');
         }
 
+        $result = [];
         // By category
         if (request()->category_id) {
             $Services = $Services->where('category_id',request()->category_id);
+            $result['category'] = Category::selectCard()->find(request()->category_id);
+            $result['main_categories'] = $this->getMainCategoriesType();
         }
 
         // By user
@@ -99,9 +107,11 @@ class ServiceController extends Controller
             $Services = $Services->orderBy('id','DESC');
         }
 
-        $Services = $Services->paginate(50)->toArray();
+        $Services = $Services->paginate(20);
 
-        return Helper::responseData('success',true,$Services);
+
+//        return Helper::responseData('success',true,$Services);
+        return view('site.services.list')->with('services',$Services)->with('result',$result);
     }
 
     /**
@@ -155,10 +165,28 @@ class ServiceController extends Controller
         $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
 
-        return view('site.pages.home');
+        return view('site.pages.home')->with('result',$result);
 //        return Helper::responseData('success',true,$result);
     }
 
+    public function getCategories($main_category = null,Request $request)
+    {
+        $main_categories_type_arabic = $this->getMainCategoriesType();
+        $result = [];
+        // Categories Lis
+        $categories = Category::selectCard();
+        if(isset($main_category) && !empty($main_category) && in_array($main_category,array_keys($main_categories_type_arabic)) && $main_category !='all'){
+            $categories = $categories->where('main_category_type',$main_category);
+            $result['main_category_type'] = $main_category;
+        }
+        $result['categories'] = $categories->get();
+        $result['main_categories'] = $main_categories_type_arabic;
+        return view('site.services.categories')->with('result',$result);
+    }
 
+
+    public function getMainCategoriesType(){
+        return ['all'=>'الكل','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
+    }
 
 }

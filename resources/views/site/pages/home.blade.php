@@ -238,175 +238,59 @@
         </section>
         <!-- top-rated-seller-section -->
 
+        @if(isset($result['top_selling_services']) && !empty($result['top_selling_services']) && count($result['top_selling_services']) > 0)
         <!-- best-selling-services-section -->
         <section class="best-selling-services-section">
             <div class="container wow fadeInUp" data-wow-duration="1.5s">
                 <header class="sec-header-1">
-                    <h2>Best Selling Services</h2>
+                    <h2>Top Selling Services</h2>
                 </header>
                 <div class="sec-content">
                     <div class="services-slider-1 owl-carousel owl-navs-with-header">
+                        @foreach($result['top_selling_services'] as $key => $value)
                         <div class="item">
-                            <div class="service-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
-                                        <div class="caption media">
-                                            <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                            <div class="media-body">
-                                                <p>Creator</p>
-                                                <h4>Alice Krejčová</h4>
+                                <div class="service-item-1">
+                                    <a href="{{ url('service/show/'.$value->id) }}">
+                                        <figure>
+                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
+                                                <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                            @else
+                                                <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                            @endif
+                                            <div class="caption media">
+                                                @if(isset($value->user) && !empty($value->user))
+                                                    @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
+                                                        <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
+                                                    @else
+                                                        <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
+                                                    @endif
+                                                    <div class="media-body">
+                                                        <p>Creator</p>
+                                                        <h4>{{ $value->user->name }}</h4>
+                                                    </div>
+                                                @endif
                                             </div>
-                                        </div>
-                                    </figure>
-                                    <div class="details">
-                                        <h3>Create a 3d For Your Product</h3>
-                                        <div class="meta d-flex align-items-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                            <p class="total-sell">235 Sell</p>
-                                        </div>
-                                        <p class="brief">
-                                            I will model and render whatever you need!..
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
-                                        <div class="caption media">
-                                            <img src="{{ asset('assets/site/images/services/u-2.png') }}" class="author-img">
-                                            <div class="media-body">
-                                                <p>Creator</p>
-                                                <h4>Homura Yunosuke</h4>
+                                        </figure>
+                                        <div class="details">
+                                            <h3>{{ $value->title }}</h3>
+                                            <div class="meta d-flex align-items-center">
+                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                <p class="total-sell">{{ $value->Orders()->count() }} Sell</p>
                                             </div>
+                                            <p class="brief">
+                                                {{ \Str::limit($value->description , 70)}}
+                                            </p>
                                         </div>
-                                    </figure>
-                                    <div class="details">
-                                        <h3>Create a 3d For Your Product</h3>
-                                        <div class="meta d-flex align-items-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                            <p class="total-sell">235 Sell</p>
-                                        </div>
-                                        <p class="brief">
-                                            I will model and render whatever you need!..
-                                        </p>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/s-3.png') }}" class="main-img">
-                                        <div class="caption media">
-                                            <img src="{{ asset('assets/site/images/services/u-3.png') }}" class="author-img">
-                                            <div class="media-body">
-                                                <p>Creator</p>
-                                                <h4>Sakane Miiko</h4>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                    <div class="details">
-                                        <h3>Create a 3d For Your Product</h3>
-                                        <div class="meta d-flex align-items-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                            <p class="total-sell">235 Sell</p>
-                                        </div>
-                                        <p class="brief">
-                                            I will model and render whatever you need!..
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/s-4.png') }}" class="main-img">
-                                        <div class="caption media">
-                                            <img src="{{ asset('assets/site/images/services/u-4.png') }}" class="author-img">
-                                            <div class="media-body">
-                                                <p>Creator</p>
-                                                <h4>Sara Scholz</h4>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                    <div class="details">
-                                        <h3>Create a 3d For Your Product</h3>
-                                        <div class="meta d-flex align-items-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                            <p class="total-sell">235 Sell</p>
-                                        </div>
-                                        <p class="brief">
-                                            I will model and render whatever you need!..
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/s-5.png') }}" class="main-img">
-                                        <div class="caption media">
-                                            <img src="{{ asset('assets/site/images/services/u-5.png') }}" class="author-img">
-                                            <div class="media-body">
-                                                <p>Creator</p>
-                                                <h4>William Diwedi</h4>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                    <div class="details">
-                                        <h3>Create a 3d For Your Product</h3>
-                                        <div class="meta d-flex align-items-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                            <p class="total-sell">235 Sell</p>
-                                        </div>
-                                        <p class="brief">
-                                            I will model and render whatever you need!..
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/s-5.png') }}" class="main-img">
-                                        <div class="caption media">
-                                            <img src="{{ asset('assets/site/images/services/u-5.png') }}" class="author-img">
-                                            <div class="media-body">
-                                                <p>Creator</p>
-                                                <h4>William Diwedi</h4>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                    <div class="details">
-                                        <h3>Create a 3d For Your Product</h3>
-                                        <div class="meta d-flex align-items-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                            <p class="total-sell">235 Sell</p>
-                                        </div>
-                                        <p class="brief">
-                                            I will model and render whatever you need!..
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </section>
         <!-- best-selling-services-section -->
+        @endif
 
         <!-- how-its-work-section -->
         <section class="how-its-work-section">

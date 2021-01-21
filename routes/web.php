@@ -12,6 +12,7 @@ use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\User\UserServiceController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,7 +88,11 @@ Route::group(['middleware' => 'api-localization'],function(){
     Route::group(['prefix' => ''],function(){
         Route::get('/', [ServiceController::class, 'getHomeData']);
         Route::get('home', [ServiceController::class, 'getHomeData']);
-        Route::get('list', [ServiceController::class, 'getList']);
+        Route::get('lang/{lang}', [SiteController::class, 'changeLanguage']);
+    });
+    Route::group(['prefix' => 'service'],function(){
+        Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);
+        Route::get('list/{category?}', [ServiceController::class, 'getList']);
         Route::get('show/{service_id}', [ServiceController::class, 'getShow']);
         Route::get('reviews/{service_id}', [ServiceController::class, 'getReviews']);
     });
@@ -107,4 +112,3 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::post('contact-us', [HelperController::class, 'postContactUs']);
     });
 });
-

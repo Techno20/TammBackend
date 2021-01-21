@@ -17,7 +17,14 @@ class ApiLocalization
   public function handle($request, Closure $next)
   {
     // Check header request and determine localizaton
-    $local = ($request->hasHeader('X-localization')) ? $request->header('X-localization') : config('app.locale');
+//    $local = ($request->hasHeader('X-localization')) ? $request->header('X-localization') : config('app.locale');
+    $local = config('app.locale');
+    if(session()->get('locale')){
+        $local = session()->get('locale');
+    }
+    if($request->hasHeader('X-localization')){
+        $local = $request->header('X-localization');
+    }
     // set laravel localization
     app()->setLocale($local);
     // continue request

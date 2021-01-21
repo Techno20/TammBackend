@@ -28,19 +28,19 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="">Home</a>
+                    <a class="nav-link active" href="{{ url('/') }}">@lang('site.home')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Services</a>
+                    <a class="nav-link" href="{{ url('service/categories') }}">@lang('site.services')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">How it works</a>
+                    <a class="nav-link" href="">@lang('site.how_it_work')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Blog</a>
+                    <a class="nav-link" href="">@lang('site.blog')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">About us</a>
+                    <a class="nav-link" href="">@lang('site.about_us')</a>
                 </li>
             </ul>
         </nav>
@@ -193,10 +193,10 @@
 <!-- join-tamm2 modal -->
 
 <!-- Start Main Header -->
-<header class="main-header home-header" id="home">
+<header class="main-header @if(empty(Request::segment(1)) || Request::segment(1) == 'home') home-header @endif" id="home">
     <div class="container position-relative">
         <nav class="navbar navbar-expand-lg">
-            <a href="" class="brand">
+            <a href="{{ url('/') }}" class="brand">
                 <img src="{{ asset('assets/site/images/logo.svg') }}">
             </a>
             <button type="button" class="navbar-toggler btn " id="openMenu">
@@ -205,35 +205,38 @@
             <div class="collapse navbar-collapse " id="main_menu">
                 <ul class="navbar-nav main-menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="">Home</a>
+                        <a class="nav-link active" href="{{ url('/') }}">@lang('site.home')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Services</a>
+                        <a class="nav-link" href="{{ url('service/categories') }}">@lang('site.services')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">How it works</a>
+                        <a class="nav-link" href="">@lang('site.how_it_works')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Blog</a>
+                        <a class="nav-link" href="">@lang('site.blog')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">About us</a>
+                        <a class="nav-link" href="">@lang('site.about_us')</a>
                     </li>
                 </ul>
             </div>
             <div class="header-tools">
-                <a href="#joinTamm2Modal" class="btn btn-white become-seller" data-toggle="modal">Become a Seller</a>
-                <a href="#signInModal" class="btn btn-white sign-in" data-toggle="modal">Sign in</a>
-                <a href="#joinTammModal" class="btn btn-yallow join-us" data-toggle="modal">Join us</a>
+                <a href="#joinTamm2Modal" class="btn btn-white become-seller" data-toggle="modal">@lang('site.become_seller')</a>
+                <a href="#signInModal" class="btn btn-white sign-in" data-toggle="modal">@lang('site.sign_in')</a>
+                <a href="#joinTammModal" class="btn btn-yallow join-us" data-toggle="modal">@lang('site.join_us')</a>
                 <div class="dropdown lang-dropdown">
                     <a class="btn btn-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
-                        <span>EN</span>
+                        <span>{{ strtoupper(app()->getLocale()) }}</span>
                         <i class="fas fa-angle-down mr-1"></i>
                     </a>
 
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">EN</a>
-                        <a class="dropdown-item" href="#">AR</a>
+                        @if(app()->getLocale() == 'ar')
+                            <a class="dropdown-item" href="{{ url('lang/en') }}">EN</a>
+                        @else
+                            <a class="dropdown-item" href="{{ url('lang/ar') }}">AR</a>
+                        @endif
                     </div>
                 </div>
             </div>

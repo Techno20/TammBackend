@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-{{--@if(App::getLocale() === 'ar')--}}
-{{--    <html dir="rtl" lang="ar">--}}
-{{--@else--}}
-{{--    <html dir="ltr" lang="en">--}}
-{{--@endif--}}
+@if(App::getLocale() === 'ar')
+    <html dir="rtl" lang="ar">
+@else
+    <html dir="ltr" lang="en">
+@endif
     <head>
         @include('site.layout.common.head')
         @yield('css')

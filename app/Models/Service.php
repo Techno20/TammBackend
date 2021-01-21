@@ -190,7 +190,7 @@ class Service extends Model
 
   public function scopeSelectCard($query)
   {
-    return $query->select(DB::raw($this->table.'.id'),DB::raw($this->table.'.is_active'),DB::raw($this->table.'.is_approved'),DB::raw($this->table.'.category_id'),DB::raw($this->table.'.main_category_type'),DB::raw($this->table.'.title'),DB::raw($this->table.'.basic_price'),DB::raw($this->table.'.user_id'),DB::raw($this->table.'.created_at'),DB::raw($this->table.'.deleted_at'))
+    return $query->select(DB::raw($this->table.'.id'),DB::raw($this->table.'.is_active'),DB::raw($this->table.'.is_approved'),DB::raw($this->table.'.category_id'),DB::raw($this->table.'.main_category_type'),DB::raw($this->table.'.title'),DB::raw($this->table.'.description'),DB::raw($this->table.'.basic_price'),DB::raw($this->table.'.user_id'),DB::raw($this->table.'.created_at'),DB::raw($this->table.'.deleted_at'))
     ->with('User','Image')->selectRatingAverage();
   }
 

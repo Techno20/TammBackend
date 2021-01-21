@@ -83,7 +83,7 @@
                     <a href="" class="f-logo">
                         <img src="{{ asset('assets/site/images/f-logo.png') }}" alt="logo">
                     </a>
-                    <div class="copyright">© TAMM International Ltd. 2020</div>
+                    <div class="copyright">© @lang('site.copyright'). {{ date('Y',time()) }}</div>
                 </div>
                 <div class="f-social">
                     <a href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>

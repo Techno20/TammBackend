@@ -155,7 +155,8 @@ class ServiceController extends Controller
         $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
 
-        return Helper::responseData('success',true,$result);
+        return view('site.pages.home');
+//        return Helper::responseData('success',true,$result);
     }
 
 

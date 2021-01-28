@@ -6,4 +6,8 @@
 <script src="{{ asset('assets/site/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 
 <script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
-<script src="{{ asset('assets/site/js/main.js') }}"></script>
+@if(app()->getLocale() == 'ar')
+    <script src="{{ asset('assets/site/js/main-rtl.js') }}"></script>
+@else
+    <script src="{{ asset('assets/site/js/main.js') }}"></script>
+@endif

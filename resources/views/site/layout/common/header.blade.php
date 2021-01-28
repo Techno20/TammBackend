@@ -197,7 +197,12 @@
     <div class="container position-relative">
         <nav class="navbar navbar-expand-lg">
             <a href="{{ url('/') }}" class="brand">
-                <img src="{{ asset('assets/site/images/logo.svg') }}">
+            
+                @if(app()->getLocale() == 'ar')
+                 <img src="{{ asset('assets/shared/img/logo.svg') }}">
+                @else
+                    <img src="{{ asset('assets/site/images/logo.svg') }}">
+                @endif
             </a>
             <button type="button" class="navbar-toggler btn " id="openMenu">
                 <i class="fa fa-align-right fa-fw"></i>

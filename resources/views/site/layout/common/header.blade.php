@@ -55,7 +55,7 @@
         <div class="modal-content">
             <div class="auth-modal signin-modal">
                 <header class="auth-header-1 d-flex align-items-center justify-content-between">
-                    <h3>Sign in</h3>
+                    <h3>@lang('site.sign_in')</h3>
                     <a href="#joinTammModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">Join now</a>
                 </header>
                 <div class="social-login">
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">Continue </button>
+                        <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
                     </div>
                 </div>
             </div>
@@ -102,18 +102,18 @@
             <div class="auth-modal reset-password-modal">
                 <header class="auth-header-2 text-center">
                     <h3>Reset Password</h3>
-                    <p>Please enter your email address and we'll send you a link to reset your password.</p>
+                    <p>Please @lang('site.enter_your') email address and we'll send you a link to reset your password.</p>
                 </header>
 
 
                 <div class="auth-form sign-in-form gray-form">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="Enter your email" name="">
+                        <input type="text" class="form-control form-control-lg" placeholder="@lang('site.enter_your') email" name="">
                     </div>
 
                     <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">Continue </button>
-                        <p class="text-center back"><a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="">Back to Sign In</a></p>
+                        <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
+                        <p class="text-center back"><a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="">Back to @lang('site.sign_in')</a></p>
                     </div>
                 </div>
             </div>
@@ -128,15 +128,15 @@
             <div class="auth-modal join-tamm-modal">
                 <header class="auth-header-1 d-flex align-items-center justify-content-between">
                     <h3>Join Tamm</h3>
-                    <a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">Sign in</a>
+                    <a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">@lang('site.sign_in')</a>
                 </header>
                 <div class="auth-form join-form gray-form">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="Enter your email" name="">
+                        <input type="text" class="form-control form-control-lg" placeholder="@lang('site.enter_your') email" name="">
                     </div>
 
                     <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">Continue </button>
+                        <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
                     </div>
                 </div>
                 <p class="or-sec"><span>OR</span></p>
@@ -167,22 +167,25 @@
 <div class="modal fade custom-modal" id="joinTamm2Modal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
-            <div class="auth-modal join-tamm2-modal">
+            <div class="auth-modal user_register_block join-tamm2-modal">
                 <header class="auth-header-1 d-flex align-items-center justify-content-between">
-                    <h3>Join Tamm</h3>
-                    <a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">Sign in</a>
+                    <h3>@lang('site.become_seller')</h3>
+                    <a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">@lang('site.sign_in')</a>
                 </header>
                 <div class="auth-form join-form gray-form">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="Enter your email" name="">
+                        <input type="text" class="form-control form-control-lg name" placeholder="@lang('site.enter_your') @lang('site.name')" name="name">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control form-control-lg" placeholder="Password" name="">
+                        <input type="email" class="form-control form-control-lg email" placeholder="@lang('site.enter_your') @lang('site.email')" name="email">
                     </div>
-                    <p class="help-text">8 characters or longer. Combine upper and lowercase letters and numbers.</p>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-lg password" placeholder="@lang('site.password')" name="password">
+                    </div>
+                    <p class="help-text">@lang('site.password_cond')</p>
 
                     <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">Continue </button>
+                        <button type="button" class="btn btn-lg btn-block btn-yallow user_register">@lang('site.continue') </button>
                         <p class="agree-terms">By joining, you agree to Tamm <a href="">Terms of Service</a></p>
                     </div>
                 </div>

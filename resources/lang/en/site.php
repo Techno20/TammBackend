@@ -28,6 +28,12 @@ return [
     'customer_saying_desc' => 'Work with the best freelance talent from around the world on our secure,flexible and cost-effective platform.',
     'find_talent_needed' => 'Find the talent needed to get your business <span>growing</span>.',
     'lets_start' => 'Let’s Start',
+    'enter_your' => 'Enter your ',
+    'name' => 'Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'password_cond' => '8 characters or longer. Combine upper and lowercase letters and numbers.',
+    'continue' => 'Continue',
     '' => '',
 
 ];

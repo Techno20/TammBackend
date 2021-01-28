@@ -81,7 +81,11 @@
             <div class="wrapper d-flex align-items-center justify-content-between">
                 <div class="content d-flex align-items-center">
                     <a href="" class="f-logo">
-                        <img src="{{ asset('assets/site/images/f-logo.png') }}" alt="logo">
+                        @if(app()->getLocale() == 'ar')
+                            <img src="{{ asset('assets/shared/img/logo.svg') }}" alt="logo">
+                        @else
+                            <img src="{{ asset('assets/site/images/f-logo.png') }}" alt="logo">
+                        @endif
                     </a>
                     <div class="copyright">© @lang('site.copyright'). {{ date('Y',time()) }}</div>
                 </div>

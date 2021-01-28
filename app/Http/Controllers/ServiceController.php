@@ -161,9 +161,18 @@ class ServiceController extends Controller
         $topRatedServices = Service::selectCard()->orderByTopRated()->take(32)->get();
         $result['top_rated_services'] = $topRatedServices;
 
+        // Top Rated seller
+//        $topRatedSeller = Service::selectCard()->orderByTopRated()->groupBy('user_id')->take(32)->get();
+        $topRatedSeller = Service::selectCard()->orderByTopRated()->take(32)->get();
+        $result['top_rated_seller'] = $topRatedSeller;
+
         // Top Selling Services
         $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
+
+        // Top Selling Services
+        $categories = Category::selectCard()->take(32)->get();
+        $result['categories'] = $categories;
 
         return view('site.pages.home')->with('result',$result);
 //        return Helper::responseData('success',true,$result);

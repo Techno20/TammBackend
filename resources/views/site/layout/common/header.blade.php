@@ -146,7 +146,7 @@
                         Continue with Facebook
                     </a>
                     <a href="" class="btn btn-block google-btn">
-                        <img src="{{ asset('assets/site/images/icons/google-ic.') }}" class="mr-2">
+                        <img src="{{ asset('assets/site/images/icons/google-ic.svg') }}" class="mr-2">
                         Continue with Google
                     </a>
                     <a href="" class="btn btn-block apple-btn">

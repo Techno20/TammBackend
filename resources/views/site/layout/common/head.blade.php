@@ -26,3 +26,4 @@
     <link rel="stylesheet" href="{{ asset('assets/site/css/style.css') }}" />
     <title>Tamm</title>
 @endif
+<link rel="stylesheet" href="{{ asset('assets/site/css/custom.css') }}" />

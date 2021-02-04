@@ -27,3 +27,7 @@
     <title>Tamm</title>
 @endif
 <link rel="stylesheet" href="{{ asset('assets/site/css/custom.css') }}" />
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.css">

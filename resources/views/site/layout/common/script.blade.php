@@ -12,6 +12,9 @@
     <script src="{{ asset('assets/site/js/main.js') }}"></script>
 @endif
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 <script>
     $(document).ready(function () {
@@ -31,19 +34,31 @@
                 data: data,
                 dataType: 'json',
                 success:  function(result){
-                    alert(result);
-                    console.log(result);
+                    Swal.fire({
+                        icon: "success",
+                        title: "نجاح",
+                        text: "تمت عملية التسجيل بنجاح",
+                        showConfirmButton : false,
+                        confirmButtonText: 'استمرار'
+                    });
+                    setTimeout(function () {
+                        window.location = "{{ url(url()->current()) }}";
+                    },3000);
                 },
                 error:  function(result){
-                    // console.log(result.responseJSON.data.errors);
-                    // result.responseJSON.data.errors.each(function (index,value) {
-                    //     console.log(result.responseJSON.status);
-                    //     console.log(index+':'+value);
-                    // });
+                    var errors_text = '';
                     $.each(result.responseJSON.data.errors, function(i, item) {
-                        console.log(i);
-                        console.log(item);
+                        errors_text = errors_text+item+'<br/>';
                     });
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطأ',
+                        // text: errors_text,
+                        html: errors_text,
+                        confirmButtonText: 'موافق'
+                    })
+
                 }
             });
         });

@@ -89,6 +89,11 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('/', [ServiceController::class, 'getHomeData']);
         Route::get('home', [ServiceController::class, 'getHomeData']);
         Route::get('lang/{lang}', [SiteController::class, 'changeLanguage']);
+
+        Route::get('about-us', [SiteController::class, 'getAboutUs']);
+        Route::get('how-it-work', [SiteController::class, 'getHowItWok']);
+        Route::get('logout', [SiteController::class, 'getLogout']);
+
     });
     Route::group(['prefix' => 'service'],function(){
         Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);

@@ -1,12 +1,12 @@
 <aside class="dashboard-right-side">
     <div class="user-profile-box">
         <figure class="text-center">
-            <img src="{{ asset('assets/site/images/u-2.png') }}" class="img-fluid">
+            <img src="{{ asset('assets/site/images/user.png') }}" class="img-fluid">
         </figure>
-        <h3>Emilee Simchenko</h3>
-        <p class="brief">A UX designer with years of building all types of unique experiences</p>
+        <h3>{{ auth()->user()->name }}</h3>
+        <p class="brief">{{ auth()->user()->about_me }}</p>
         <div class="actions text-center">
-            <a href="" class="btn btn-outline-darkblue">Show profile</a>
+            <a href="{{ url('user/profile') }}" class="btn btn-outline-darkblue">@lang('site.show_profile')</a>
         </div>
         <div class="summary">
             <div class="item d-flex align-items-center justify-content-between">
@@ -70,10 +70,10 @@
         <figure>
             <img src="{{ asset('assets/site/images/dashboard/serv-question.png') }}" class="img-fluid">
         </figure>
-        <h3>Need Help?</h3>
-        <p>If you have any quastions.</p>
+        <h3>@lang('site.need_help')</h3>
+        <p>@lang('site.need_help_text').</p>
         <div class="actions">
-            <a href="" class="btn btn-yallow">Contact Seller</a>
+            <a href="{{ url('contact') }}" class="btn btn-yallow">@lang('site.contact_seller')</a>
         </div>
     </div>
 </aside>

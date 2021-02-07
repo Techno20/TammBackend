@@ -185,7 +185,7 @@
                 </a>
                 <div class="user-quick-menu d-inline-block">
                     <a href="" class="user">
-                        <img src="{{ asset('assets/site/images/services/u-2.png') }}" alt="">
+                        <img src="{{ asset('assets/site/images/user.png') }}" alt="">
                         <span></span>
                     </a>
                     <div class="h-user-quick-menu-dropdown">
@@ -272,7 +272,7 @@
             </div>
             @else
             <div class="header-tools">
-                    <a href="#joinTamm2Modal" class="btn btn-white become-seller" data-toggle="modal">@lang('site.become_seller')</a>
+                    {{--<a href="#joinTamm2Modal" class="btn btn-white become-seller" data-toggle="modal">@lang('site.become_seller')</a>--}}
                     <a href="#signInModal" class="btn btn-white sign-in" data-toggle="modal">@lang('site.sign_in')</a>
                     <a href="#joinTamm2Modal" class="btn btn-yallow join-us" data-toggle="modal">@lang('site.join_us')</a>
                 <div class="dropdown lang-dropdown">

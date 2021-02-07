@@ -41,6 +41,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         });
         Route::get('profile/{user_id}', [UserProfileController::class, 'getProfile']);
         Route::get('dashboard', [UserProfileController::class, 'getDashboard']);
+        Route::get('profile', [UserProfileController::class, 'getMyProfile']);
 
         Route::group(['middleware' => 'auth'],function(){
             Route::get('me', [AuthController::class, 'getMe']);
@@ -58,6 +59,9 @@ Route::group(['middleware' => 'api-localization'],function(){
                 Route::post('edit/{service_id}', [UserServiceController::class, 'Save']);
                 Route::post('activation/{service_id}', [UserServiceController::class, 'postActivation']);
                 Route::delete('delete/{service_id}', [UserServiceController::class, 'Delete']);
+                Route::get('pricing', [UserServiceController::class, 'getPricing']);
+                Route::get('description', [UserServiceController::class, 'getDescription']);
+//                Route::get('description', [UserServiceController::class, 'getDescription']);
             });
 
             Route::group(['prefix' => 'order'],function(){

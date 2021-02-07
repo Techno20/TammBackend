@@ -81,6 +81,25 @@ class UserProfileController extends Controller
 //      return Helper::responseData('success',true,$User);
         return view('site.user.profile')->with('user',$User);
     }
+    /**
+     * Get specific user profile
+     *
+     * @param integer $userId
+     */
+    public function getMyProfile()
+    {
+        $userId = auth()->user()->id;
+      $User = User::where('id',$userId)->with('LastDeliveredOrder')->first();
+      if(!$User){
+        return Helper::responseData('user_not_found',false,false,__('default.error_message.user_not_found'),404);
+      }
+      $Skills = Skill::whereHas('UserSkills',function($UserSkills) use($userId){
+        return $UserSkills->where('user_id',$userId);
+      })->selectCard()->get();
+      $User->skills = $Skills;
+//      return Helper::responseData('success',true,$User);
+        return view('site.user.my_profile')->with('user',$User);
+    }
 
     
 

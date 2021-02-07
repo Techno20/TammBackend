@@ -42,10 +42,10 @@
                 </header>
                 <section class="promo-section media align-items-center">
                     <div class="media-body">
-                        <h3>Improve your success in 3 steps</h3>
-                        <p>The key to your success on Fiverr is the brand you build for yourself through your Tamm reputation.</p>
+                        <h3>@lang('site.improve_your_success_title')</h3>
+                        <p>@lang('site.improve_your_success_text').</p>
                         <div class="actions">
-                            <a href="" class="btn btn-yallow">Read more</a>
+                            <a href="" class="btn btn-yallow">@lang('site.read_more')</a>
                         </div>
                     </div>
                     <figure>
@@ -55,10 +55,10 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="balance-items">
-                            <h3 class="m-title">Current Balance</h3>
+                            <h3 class="m-title">@lang('site.current_balance')</h3>
                             <div class="wrapper">
                                 <div class="balance-box">
-                                    <label>Earings last 3 months</label>
+                                    <label>@lang('site.earings_last_3_month')</label>
                                     <div class="text">
                                         7,345.34 SAR <small>25%</small> <i class="fas fa-chevron-up"></i>
                                     </div>
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="balance-box">
-                                    <label>Total orders this month</label>
+                                    <label>@lang('site.total_orders_this_month')</label>
                                     <div class="text red">
                                         7,345.34 SAR <small>25%</small> <i class="fas fa-chevron-down"></i>
                                     </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-lg-8">
                         <div class="recent-orders-sec">
-                            <h3 class="m-title">Recent orders</h3>
+                            <h3 class="m-title">@lang('site.recent_orders')</h3>
                             <div class="content">
                                 <div class="table-responsive">
                                     <table class="table table-borderless cs-table-1">

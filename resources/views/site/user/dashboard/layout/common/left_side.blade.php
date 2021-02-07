@@ -9,7 +9,7 @@
         </a>
         <div class="user-info-side media align-items-center">
             <figure>
-                <img src="{{ asset('assets/site/images/sellers/u-1.png') }}" alt="" />
+                <img src="{{ asset('assets/site/images/user.png') }}" alt="" />
             </figure>
             <div class="media-body">
                 <h5>@lang('site.welcome'), <span>{{ auth()->user()->name }}</span></h5>
@@ -145,8 +145,8 @@
         <div class="promo-side">
             <img src="{{ asset('assets/site/images/dashboard/bottom.png') }}" alt="" title="" class="img-fluid" />
 
-            <p>Lear more about business in Tamm Academy</p>
-            <a href="" class="btn btn-yallow btn-block">Go Now</a>
+            <p>@lang('site.learn_more_about_tamm')</p>
+            <a href="{{ url('/') }}" class="btn btn-yallow btn-block">@lang('site.go_now')</a>
         </div>
     </div>
 </aside>

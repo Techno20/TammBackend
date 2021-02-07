@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\Category;
+
 class Helper {
 
     /**
@@ -54,8 +56,22 @@ class Helper {
         return $newArray;
     }
 
-    public static function getMainCategoriesType(){
-        return ['all'=>'الكل','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
+    public static function getMainCategoriesType($all = false,$lang = 'ar'){
+        $categories_ar = ['technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
+        $categories_en = ['technical' => 'Technical','consultation' => 'Consultation','training' => 'Training'];
+        if($all){
+            $categories_ar['all'] = 'الكل';
+            $categories_en['all'] = 'All';
+        }
+        if($lang == 'en'){
+            return $categories_en;
+        }
+        return $categories_ar;
+    }
+
+    public static function getCategories(){
+        $categories = Category::selectCard()->get();
+        return $categories;
     }
 
 }

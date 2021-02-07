@@ -263,4 +263,7 @@ class UserServiceController extends Controller
     public function getForm(Request $request){
         return view('site.user.service.create');
     }
+    public function getPricing(Request $request){
+        return view('site.user.service.pricing');
+    }
 }

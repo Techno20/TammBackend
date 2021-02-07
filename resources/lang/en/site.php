@@ -3,6 +3,7 @@
 return [
 
     'home' => 'Home',
+    'tamm' => 'Tamm',
     'services' => 'Services',
     'how_it_works' => 'How it Works',
     'blog' => 'Blog',
@@ -78,5 +79,31 @@ return [
 
     'max' => 'Max',
     'just_perfect' => 'Just Perfect',
+
+    'chose_one' => 'Chose one ...',
+    'category' => 'Category',
+
+    'metadata' => 'Metadata',
+    'language' => 'LANGUAGE',
+
+    'arabic' => 'Arabic',
+    'english' => 'English',
+    'next' => 'Next',
+    'show_profile' => 'Show profile',
+
+    'improve_your_success_title' => 'Improve your success in 3 steps',
+    'improve_your_success_text' => 'The key to your success on Fiverr is the brand you build for yourself through your Tamm reputation.',
+    'read_more' => 'Read More',
+    'recent_orders' => 'Recent orders',
+    'current_balance' => 'Current Balance',
+    'earings_last_3_month' => 'Earings last 3 months',
+    'total_orders_this_month' => 'Total orders this month',
+
+    'learn_more_about_tamm' => 'Learn more about business in Tamm Academy',
+    'go_now' => 'Go Now',
+
+    'need_help' => 'Need Help?',
+    'need_help_text' => 'If you have any quastions',
+    'contact_seller' => 'Contact Seller',
 
 ];

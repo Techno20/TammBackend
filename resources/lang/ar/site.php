@@ -3,6 +3,7 @@
 return [
 
     'home' => 'الرئيسية',
+    'tamm' => 'تم',
     'services' => 'الخدمات',
     'how_it_works' => 'كيف تعمل',
     'blog' => 'المدونة',
@@ -81,6 +82,33 @@ return [
 
     'max' => 'الحد الأعلى',
     'just_perfect' => 'كن دقيقا',
+
+    'chose_one' => 'اختر خيارا',
+    'category' => 'التصنيف',
+
+    'metadata' => 'بيانات اضافية',
+    'language' => 'اللغات',
+
+    'arabic' => 'العربية',
+    'english' => 'الانجليزية',
+    'next' => 'التالي',
+    'show_profile' => 'عرض الملف الشخصي',
+
+    'improve_your_success_title' => 'حسن نجاحك في 3 خطوات',
+    'improve_your_success_text' => 'مفتاح نجاحك  هو العلامة التجارية التي تبنيها لنفسك من خلال سمعتك في المنصة.',
+    'read_more' => 'اقرأ المزيد',
+    'recent_orders' => 'أخر الطلبات',
+    'current_balance' => 'الرصيد الحالي',
+    'earings_last_3_month' => 'الأرباح اخر ثلاث شهور',
+    'total_orders_this_month' => 'عدد الطلبات هذا الشهر',
+
+    'learn_more_about_tamm' => 'تعرف على المزيد حول الأعمال في أكاديمية تم',
+    'go_now' => 'شاهد الأن',
+
+    'need_help' => 'هل تحتاج الى مساعدة',
+    'need_help_text' => 'اذا كان لديك سؤال او استفسار',
+    'contact_seller' => 'تواصل معنا',
+
 
 
 ];

@@ -31,13 +31,13 @@
                             </div>
                             <div class="user">
                                 <figure>
-                                    <img src="{{ asset('assets/site/images/u-2.png') }}" alt="">
+                                    <img src="{{ asset('assets/site/images/user.png') }}" alt="">
                                     <p class="rate">
                                         <i class="fas fa-star"></i>
                                         4.7
                                     </p>
                                 </figure>
-                                <h3>Emilee Simchenko</h3>
+                                <h3>{{ auth()->user()->name }}</h3>
                                 <div class="brief">
                                     A UX designer with years of building all types of unique experiences <a href=""><i class="fas fa-pen"></i></a>
                                 </div>

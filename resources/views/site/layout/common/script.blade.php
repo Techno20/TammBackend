@@ -46,7 +46,7 @@
                         confirmButtonText: 'استمرار'
                     });
                     setTimeout(function () {
-                        window.location = "{{ url(url()->current()) }}";
+                        window.location = "{{ url('user/dashboard') }}";
                     },3000);
                 },
                 error:  function(result){
@@ -88,7 +88,7 @@
                         confirmButtonText: 'استمرار'
                     });
                     setTimeout(function () {
-                        window.location = "{{ url(url()->current()) }}";
+                        window.location = "{{ url('user/dashboard') }}";
                     },3000);
                 },
                 error:  function(result){

@@ -107,7 +107,7 @@ class ServiceController extends Controller
             $Services = $Services->orderBy('id','DESC');
         }
 
-        $Services = $Services->paginate(20);
+        $Services = $Services->where('is_approved',1)->paginate(20);
 
 
 //        return Helper::responseData('success',true,$Services);

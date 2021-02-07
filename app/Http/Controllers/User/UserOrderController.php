@@ -70,7 +70,8 @@ class UserOrderController extends Controller
       
 
       $Orders = $Orders->paginate(50);
-      return Helper::responseData('success',true,$Orders);
+//      return Helper::responseData('success',true,$Orders);
+        return view('site.user.dashboard.orders')->with('orders',$Orders);
     }
 
     /**

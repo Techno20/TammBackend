@@ -59,7 +59,8 @@ class UserProfileController extends Controller
       $Result['new_favourites'] = UserFavouriteService::where('user_id',auth()->user()->id)->orderBy('created_at','DESC')->take(5)->get();
       $Result['statistics'] = $Statistics;
 
-      return Helper::responseData('success',true,$Result);
+//      return Helper::responseData('success',true,$Result);
+      return view('site.user.dashboard.index')->with('result',$Result);
     }
 
     /**
@@ -77,7 +78,8 @@ class UserProfileController extends Controller
         return $UserSkills->where('user_id',$userId);
       })->selectCard()->get();
       $User->skills = $Skills;
-      return Helper::responseData('success',true,$User);
+//      return Helper::responseData('success',true,$User);
+        return view('site.user.profile')->with('user',$User);
     }
 
     

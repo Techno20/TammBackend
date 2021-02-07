@@ -34,6 +34,14 @@ return [
     'password' => 'Password',
     'password_cond' => '8 characters or longer. Combine upper and lowercase letters and numbers.',
     'continue' => 'Continue',
-    '' => '',
+    'forget_password' => 'Forgot your Password?',
+    'welcome' => 'Welcome',
+    'welcome_back' => 'Welcome Back',
+    'dashboard' => 'Dashboard',
+    'orders' => 'Orders',
+    'conversation' => 'Messages',
+    'buyers' => 'Buyers',
+    'logout' => 'Sign out',
+    'settings' => 'Settings',
 
 ];

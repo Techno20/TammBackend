@@ -28,19 +28,19 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/') }}">@lang('site.home')</a>
+                    <a class="nav-link @if(empty(Request::segment(1)) || Request::segment(1) == '/') active @endif" href="{{ url('/') }}">@lang('site.home')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('service/categories') }}">@lang('site.services')</a>
+                    <a class="nav-link {{ str_contains(request()->url(), '/service') ? 'active' : '' }}" href="{{ url('service/categories') }}">@lang('site.services')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('how-it-work') }}">@lang('site.how_it_work')</a>
+                    <a class="nav-link {{ str_contains(request()->url(), '/how-it-work') ? 'active' : '' }}" href="{{ url('how-it-work') }}">@lang('site.how_it_work')</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">@lang('site.blog')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('about-us') }}">@lang('site.about_us')</a>
+                    <a class="nav-link {{ str_contains(request()->url(), '/about-us') ? 'active' : '' }}" href="{{ url('about-us') }}">@lang('site.about_us')</a>
                 </li>
             </ul>
         </nav>
@@ -53,41 +53,25 @@
 <div class="modal fade custom-modal" id="signInModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
-            <div class="auth-modal signin-modal">
+            <div class="auth-modal user_login_block signin-modal">
                 <header class="auth-header-1 d-flex align-items-center justify-content-between">
                     <h3>@lang('site.sign_in')</h3>
-                    <a href="#joinTammModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">Join now</a>
+                    <a href="#joinTamm2Modal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">@lang('site.join_us')</a>
                 </header>
-                <div class="social-login">
-                    <a href="" class="btn btn-block fb-btn">
-                        <i class="fab fa-facebook-square mr-2"></i>
-                        Continue with Facebook
-                    </a>
-                    <a href="" class="btn btn-block google-btn">
-                        <img src="{{ asset('assets/site/images/icons/google-ic.svg') }}" class="mr-2">
-                        Continue with Google
-                    </a>
-                    <a href="" class="btn btn-block apple-btn">
-                        <i class="fab fa-apple mr-2"></i>
-                        Continue with Apple
-                    </a>
-                </div>
-
-                <p class="or-sec"><span>OR</span></p>
 
                 <div class="auth-form sign-in-form gray-form">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="Email/username" name="">
+                        <input type="text" class="form-control form-control-lg email" placeholder="@lang('site.email')" name="email">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control form-control-lg" placeholder="Password" name="">
+                        <input type="password" class="form-control form-control-lg password" placeholder="@lang('site.password')" name="password">
                     </div>
                     <div class="form-group">
-                        <a href="#resetPasswordModal" data-dismiss="modal" data-toggle="modal" class="forget-password">Forgot your Password?</a>
+                        <a href="#resetPasswordModal" data-dismiss="modal" data-toggle="modal" class="forget-password">@lang('site.forget_password')</a>
                     </div>
 
                     <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
+                        <button type="button" class="btn btn-lg btn-block btn-yallow user_login">@lang('site.continue') </button>
                     </div>
                 </div>
             </div>
@@ -121,55 +105,14 @@
     </div>
 </div>
 <!-- reset-password modal -->
-<!-- join-tamm modal -->
-<div class="modal fade custom-modal" id="joinTammModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
-            <div class="auth-modal join-tamm-modal">
-                <header class="auth-header-1 d-flex align-items-center justify-content-between">
-                    <h3>Join Tamm</h3>
-                    <a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">@lang('site.sign_in')</a>
-                </header>
-                <div class="auth-form join-form gray-form">
-                    <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="@lang('site.enter_your') email" name="">
-                    </div>
 
-                    <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
-                    </div>
-                </div>
-                <p class="or-sec"><span>OR</span></p>
-                <div class="social-login">
-                    <a href="" class="btn btn-block fb-btn">
-                        <i class="fab fa-facebook-square mr-2"></i>
-                        Continue with Facebook
-                    </a>
-                    <a href="" class="btn btn-block google-btn">
-                        <img src="{{ asset('assets/site/images/icons/google-ic.svg') }}" class="mr-2">
-                        Continue with Google
-                    </a>
-                    <a href="" class="btn btn-block apple-btn">
-                        <i class="fab fa-apple mr-2"></i>
-                        Continue with Apple
-                    </a>
-                </div>
-
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- join-tamm modal -->
 <!-- join-tamm2 modal -->
 <div class="modal fade custom-modal" id="joinTamm2Modal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
             <div class="auth-modal user_register_block join-tamm2-modal">
                 <header class="auth-header-1 d-flex align-items-center justify-content-between">
-                    <h3>@lang('site.become_seller')</h3>
+                    <h3>@lang('site.join_us')</h3>
                     <a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="btn btn-gray">@lang('site.sign_in')</a>
                 </header>
                 <div class="auth-form join-form gray-form">
@@ -186,7 +129,7 @@
 
                     <div class="actions">
                         <button type="button" class="btn btn-lg btn-block btn-yallow user_register">@lang('site.continue') </button>
-                        <p class="agree-terms">By joining, you agree to Tamm <a href="">Terms of Service</a></p>
+{{--                        <p class="agree-terms">By joining, you agree to Tamm <a href="">Terms of Service</a></p>--}}
                     </div>
                 </div>
             </div>
@@ -213,26 +156,26 @@
             <div class="collapse navbar-collapse " id="main_menu">
                 <ul class="navbar-nav main-menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ url('/') }}">@lang('site.home')</a>
+                        <a class="nav-link @if(empty(Request::segment(1)) || Request::segment(1) == '/') active @endif" href="{{ url('/') }}">@lang('site.home')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('service/categories') }}">@lang('site.services')</a>
+                        <a class="nav-link {{ str_contains(request()->url(), '/service') ? 'active' : '' }}" href="{{ url('service/categories') }}">@lang('site.services')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('how-it-work') }}">@lang('site.how_it_works')</a>
+                        <a class="nav-link {{ str_contains(request()->url(), '/how-it-work') ? 'active' : '' }}" href="{{ url('how-it-work') }}">@lang('site.how_it_works')</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">@lang('site.blog')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('about-us') }}">@lang('site.about_us')</a>
+                        <a class="nav-link {{ str_contains(request()->url(), '/about-us') ? 'active' : '' }}" href="{{ url('about-us') }}">@lang('site.about_us')</a>
                     </li>
                 </ul>
             </div>
 
             @if(auth()->guard('web')->check())
             <div class="auth-header-tools">
-                <a href="" class="btn btn-gray switch-account">Switch to seller</a>
+                <a href="" class="btn btn-gray switch-account"><span>@lang('site.welcome')</span>:{{ auth()->guard('web')->user()->name }}</a>
                 <a href="" class="btn btn-gray notification-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13.585" height="15.863" viewBox="0 0 13.585 15.863">
                         <g id="bell" transform="translate(0)">
@@ -256,59 +199,68 @@
                                 </a>
                             </div>
                             <div class="col-4">
-                                <a href="" class="item">
+                                <a href="{{ url('user/conversation/list') }}" class="item">
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/chat-code.svg') }}" alt="">
                                     </figure>
-                                    <h5>Messages</h5>
+                                    <h5>@lang('site.conversation')</h5>
                                 </a>
                             </div>
                             <div class="col-4">
-                                <a href="" class="item">
+                                <a href="{{ url('user/order/list/seller') }}" class="item">
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/boxes.svg') }}" alt="">
                                     </figure>
-                                    <h5>Orders</h5>
+                                    <h5>@lang('site.orders')</h5>
                                 </a>
                             </div>
+{{--                            <div class="col-4">--}}
+{{--                                <a href="" class="item">--}}
+{{--                                    <figure>--}}
+{{--                                        <img src="{{ asset('assets/site/images/icons/heart.svg') }}" alt="">--}}
+{{--                                    </figure>--}}
+{{--                                    <h5>Likes</h5>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
                             <div class="col-4">
-                                <a href="" class="item">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/icons/heart.svg') }}" alt="">
-                                    </figure>
-                                    <h5>Likes</h5>
-                                </a>
-                            </div>
-                            <div class="col-4">
-                                <a href="" class="item">
+                                <a href="{{ url('user/dashboard') }}" class="item">
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/dashboard.svg') }}" alt="">
                                     </figure>
-                                    <h5>Dashoards</h5>
+                                    <h5>@lang('site.dashboard')</h5>
                                 </a>
                             </div>
                             <div class="col-4">
-                                <a href="" class="item">
+                                <a href="{{ url('user/me') }}" class="item">
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/settings.svg') }}" alt="">
                                     </figure>
-                                    <h5>Settings</h5>
+                                    <h5>@lang('site.settings')</h5>
                                 </a>
                             </div>
                             <div class="col-4">
-                                <a href="" class="item">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/icons/translator.svg') }}" alt="">
-                                    </figure>
-                                    <h5>English</h5>
-                                </a>
+                                @if(app()->getLocale() == 'ar')
+                                    <a href="{{ url('lang/en') }}" class="item">
+                                        <figure>
+                                            <img src="{{ asset('assets/site/images/icons/translator.svg') }}" alt="">
+                                        </figure>
+                                        <h5>English</h5>
+                                    </a>
+                                @else
+                                    <a href="{{ url('lang/ar') }}" class="item">
+                                        <figure>
+                                            <img src="{{ asset('assets/site/images/icons/translator.svg') }}" alt="">
+                                        </figure>
+                                        <h5>Arabic</h5>
+                                    </a>
+                                @endif
                             </div>
                             <div class="col-4">
-                                <a href="{{ url('logout') }}" class="item">
+                                <a href="{{ url('user/logout') }}" class="item">
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/signout.svg') }}" alt="">
                                     </figure>
-                                    <h5>Sign out</h5>
+                                    <h5>@lang('site.logout')</h5>
                                 </a>
                             </div>
                         </div>
@@ -322,7 +274,7 @@
             <div class="header-tools">
                     <a href="#joinTamm2Modal" class="btn btn-white become-seller" data-toggle="modal">@lang('site.become_seller')</a>
                     <a href="#signInModal" class="btn btn-white sign-in" data-toggle="modal">@lang('site.sign_in')</a>
-                    <a href="#joinTammModal" class="btn btn-yallow join-us" data-toggle="modal">@lang('site.join_us')</a>
+                    <a href="#joinTamm2Modal" class="btn btn-yallow join-us" data-toggle="modal">@lang('site.join_us')</a>
                 <div class="dropdown lang-dropdown">
                     <a class="btn btn-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
                         <span>{{ strtoupper(app()->getLocale()) }}</span>

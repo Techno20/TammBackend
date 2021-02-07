@@ -16,8 +16,15 @@
                         <!-- freelancer-profile-box -->
                         <div class="freelancer-profile-box">
                             <div class="status-bar d-flex align-items-center">
-                                  
-                                    <span class="status ml-auto">
+                                <a href="" class="setting">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.315" height="19.374" viewBox="0 0 19.315 19.374">
+                                        <g id="settings" transform="translate(-0.342 -0.318)">
+                                            <path id="Shape" d="M9.658,19.373h0a2.453,2.453,0,0,1-1.9-.91l-.8-.908a1.127,1.127,0,0,0-.856-.395l-.081,0-1.228.11c-.068.006-.139.009-.208.009a2.487,2.487,0,0,1-1.765-.728,2.524,2.524,0,0,1-.727-1.973l.1-1.263a1.15,1.15,0,0,0-.4-.91l-.908-.791a2.491,2.491,0,0,1,0-3.809l.908-.8a1.128,1.128,0,0,0,.382-.964L2.068,4.819a2.54,2.54,0,0,1,.718-1.974,2.508,2.508,0,0,1,1.769-.736c.066,0,.135,0,.2.008l1.264.1h.051a1.118,1.118,0,0,0,.857-.4l.791-.91A2.5,2.5,0,0,1,9.623,0a2.456,2.456,0,0,1,1.9.91l.8.91a1.144,1.144,0,0,0,.857.387,1.129,1.129,0,0,0,.115-.006l1.229-.108c.079-.008.16-.012.24-.012a2.515,2.515,0,0,1,1.766.732,2.488,2.488,0,0,1,.72,2.007l-.127,1.227a1.147,1.147,0,0,0,.4.908l.908.792a2.491,2.491,0,0,1,0,3.809l-.908.8a1.129,1.129,0,0,0-.382.965l.108,1.227a2.535,2.535,0,0,1-.718,1.973,2.475,2.475,0,0,1-1.768.735c-.066,0-.135,0-.2-.008l-1.264-.1h-.036a1.15,1.15,0,0,0-.873.4l-.791.908a2.486,2.486,0,0,1-1.9.91l-.037.009ZM6.113,15.8h0a2.5,2.5,0,0,1,1.9.91l.8.91a1.126,1.126,0,0,0,.861.4h.061a1.081,1.081,0,0,0,.851-.41l.791-.91a2.488,2.488,0,0,1,1.933-.916c.061,0,.121,0,.177.006l1.227.091a1.153,1.153,0,0,0,.121.007,1.1,1.1,0,0,0,.788-.333,1.139,1.139,0,0,0,.328-.91l-.1-1.218a2.484,2.484,0,0,1,.91-2.11l.908-.8a1.123,1.123,0,0,0,.4-.864,1.089,1.089,0,0,0-.408-.909l-.91-.792a2.5,2.5,0,0,1-.91-2.109l.091-1.227A1.126,1.126,0,0,0,14.809,3.4a1.04,1.04,0,0,0-.105,0l-1.218.1c-.062,0-.126.007-.19.007a2.461,2.461,0,0,1-1.92-.916l-.8-.909a1.13,1.13,0,0,0-.8-.333,1.045,1.045,0,0,0-.119.006H9.6a1.084,1.084,0,0,0-.852.41l-.791.908a2.516,2.516,0,0,1-1.946.915c-.052,0-.106,0-.163-.005L4.622,3.49a1.129,1.129,0,0,0-.12-.007,1.109,1.109,0,0,0-.79.334,1.135,1.135,0,0,0-.328.909l.1,1.219a2.487,2.487,0,0,1-.909,2.109l-.91.8a1.127,1.127,0,0,0-.4.864,1.1,1.1,0,0,0,.41.909l.91.791a2.5,2.5,0,0,1,.908,2.109L3.4,14.755a1.128,1.128,0,0,0,1.124,1.223,1.014,1.014,0,0,0,.1,0l1.218-.1.263-.073Z" transform="translate(0.342 0.318)" fill="currentcolor"/>
+                                            <path id="Shape-2" data-name="Shape" d="M3.409,6.818A3.409,3.409,0,1,1,6.818,3.41,3.413,3.413,0,0,1,3.409,6.818Zm0-5.455A2.045,2.045,0,1,0,5.454,3.41,2.048,2.048,0,0,0,3.409,1.364Z" transform="translate(6.591 6.591)" fill="currentcolor"/>
+                                        </g>
+                                    </svg>
+                                </a>
+                                <span class="status ml-auto">
                                         <i class="fas fa-circle"></i>
                                         Online
                                     </span>
@@ -32,10 +39,10 @@
                                 </figure>
                                 <h3>Emilee Simchenko</h3>
                                 <div class="brief">
-                                    A UX designer with years of building all types of unique experiences
+                                    A UX designer with years of building all types of unique experiences <a href=""><i class="fas fa-pen"></i></a>
                                 </div>
                                 <div class="actions">
-                                    <a href="" class="btn btn-yallow">Contact me</a>
+                                    <a href="" class="btn btn-outline-darkblue public-mode">View Public Mode</a>
                                 </div>
                             </div>
                             <div class="user-info form-row">
@@ -77,7 +84,18 @@
 
                         </div>
                         <!-- freelancer-profile-box -->
-
+                        <!-- user-badge-box -->
+                        <div class="user-badge-box">
+                            <figure>
+                                <img src="{{ asset('assets/site/images/insurance.png') }}" class="img-fluid" alt="">
+                            </figure>
+                            <h3>Earn badges and stand out</h3>
+                            <p>Boost your sales, by boosting your expertise.</p>
+                            <div class="actions">
+                                <a href="" class="btn btn-yallow btn-lg">Enroll Now</a>
+                            </div>
+                        </div>
+                        <!-- user-badge-box -->
 
                         <!-- user-badge-box -->
                         <div class="user-successfully-completed-box">
@@ -124,6 +142,7 @@
                             <div class="social-accounts">
                                 <header class="box-header d-flex align-items-center justify-content-between">
                                     <h3 class="m-title">Linked Accounts</h3>
+                                    <a href="" class="btn add-new-btn">Add new</a>
                                 </header>
                                 <div class="content ">
                                     <div class="accounts-links d-flex flex-wrap">
@@ -137,6 +156,7 @@
                             <div class="skills">
                                 <header class="box-header d-flex align-items-center justify-content-between">
                                     <h3 class="m-title">Skills</h3>
+                                    <a href="" class="btn add-new-btn">Add new</a>
                                 </header>
                                 <div class="content d-flex flex-wrap">
                                     <span class="item">Marketing</span>
@@ -159,7 +179,9 @@
                             </div>
                             <div class="education">
                                 <header class="box-header d-flex align-items-center justify-content-between">
-                                    <h3 class="m-title">Education</h3>                                    </header>
+                                    <h3 class="m-title">Education</h3>
+                                    <a href="" class="btn add-new-btn">Add new</a>
+                                </header>
                                 <div class="content ">
                                     <div class="item">
                                         <h5>Associate - Graphic Design</h5>
@@ -170,6 +192,7 @@
                             <div class="certifications">
                                 <header class="box-header d-flex align-items-center justify-content-between">
                                     <h3 class="m-title">Certifications</h3>
+                                    <a href="#certifications-form" data-toggle="collapse" class="btn add-new-btn">Add new</a>
                                 </header>
                                 <div class="content ">
                                     <div class="item">
@@ -181,6 +204,27 @@
                                         <p>The Team W 2019</p>
                                     </div>
                                 </div>
+                                <div id="certifications-form" class=" collapse">
+                                    <div class="form-wrapper">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-lg" placeholder="Certificate or award" name="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-lg" placeholder="Certified from adobe" name="">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"     placeholder="Year" name="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="actions d-flex align-items-center">
+                                            <a href="" class="btn btn-white cancel">Cancel</a>
+                                            <a href="" class="btn btn-yallow ml-2 add">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- freelancer-info-box -->
@@ -189,55 +233,24 @@
                         <!-- user-services-section -->
                         <section class="user-services-section">
                             <header class="p-header-2 d-flex align-items-center justify-content-between">
-                                <h2>Emilee Services</h2>
+                                <h2>Your Services</h2>
+                                <div class="status-bar">
+                                    <a href="" class="active">ACTIVE GIGS</a>
+                                    <a href="">DENIED</a>
+                                    <a href="">PAUSED</a>
+                                </div>
                             </header>
                             <div class="sec-content">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div class="service-item-2">
-                                            <div class="top">
-                                                <div class="service-item-slider owl-carousel">
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-1.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-2.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-3.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
+                                        <a href="">
+                                            <div class="add-new-service-item d-flex flex-column align-items-center justify-content-center">
+                                                <figure>
+                                                    <img src="{{ asset('assets/site/images/add-new.png') }}" alt="">
+                                                </figure>
+                                                <h3>Create A New Service</h3>
                                             </div>
-                                            <div class="details">
-                                                <div class="serv-author media">
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    <div class="media-body">
-                                                        <h4>Cammy Hedling</h4>
-                                                        <p>Top rated seller</p>
-                                                    </div>
-                                                </div>
-                                                <h3 class="title">
-                                                    <a href="">I will design your modern brand style guideline for your business</a>
-                                                </h3>
-                                                <div class="meta d-flex align-items-center justify-content-between">
-                                                    <div class="price">
-                                                        <label>STARTING</label>
-                                                        <p>550 SAR</p>
-                                                    </div>
-                                                    <div class="total-meta">
-                                                        <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                        <p class="total-sell">235 Sell</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="service-item-2">

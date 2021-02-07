@@ -25,7 +25,8 @@ class UserBuyerController extends Controller
           return $Service->where('user_id',auth()->user()->id);
         });
       }])->paginate(50);
-      return Helper::responseData('success',true,$Buyers);
+//      return Helper::responseData('success',true,$Buyers);
+        return view('site.user.dashboard.buyers')->with('buyers',$Buyers);
     }
 
     

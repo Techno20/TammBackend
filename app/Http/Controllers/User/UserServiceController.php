@@ -67,7 +67,8 @@ class UserServiceController extends Controller
         }
 
         $Services = $Services->paginate(50)->toArray();
-        return Helper::responseData('success',true,$Services);
+//        return Helper::responseData('success',true,$Services);
+        return view('site.user.dashboard.services')->with('services',$Services);
     }
 
     /**

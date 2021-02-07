@@ -62,5 +62,21 @@ return [
     'all_order' => 'All Orders',
     'all' => 'All',
     'add_new_service' => 'Add New Service',
+    'save' => 'Save',
+    'save_and_review' => 'Save And Review',
+
+    'categories' => 'Categories',
+
+    'overview' => 'Overview',
+    'pricing' => 'Pricing',
+    'service_description' => 'Service Description',
+    'requirements' => 'Requirements',
+    'gallery' => 'Gallery',
+
+    'service_title' => 'Service Title',
+    'service_title_hint' => 'I will design your website and logo design',
+
+    'max' => 'Max',
+    'just_perfect' => 'Just Perfect',
 
 ];

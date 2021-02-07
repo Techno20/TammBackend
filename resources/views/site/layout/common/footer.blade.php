@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-1-5 col-md-4 col-6">
                     <div class="f-widget">
-                        <h3 class="w-title">Categories</h3>
+                        <h3 class="w-title">@lang('site.categories')</h3>
                         <ul>
                             <li><a href="">Graphics & Design</a></li>
                             <li><a href="">Digital Marketing</a></li>

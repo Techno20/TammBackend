@@ -4,6 +4,8 @@
 <script src="{{ asset('assets/site/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/owlslider/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
+<script src="{{ asset('assets/site/plugins/jquery-nice-select-master/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('assets/site/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js') }}"></script>
 
 <script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
 @if(app()->getLocale() == 'ar')
@@ -121,6 +123,10 @@
 
                 }
             });
+        });
+
+        $('body').on('click keyup keydown change','.input_to_count',function (){
+            $('.input_text_count').text(this.value.length);
         });
     });
 </script>

@@ -254,4 +254,13 @@ class UserServiceController extends Controller
             return Helper::responseData('success',false);
         }
     }
+
+    /**
+     * new Code By Mohammed Ali Fnannah
+     * add new services page
+     */
+
+    public function getForm(Request $request){
+        return view('site.user.service.create');
+    }
 }

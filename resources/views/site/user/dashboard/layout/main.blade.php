@@ -5,7 +5,7 @@
     <html dir="ltr" lang="en">
 @endif
     <head>
-        @include('site.user.dashboard.layout.common.head')
+        @include('site.layout.common.head')
         @yield('css')
     </head>
     <body>
@@ -15,7 +15,7 @@
             @yield('content')
         </div>
 
-        @include('site.user.dashboard.layout.common.script')
+        @include('site.layout.common.script')
         @yield('js')
     </body>
 </html>

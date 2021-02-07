@@ -52,7 +52,7 @@
             <header class="tl-header d-flex align-items-center justify-content-between">
                 <h3 class="title">@lang('site.services')</h3>
                 <div class="btns">
-                    <a href="" class="btn btn-yallow">@lang('site.add_new_service')</a>
+                    <a href="{{ url('user/service/add') }}" class="btn btn-yallow">@lang('site.add_new_service')</a>
                 </div>
             </header>
             <div class="sec-content">

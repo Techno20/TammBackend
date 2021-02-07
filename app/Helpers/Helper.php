@@ -53,4 +53,9 @@ class Helper {
         }
         return $newArray;
     }
+
+    public static function getMainCategoriesType(){
+        return ['all'=>'الكل','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
+    }
+
 }

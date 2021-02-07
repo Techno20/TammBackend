@@ -18,12 +18,17 @@
 
 <link rel="stylesheet" href="{{ asset('assets/site/plugins/fancybox/jquery.fancybox.min.css') }}"/>
 
+<link rel="stylesheet" href="{{ asset('assets/site/plugins/jquery-nice-select-master/css/nice-select.css') }}"/>
+<link rel="stylesheet" href="{{ asset('assets/site/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css') }}"/>
+
 <!-- Main Style CSS -->
 @if(app()->getLocale() == 'ar')
     <link rel="stylesheet" href="{{ asset('assets/site/css/style-rtl.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard-rtl.css') }}" />
     <title>منصة تم</title>
 @else
     <link rel="stylesheet" href="{{ asset('assets/site/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard.css') }}" />
     <title>Tamm</title>
 @endif
 <link rel="stylesheet" href="{{ asset('assets/site/css/custom.css') }}" />

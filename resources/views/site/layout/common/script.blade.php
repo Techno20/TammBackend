@@ -4,12 +4,16 @@
 <script src="{{ asset('assets/site/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/owlslider/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
+<script src="{{ asset('assets/site/plugins/jquery-nice-select-master/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('assets/site/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js') }}"></script>
 
 <script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
 @if(app()->getLocale() == 'ar')
     <script src="{{ asset('assets/site/js/main-rtl.js') }}"></script>
+    <script src="{{ asset('assets/site/js/dashboard-rtl.js') }}"></script>
 @else
     <script src="{{ asset('assets/site/js/main.js') }}"></script>
+    <script src="{{ asset('assets/site/js/dashboard.js') }}"></script>
 @endif
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>
@@ -42,7 +46,7 @@
                         confirmButtonText: 'استمرار'
                     });
                     setTimeout(function () {
-                        window.location = "{{ url('user/dashboard') }}";
+                        window.location = "{{ url(url()->current()) }}";
                     },3000);
                 },
                 error:  function(result){
@@ -84,7 +88,7 @@
                         confirmButtonText: 'استمرار'
                     });
                     setTimeout(function () {
-                        window.location = "{{ url('user/dashboard') }}";
+                        window.location = "{{ url(url()->current()) }}";
                     },3000);
                 },
                 error:  function(result){
@@ -119,6 +123,10 @@
 
                 }
             });
+        });
+
+        $('body').on('click keyup keydown change','.input_to_count',function (){
+            $('.input_text_count').text(this.value.length);
         });
     });
 </script>

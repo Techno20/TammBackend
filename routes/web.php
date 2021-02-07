@@ -53,6 +53,7 @@ Route::group(['middleware' => 'api-localization'],function(){
             Route::group(['prefix' => 'service'],function(){
                 Route::get('list', [UserServiceController::class, 'getList']);
                 Route::get('show/{service_id}', [UserServiceController::class, 'getShow']);
+                Route::get('add', [UserServiceController::class, 'getForm']);
                 Route::post('add', [UserServiceController::class, 'Save']);
                 Route::post('edit/{service_id}', [UserServiceController::class, 'Save']);
                 Route::post('activation/{service_id}', [UserServiceController::class, 'postActivation']);

@@ -63,5 +63,24 @@ return [
 
     'all' => 'الكل',
     'add_new_service' => 'اضافة خدمة جديدة',
+    'save' => 'حفظ',
+    'save_and_review' => 'حفظ ومعاينة',
+
+
+
+    'categories' => 'التصنيفات',
+
+    'overview' => 'نظرة عامة',
+    'pricing' => 'التسعير',
+    'service_description' => 'وصف الخدمة',
+    'requirements' => 'المتطلبات',
+    'gallery' => 'المعرض',
+
+    'service_title' => 'عنوان الخدمة',
+    'service_title_hint' => 'سوف اقوم بتصميم شعار للموقع الالكتروني الخاص بك',
+
+    'max' => 'الحد الأعلى',
+    'just_perfect' => 'كن دقيقا',
+
 
 ];

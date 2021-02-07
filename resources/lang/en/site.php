@@ -60,5 +60,7 @@ return [
     'delivered_order' => 'Delivered',
     'cancelled_order' => 'Cancelled',
     'all_order' => 'All Orders',
+    'all' => 'All',
+    'add_new_service' => 'Add New Service',
 
 ];

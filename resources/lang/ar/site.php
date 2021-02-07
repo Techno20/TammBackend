@@ -61,4 +61,7 @@ return [
     'cancelled_order' => 'الملغية',
     'all_order' => 'كل الطلبات',
 
+    'all' => 'الكل',
+    'add_new_service' => 'اضافة خدمة جديدة',
+
 ];

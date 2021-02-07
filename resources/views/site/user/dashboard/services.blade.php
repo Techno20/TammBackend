@@ -11,9 +11,9 @@
         <!-- header -->
         <header class="dashboard-header d-flex align-items-center justify-content-between">
             <div class="title">
-                <h3>My services</h3>
+                <h3>@lang('site.services')</h3>
                 <p>
-                    Hi, Emilee welcome back
+                    @lang('site.welcome'), {{ auth()->user()->name }} @lang('site.welcome_back')
                 </p>
             </div>
             <div class="page-header-btns">
@@ -41,25 +41,23 @@
 
         <!-- filter -->
         <section class="filter-cats-sec">
-            <a href="" class="item active">ACTIVE(4)</a>
-            <a href="" class="item">MISSING DETAILS(23)</a>
-            <a href="" class="item">AWAITING MY REVIEW(10)</a>
-            <a href="" class="item">DELIVERED(24)</a>
-            <a href="" class="item">COMPLETED(10)</a>
-            <a href="" class="item">CANCELLED(4)</a>
-            <a href="" class="item">ALL ORDERS(50)</a>
+            <a href="{{ url('user/service/list?main_category_type=technical') }}" class="item @if((request()->has('main_category_type') && request()->main_category_type =='technical') || !request()->has('main_category_type')) active @endif">@lang('default.other.main_category_types.technical') @if((request()->has('main_category_type') && request()->main_category_type =='technical') || !request()->has('main_category_type')) ({{$services->count()}}) @endif</a>
+            <a href="{{ url('user/service/list?main_category_type=consultation') }}" class="item @if(request()->has('main_category_type') && request()->main_category_type =='consultation') active @endif">@lang('default.other.main_category_types.consultation') @if(request()->has('main_category_type') && request()->main_category_type =='consultation') ({{$services->count()}}) @endif</a>
+            <a href="{{ url('user/service/list?main_category_type=training') }}" class="item @if(request()->has('main_category_type') && request()->main_category_type =='training') active @endif">@lang('default.other.main_category_types.training') @if(request()->has('main_category_type') && request()->main_category_type =='training') ({{$services->count()}}) @endif</a>
+            <a href="{{ url('user/service/list?main_category_type=all') }}" class="item @if(request()->has('main_category_type') && request()->main_category_type =='all') active @endif">@lang('site.all') @if(request()->has('main_category_type') && request()->main_category_type =='all') ({{$services->count()}}) @endif</a>
         </section>
 
         <!-- table -->
         <section class="table-list-section">
             <header class="tl-header d-flex align-items-center justify-content-between">
-                <h3 class="title">Active Service</h3>
+                <h3 class="title">@lang('site.services')</h3>
                 <div class="btns">
-                    <a href="" class="btn btn-yallow">Add New Service</a>
+                    <a href="" class="btn btn-yallow">@lang('site.add_new_service')</a>
                 </div>
             </header>
             <div class="sec-content">
                 <div class="table-responsive">
+                    @if(isset($services) && !empty($services) && $services->count() > 0)
                     <table class="table table-borderless cs-table-2">
                         <thead>
                         <tr>
@@ -71,78 +69,28 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($services as $key => $value)
                         <tr>
                             <td>
                                 <div class="media align-items-center">
                                     <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
                                     <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
+                                        <h3>{{ $value->title }}</h3>
                                     </div>
                                 </div>
                             </td>
                             <td>323</td>
                             <td>200</td>
-                            <td>30</td>
-                            <td>12</td>
+                            <td>{{ $value->Orders()->count() }}</td>
+                            <td>{{ $value->Orders()->where('status','canceled')->count() }}</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>723</td>
-                            <td>500</td>
-                            <td>10</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>9812</td>
-                            <td>800</td>
-                            <td>300</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>12</td>
-                            <td>4</td>
-                            <td>1</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>12</td>
-                            <td>4</td>
-                            <td>1</td>
-                            <td>0</td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
+                        {{ $services->links() }}
+                    @else
+                        <div class="alert alert-danger  text-danger">@lang('site.sorry_no_data')</div>
+                    @endif
                 </div>
             </div>
         </section>

@@ -27,7 +27,7 @@ class UserServiceController extends Controller
         /* Filters */
 
         // By main category type
-        if (request()->main_category_type) {
+        if (request()->main_category_type && request()->main_category_type != 'all') {
             $Services = $Services->where('main_category_type',request()->main_category_type);
         }
 
@@ -66,7 +66,7 @@ class UserServiceController extends Controller
             $Services = $Services->orderBy('id','DESC');
         }
 
-        $Services = $Services->paginate(50)->toArray();
+        $Services = $Services->paginate(50);
 //        return Helper::responseData('success',true,$Services);
         return view('site.user.dashboard.services')->with('services',$Services);
     }

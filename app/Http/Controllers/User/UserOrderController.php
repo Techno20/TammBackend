@@ -32,6 +32,9 @@ class UserOrderController extends Controller
         $Orders->whereHas('Service',function($Service){
           return $Service->where('user_id',auth()->user()->id);
         });
+          if(!request()->has('status')){
+              $Orders = $Orders->where('status','current');
+          }
       }else {
         $Orders = $Orders->where('user_id',auth()->user()->id);
       }
@@ -39,10 +42,13 @@ class UserOrderController extends Controller
       // Filters
       
       // By status
-      if(request()->status == 'delivered'){
-        $Orders = $Orders->where('status','delivered');
-      }else {
-        $Orders = $Orders->where('status','!=','delivered');
+//      if(request()->status == 'delivered'){
+//        $Orders = $Orders->where('status','delivered');
+//      }else {
+//        $Orders = $Orders->where('status','!=','delivered');
+//      }
+      if(request()->has('status') && in_array(request()->status,['canceled','current','delivered'])){
+        $Orders = $Orders->where('status',request()->status);
       }
 
       // By dates

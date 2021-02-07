@@ -109,6 +109,10 @@ class User extends Authenticatable implements JWTSubject
     public function Orders(){
         return $this->hasMany('App\Models\Order');
     }
+    // Orders
+    public function CompleteOrders(){
+        return $this->hasMany('App\Models\Order')->where('status','delivered');
+    }
 
     // Last Delivered Order
     public function LastDeliveredOrder(){

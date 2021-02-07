@@ -11,9 +11,9 @@
         <!-- header -->
         <header class="dashboard-header d-flex align-items-center justify-content-between">
             <div class="title">
-                <h3>Buyers</h3>
+                <h3>@lang('site.buyers')</h3>
                 <p>
-                    Hi, Emilee welcome back
+                    @lang('site.welcome'), {{ auth()->user()->name }} @lang('site.welcome_back')
                 </p>
             </div>
             <div class="page-header-btns">
@@ -43,133 +43,56 @@
         <!-- table -->
         <section class="table-list-section">
             <header class="tl-header d-flex align-items-center justify-content-between">
-                <h3 class="title">MY BUYERS</h3>
+                <h3 class="title">@lang('site.buyers')</h3>
             </header>
             <div class="sec-content">
                 <div class="table-responsive">
+                    @if(isset($buyers) && !empty($buyers) && $buyers->count() > 0)
                     <table class="table table-borderless cs-table-2">
                         <thead>
-                        <tr>
-                            <th>Buyer Name</th>
-                            <th>Completed Orders</th>
-                            <th>amount spent </th>
-                            <th>last order </th>
-                            <th>Message</th>
+                            <tr>
+                            <th>@lang('site.buyer_name')</th>
+                            <th>@lang('site.completed_orders')</th>
+                            <th>@lang('site.amount_spent')</th>
+                            <th>@lang('site.last_order')</th>
+                            <th>@lang('site.buyer_message')</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="media circle-img align-items-center">
-                                    <img src="{{ asset('assets/site/images/u-2.png') }}" class="">
-                                    <div class="media-body">
-                                        <h3>Boris Ukhtomsky</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td>
-                                <a href="" class="btn btn-gray message-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.899" height="18.958" viewBox="0 0 18.899 18.958">
-                                        <g id="chat-code" transform="translate(-0.922 -0.042)">
-                                            <path id="Combined_Shape" data-name="Combined Shape" d="M1.531,18.958H1.494A1.494,1.494,0,0,1,.131,16.853L1.6,13.571a9.195,9.195,0,1,1,9.773,4.7,10.06,10.06,0,0,1-1.684.148A9.215,9.215,0,0,1,5.8,17.529L2.025,18.874a1.383,1.383,0,0,1-.472.084Zm.7-11.578a7.7,7.7,0,0,0,.842,5.69.8.8,0,0,1,.117.836L1.688,17.326l3.863-1.379a.789.789,0,0,1,.815.111l.02.016a7.613,7.613,0,1,0,4-14.451c-.251-.024-.5-.037-.748-.037A7.631,7.631,0,0,0,2.236,7.379Zm3.842,3.329a.75.75,0,0,1-.1-1.493l.1-.007h5a.75.75,0,0,1,.1,1.493l-.1.007Zm0-3a.75.75,0,0,1-.1-1.493l.1-.006h8a.75.75,0,0,1,.1,1.493l-.1.006Z" transform="translate(0.922 0.042)" fill="currentcolor"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media circle-img align-items-center">
-                                    <img src="{{ asset('assets/site/images/u-2.png') }}" class="">
-                                    <div class="media-body">
-                                        <h3>Boris Ukhtomsky</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td>
-                                <a href="" class="btn btn-gray message-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.899" height="18.958" viewBox="0 0 18.899 18.958">
-                                        <g id="chat-code" transform="translate(-0.922 -0.042)">
-                                            <path id="Combined_Shape" data-name="Combined Shape" d="M1.531,18.958H1.494A1.494,1.494,0,0,1,.131,16.853L1.6,13.571a9.195,9.195,0,1,1,9.773,4.7,10.06,10.06,0,0,1-1.684.148A9.215,9.215,0,0,1,5.8,17.529L2.025,18.874a1.383,1.383,0,0,1-.472.084Zm.7-11.578a7.7,7.7,0,0,0,.842,5.69.8.8,0,0,1,.117.836L1.688,17.326l3.863-1.379a.789.789,0,0,1,.815.111l.02.016a7.613,7.613,0,1,0,4-14.451c-.251-.024-.5-.037-.748-.037A7.631,7.631,0,0,0,2.236,7.379Zm3.842,3.329a.75.75,0,0,1-.1-1.493l.1-.007h5a.75.75,0,0,1,.1,1.493l-.1.007Zm0-3a.75.75,0,0,1-.1-1.493l.1-.006h8a.75.75,0,0,1,.1,1.493l-.1.006Z" transform="translate(0.922 0.042)" fill="currentcolor"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media circle-img align-items-center">
-                                    <img src="{{ asset('assets/site/images/u-1.png') }}" class="">
-                                    <div class="media-body">
-                                        <h3>Kiandra Lowe</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td>
-                                <a href="" class="btn btn-gray message-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.899" height="18.958" viewBox="0 0 18.899 18.958">
-                                        <g id="chat-code" transform="translate(-0.922 -0.042)">
-                                            <path id="Combined_Shape" data-name="Combined Shape" d="M1.531,18.958H1.494A1.494,1.494,0,0,1,.131,16.853L1.6,13.571a9.195,9.195,0,1,1,9.773,4.7,10.06,10.06,0,0,1-1.684.148A9.215,9.215,0,0,1,5.8,17.529L2.025,18.874a1.383,1.383,0,0,1-.472.084Zm.7-11.578a7.7,7.7,0,0,0,.842,5.69.8.8,0,0,1,.117.836L1.688,17.326l3.863-1.379a.789.789,0,0,1,.815.111l.02.016a7.613,7.613,0,1,0,4-14.451c-.251-.024-.5-.037-.748-.037A7.631,7.631,0,0,0,2.236,7.379Zm3.842,3.329a.75.75,0,0,1-.1-1.493l.1-.007h5a.75.75,0,0,1,.1,1.493l-.1.007Zm0-3a.75.75,0,0,1-.1-1.493l.1-.006h8a.75.75,0,0,1,.1,1.493l-.1.006Z" transform="translate(0.922 0.042)" fill="currentcolor"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media circle-img align-items-center">
-                                    <img src="{{ asset('assets/site/images/u-2.png') }}" class="">
-                                    <div class="media-body">
-                                        <h3>Boris Ukhtomsky</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td>
-                                <a href="" class="btn btn-gray message-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.899" height="18.958" viewBox="0 0 18.899 18.958">
-                                        <g id="chat-code" transform="translate(-0.922 -0.042)">
-                                            <path id="Combined_Shape" data-name="Combined Shape" d="M1.531,18.958H1.494A1.494,1.494,0,0,1,.131,16.853L1.6,13.571a9.195,9.195,0,1,1,9.773,4.7,10.06,10.06,0,0,1-1.684.148A9.215,9.215,0,0,1,5.8,17.529L2.025,18.874a1.383,1.383,0,0,1-.472.084Zm.7-11.578a7.7,7.7,0,0,0,.842,5.69.8.8,0,0,1,.117.836L1.688,17.326l3.863-1.379a.789.789,0,0,1,.815.111l.02.016a7.613,7.613,0,1,0,4-14.451c-.251-.024-.5-.037-.748-.037A7.631,7.631,0,0,0,2.236,7.379Zm3.842,3.329a.75.75,0,0,1-.1-1.493l.1-.007h5a.75.75,0,0,1,.1,1.493l-.1.007Zm0-3a.75.75,0,0,1-.1-1.493l.1-.006h8a.75.75,0,0,1,.1,1.493l-.1.006Z" transform="translate(0.922 0.042)" fill="currentcolor"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media circle-img align-items-center">
-                                    <img src="{{ asset('assets/site/images/u-2.png') }}" class="">
-                                    <div class="media-body">
-                                        <h3>Boris Ukhtomsky</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td>
-                                <a href="" class="btn btn-gray message-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.899" height="18.958" viewBox="0 0 18.899 18.958">
-                                        <g id="chat-code" transform="translate(-0.922 -0.042)">
-                                            <path id="Combined_Shape" data-name="Combined Shape" d="M1.531,18.958H1.494A1.494,1.494,0,0,1,.131,16.853L1.6,13.571a9.195,9.195,0,1,1,9.773,4.7,10.06,10.06,0,0,1-1.684.148A9.215,9.215,0,0,1,5.8,17.529L2.025,18.874a1.383,1.383,0,0,1-.472.084Zm.7-11.578a7.7,7.7,0,0,0,.842,5.69.8.8,0,0,1,.117.836L1.688,17.326l3.863-1.379a.789.789,0,0,1,.815.111l.02.016a7.613,7.613,0,1,0,4-14.451c-.251-.024-.5-.037-.748-.037A7.631,7.631,0,0,0,2.236,7.379Zm3.842,3.329a.75.75,0,0,1-.1-1.493l.1-.007h5a.75.75,0,0,1,.1,1.493l-.1.007Zm0-3a.75.75,0,0,1-.1-1.493l.1-.006h8a.75.75,0,0,1,.1,1.493l-.1.006Z" transform="translate(0.922 0.042)" fill="currentcolor"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </td>
-                        </tr>
+                            @foreach($buyers as $key => $value)
+                                <tr>
+                                    <td>
+                                        <div class="media circle-img align-items-center">
+                                            @if(file_exists(asset('uploads/users/'.$value->avatar)))
+                                                <img src="{{ asset('uploads/users/'.$value->avatar) }}" class="">
+                                            @else
+                                                <img src="{{ asset('assets/site/images/u-2.png') }}" class="">
+                                            @endif
+                                            <div class="media-body">
+                                                <h3>{{ $value->name }}</h3>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ $value->complete_orders_count }}</td>
+                                    <td>{{ $value->CompleteOrders()->sum('paid_total') }} $</td>
+                                    <td>{{ date('M d',strtotime($value->CompleteOrders()->latest()->first()->created_at)) }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-gray message-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18.899" height="18.958" viewBox="0 0 18.899 18.958">
+                                                <g id="chat-code" transform="translate(-0.922 -0.042)">
+                                                    <path id="Combined_Shape" data-name="Combined Shape" d="M1.531,18.958H1.494A1.494,1.494,0,0,1,.131,16.853L1.6,13.571a9.195,9.195,0,1,1,9.773,4.7,10.06,10.06,0,0,1-1.684.148A9.215,9.215,0,0,1,5.8,17.529L2.025,18.874a1.383,1.383,0,0,1-.472.084Zm.7-11.578a7.7,7.7,0,0,0,.842,5.69.8.8,0,0,1,.117.836L1.688,17.326l3.863-1.379a.789.789,0,0,1,.815.111l.02.016a7.613,7.613,0,1,0,4-14.451c-.251-.024-.5-.037-.748-.037A7.631,7.631,0,0,0,2.236,7.379Zm3.842,3.329a.75.75,0,0,1-.1-1.493l.1-.007h5a.75.75,0,0,1,.1,1.493l-.1.007Zm0-3a.75.75,0,0,1-.1-1.493l.1-.006h8a.75.75,0,0,1,.1,1.493l-.1.006Z" transform="translate(0.922 0.042)" fill="currentcolor"/>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                        {{ $buyers->links() }}
+                    @else
+                        <div class="alert alert-danger  text-danger">@lang('site.sorry_no_data')</div>
+                    @endif
                 </div>
             </div>
         </section>

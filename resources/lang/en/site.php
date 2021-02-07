@@ -44,4 +44,21 @@ return [
     'logout' => 'Sign out',
     'settings' => 'Settings',
 
+    'buyer_name' => 'Buyer Name',
+    'completed_orders' => 'Completed Orders',
+    'amount_spent' => 'Amount Spent',
+    'last_order' => 'Last Order',
+    'buyer_message' => 'Message',
+
+    'service' => 'Service',
+    'order_date' => 'Order Date',
+    'last_update' => 'Last Update',
+    'total' => 'Total',
+    'status' => 'Status',
+
+    'current_order' => 'Current',
+    'delivered_order' => 'Delivered',
+    'cancelled_order' => 'Cancelled',
+    'all_order' => 'All Orders',
+
 ];

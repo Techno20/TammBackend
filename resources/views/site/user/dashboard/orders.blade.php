@@ -11,9 +11,9 @@
         <!-- header -->
         <header class="dashboard-header d-flex align-items-center justify-content-between">
             <div class="title">
-                <h3>Active Orders</h3>
+                <h3>@lang('site.orders')</h3>
                 <p>
-                    Hi, Emilee welcome back
+                    @lang('site.welcome'), {{ auth()->user()->name }} @lang('site.welcome_back')
                 </p>
             </div>
             <div class="page-header-btns">
@@ -41,133 +41,57 @@
 
         <!-- filter -->
         <section class="filter-cats-sec">
-            <a href="" class="item active">ACTIVE(4)</a>
-            <a href="" class="item">MISSING DETAILS(23)</a>
-            <a href="" class="item">AWAITING MY REVIEW(10)</a>
-            <a href="" class="item">DELIVERED(24)</a>
-            <a href="" class="item">COMPLETED(10)</a>
-            <a href="" class="item">CANCELLED(4)</a>
-            <a href="" class="item">ALL ORDERS(50)</a>
+            <a href="{{ url('user/order/list/seller?status=current') }}" class="item @if((request()->has('status') && request()->status =='current') || !request()->has('status')) active @endif">@lang('site.current_order') @if((request()->has('status') && request()->status =='current') || !request()->has('status')) ({{$orders->count()}}) @endif</a>
+            <a href="{{ url('user/order/list/seller?status=delivered') }}" class="item @if(request()->has('status') && request()->status =='delivered') active @endif">@lang('site.delivered_order') @if(request()->has('status') && request()->status =='delivered') ({{$orders->count()}}) @endif</a>
+            <a href="{{ url('user/order/list/seller?status=canceled') }}" class="item @if(request()->has('status') && request()->status =='canceled') active @endif">@lang('site.cancelled_order') @if(request()->has('status') && request()->status =='canceled') ({{$orders->count()}}) @endif</a>
+            <a href="{{ url('user/order/list/seller?status=all') }}" class="item @if(request()->has('status') && request()->status =='all') active @endif">@lang('site.all_order') @if(request()->has('status') && request()->status =='all') ({{$orders->count()}}) @endif</a>
         </section>
 
         <!-- table -->
         <section class="table-list-section">
             <header class="tl-header d-flex align-items-center justify-content-between">
-                <h3 class="title">Active Orders</h3>
+                <h3 class="title">@lang('site.orders')</h3>
             </header>
             <div class="sec-content">
                 <div class="table-responsive">
+                    @if(isset($orders) && !empty($orders) && $orders->count() > 0)
                     <table class="table table-borderless cs-table-2">
                         <thead>
                         <tr>
-                            <th>Services</th>
-                            <th>Order Date</th>
-                            <th>Due on</th>
-                            <th>Total </th>
-                            <th>Status</th>
+                            <th>@lang('site.service')</th>
+                            <th>@lang('site.order_date')</th>
+                            <th>@lang('site.last_update')</th>
+                            <th>@lang('site.total') </th>
+                            <th>@lang('site.status')</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
+                        @foreach($orders as $key => $value)
+                            <tr>
+                                <td>
+                                    <div class="media align-items-center">
+                                        @if(isset($value->Service()->image) && !empty($value->Service()->image) && !empty($value->Service()->image->path) && file_exists(asset('uploads/services/'.$value->Service()->image->path)))
+                                            <img src="{{ asset('uploads/services/'.$value->Service()->image->path) }}">
+                                        @else
+                                            <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
+                                        @endif
+                                        <div class="media-body">
+                                            <h3>{{ $value->Service()->selectCard()->first()->title }}</h3>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label">Active</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label red">Active</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label">Active</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label">Active</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label">Active</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label">Active</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
-                                    <div class="media-body">
-                                        <h3>I will do 3 unique minimalist logo design</h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>22 Jun</td>
-                            <td>23 Jun</td>
-                            <td>$12.00</td>
-                            <td><span class="stauts-label">Active</span></td>
-                        </tr>
+                                </td>
+                                <td>{{ date('M d',strtotime($value->created_at)) }}</td>
+                                <td>{{ date('M d',strtotime($value->status_updated_at)) }}</td>
+                                <td>{{ $value->paid_total }} $</td>
+                                <td><span class="stauts-label @if($value->status == 'canceled') red @endif">@lang('default.other.order_status.'.$value->status)</span></td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
+                        {{ $orders->links() }}
+                    @else
+                        <div class="alert alert-danger  text-danger">@lang('site.sorry_no_data')</div>
+                    @endif
                 </div>
             </div>
         </section>

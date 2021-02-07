@@ -43,4 +43,22 @@ return [
     'buyers' => 'المشترون',
     'logout' => 'تسجيل خروج',
     'settings' => 'الاعدادات',
+
+    'buyer_name' => 'اسم المشتري',
+    'completed_orders' => 'الطلبات المكتملة',
+    'amount_spent' => 'اجمالي المشتريات',
+    'last_order' => 'اخر طلب',
+    'buyer_message' => 'تواصل',
+
+    'service' => 'الخدمة',
+    'order_date' => 'تاريخ الطلب',
+    'last_update' => 'اخر تحديث',
+    'total' => 'الاجمالي',
+    'status' => 'الحالة',
+
+    'current_order' => 'الحالية',
+    'delivered_order' => 'المنتهية',
+    'cancelled_order' => 'الملغية',
+    'all_order' => 'كل الطلبات',
+
 ];

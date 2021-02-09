@@ -1,3 +1,13 @@
 .main-categories-slider .owl-stage{
     width: 100% !important;
 }
+
+.paginator-holder ul li a.activated,
+.paginator-holder ul li a:hover {
+    color: #FCB52D !important;
+}
+
+.paginator-holder ul li a.activated span {
+    background-color: #FCB52D;
+    color: #FFF;
+}

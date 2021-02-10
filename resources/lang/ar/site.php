@@ -109,6 +109,37 @@ return [
     'need_help_text' => 'اذا كان لديك سؤال او استفسار',
     'contact_seller' => 'تواصل معنا',
 
+    'write_hear' => 'اكتب هنا ...',
+    'basic_pricing' => 'الخطة المبتدئة',
+    'standard_pricing' => 'الخطة المتوسطة',
+    'premium_pricing' => 'الخطة المتقدمة',
+    'pricing_title' => 'العنوان',
+    'pricing_description' => 'التفاصيل',
+    'pricing_services_list' => 'الخدمات',
+    'service_list_hint' => 'لكتابة اكتر من خدمة الرجاء الكتابة ومن ثم الضغط على زر Enter',
+    'pricing_price' => 'السعر',
+    'pricing_delivery_days' => 'مدة التسليم بالايام',
+    'previous' => 'السابق',
+    'description' => 'الوصف',
+    'service_extra' => 'الزيادات',
+    'extra_title' => 'العنوان',
+    'extra_price' => 'السعر',
+    'choose_images_videos' => 'الرجاء اختيار الصور او الفيديو',
+    'click_hear' => 'اضغط هنا',
+    'browse' => 'تصفح',
+
+    'service_plans' => 'خطط الخدمة',
+    'about_this_service' => 'تفاصيل الخدمة',
+    'sar' => 'ر.س',
+    'orders_in_queue' => 'طلبات في الانتظار',
+    'reviews' => 'تقيمات',
+    'basic' => 'مبتدئة',
+    'standard' => 'متوسطة',
+    'premium' => 'متقدمة',
+    'delivery_days' => 'عدد ايام الاستلام',
+    'any_quastions' => 'لديك أسئلة',
+    'if_you_have_any_quastions' => 'اذا كان لديك اي سؤال او استفسار',
+
 
 
 ];

@@ -19,9 +19,23 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>
 <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('assets/site/plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
 <script>
     $(document).ready(function () {
+        $('.select2').select2({
+            placeholder: "@lang('site.write_hear')",
+            tags:true,
+        });
+
+        if ($('#editor').length != 0) {
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
         $('body').on('click','.user_register',function () {
             var name = $('.user_register_block .name').val();
             var email = $('.user_register_block .email').val();
@@ -127,6 +141,12 @@
 
         $('body').on('click keyup keydown change','.input_to_count',function (){
             $('.input_text_count').text(this.value.length);
+        });
+        $('body').on('click keyup keydown change','.input_to_count_2',function (){
+            $('.input_text_count_2').text(this.value.length);
+        });
+        $('body').on('click keyup keydown change','.input_to_count_3',function (){
+            $('.input_text_count_2').text(this.value.length);
         });
     });
 </script>

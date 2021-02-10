@@ -118,4 +118,76 @@ class UploaderController extends Controller
     }
   }
 
+
+    public function uploadSingle($file,$is_image = true,$image_width = 0,$image_height = 0,$thumb_width = 0,$thumb_height = 0){
+        $validator = validator()->make(['file' => $file], [
+            'file' => (($this->allowedFileExtensions) ? 'mimes:'.$this->allowedFileExtensions.'|' : '').'required'
+        ]);
+        if ($validator->fails())
+        {
+            return Helper::responseValidationError($validator->messages());
+        }
+
+        $disk = 'public';
+        $file = $file;
+        $fileName = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
+        $filePath = $this->folder.'/'.$fileName;
+
+        // Upload Image
+        if($is_image){
+
+            if($image_width || $image_height){
+                $resizeImage = Image::make(file_get_contents($file));
+
+                if($image_width && $resizeImage->width() > $image_width && !$image_height){
+                    $resizeImage->resize($image_width,null,function($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }elseif(!$image_width && $image_height){
+                    if ($resizeImage->height() > $image_height) {
+                        $resizeImage->resize(null,$image_height,function($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    }
+                }elseif($image_width && $thumb_height) {
+                    $resizeImage->resize($image_width,$image_height);
+                }
+
+                Storage::disk($disk)->put($filePath, $resizeImage->encode());
+            }else {
+                Storage::disk($disk)->put($filePath, file_get_contents($file));
+            }
+            /* Make Thumbnail */
+            if($thumb_width || $thumb_height){
+                $ThumbImage = Image::make(file_get_contents($file));
+                $thumbFileName = $fileName;
+
+                if($thumb_width && $ThumbImage->width() > $thumb_width && !$thumb_height){
+                    $ThumbImage->resize($thumb_width,null,function($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }elseif(!$thumb_width && $thumb_height){
+                    if ($ThumbImage->height() > $thumb_height) {
+                        $ThumbImage->resize(null,$thumb_height,function($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    }
+                }elseif($thumb_width && $thumb_height) {
+                    $ThumbImage->resize($thumb_width,$thumb_height);
+                }
+
+                Storage::disk($disk)->put($this->thumbFolder.'/'.$thumbFileName, $ThumbImage->encode());
+            }
+        }else {
+            // Upload File
+            Storage::disk($disk)->put($filePath,file_get_contents($file));
+        }
+
+        return [
+            'file_path' => Storage::disk($disk)->url($filePath),
+            'path' => $fileName
+        ];
+    }
+
+
 }

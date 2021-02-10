@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard.css') }}" />
     <title>Tamm</title>
 @endif
-<link rel="stylesheet" href="{{ asset('assets/site/css/custom.css') }}" />
-
-
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="{{ asset('assets/site/css/custom.css') }}" />

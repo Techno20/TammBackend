@@ -119,28 +119,10 @@
                                             <div class="service-item-slider owl-carousel">
                                                 <div class="item">
                                                     <a href="{{ url('service/show/'.$value->id) }}">
-                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                            <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                                         @else
-                                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
-                                                        @endif
-                                                    </a>
-                                                </div>
-                                                <div class="item">
-                                                    <a href="{{ url('service/show/'.$value->id) }}">
-                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
-                                                        @else
-                                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
-                                                        @endif
-                                                    </a>
-                                                </div>
-                                                <div class="item">
-                                                    <a href="{{ url('service/show/'.$value->id) }}">
-                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
-                                                        @else
-                                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                                            <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                                         @endif
                                                     </a>
                                                 </div>
@@ -153,11 +135,11 @@
                                                     @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
                                                         <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
                                                     @else
-                                                        <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
+                                                        <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                     @endif
                                                     <div class="media-body">
                                                         <h4>{{ $value->user->name }}</h4>
-                                                        <p>Creator</p>
+{{--                                                        <p>Creator</p>--}}
                                                     </div>
                                                 @endif
                                             </div>

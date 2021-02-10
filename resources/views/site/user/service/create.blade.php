@@ -8,99 +8,9 @@
     @endif
 
     <style>
-        .wizard-content-left {
-            background-blend-mode: darken;
-            background-color: rgba(0, 0, 0, 0.45);
-            background-image: url("https://i.ibb.co/X292hJF/form-wizard-bg-2.jpg");
-            background-position: center center;
-            background-size: cover;
-            height: 100vh;
-            padding: 30px;
-        }
-        .wizard-content-left h1 {
-            color: #ffffff;
-            font-size: 38px;
-            font-weight: 600;
-            padding: 12px 20px;
-            text-align: center;
-        }
 
-        .form-wizard {
-            color: #888888;
-            padding: 30px;
-        }
-        .form-wizard .wizard-form-radio {
-            display: inline-block;
-            margin-left: 5px;
-            position: relative;
-        }
-        .form-wizard .wizard-form-radio input[type="radio"] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            -ms-appearance: none;
-            -o-appearance: none;
-            appearance: none;
-            background-color: #dddddd;
-            height: 25px;
-            width: 25px;
-            display: inline-block;
-            vertical-align: middle;
-            border-radius: 50%;
-            position: relative;
-            cursor: pointer;
-        }
-        .form-wizard .wizard-form-radio input[type="radio"]:focus {
-            outline: 0;
-        }
-        .form-wizard .wizard-form-radio input[type="radio"]:checked {
-            background-color: #fb1647;
-        }
-        .form-wizard .wizard-form-radio input[type="radio"]:checked::before {
-            content: "";
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            display: inline-block;
-            background-color: #ffffff;
-            border-radius: 50%;
-            left: 1px;
-            right: 0;
-            margin: 0 auto;
-            top: 8px;
-        }
-        .form-wizard .wizard-form-radio input[type="radio"]:checked::after {
-            content: "";
-            display: inline-block;
-            webkit-animation: click-radio-wave 0.65s;
-            -moz-animation: click-radio-wave 0.65s;
-            animation: click-radio-wave 0.65s;
-            background: #000000;
-            content: '';
-            display: block;
-            position: relative;
-            z-index: 100;
-            border-radius: 50%;
-        }
-        .form-wizard .wizard-form-radio input[type="radio"] ~ label {
-            padding-left: 10px;
-            cursor: pointer;
-        }
-        .form-wizard .form-wizard-header {
-            text-align: center;
-        }
-        .form-wizard .form-wizard-next-btn, .form-wizard .form-wizard-previous-btn, .form-wizard .form-wizard-submit {
-            background-color: #d65470;
-            color: #ffffff;
-            display: inline-block;
-            min-width: 100px;
-            min-width: 120px;
-            padding: 10px;
-            text-align: center;
-        }
-        .form-wizard .form-wizard-next-btn:hover, .form-wizard .form-wizard-next-btn:focus, .form-wizard .form-wizard-previous-btn:hover, .form-wizard .form-wizard-previous-btn:focus, .form-wizard .form-wizard-submit:hover, .form-wizard .form-wizard-submit:focus {
-            color: #ffffff;
-            opacity: 0.6;
-            text-decoration: none;
+        .body-content{
+            background: #fff;
         }
         .form-wizard .wizard-fieldset {
             display: none;
@@ -111,30 +21,19 @@
         .form-wizard .wizard-form-error {
             display: none;
             background-color: #ff0000;
-            position: absolute;
+            position: relative;
             left: 0;
             right: 0;
             bottom: 0;
             height: 2px;
             width: 100%;
         }
-        .form-wizard .form-wizard-previous-btn {
-            background-color: #fb1647;
-        }
-        .form-wizard .form-control {
-            font-weight: 300;
-            height: auto !important;
-            padding: 15px;
-            color: #888888;
-            background-color: #f1f1f1;
-            border: none;
-        }
+
         .form-wizard .form-control:focus {
             box-shadow: none;
         }
         .form-wizard .form-group {
             position: relative;
-            margin: 25px 0;
         }
         .form-wizard .wizard-form-text-label {
             position: absolute;
@@ -190,11 +89,22 @@
             if ($('.tags-input').length != 0) {
                 $('.tags-input').val();
             }
-        })
+
+            $('body').on('click','.btn-add-new-record',function () {
+                $('.extra-container').append($('.extra-template').html());
+            });
+            $('body').on('click','.btn-remove-record',function () {
+                $(this).parent().parent().html('');
+            });
+        });
     </script>
     <script>
         $(document).ready(function () {
+            $('body').on('change','.select2',function () {
+                console.log($('.select2').val());
+            });
             /*
+            $('body').on('click','.add_service_overview_button',function () {
             $('body').on('click','.add_service_overview_button',function () {
                 var title = $('.add_service_overview_block .title').val();
                 var main_category_type = $('.add_service_overview_block .main_category_type').val();
@@ -374,10 +284,10 @@
                 <div class="container">
                     <div class="d-flex align-items-center">
                         <h1>@lang('site.add_new_service')</h1>
-                        <div class="page-action-btns">
-                            <a class="btn btn-tamm add_service_overview_button">@lang('site.save')</a>
-                            <a class="btn btn-outline-secondary">@lang('site.save_and_review')</a>
-                        </div>
+{{--                        <div class="page-action-btns">--}}
+{{--                            <a class="btn btn-tamm add_service_overview_button">@lang('site.save')</a>--}}
+{{--                            <a class="btn btn-outline-secondary">@lang('site.save_and_review')</a>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </header>
@@ -388,7 +298,8 @@
                 <div class="row no-gutters">
                     <div class="col-lg-12 col-md-12">
                         <div class="form-wizard">
-                            <form action="" method="post" role="form">
+                            <form action="{{ url('user/service/add') }}" method="post" role="form" enctype="multipart/form-data">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-wizard-header">
                                     <div class="form-paginator">
                                         <div class="container">
@@ -397,7 +308,7 @@
                                                     <li><a class="nav-link active"><span>1</span> @lang('site.overview')</a></li>
                                                     <li><a class="nav-link"><span>2</span> @lang('site.pricing')</a></li>
                                                     <li><a class="nav-link"><span>3</span> @lang('site.service_description')</a></li>
-                                                    <li><a class="nav-link"><span>4</span> @lang('site.requirements')</a></li>
+                                                    <li><a class="nav-link"><span>4</span> @lang('site.service_extra')</a></li>
                                                     <li><a class="nav-link"><span>5</span> @lang('site.gallery')</a></li>
                                                 </ul>
                                             </div>
@@ -413,21 +324,19 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-9">
                         <div class="add-service-content">
-                            <div class="form-group add-title">
-                                <h3>@lang('site.overview')</h3>
-                            </div>
-
 
                             <fieldset class="wizard-fieldset show">
 
-
+                                <div class="form-group add-title">
+                                    <h3>@lang('site.overview')</h3>
+                                </div>
                                 <div class="form-row">
                                     <div class="col-md-3">
                                         <label class="form-lable" for="service-title">@lang('site.service_title')</label>
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <textarea id="service-title" name="title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.service_title_hint')" rows="2"></textarea>
+                                            <textarea id="service-title" name="title" class="form-control input_to_count title" placeholder="@lang('site.service_title_hint')" rows="2"></textarea>
                                             <div class="wizard-form-error"></div>
                                             <div class="control-hint d-flex align-items-center justify-content-between">
                                                 <p>@lang('site.just_perfect')!</p>
@@ -532,186 +441,336 @@
                                 </div>
                             </fieldset>
                             <fieldset class="wizard-fieldset">
-                                <h5>Account Information</h5>
-                                <div class="form-group">
-                                    <input type="email" class="form-control wizard-required" id="email">
-                                    <label for="email" class="wizard-form-text-label">Email*</label>
-                                    <div class="wizard-form-error"></div>
+                                <div class="form-group add-title">
+                                    <h3>@lang('site.pricing')</h3>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="username">
-                                    <label for="username" class="wizard-form-text-label">User Name*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control wizard-required" id="pwd">
-                                    <label for="pwd" class="wizard-form-text-label">Password*</label>
-                                    <div class="wizard-form-error"></div>
-                                    <span class="wizard-password-eye"><i class="far fa-eye"></i></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control wizard-required" id="cpwd">
-                                    <label for="cpwd" class="wizard-form-text-label">Confirm Password*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="form-group clearfix">
-                                    <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                    <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
-                                </div>
-                            </fieldset>
-                            <fieldset class="wizard-fieldset">
-                                <h5>Bank Information</h5>
-                                <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="bname">
-                                    <label for="bname" class="wizard-form-text-label">Bank Name*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="brname">
-                                    <label for="brname" class="wizard-form-text-label">Branch Name*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="acname">
-                                    <label for="acname" class="wizard-form-text-label">Account Name*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="acon">
-                                    <label for="acon" class="wizard-form-text-label">Account Number*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="form-group clearfix">
-                                    <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                    <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
-                                </div>
-                            </fieldset>
-                            <fieldset class="wizard-fieldset">
-                                <h5>Payment Information</h5>
-                                <div class="form-group">
-                                    Payment Type
-                                    <div class="wizard-form-radio">
-                                        <input name="radio-name" id="mastercard" type="radio">
-                                        <label for="mastercard">Master Card</label>
+
+{{--                                basic pricing--}}
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <h5>@lang('site.basic_pricing')</h5>
                                     </div>
-                                    <div class="wizard-form-radio">
-                                        <input name="radio-name" id="visacard" type="radio">
-                                        <label for="visacard">Visa Card</label>
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="basic-pricing-title">@lang('site.pricing_title')</label>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="honame">
-                                    <label for="honame" class="wizard-form-text-label">Holder Name*</label>
-                                    <div class="wizard-form-error"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control wizard-required" id="cardname">
-                                            <label for="cardname" class="wizard-form-text-label">Card Number*</label>
-                                            <div class="wizard-form-error"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control wizard-required" id="cvc">
-                                            <label for="cvc" class="wizard-form-text-label">CVC*</label>
+                                            <input type="text" id="basic-pricing-title" name="basic_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">Expiry Date</div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="form-group">
-                                            <select class="form-control">
-                                                <option value="">Date</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                                <option value="">4</option>
-                                                <option value="">5</option>
-                                                <option value="">6</option>
-                                                <option value="">7</option>
-                                                <option value="">8</option>
-                                                <option value="">9</option>
-                                                <option value="">10</option>
-                                                <option value="">11</option>
-                                                <option value="">12</option>
-                                                <option value="">13</option>
-                                                <option value="">14</option>
-                                                <option value="">15</option>
-                                                <option value="">16</option>
-                                                <option value="">17</option>
-                                                <option value="">18</option>
-                                                <option value="">19</option>
-                                                <option value="">20</option>
-                                                <option value="">21</option>
-                                                <option value="">22</option>
-                                                <option value="">23</option>
-                                                <option value="">24</option>
-                                                <option value="">25</option>
-                                                <option value="">26</option>
-                                                <option value="">27</option>
-                                                <option value="">28</option>
-                                                <option value="">29</option>
-                                                <option value="">30</option>
-                                                <option value="">31</option>
-                                            </select>
-                                        </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="basic-pricing-price">@lang('site.pricing_price')</label>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="col-md-9">
                                         <div class="form-group">
-                                            <select class="form-control">
-                                                <option value="">Month</option>
-                                                <option value="">jan</option>
-                                                <option value="">Feb</option>
-                                                <option value="">March</option>
-                                                <option value="">April</option>
-                                                <option value="">May</option>
-                                                <option value="">June</option>
-                                                <option value="">Jully</option>
-                                                <option value="">August</option>
-                                                <option value="">Sept</option>
-                                                <option value="">Oct</option>
-                                                <option value="">Nov</option>
-                                                <option value="">Dec</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="form-group">
-                                            <select class="form-control">
-                                                <option value="">Years</option>
-                                                <option value="">2019</option>
-                                                <option value="">2020</option>
-                                                <option value="">2021</option>
-                                                <option value="">2022</option>
-                                                <option value="">2023</option>
-                                                <option value="">2024</option>
-                                                <option value="">2025</option>
-                                                <option value="">2026</option>
-                                                <option value="">2027</option>
-                                                <option value="">2028</option>
-                                                <option value="">2029</option>
-                                                <option value="">2030</option>
-                                                <option value="">2031</option>
-                                                <option value="">2032</option>
-                                                <option value="">2033</option>
-                                                <option value="">2034</option>
-                                                <option value="">2035</option>
-                                                <option value="">2036</option>
-                                                <option value="">2037</option>
-                                                <option value="">2038</option>
-                                                <option value="">2039</option>
-                                                <option value="">2040</option>
-                                            </select>
+                                            <input type="number" min="0.01" value="0.01" id="basic-pricing-price" name="basic_price" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')" />
+                                            <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="basic-pricing-delivery_days">@lang('site.pricing_delivery_days')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="number" min="1" value="1" step="1" id="basic-pricing-delivery_days" name="basic_delivery_days" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_delivery_days')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="basic-pricing-description">@lang('site.pricing_description')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <textarea id="basic-pricing-description" name="basic_description" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_description')" rows="2"></textarea>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="basic-pricing-services_list">@lang('site.pricing_services_list')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <select name="basic_services_list[]"  multiple="multiple"  class="form-control select2 select2-keywords" placeholder="@lang('site.pricing_services_list')" id="basic-pricing-services_list" style="width: 100%;"></select>
+                                            <span>@lang('site.service_list_hint')</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <h5>@lang('site.standard_pricing')</h5>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="standard-pricing-title">@lang('site.pricing_title')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="text" id="standard-pricing-title" name="standard_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="standard-pricing-price">@lang('site.pricing_price')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="number" min="0.01" value="0.01" id="standard-pricing-price" name="standard_price" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="standard-pricing-delivery_days">@lang('site.pricing_delivery_days')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="number" min="1" value="1" step="1" id="standard-pricing-delivery_days" name="standard_delivery_days" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_delivery_days')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="standard-pricing-description">@lang('site.pricing_description')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <textarea id="standard-pricing-description" name="standard_description" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_description')" rows="2"></textarea>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="standard-pricing-services_list">@lang('site.pricing_services_list')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <select name="standard_services_list[]"  multiple="multiple"  class="form-control select2 select2-keywords" placeholder="@lang('site.pricing_services_list')" id="standard-pricing-services_list" style="width: 100%;"></select>
+                                            <span>@lang('site.service_list_hint')</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <h5>@lang('site.premium_pricing')</h5>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="premium-pricing-title">@lang('site.pricing_title')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="text" id="premium-pricing-title" name="premium_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="premium-pricing-price">@lang('site.pricing_price')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="number" min="0.01" value="0.01" id="premium-pricing-price" name="premium_price" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="premium-pricing-delivery_days">@lang('site.pricing_delivery_days')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="number" min="1" value="1" step="1" id="premium-pricing-delivery_days" name="premium_delivery_days" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_delivery_days')" />
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="premium-pricing-description">@lang('site.pricing_description')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <textarea id="premium-pricing-description" name="premium_description" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_description')" rows="2"></textarea>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label class="form-lable" for="premium-pricing-services_list">@lang('site.pricing_services_list')</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <select name="premium_services_list[]"  multiple="multiple"  class="form-control select2 select2-keywords" placeholder="@lang('site.pricing_services_list')" id="premium-pricing-services_list" style="width: 100%;"></select>
+                                            <span>@lang('site.service_list_hint')</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div class="form-group clearfix">
-                                    <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                    <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
+                                    <div class="add-service-footer d-flex align-items-center justify-content-between">
+                                        <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
+                                        <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <fieldset class="wizard-fieldset">
+                                <div class="add-service-content">
+                                    <div class="form-group add-title">
+                                        <h3>@lang('site.description')</h3>
+                                    </div>
+                                    <div class="add-service-desc-sec">
+                                        <div class="form-group">
+                                            <label for="service-title">@lang('site.service_description')</label>
+
+{{--                                            <div id="editor"></div>--}}
+                                            <textarea name="description" class="form-control input_to_count_2" cols="30" rows="10"></textarea>
+
+                                            <div class="control-hint d-flex align-items-center justify-content-between">
+                                                <p>@lang('site.just_perfect')!</p>
+                                                <small><span class="input_text_count_2">0</span> / 80 @lang('site.max')</small>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <div class="add-service-footer d-flex align-items-center justify-content-between">
+                                            <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
+                                            <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                            <fieldset class="wizard-fieldset">
+                                <div class="add-service-content">
+                                    <div class="form-group add-title">
+                                        <h3>@lang('site.service_extra')</h3>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" id="basic-pricing-title" name="extras[]['title']" class="form-control input_to_count title" placeholder="@lang('site.pricing_title')" />
+                                                <div class="wizard-form-error"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="number" min="0.01" value="0.01"  id="basic-pricing-title" name="extras[]['price']" class="form-control input_to_count title" placeholder="@lang('site.pricing_price')" />
+                                                <div class="wizard-form-error"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-add-new-record">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="extra-template" style="display: none;">
+                                        <div class="form-row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" id="basic-pricing-title" name="extras_title[]" class="form-control input_to_count title" placeholder="@lang('site.pricing_title')" />
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" min="0.01" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title" placeholder="@lang('site.pricing_price')" />
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button type="button" class="btn btn-remove-record">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="extra-container">
+
+                                    </div>
+
+
+                                    <div class="form-group clearfix">
+                                        <div class="add-service-footer d-flex align-items-center justify-content-between">
+                                            <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
+                                            <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                            <fieldset class="wizard-fieldset">
+                                <div class="add-service-content">
+                                    <div class="form-group add-title">
+                                        <h3>@lang('site.gallery')</h3>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-between gallery-labl">
+                                        <label>@lang('site.choose_images_videos')</label>
+                                    </div>
+                                    <div class="row mx-n2">
+                                        <div class="col-lg-4 col-sm-6 px-2">
+                                            <div class="file-upload mb-4">
+
+                                                <div class="image-upload-wrap">
+                                                    <input name="gallery[]" multiple="multiple" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                                    <div class="drag-text">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="42" viewBox="0 0 60 42">
+                                                            <path class="a"
+                                                                  d="M55,42H5a5.015,5.015,0,0,1-5-5V5A5.015,5.015,0,0,1,5,0H55a5.015,5.015,0,0,1,5,5V37a4.986,4.986,0,0,1-4.163,4.928,4.649,4.649,0,0,1-.822.073ZM32.234,29.689,45.483,40h9.531a2.753,2.753,0,0,0,.476-.042A2.982,2.982,0,0,0,58,37V28.566L44.082,20.215ZM2.012,37.264A3,3,0,0,0,5,40H42.226L21.95,24.228ZM2,5V34.882L21.453,22.163a1,1,0,0,1,1.16.048l7.995,6.218L43.375,18.219a1,1,0,0,1,1.14-.076L58,26.234V5a3,3,0,0,0-3-3H5A3,3,0,0,0,2,5Zm22,7a6,6,0,1,1,6,6A6.006,6.006,0,0,1,24,12Zm2,0a4,4,0,1,0,4-4A4,4,0,0,0,26,12Z"
+                                                                  transform="translate(0 0)" fill="#9fa1b6" />
+                                                        </svg>
+                                                        <h3>@lang('site.click_hear')
+                                                            <span>@lang('site.browse')</span>
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="file-upload-content">
+                                                    <img class="file-upload-image" src="#" alt="your image" />
+                                                    <div class="image-title-wrap">
+                                                        <div class="image-title"></div>
+                                                        <button type="button" onclick="removeUpload(this)" class="remove-image"><i
+                                                                class="fa fa-times fa-fw"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group clearfix">
+                                        <div class="add-service-footer d-flex align-items-center justify-content-between">
+                                            <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
+                                            <button type="submit" class="form-wizard-submit btn btn-tamm add_service_overview_button">@lang('site.save')</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
 

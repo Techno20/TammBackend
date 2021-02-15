@@ -68,7 +68,7 @@ class UserServiceController extends Controller
             $Services = $Services->orderBy('id','DESC');
         }
 
-        $Services = $Services->paginate(50);
+        $Services = $Services->with('Category')->paginate(50);
 //        return Helper::responseData('success',true,$Services);
         return view('site.user.dashboard.services')->with('services',$Services);
     }
@@ -273,8 +273,12 @@ class UserServiceController extends Controller
      * add new services page
      */
 
-    public function getForm(Request $request){
-        return view('site.user.service.create');
+    public function getForm(Request $request,$service_id = null){
+        $service = null;
+        if(isset($service_id) && !empty($service_id) && intval($service_id) > 0){
+            $service = Service::where('id',$service_id)->where('user_id',auth()->user()->id)->first();
+        }
+        return view('site.user.service.create')->with('service',$service);
     }
     public function getPricing(Request $request){
         return view('site.user.service.pricing');

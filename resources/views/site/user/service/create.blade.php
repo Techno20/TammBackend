@@ -336,7 +336,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <textarea id="service-title" name="title" class="form-control input_to_count title" placeholder="@lang('site.service_title_hint')" rows="2"></textarea>
+                                            <textarea id="service-title" name="title" class="form-control input_to_count title" placeholder="@lang('site.service_title_hint')" rows="2">{{ ($service && $service->title) ? $service->title : null }}</textarea>
                                             <div class="wizard-form-error"></div>
                                             <div class="control-hint d-flex align-items-center justify-content-between">
                                                 <p>@lang('site.just_perfect')!</p>
@@ -355,7 +355,7 @@
                                                 <select id="cat-1" class="form-control nice-select-me main_category_type" name="main_category_type">
                                                     <option selected disabled>@lang('site.chose_one')</option>
                                                     @foreach(\Helper::getMainCategoriesType(false,app()->getLocale()) as $key => $value)
-                                                        <option value="{{$key}}">{{ $value }}</option>
+                                                        <option {{ ($service && $service->main_category_type && $service->main_category_type == $key ) ? 'selected' : '' }} value="{{$key}}">{{ $value }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -363,7 +363,7 @@
                                                 <select id="cat-2" class="form-control nice-select-me category_id" name="category_id">
                                                     <option selected disabled>@lang('site.chose_one')</option>
                                                     @foreach(\Helper::getCategories() as $key => $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                        <option {{ ($service && $service->category_id && $service->category_id == $key ) ? 'selected' : '' }} value="{{ $value->id }}">{{ $value->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -456,7 +456,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="text" id="basic-pricing-title" name="basic_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
+                                            <input type="text" id="basic-pricing-title" value="{{ ($service && $service->basic_title) ? $service->basic_title : null }}"  name="basic_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
@@ -467,7 +467,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="number" min="0.01" value="0.01" id="basic-pricing-price" name="basic_price" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')" />
+                                            <input type="number" min="0.01" value="{{ ($service && $service->basic_price) ? $service->basic_price : '0.01' }}" id="basic-pricing-price" name="basic_price"  class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')" />
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
@@ -478,7 +478,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="number" min="1" value="1" step="1" id="basic-pricing-delivery_days" name="basic_delivery_days" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_delivery_days')" />
+                                            <input type="number" min="1"  value="{{ ($service && $service->basic_delivery_days) ? $service->basic_delivery_days : '1' }}"  step="1" id="basic-pricing-delivery_days" name="basic_delivery_days" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_delivery_days')" />
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
@@ -489,7 +489,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <textarea id="basic-pricing-description" name="basic_description" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_description')" rows="2"></textarea>
+                                            <textarea id="basic-pricing-description" name="basic_description" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_description')" rows="2">{!!  ($service && $service->basic_description) ? $service->basic_description : ''  !!}</textarea>
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
@@ -516,7 +516,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="text" id="standard-pricing-title" name="standard_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
+                                            <input type="text" id="standard-pricing-title" value="{{ ($service && $service->standard_title) ? $service->standard_title : null }}" name="standard_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>
@@ -577,7 +577,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
-                                            <input type="text" id="premium-pricing-title" name="premium_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
+                                            <input type="text" id="premium-pricing-title" value="{{ ($service && $service->premium_title) ? $service->premium_title : null }}" name="premium_title" class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_title')" />
                                             <div class="wizard-form-error"></div>
                                         </div>
                                     </div>

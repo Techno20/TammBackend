@@ -140,6 +140,25 @@ return [
     'any_quastions' => 'لديك أسئلة',
     'if_you_have_any_quastions' => 'اذا كان لديك اي سؤال او استفسار',
 
+    'about' => 'من نحن',
+    'careers' => 'التوظيف',
+    'news' => 'الاخبار',
+    'privacy_policy' => 'سياسة الخصوصية',
+    'terms_of_service' => 'الشروط والاحكام',
+    'more' => 'اخرى',
+    'support' => 'الدعم الفني',
+    'help_support' => 'المساعدة',
+    'trust_safety' => 'موثوقية البيانات',
+    'selling_on_tamm' => 'الشراء في تم',
+    'buying_on_tamm' => 'البيع في تم',
+
+    'rate' => 'التقيم',
+    'edit' => 'تعديل',
+    'view' => 'عرض',
+
+
+
+
 
 
 ];

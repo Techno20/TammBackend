@@ -243,12 +243,12 @@
                             <div class="sec-content">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="">
+                                        <a href="{{ url('user/service/add') }}">
                                             <div class="add-new-service-item d-flex flex-column align-items-center justify-content-center">
                                                 <figure>
                                                     <img src="{{ asset('assets/site/images/add-new.png') }}" alt="">
                                                 </figure>
-                                                <h3>Create A New Service</h3>
+                                                <h3>@lang('site.add_new_service')</h3>
                                             </div>
                                         </a>
                                     </div>

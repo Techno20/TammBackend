@@ -61,11 +61,11 @@
                     <table class="table table-borderless cs-table-2">
                         <thead>
                         <tr>
-                            <th>Services</th>
-                            <th>Impressions</th>
-                            <th>Clicks</th>
-                            <th>Orders </th>
-                            <th>Cancellations</th>
+                            <th>@lang('site.service_title')</th>
+                            <th>@lang('site.category')</th>
+                            <th>@lang('site.rate')</th>
+                            <th>@lang('site.view')</th>
+                            <th>@lang('site.edit')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -79,10 +79,18 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>323</td>
-                            <td>200</td>
-                            <td>{{ $value->Orders()->count() }}</td>
-                            <td>{{ $value->Orders()->where('status','canceled')->count() }}</td>
+                            <td>{{ $value->Category->name }}</td>
+                            <td>{{ 0 }}</td>
+                            <td>
+                                <div class="actions">
+                                    <a href="{{ url('service/show/'.$value->id) }}" class="btn btn-yallow"><i class="fa fa-eye"></i></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="actions">
+                                    <a href="{{ url('user/service/add/'.$value->id) }}" class="btn btn-green"><i class="fa fa-edit"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

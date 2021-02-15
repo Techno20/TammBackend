@@ -191,11 +191,12 @@
                     <div class="h-user-quick-menu-dropdown">
                         <div class="row no-gutters">
                             <div class="col-4">
-                                <a href="{{ url('user/me') }}" class="item">
+{{--                                <a href="{{ url('user/me') }}" class="item">--}}
+                                <a href="{{ url('user/profile') }}" class="item">
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/user.svg') }}" alt="">
                                     </figure>
-                                    <h5>Profile</h5>
+                                    <h5>@lang('site.Profile')</h5>
                                 </a>
                             </div>
                             <div class="col-4">

@@ -89,16 +89,17 @@ class UserProfileController extends Controller
     public function getMyProfile()
     {
         $userId = auth()->user()->id;
-      $User = User::where('id',$userId)->with('LastDeliveredOrder')->first();
-      if(!$User){
-        return Helper::responseData('user_not_found',false,false,__('default.error_message.user_not_found'),404);
-      }
-      $Skills = Skill::whereHas('UserSkills',function($UserSkills) use($userId){
-        return $UserSkills->where('user_id',$userId);
-      })->selectCard()->get();
-      $User->skills = $Skills;
+        $User = User::where('id',$userId)->with('LastDeliveredOrder')->first();
+        if(!$User){
+            return Helper::responseData('user_not_found',false,false,__('default.error_message.user_not_found'),404);
+        }
+        $Skills = Skill::whereHas('UserSkills',function($UserSkills) use($userId){
+            return $UserSkills->where('user_id',$userId);
+        })->selectCard()->get();
+        $User->skills = $Skills;
 //      return Helper::responseData('success',true,$User);
-        return view('site.user.my_profile')->with('user',$User);
+        $Services = Service::selectCard()->where('user_id',auth()->user()->id)->with('Category')->paginate(7);
+        return view('site.user.my_profile')->with('user',$User)->with('services',$Services);
     }
 
     

@@ -57,11 +57,16 @@
                             <div class="service-cat-item">
                                 <a href="{{ url('service/show/'.$value->id) }}">
                                     <figure>
-                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                            <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                         @else
-                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="">
+                                            <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                         @endif
+                                        {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                            {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                        {{--@else--}}
+                                            {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="">--}}
+                                        {{--@endif--}}
                                     </figure>
                                     <div class="caption">
                                         <h3>{{ $value->title }}</h3>
@@ -94,10 +99,15 @@
                                 <div class="seller-item-2">
                                     <a href="{{ url('service/show/'.$value->id) }}">
                                         <figure>
-                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                            {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                            {{--@else--}}
+                                                {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                            {{--@endif--}}
+                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                             @else
-                                                <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                             @endif
                                         </figure>
                                         <div class="details d-flex align-items-center">
@@ -123,10 +133,15 @@
                                 <div class="seller-item-1">
                                     <a href="">
                                         <figure>
-                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                            {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                            {{--@else--}}
+                                                {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                            {{--@endif--}}
+                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                             @else
-                                                <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                             @endif
                                         </figure>
                                         <div class="details">
@@ -169,10 +184,15 @@
                                 <div class="service-item-1">
                                     <a href="{{ url('service/show/'.$value->id) }}">
                                         <figure>
-                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                            {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                            {{--@else--}}
+                                                {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                            {{--@endif--}}
+                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                             @else
-                                                <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                             @endif
                                             <div class="caption media">
                                                 @if(isset($value->user) && !empty($value->user))

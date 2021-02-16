@@ -34,3 +34,13 @@
     background-color: var(--red);
     color: #fff;
 }
+
+
+.footer-ul-two-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.pagination svg{
+    width: 36px;
+}

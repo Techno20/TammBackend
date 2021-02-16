@@ -3,10 +3,10 @@
     <div class="f-top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-1-5 col-md-4 col-6">
+                <div class="col-lg-2-5 col-md-4 col-6">
                     <div class="f-widget">
                         <h3 class="w-title">@lang('site.categories')</h3>
-                        <ul>
+                        <ul class="footer-ul-two-col">
                             @foreach(\Helper::getCategories() as $key => $value)
                                 <li><a href="{{ url('service/list?category_id='.$value->id) }}">{{ $value->name }}</a></li>
                             @endforeach
@@ -15,15 +15,15 @@
                 </div>
                 <div class="col-lg-1-5 col-md-4 col-6">
                     <div class="f-widget">
-                        <h3 class="w-title">@lang('site.about')</h3>
+                        <h3 class="w-title">@lang('site.more')</h3>
                         <ul>
-{{--                            <li><a href="">@lang('site.careers')</a></li>--}}
-                            {{--<li><a href="">@lang('site.news')</a></li>--}}
-                            <li><a href="">@lang('site.privacy_policy')</a></li>
-                            <li><a href="">@lang('site.terms_of_service')</a></li>
+                            @foreach(\Helper::getMainCategoriesType(false,app()->getLocale()) as $key => $value)
+                                <li><a href="{{ url('service/categories/'.$key) }}">{{ $value }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
+
                 {{--<div class="col-lg-1-5 col-md-4 col-6">--}}
                     {{--<div class="f-widget">--}}
                         {{--<h3 class="w-title">@lang('site.support')</h3>--}}
@@ -39,23 +39,25 @@
                     <div class="f-widget">
                         <h3 class="w-title">@lang('site.tamm')</h3>
                         <ul>
-                            <li><a href="">@lang('site.services')</a></li>
-                            <li><a href="">@lang('site.how_it_works')</a></li>
-                            <li><a href="">@lang('site.blog')</a></li>
-                            <li><a href="">@lang('site.about_us')</a></li>
+                            <li><a href="{{ url('service/categories') }}">@lang('site.services')</a></li>
+                            <li><a href="{{ url('how-it-work') }}">@lang('site.how_it_works')</a></li>
+                            <li><a href="#">@lang('site.blog')</a></li>
+                            <li><a href="{{ url('about-us') }}">@lang('site.about_us')</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-1-5 col-md-4 col-6">
                     <div class="f-widget">
-                        <h3 class="w-title">@lang('site.more')</h3>
+                        <h3 class="w-title">@lang('site.about')</h3>
                         <ul>
-                            @foreach(\Helper::getMainCategoriesType(false,app()->getLocale()) as $key => $value)
-                                <li><a href="{{ url('service/categories/'.$key) }}">{{ $value }}</a></li>
-                            @endforeach
+                            {{--                            <li><a href="">@lang('site.careers')</a></li>--}}
+                            {{--<li><a href="">@lang('site.news')</a></li>--}}
+                            <li><a href="#">@lang('site.privacy_policy')</a></li>
+                            <li><a href="#">@lang('site.terms_of_service')</a></li>
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

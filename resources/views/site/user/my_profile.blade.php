@@ -252,236 +252,59 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="service-item-2">
-                                            <div class="top">
-                                                <div class="service-item-slider owl-carousel">
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-1.png') }}">
-                                                        </a>
+
+                                    @if(isset($services) && !empty($services) && count($services->toArray()) > 0)
+                                        @foreach($services as $key => $value)
+
+                                            <div class="col-sm-6">
+                                                <div class="service-item-2">
+                                                    <div class="top">
+                                                        <div class="service-item-slider owl-carousel">
+                                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                                            @else
+                                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
+                                                            @endif
+                                                        </div>
+                                                        <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
                                                     </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-2.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-3.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
-                                            </div>
-                                            <div class="details">
-                                                <div class="serv-author media">
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    <div class="media-body">
-                                                        <h4>Cammy Hedling</h4>
-                                                        <p>Top rated seller</p>
-                                                    </div>
-                                                </div>
-                                                <h3 class="title">
-                                                    <a href="">I will design your modern brand style guideline for your business</a>
-                                                </h3>
-                                                <div class="meta d-flex align-items-center justify-content-between">
-                                                    <div class="price">
-                                                        <label>STARTING</label>
-                                                        <p>550 SAR</p>
-                                                    </div>
-                                                    <div class="total-meta">
-                                                        <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                        <p class="total-sell">235 Sell</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="service-item-2">
-                                            <div class="top">
-                                                <div class="service-item-slider owl-carousel">
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-1.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-2.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-3.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
-                                            </div>
-                                            <div class="details">
-                                                <div class="serv-author media">
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    <div class="media-body">
-                                                        <h4>Cammy Hedling</h4>
-                                                        <p>Top rated seller</p>
-                                                    </div>
-                                                </div>
-                                                <h3 class="title">
-                                                    <a href="">I will design your modern brand style guideline for your business</a>
-                                                </h3>
-                                                <div class="meta d-flex align-items-center justify-content-between">
-                                                    <div class="price">
-                                                        <label>STARTING</label>
-                                                        <p>550 SAR</p>
-                                                    </div>
-                                                    <div class="total-meta">
-                                                        <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                        <p class="total-sell">235 Sell</p>
+                                                    <div class="details">
+                                                        <div class="serv-author media">
+                                                            @if(isset($value->user) && !empty($value->user))
+                                                                @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
+                                                                    <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
+                                                                @else
+                                                                    <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
+                                                                @endif
+                                                                <div class="media-body">
+                                                                    <h4>{{ $value->user->name }}</h4>
+                                                                    {{--                                                        <p>Creator</p>--}}
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <h3 class="title">
+                                                            <a href="{{ url('service/show/'.$value->id) }}">{{ $value->title }}</a>
+                                                        </h3>
+                                                        <div class="meta d-flex align-items-center justify-content-between">
+                                                            <div class="price">
+                                                                <label>@lang('site.starting')</label>
+                                                                <p>{{ $value->basic_price }} @lang('site.sar')</p>
+                                                            </div>
+                                                            <div class="total-meta">
+                                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                                <p class="total-sell">{{ $value->Orders()->count() }} @lang('site.sell')</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="service-item-2">
-                                            <div class="top">
-                                                <div class="service-item-slider owl-carousel">
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-1.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-2.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-3.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
-                                            </div>
-                                            <div class="details">
-                                                <div class="serv-author media">
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    <div class="media-body">
-                                                        <h4>Cammy Hedling</h4>
-                                                        <p>Top rated seller</p>
-                                                    </div>
-                                                </div>
-                                                <h3 class="title">
-                                                    <a href="">I will design your modern brand style guideline for your business</a>
-                                                </h3>
-                                                <div class="meta d-flex align-items-center justify-content-between">
-                                                    <div class="price">
-                                                        <label>STARTING</label>
-                                                        <p>550 SAR</p>
-                                                    </div>
-                                                    <div class="total-meta">
-                                                        <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                        <p class="total-sell">235 Sell</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="service-item-2">
-                                            <div class="top">
-                                                <div class="service-item-slider owl-carousel">
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-1.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-2.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-3.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
-                                            </div>
-                                            <div class="details">
-                                                <div class="serv-author media">
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    <div class="media-body">
-                                                        <h4>Cammy Hedling</h4>
-                                                        <p>Top rated seller</p>
-                                                    </div>
-                                                </div>
-                                                <h3 class="title">
-                                                    <a href="">I will design your modern brand style guideline for your business</a>
-                                                </h3>
-                                                <div class="meta d-flex align-items-center justify-content-between">
-                                                    <div class="price">
-                                                        <label>STARTING</label>
-                                                        <p>550 SAR</p>
-                                                    </div>
-                                                    <div class="total-meta">
-                                                        <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                        <p class="total-sell">235 Sell</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="service-item-2">
-                                            <div class="top">
-                                                <div class="service-item-slider owl-carousel">
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-1.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-2.png') }}">
-                                                        </a>
-                                                    </div>
-                                                    <div class="item">
-                                                        <a href="">
-                                                            <img src="{{ asset('assets/site/images/services/si-3.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
-                                            </div>
-                                            <div class="details">
-                                                <div class="serv-author media">
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    <div class="media-body">
-                                                        <h4>Cammy Hedling</h4>
-                                                        <p>Top rated seller</p>
-                                                    </div>
-                                                </div>
-                                                <h3 class="title">
-                                                    <a href="">I will design your modern brand style guideline for your business</a>
-                                                </h3>
-                                                <div class="meta d-flex align-items-center justify-content-between">
-                                                    <div class="price">
-                                                        <label>STARTING</label>
-                                                        <p>550 SAR</p>
-                                                    </div>
-                                                    <div class="total-meta">
-                                                        <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                        <p class="total-sell">235 Sell</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
+                                        @endforeach
+                                            <div class="col-sm-12 text-center"><div class="pagination">{{ $services->links() }}</div></div>
+                                    @else
+                                        <div class="alert alert-danger  text-danger">@lang('site.sorry_no_data')</div>
+                                    @endif
                                 </div>
 
                                 <div class="user-reviews-sec">

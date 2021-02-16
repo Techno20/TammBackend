@@ -196,7 +196,7 @@
                                     <figure>
                                         <img src="{{ asset('assets/site/images/icons/user.svg') }}" alt="">
                                     </figure>
-                                    <h5>@lang('site.Profile')</h5>
+                                    <h5>@lang('site.profile')</h5>
                                 </a>
                             </div>
                             <div class="col-4">

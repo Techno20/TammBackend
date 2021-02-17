@@ -112,11 +112,7 @@
                                         </figure>
                                         <div class="details d-flex align-items-center">
                                             <div class="seller">
-                                                @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
-                                                    <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
-                                                @else
-                                                    <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                @endif
+                                                <img src="{{ $value->user->avatar_full_path }}" class="author-img">
                                                 <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
                                             </div>
                                             <div class="content">
@@ -146,11 +142,7 @@
                                         </figure>
                                         <div class="details">
                                             <div class="seller">
-                                                @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
-                                                    <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
-                                                @else
-                                                    <img src="{{ asset('assets/site/images/services/u-2.png') }}" class="author-img">
-                                                @endif
+                                                <img src="{{ $value->user->avatar_full_path }}" class="author-img">
                                                 <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
                                             </div>
                                             <div class="content">
@@ -196,11 +188,7 @@
                                             @endif
                                             <div class="caption media">
                                                 @if(isset($value->user) && !empty($value->user))
-                                                    @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
-                                                        <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
-                                                    @else
-                                                        <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    @endif
+                                                    <img src="{{ $value->user->avatar_full_path }}" class="author-img">
                                                     <div class="media-body">
 {{--                                                        <p>Creator</p>--}}
                                                         <h4>{{ $value->user->name }}</h4>

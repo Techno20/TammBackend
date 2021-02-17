@@ -78,8 +78,14 @@ class UserProfileController extends Controller
         return $UserSkills->where('user_id',$userId);
       })->selectCard()->get();
       $User->skills = $Skills;
+//      dd($User->toArray());
 //      return Helper::responseData('success',true,$User);
-        return view('site.user.profile')->with('user',$User);
+        $Services = Service::selectCard()
+            ->where('user_id',$userId)
+            ->with('Category')
+            ->orderBy('id','DESC')
+            ->paginate(6);
+        return view('site.user.profile')->with('user',$User)->with('services',$Services);
     }
     /**
      * Get specific user profile
@@ -98,7 +104,11 @@ class UserProfileController extends Controller
         })->selectCard()->get();
         $User->skills = $Skills;
 //      return Helper::responseData('success',true,$User);
-        $Services = Service::selectCard()->where('user_id',auth()->user()->id)->with('Category')->paginate(7);
+        $Services = Service::selectCard()
+            ->where('user_id',auth()->user()->id)
+            ->with('Category')
+            ->orderBy('id','DESC')
+            ->paginate(5);
         return view('site.user.my_profile')->with('user',$User)->with('services',$Services);
     }
 

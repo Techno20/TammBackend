@@ -155,6 +155,21 @@ return [
     'rate' => 'التقيم',
     'edit' => 'تعديل',
     'view' => 'عرض',
+    'profile' => 'الملف الشخصي',
+    'view_public_mode' => 'مظهر الحساب العام',
+
+    'sell' => 'بيع',
+    'starting' => 'يبدأ من',
+
+    'skills' => 'المهارات',
+    'linked_accounts' => 'روابط التواصل الاجتماعي',
+    'add_new' => 'اضافة جديد',
+
+    'contact_me' => 'تواصل معي',
+    'from' => 'من',
+    'mbr_since' => 'عضو منذ',
+    'rspns_time' => 'وقت الرد',
+    'education' => 'التعليم',
 
 
 

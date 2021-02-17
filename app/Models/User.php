@@ -128,6 +128,10 @@ class User extends Authenticatable implements JWTSubject
     public function Bank(){
         return $this->belongsTo('App\Models\Bank')->selectCard();
     }
+    // Bank
+    public function Country(){
+        return $this->belongsTo('App\Models\Country')->selectCard();
+    }
 
     /* START ATTRIBUTES */
     public function getCreatedAtAttribute($value){
@@ -152,10 +156,11 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getAvatarFullPathAttribute()
     {
-        if ($this->avatar) {
+        if ($this->avatar && Storage::exists('users/avatars/'.$this->avatar)) {
             $avatar = Storage::url('users/avatars/'.$this->avatar);
         }else {
-            $avatar = asset('assets/images/no-avatar.png');
+//            $avatar = asset('assets/images/no-avatar.png');
+            $avatar = asset('assets/site/images/user.png');
         }
         return $avatar;
     }

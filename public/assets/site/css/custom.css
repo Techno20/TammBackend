@@ -44,3 +44,14 @@
 .pagination svg{
     width: 36px;
 }
+.pagination .leading-5{
+    padding-top: 15px;
+}
+
+.pagination nav{
+    margin: 15px auto 15px auto !important;
+}
+
+.freelancer-info-box .education{
+    border-bottom: 0;
+}

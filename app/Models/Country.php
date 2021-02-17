@@ -23,4 +23,11 @@ class Country extends Model
     public function Users(){
       return $this->hasMany('App\Models\User','country_id','id');
     }
+
+    /* START SCOPES */
+    public function scopeSelectCard($query)
+    {
+        return $query->select('id','name_'.app()->getLocale().' as name');
+    }
+
 }

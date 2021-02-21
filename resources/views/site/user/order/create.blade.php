@@ -643,24 +643,32 @@
                                                             <div class="price">{{ $result['order_summary']['delivery_time'] }} @lang('site.days')</div>
                                                         </div>
                                                         <div class="actions">
-                                                            <button type="button" class="btn btn-yallow btn-block btn-lg">@lang('site.continue') ({{ $result['order_summary']['total'] }} @lang('site.sar'))</button>
+                                                            <a href="javascript:;" class="form-wizard-next-btn btn btn-yallow btn-block btn-lg">@lang('site.continue') ({{ $result['order_summary']['total'] }} @lang('site.sar'))</a>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                             </div>
                                         </div>
-                                    </div>
                                 </section>
-                                <!-- order-details-section -->
 
-                                <div class="form-group clearfix">
-                                    <div class="add-service-footer d-flex align-items-center justify-content-between">
-                                        {{--                                <a href="" class="btn btn-light">Previous</a>--}}
-                                        <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
+                            </fieldset>
+
+                            <fieldset class="wizard-fieldset">
+                                <div class="add-service-content">
+
+
+                                    <div class="form-group clearfix">
+                                        <div class="add-service-footer d-flex align-items-center justify-content-between">
+                                            <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
+                                            <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
+                                        </div>
                                     </div>
                                 </div>
+
+
                             </fieldset>
+
                             <fieldset class="wizard-fieldset">
 
                                 <form id="form-container" method="post" action="/charge">
@@ -682,20 +690,7 @@
                                 </div>
 
                             </fieldset>
-                           <fieldset class="wizard-fieldset">
-                                <div class="add-service-content">
 
-
-                                    <div class="form-group clearfix">
-                                        <div class="add-service-footer d-flex align-items-center justify-content-between">
-                                            <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
-                                            <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </fieldset>
 
                         </div>
                     </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Service;
 use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -27,5 +29,19 @@ class SiteController extends Controller
     }
     public function getHowItWok(){
         return view('site.pages.how_it_work');
+    }
+
+    public function getSearch(Request $request){
+        if (request()->s) {
+            $Services = Service::onlyApproved()
+                ->onlyActive()
+                ->selectCard()
+                ->where('title','LIKE','%'.request()->s.'%')
+                ->orderBy('id','DESC')
+                ->where('is_approved',1)
+                ->paginate(20);
+            return view('site.pages.search')->with('services',$Services);
+        }
+        return Redirect::back();
     }
 }

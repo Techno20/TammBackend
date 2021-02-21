@@ -95,6 +95,8 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('home', [ServiceController::class, 'getHomeData']);
         Route::get('lang/{lang}', [SiteController::class, 'changeLanguage']);
 
+        Route::get('search', [SiteController::class, 'getSearch']);
+
         Route::get('about-us', [SiteController::class, 'getAboutUs']);
         Route::get('how-it-work', [SiteController::class, 'getHowItWok']);
         Route::get('logout', [SiteController::class, 'getLogout']);

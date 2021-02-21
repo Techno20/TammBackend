@@ -711,7 +711,7 @@
                                                 </ul>
                                             @endif
 
-                                            <button type="button" class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->basic_price }} @lang('site.sar'))</button>
+                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=basic') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->basic_price }} @lang('site.sar'))</a>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="standard-plan" role="tabpanel">
@@ -742,7 +742,7 @@
                                                 </ul>
                                             @endif
 
-                                            <button type="button" class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</button>
+                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="premium-plan" role="tabpanel">
@@ -773,7 +773,7 @@
                                                 </ul>
                                             @endif
 
-                                            <button type="button" class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->premium_price }} @lang('site.sar'))</button>
+                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
                                         </div>
                                     </div>
                                 </div>

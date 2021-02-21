@@ -6,6 +6,11 @@
 @endif
     <head>
         @include('site.layout.common.head')
+        @if(app()->getLocale() == 'ar')
+            <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard-rtl.css') }}" />
+        @else
+            <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard.css') }}" />
+        @endif
         @yield('css')
     </head>
     <body>
@@ -16,6 +21,11 @@
         </div>
 
         @include('site.layout.common.script')
+        @if(app()->getLocale() == 'ar')
+            <script src="{{ asset('assets/site/js/dashboard-rtl.js') }}"></script>
+        @else
+            <script src="{{ asset('assets/site/js/dashboard.js') }}"></script>
+        @endif
         @yield('js')
     </body>
 </html>

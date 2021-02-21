@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\HowWeWork;
+use App\Models\Say;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -173,6 +175,12 @@ class ServiceController extends Controller
         // Top Selling Services
         $categories = Category::selectCard()->take(32)->get();
         $result['categories'] = $categories;
+
+        $says = Say::where('status',1)->where('lang',app()->getLocale())->limit(5)->get();
+        $result['says'] = $says;
+
+        $how_we_work = HowWeWork::where('status',1)->where('lang',app()->getLocale())->limit(3)->get();
+        $result['how_we_work'] = $how_we_work;
 
         return view('site.pages.home')->with('result',$result);
 //        return Helper::responseData('success',true,$result);

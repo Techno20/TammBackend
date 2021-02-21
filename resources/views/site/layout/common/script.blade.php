@@ -10,10 +10,8 @@
 <script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
 @if(app()->getLocale() == 'ar')
     <script src="{{ asset('assets/site/js/main-rtl.js') }}"></script>
-    <script src="{{ asset('assets/site/js/dashboard-rtl.js') }}"></script>
 @else
     <script src="{{ asset('assets/site/js/main.js') }}"></script>
-    <script src="{{ asset('assets/site/js/dashboard.js') }}"></script>
 @endif
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>

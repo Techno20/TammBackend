@@ -17,8 +17,10 @@
                         <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">@lang('site.slide_desc')</p>
                         <div class="search-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
                             <div class="search-form">
-                                <input type="text" class="form-control" placeholder="@lang('site.search_placeholder')" name="">
-                                <button type="button" class="btn"><i class="fa fa-search"></i></button>
+                                <form action="{{ url('search') }}" method="get">
+                                    <input type="text" class="form-control" placeholder="@lang('site.search_placeholder')" name="s">
+                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
                             <div class="skills">
                                 @lang('site.try_skills'):
@@ -217,6 +219,7 @@
         <!-- best-selling-services-section -->
         @endif
 
+        @if(isset($result['how_we_work']) && !empty($result['how_we_work']) && $result['how_we_work']->count() > 0)
         <!-- how-its-work-section -->
         <section class="how-its-work-section">
             <div class="container">
@@ -233,27 +236,15 @@
                                 <p>@lang('site.how_it_work_desc')</p>
                             </header>
                             <div class="steps">
+                                @foreach($result['how_we_work'] as $key => $value)
                                 <div class="step d-flex wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">
                                     <i class="fas fa-play"></i>
                                     <div class="content">
-                                        <h3>Find your business</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                        <h3>{{ $value->name }}</h3>
+                                        <p>{{ $value->text }}</p>
                                     </div>
                                 </div>
-                                <div class="step d-flex wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                                    <i class="fas fa-play"></i>
-                                    <div class="content">
-                                        <h3>Choose the best service</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                </div>
-                                <div class="step d-flex wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                                    <i class="fas fa-play"></i>
-                                    <div class="content">
-                                        <h3>Pay safley and got your service</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -262,6 +253,7 @@
             </div>
         </section>
         <!-- how-its-work-section -->
+        @endif
 
         @if(isset($result['categories']) && !empty($result['categories']) && count($result['categories']) > 0)
         <!-- marketplaces-section -->
@@ -295,6 +287,7 @@
         <!-- marketplaces-section -->
         @endif
 
+        @if(isset($result['says']) && !empty($result['says']) && count($result['says']) > 0)
         <!-- testimonials-section -->
         <section class="testimonials-section">
             <div class="container">
@@ -307,43 +300,26 @@
                             </div>
                         </div>
                         <div class="col-lg-6 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".3s">
+
+                                @foreach($result['says'] as $key => $value)
                             <div class="testimonials-slider owl-carousel">
                                 <div class="testimonial-item">
                                     <div class="user-sec media">
-                                        <img src="{{ asset('assets/site/images/u-1.png') }}">
+                                        @if(isset($value->image) && !empty($value->image) && Storage::exists('says/'.$value->image))
+                                            <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}">
+                                        @else
+                                            <img src="{{ asset('assets/site/images/user.png') }}">
+                                        @endif
                                         <div class="media-body">
-                                            <h4>Ghassan Hani</h4>
-                                            <p>Product Designer @ REF Group</p>
+                                            <h4>{{ $value->name }}</h4>
+                                            <p>{{ $value->postion }}</p>
                                         </div>
                                     </div>
                                     <div class="content">
-                                        “Great website ✌️ AI Test, 3000 programs, 200 institutions, 5 continents, Free and paid education opportunities, and one common application.”
+                                        {{ $value->text }}
                                     </div>
                                 </div>
-                                <div class="testimonial-item">
-                                    <div class="user-sec media">
-                                        <img src="{{ asset('assets/site/images/u-1.png') }}">
-                                        <div class="media-body">
-                                            <h4>Ghassan Hani</h4>
-                                            <p>Product Designer @ REF Group</p>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        “Great website ✌️ AI Test, 3000 programs, 200 institutions, 5 continents, Free and paid education opportunities, and one common application.”
-                                    </div>
-                                </div>
-                                <div class="testimonial-item">
-                                    <div class="user-sec media">
-                                        <img src="{{ asset('assets/site/images/u-1.png') }}">
-                                        <div class="media-body">
-                                            <h4>Ghassan Hani</h4>
-                                            <p>Product Designer @ REF Group</p>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        “Great website ✌️ AI Test, 3000 programs, 200 institutions, 5 continents, Free and paid education opportunities, and one common application.”
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -351,6 +327,7 @@
             </div>
         </section>
         <!-- testimonials-section -->
+        @endif
 
         <!-- call-action-1-section -->
         <section class="call-action-1-section">

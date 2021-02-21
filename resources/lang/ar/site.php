@@ -170,6 +170,21 @@ return [
     'mbr_since' => 'عضو منذ',
     'rspns_time' => 'وقت الرد',
     'education' => 'التعليم',
+    'search_result' => 'نتائج البحث عن',
+
+    'order_details' => 'تفاصيل الطلب',
+    'confirm_pay' => 'تأكيد الطلب والدفع',
+    'submit_requirements' => 'انهاء الطلب',
+
+    'customize_your_package' => 'رتب باقتك',
+
+    'add_extras' => 'اضف الخدمات الاضافية',
+    'add_extras_text' => 'لتحقيق افضل نتيجة من الخدمة اختر الخدمات الاضافية المناسبة',
+
+    'summary' => 'تفاصيل الطلب',
+    'delivery_time' => 'وقت التسليم',
+    'subtotal' => 'الاجمالي الفرعي',
+    'days' => 'ايام',
 
 
 

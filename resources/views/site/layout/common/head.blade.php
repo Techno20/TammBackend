@@ -24,11 +24,9 @@
 <!-- Main Style CSS -->
 @if(app()->getLocale() == 'ar')
     <link rel="stylesheet" href="{{ asset('assets/site/css/style-rtl.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard-rtl.css') }}" />
     <title>منصة تم</title>
 @else
     <link rel="stylesheet" href="{{ asset('assets/site/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/site/css/dashboard.css') }}" />
     <title>Tamm</title>
 @endif
 

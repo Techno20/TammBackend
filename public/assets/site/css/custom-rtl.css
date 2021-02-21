@@ -1,3 +1,6 @@
 .pagination svg{
     transform: rotate(180deg);
 }
+.breadcrumb .fa-chevron-right{
+    transform: rotate(180deg);
+}

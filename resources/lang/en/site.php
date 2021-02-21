@@ -138,4 +138,45 @@ return [
     'if_you_have_any_quastions' => 'If you have any quastions',
 
 
+    'about' => 'About Us',
+    'careers' => 'Careers',
+    'news' => 'News',
+    'privacy_policy' => 'Privacy Policy',
+    'terms_of_service' => 'Terms of Service',
+    'more' => 'More',
+    'support' => 'Support',
+    'help_support' => 'Help Support',
+    'trust_safety' => 'Trust & Safety',
+    'selling_on_tamm' => 'الشراء في تم',
+    'buying_on_tamm' => 'البيع في تم',
+
+    'rate' => 'Rate',
+    'edit' => 'Edit',
+    'view' => 'View',
+    'profile' => 'Profile',
+    'view_public_mode' => 'View Public Mode',
+
+    'sell' => 'Sell',
+    'starting' => 'Starting',
+
+    'skills' => 'Skills',
+    'linked_accounts' => 'Linked Accounts',
+    'add_new' => 'Add New',
+
+    'contact_me' => 'Contact Me',
+    'from' => 'From',
+    'mbr_since' => 'Mbr Since',
+    'rspns_time' => 'Espns Time',
+    'education' => 'Education',
+    'search_result' => 'Search Result',
+
+    'order_details' => 'Order Details',
+    'confirm_pay' => 'Confirm & Pay',
+    'submit_requirements' => 'Submit Requirements',
+
+    'customize_your_package' => 'Customize Your Package',
+
+    'add_extras' => 'Add Extras',
+    'add_extras_text' => 'Add extra services for your order to get a best goal',
+
 ];

@@ -174,7 +174,7 @@ return [
 
     'order_details' => 'تفاصيل الطلب',
     'confirm_pay' => 'تأكيد الطلب والدفع',
-    'submit_requirements' => 'انهاء الطلب',
+    'submit_requirements' => 'اكتب متطلباتك',
 
     'customize_your_package' => 'رتب باقتك',
 

@@ -185,6 +185,9 @@
 
         }
     </style>
+    <style>
+        #requirements{position:absolute; top:-100px;}
+    </style>
 @endsection
 
 @section('js')
@@ -388,6 +391,12 @@
     <script src="https://secure.gosell.io/js/sdk/tap.min.js"></script>
 
     <script>
+        $(document).ready(function () {
+            $(".attachment-btn").click(function() {
+                $("#requirements").click();
+            });
+        });
+
         //pass your public key from tap's dashboard
         var tap = Tapjsli('pk_test_OanSHyNLEKBiFcUZMt8zDXds');
 
@@ -474,7 +483,7 @@
                 <div class="row no-gutters">
                     <div class="col-lg-12 col-md-12">
                         <div class="form-wizard">
-                            <form action="{{ url('user/service/add') }}" method="post" role="form" enctype="multipart/form-data">
+                            <form action="{{ url('user/service/add') }}" id="form-container" method="post" role="form" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-wizard-header">
                                     <div class="form-paginator">
@@ -657,6 +666,37 @@
                             <fieldset class="wizard-fieldset">
                                 <div class="add-service-content">
 
+                                    <div class="send-message-comp">
+                                        <div class="message-wrapper d-flex flex-column ">
+                                            <textarea name="" class="form-control input_to_count" placeholder="Write your message"></textarea>
+{{--                                            <div class="attachments d-flex align-items-center flex-wrap">--}}
+{{--                                                <label>Attachmets:</label>--}}
+{{--                                                <div class="attachment">--}}
+{{--                                                    <i class="fas fa-paperclip"></i>--}}
+{{--                                                    <span>image.png</span>--}}
+{{--                                                    <a href="">--}}
+{{--                                                        <i class="fas fa-times"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="attachment">--}}
+{{--                                                    <i class="fas fa-paperclip"></i>--}}
+{{--                                                    <span>File.docx</span>--}}
+{{--                                                    <a href="">--}}
+{{--                                                        <i class="fas fa-times"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+                                            <div class="message-controls d-flex align-items-center">
+                                                <p class="counter">
+                                                    <span class="current input_text_count">0</span>
+                                                    <span class="total">/ 2500</span>
+                                                </p>
+                                                <input type="file" id="requirements" name="attachment" multiple>
+                                                <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
+{{--                                                <button type="button" data-target="#successfullySendRequest" data-toggle="modal" class="btn btn-yallow">Send</button>--}}
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group clearfix">
                                         <div class="add-service-footer d-flex align-items-center justify-content-between">
@@ -671,7 +711,7 @@
 
                             <fieldset class="wizard-fieldset">
 
-                                <form id="form-container" method="post" action="/charge">
+{{--                                <form id="form-container" method="post" action="/charge">--}}
                                     <!-- Tap element will be here -->
                                     <div id="element-container"></div>
                                     <div id="error-handler" role="alert"></div>
@@ -680,11 +720,11 @@
                                     </div>
                                     <!-- Tap pay button -->
                                     <button id="tap-btn">Submit</button>
-                                </form>
+{{--                                </form>--}}
 
                                 <div class="form-group clearfix">
                                     <div class="add-service-footer d-flex align-items-center justify-content-between">
-                                        <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
+{{--                                        <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>--}}
                                         <a href="javascript:;" class="form-wizard-next-btn btn btn-tamm add_service_overview_button">@lang('site.next')</a>
                                     </div>
                                 </div>

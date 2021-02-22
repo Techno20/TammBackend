@@ -179,4 +179,16 @@ return [
     'add_extras' => 'Add Extras',
     'add_extras_text' => 'Add extra services for your order to get a best goal',
 
+
+    'summary' => 'Summary',
+    'delivery_time' => 'Delivery Time',
+    'subtotal' => 'Subtotal',
+    'days' => 'Days',
+
+
+    'watch_the_video' => 'Watch the video',
+    'tamm_platform' => 'Tamm Platform',
+    'your_dream_it' => 'Your Dream It. We Build It',
+    'work_with_the_best_freelance' => 'Work with the best freelance talent from around the world on our secure,flexible and cost-effective platform.',
+
 ];

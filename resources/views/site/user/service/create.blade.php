@@ -273,6 +273,30 @@
             });
         });
 
+        function readURL(input) {
+            // console.log();
+            let _this = $(input);
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    _this.closest('.file-upload').find('.image-upload-wrap').hide();
+
+                    _this.closest('.file-upload').find('.file-upload-image').attr('src', e.target.result);
+                    _this.closest('.file-upload').find('.file-upload-content').show();
+
+                    _this.closest('.file-upload').find('.image-title').html(input.files[0].name);
+                    console.log(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload(input);
+            }
+        }
+
 
     </script>
 @endsection
@@ -300,6 +324,7 @@
                         <div class="form-wizard">
                             <form action="{{ url('user/service/add') }}" method="post" role="form" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="id" value="{{ $service ? $service->id : '' }}">
                                 <div class="form-wizard-header">
                                     <div class="form-paginator">
                                         <div class="container">

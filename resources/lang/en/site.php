@@ -191,5 +191,6 @@ return [
     'your_dream_it' => 'Your Dream It. We Build It',
     'work_with_the_best_freelance' => 'Work with the best freelance talent from around the world on our secure,flexible and cost-effective platform.',
     'more_services' => 'More Services By',
+    'member_since' => 'Member Since',
 
 ];

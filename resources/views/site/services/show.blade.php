@@ -132,7 +132,42 @@
                                     {!!  $service->description  !!}
                                 </div>
                             </div>
-                            </div>
+                            @if($service->user)
+                                <div class="serv-seller-box">
+                                    <div class="header d-flex align-items-center">
+                                        <a href="{{$service->user ? url('user/profile/'.$service->user->id) : ''}}">
+                                            <div class="serv-author media align-items-center">
+                                                @if(file_exists(asset('uploads/users/'.$service->user->avatar)))
+                                                    <img src="{{ asset('uploads/users/'.$service->user->avatar) }}" class="author-img">
+                                                @else
+                                                    <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
+                                                @endif
+                                                <div class="media-body">
+                                                    <h4>{{ $service->user->name }}</h4>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="total-meta d-flex align-item-center">
+                                            <p class="total-rate"><i class="fas fa-star"></i> {{$service->rating_avg}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="summbary d-flex">
+                                        @if($service->user->country)
+                                            <div class="info">
+                                                <label>@lang('site.from')</label>
+                                                <p>{{$service->user->country->name}}</p>
+                                            </div>
+                                        @endif
+                                        <div class="info">
+                                            <label>@lang('site.member_since')</label>
+                                            <p>{{\Carbon\Carbon::parse($service->user->created_at)->format('Y-m')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="brief">
+                                        {{$service->user->about_me}}
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-xl-4">
@@ -195,95 +230,100 @@
                                                 <div class="info">
                                                     <i class="far fa-clock"></i>
                                                     <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
-                                                <div class="info">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
+                                                    <div class="info">
+                                                        <i class="far fa-clock"></i>
+                                                        <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
+                                                    </div>
+                                                    {{--                                                <div class="info">--}}
+                                                    {{--                                                    <i class="fas fa-sync"></i>--}}
+                                                    {{--                                                    <span>4 Revisions</span>--}}
+                                                    {{--                                                </div>--}}
                                                 </div>
-                                            </div>
-                                            <?php //$services_list = explode('||',$service->basic_services_list); ?>
-                                            @if(count($service->standard_services_list) > 0)
-                                                <ul class="serv-features">
-                                                    @foreach($service->standard_services_list as $value)
-                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
+                                                <?php //$services_list = explode('||',$service->basic_services_list); ?>
+                                                @if(count($service->standard_services_list) > 0)
+                                                    <ul class="serv-features">
+                                                        @foreach($service->standard_services_list as $value)
+                                                            <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
 
-                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                                <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="premium-plan" role="tabpanel">
+                                            <div class="plan-details-wrapper">
+                                                <div class="head d-flex align-items-center justify-content-between">
+                                                    <h4>{{ $service->premium_title }}</h4>
+                                                    <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
+                                                </div>
+                                                <div class="brief">
+                                                    <p>{{ $service->premium_description }}</p>
+                                                </div>
+                                                <div class="meta d-flex align-items-center flex-wrap">
+                                                    <div class="info">
+                                                        <i class="far fa-clock"></i>
+                                                        <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
+                                                    </div>
+                                                    {{--                                                <div class="info">--}}
+                                                    {{--                                                    <i class="fas fa-sync"></i>--}}
+                                                    {{--                                                    <span>4 Revisions</span>--}}
+                                                    {{--                                                </div>--}}
+                                                </div>
+                                                <?php //$services_list = explode('||',$service->basic_services_list); ?>
+                                                @if(count($service->standard_services_list) > 0)
+                                                    <ul class="serv-features">
+                                                        @foreach($service->standard_services_list as $value)
+                                                            <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+
+                                                <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="premium-plan" role="tabpanel">
+                                            <div class="plan-details-wrapper">
+                                                <div class="head d-flex align-items-center justify-content-between">
+                                                    <h4>{{ $service->premium_title }}</h4>
+                                                    <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
+                                                </div>
+                                                <div class="brief">
+                                                    <p>{{ $service->premium_description }}</p>
+                                                </div>
+                                                <div class="meta d-flex align-items-center flex-wrap">
+                                                    <div class="info">
+                                                        <i class="far fa-clock"></i>
+                                                        <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
+                                                    </div>
+                                                    {{--                                                <div class="info">--}}
+                                                    {{--                                                    <i class="fas fa-sync"></i>--}}
+                                                    {{--                                                    <span>4 Revisions</span>--}}
+                                                    {{--                                                </div>--}}
+                                                </div>
+                                                <?php //$services_list = explode('||',$service->basic_services_list); ?>
+                                                @if(count($service->premium_services_list) > 0)
+                                                    <ul class="serv-features">
+                                                        @foreach($service->premium_services_list as $value)
+                                                            <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+
+                                                <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="premium-plan" role="tabpanel">
-                                        <div class="plan-details-wrapper">
-                                            <div class="head d-flex align-items-center justify-content-between">
-                                                <h4>{{ $service->premium_title }}</h4>
-                                                <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
-                                            </div>
-                                            <div class="brief">
-                                                <p>{{ $service->premium_description }}</p>
-                                            </div>
-                                            <div class="meta d-flex align-items-center flex-wrap">
-                                                <div class="info">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
-                                                </div>
-                                                {{--                                                <div class="info">--}}
-                                                {{--                                                    <i class="fas fa-sync"></i>--}}
-                                                {{--                                                    <span>4 Revisions</span>--}}
-                                                {{--                                                </div>--}}
-                                            </div>
-                                            <?php //$services_list = explode('||',$service->basic_services_list); ?>
-                                            @if(count($service->standard_services_list) > 0)
-                                                <ul class="serv-features">
-                                                    @foreach($service->standard_services_list as $value)
-                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
 
-                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="premium-plan" role="tabpanel">
-                                        <div class="plan-details-wrapper">
-                                            <div class="head d-flex align-items-center justify-content-between">
-                                                <h4>{{ $service->premium_title }}</h4>
-                                                <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
-                                            </div>
-                                            <div class="brief">
-                                                <p>{{ $service->premium_description }}</p>
-                                            </div>
-                                            <div class="meta d-flex align-items-center flex-wrap">
-                                                <div class="info">
-                                                    <i class="far fa-clock"></i>
-                                                    <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
-                                                </div>
-                                                {{--                                                <div class="info">--}}
-                                                {{--                                                    <i class="fas fa-sync"></i>--}}
-                                                {{--                                                    <span>4 Revisions</span>--}}
-                                                {{--                                                </div>--}}
-                                            </div>
-                                            <?php //$services_list = explode('||',$service->basic_services_list); ?>
-                                            @if(count($service->premium_services_list) > 0)
-                                                <ul class="serv-features">
-                                                    @foreach($service->premium_services_list as $value)
-                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-
-                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
-                                        </div>
-                                    </div>
                                 </div>
-
-                            </div>
-                            <div class="serv-question d-flex align-items-center">
-                                <img src="{{ asset('assets/site/images/services/serv-question.png') }}" class="img-fluid" alt="">
-                                <div class="data">
-                                    <h5>@lang('site.any_quastions')?</h5>
-                                    <p>@lang('site.if_you_have_any_quastions').</p>
+                                <div class="serv-question d-flex align-items-center">
+                                    <img src="{{ asset('assets/site/images/services/serv-question.png') }}" class="img-fluid" alt="">
+                                    <div class="data">
+                                        <h5>@lang('site.any_quastions')?</h5>
+                                        <p>@lang('site.if_you_have_any_quastions').</p>
+                                    </div>
+                                    <button class="btn btn-yallow" data-toggle="modal" data-target="#sendMessageModal">@lang('site.contact_seller')</button>
                                 </div>
-                                <button class="btn btn-yallow" data-toggle="modal" data-target="#sendMessageModal">@lang('site.contact_seller')</button>
                             </div>
                         </aside>
                     </div>

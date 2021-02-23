@@ -539,7 +539,13 @@
                                                         <div class="col-md-9">
                                                             <div class="form-group">
                                                                 <select name="basic_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
-                                                                        placeholder="@lang('site.pricing_services_list')" id="basic-pricing-services_list" style="width: 100%;"></select>
+                                                                        placeholder="@lang('site.pricing_services_list')" id="basic-pricing-services_list" style="width: 100%;">
+                                                                    @if($service->basic_services_list && count($service->basic_services_list))
+                                                                        @foreach($service->basic_services_list as $item)
+                                                                            <option selected>{{$item}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
                                                                 <span>@lang('site.service_list_hint')</span>
                                                             </div>
                                                         </div>
@@ -604,7 +610,13 @@
                                                         <div class="col-md-9">
                                                             <div class="form-group">
                                                                 <select name="standard_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
-                                                                        placeholder="@lang('site.pricing_services_list')" id="standard-pricing-services_list" style="width: 100%;"></select>
+                                                                        placeholder="@lang('site.pricing_services_list')" id="standard-pricing-services_list" style="width: 100%;">
+                                                                    @if($service->standard_services_list && count($service->standard_services_list))
+                                                                        @foreach($service->standard_services_list as $item)
+                                                                            <option selected>{{$item}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
                                                                 <span>@lang('site.service_list_hint')</span>
                                                             </div>
                                                         </div>
@@ -670,7 +682,13 @@
                                                         <div class="col-md-9">
                                                             <div class="form-group">
                                                                 <select name="premium_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
-                                                                        placeholder="@lang('site.pricing_services_list')" id="premium-pricing-services_list" style="width: 100%;"></select>
+                                                                        placeholder="@lang('site.pricing_services_list')" id="premium-pricing-services_list" style="width: 100%;">
+                                                                    @if($service->premium_services_list && count($service->premium_services_list))
+                                                                        @foreach($service->premium_services_list as $item)
+                                                                            <option selected>{{$item}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
                                                                 <span>@lang('site.service_list_hint')</span>
                                                             </div>
                                                         </div>
@@ -720,29 +738,81 @@
                                                         <div class="form-group add-title">
                                                             <h3>@lang('site.service_extra')</h3>
                                                         </div>
-
-                                                        <div class="form-row">
-                                                            <div class="col-md-8">
-                                                                <div class="form-group">
-                                                                    <input type="text" id="basic-pricing-title" name="extras[]['title']" class="form-control input_to_count title"
-                                                                           placeholder="@lang('site.pricing_title')"/>
-                                                                    <div class="wizard-form-error"></div>
+                                                        @if($service && count($service->Extras))
+                                                            <div class="form-row">
+                                                                <div class="col-md-8">
+                                                                    <div class="form-group">
+                                                                        <input type="text" id="basic-pricing-title" name="extras_title[]" class="form-control input_to_count title"
+                                                                               placeholder="@lang('site.pricing_title')" value="{{$service->Extras->first()->title}}"/>
+                                                                        <div class="wizard-form-error"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <input type="number" min="0.01" value="{{$service->Extras->first()->price}}" id="basic-pricing-title" name="extras_price[]"
+                                                                               class="form-control input_to_count title" placeholder="@lang('site.pricing_price')"/>
+                                                                        <div class="wizard-form-error"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <button type="button" class="btn btn-add-new-record">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <input type="number" min="0.01" value="0.01" id="basic-pricing-title" name="extras[]['price']"
-                                                                           class="form-control input_to_count title" placeholder="@lang('site.pricing_price')"/>
-                                                                    <div class="wizard-form-error"></div>
+                                                            <div class="extra-template" style="display: none">
+                                                                <div class="form-row">
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group">
+                                                                            <input type="text" id="basic-pricing-title" name="extras_title[]" class="form-control input_to_count title"
+                                                                                   placeholder="@lang('site.pricing_title')"/>
+                                                                            <div class="wizard-form-error"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <input type="number" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
+                                                                                   placeholder="@lang('site.pricing_price')"/>
+                                                                            <div class="wizard-form-error"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                        <button type="button" class="btn btn-remove-record">
+                                                                            <i class="fa fa-times"></i>
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-1">
-                                                                <button type="button" class="btn btn-add-new-record">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
+                                                            <div class="extra-container">
+                                                                @foreach($service->Extras as $key => $value)
+                                                                    @if($key != 0)
+                                                                        <div class="extra-template">
+                                                                            <div class="form-row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="form-group">
+                                                                                        <input type="text" id="basic-pricing-title" name="extras_title[]" class="form-control input_to_count title"
+                                                                                               placeholder="@lang('site.pricing_title')" value="{{$value->title}}"/>
+                                                                                        <div class="wizard-form-error"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <input type="number" value="{{$value->price}}" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
+                                                                                               placeholder="@lang('site.pricing_price')"/>
+                                                                                        <div class="wizard-form-error"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <button type="button" class="btn btn-remove-record">
+                                                                                        <i class="fa fa-times"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
                                                             </div>
-                                                        </div>
-                                                        <div class="extra-template" style="display: none;">
+                                                        @else
                                                             <div class="form-row">
                                                                 <div class="col-md-8">
                                                                     <div class="form-group">
@@ -753,21 +823,44 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
-                                                                        <input type="number" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
-                                                                               placeholder="@lang('site.pricing_price')"/>
+                                                                        <input type="number" min="0.01" value="0.01" id="basic-pricing-title" name="extras_price[]"
+                                                                               class="form-control input_to_count title" placeholder="@lang('site.pricing_price')"/>
                                                                         <div class="wizard-form-error"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-1">
-                                                                    <button type="button" class="btn btn-remove-record">
-                                                                        <i class="fa fa-times"></i>
+                                                                    <button type="button" class="btn btn-add-new-record">
+                                                                        <i class="fa fa-plus"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="extra-container">
+                                                            <div class="extra-template" style="display: none">
+                                                                <div class="form-row">
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group">
+                                                                            <input type="text" id="basic-pricing-title" name="extras_title[]" class="form-control input_to_count title"
+                                                                                   placeholder="@lang('site.pricing_title')"/>
+                                                                            <div class="wizard-form-error"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                            <input type="number" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
+                                                                                   placeholder="@lang('site.pricing_price')"/>
+                                                                            <div class="wizard-form-error"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                        <button type="button" class="btn btn-remove-record">
+                                                                            <i class="fa fa-times"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="extra-container">
 
-                                                        </div>
+                                                            </div>
+                                                        @endif
 
 
                                                         <div class="form-group clearfix">

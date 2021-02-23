@@ -151,18 +151,18 @@
                                             <p class="total-rate"><i class="fas fa-star"></i> {{$service->rating_avg}}</p>
                                         </div>
                                     </div>
-                                    <div class="summbary d-flex">
-                                        @if($service->user->country)
-                                            <div class="info">
-                                                <label>@lang('site.from')</label>
-                                                <p>{{$service->user->country->name}}</p>
-                                            </div>
-                                        @endif
-                                        <div class="info">
-                                            <label>@lang('site.member_since')</label>
-                                            <p>{{\Carbon\Carbon::parse($service->user->created_at)->format('Y-m')}}</p>
-                                        </div>
-                                    </div>
+{{--                                    <div class="summbary d-flex">--}}
+{{--                                        @if($service->user->country)--}}
+{{--                                            <div class="info">--}}
+{{--                                                <label>@lang('site.from')</label>--}}
+{{--                                                <p>{{$service->user->country->name}}</p>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
+{{--                                        <div class="info">--}}
+{{--                                            <label>@lang('site.member_since')</label>--}}
+{{--                                            <p>{{\Carbon\Carbon::parse($service->user->created_at)->format('Y-m')}}</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div class="brief">
                                         {{$service->user->about_me}}
                                     </div>

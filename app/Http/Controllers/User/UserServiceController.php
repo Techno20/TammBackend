@@ -70,6 +70,7 @@ class UserServiceController extends Controller
         }
 
         $Services = $Services->with('Category')->paginate(50);
+
 //        return Helper::responseData('success',true,$Services);
         return view('site.user.dashboard.services')->with('services',$Services);
     }

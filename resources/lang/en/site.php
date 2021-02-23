@@ -143,7 +143,7 @@ return [
     'news' => 'News',
     'privacy_policy' => 'Privacy Policy',
     'terms_of_service' => 'Terms of Service',
-    'more' => 'More',
+    'more' => 'Services',
     'support' => 'Support',
     'help_support' => 'Help Support',
     'trust_safety' => 'Trust & Safety',

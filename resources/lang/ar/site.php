@@ -147,7 +147,7 @@ return [
     'news' => 'الاخبار',
     'privacy_policy' => 'سياسة الخصوصية',
     'terms_of_service' => 'الشروط والاحكام',
-    'more' => 'اخرى',
+    'more' => 'خدمات',
     'support' => 'الدعم الفني',
     'help_support' => 'المساعدة',
     'trust_safety' => 'موثوقية البيانات',

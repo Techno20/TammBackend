@@ -13,7 +13,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6  order-lg-last ">
                 <figure class="wow fadeInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">
-                    <img src="/assets/site/images/how-its-work/main-img.png" class="img-fluid">
+                    <img src="assets/site/images/how-its-work/main-img.png" class="img-fluid">
                    
                 </figure>
             </div>
@@ -26,7 +26,7 @@
                         نحن نساعدك بالوصول السريع لاعمالك
                     </div>
                     <div>
-						<form class="pt-5" action="/contactus" method="POST" enctype="multipart/form-data" id="idContact">@csrf
+						<form class="pt-5" action="{{ url('contactus') }}" method="POST" enctype="multipart/form-data" id="idContact">@csrf
 							<div class="form-group mb-4">
 								{{-- <label for="exampleFormControlInput1">الاسم</label> --}}
 								<input type="text" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا الاسم " name="name">

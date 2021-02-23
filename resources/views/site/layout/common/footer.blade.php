@@ -43,12 +43,13 @@
                             <li><a href="{{ url('how-it-work') }}">@lang('site.how_it_works')</a></li>
                             <li><a href="#">@lang('site.blog')</a></li>
                             <li><a href="{{ url('about-us') }}">@lang('site.about_us')</a></li>
+                            <li><a href="{{ url('contactus') }}">@lang('site.contactus')</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-1-5 col-md-4 col-6">
                     <div class="f-widget">
-                        <h3 class="w-title">@lang('site.about')</h3>
+                        <h3 class="w-title">@lang('site.Policies and terms')</h3>
                         <ul>
                             {{--                            <li><a href="">@lang('site.careers')</a></li>--}}
                             {{--<li><a href="">@lang('site.news')</a></li>--}}

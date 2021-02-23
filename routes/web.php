@@ -100,7 +100,6 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('about-us', [SiteController::class, 'getAboutUs']);
         Route::get('how-it-work', [SiteController::class, 'getHowItWok']);
         Route::get('logout', [SiteController::class, 'getLogout']);
-
     });
     Route::group(['prefix' => 'service'],function(){
         Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);
@@ -122,5 +121,8 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('default', [HelperController::class, 'getDefault']);
         Route::get('lists', [HelperController::class, 'getLists']);
         Route::post('contact-us', [HelperController::class, 'postContactUs']);
+
     });
 });
+
+ Route::resource('/contactus', 'App\Http\Controllers\ContactusController');

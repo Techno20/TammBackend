@@ -16,7 +16,6 @@
                         <!-- freelancer-profile-box -->
                         <div class="freelancer-profile-box">
                             <div class="status-bar d-flex align-items-center">
-
 {{--                                    <span class="status ml-auto">--}}
 {{--                                        <i class="fas fa-circle"></i>--}}
 {{--                                        Online--}}

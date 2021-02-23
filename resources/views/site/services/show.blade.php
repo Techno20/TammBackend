@@ -96,6 +96,19 @@
                                         @endif
                                     </div>
                                 </a>
+                                <div class="serv-author media align-items-center">
+                                    @if(isset($service->user) && !empty($service->user))
+                                        @if(file_exists(asset('uploads/users/'.$service->user->avatar)))
+                                            <img src="{{ asset('uploads/users/'.$service->user->avatar) }}" class="author-img">
+                                        @else
+                                            <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
+                                        @endif
+                                        <div class="media-body">
+                                            <h4>{{ $service->user->name }}</h4>
+{{--                                            <p>Creator</p>--}}
+                                        </div>
+                                    @endif
+                                </div>
                                 <div class="total-meta d-flex align-item-center">
                                     <p class="total-rate"><i class="fas fa-star"></i> {{ $service->rating_avg }}</p>
                                     <p class="total-reviews">1k+ @lang('site.reviews')</p>
@@ -131,6 +144,7 @@
                                 <div class="content">
                                     {!!  $service->description  !!}
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -194,6 +208,36 @@
                                                 <div class="info">
                                                     <i class="far fa-clock"></i>
                                                     <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
+                                                <div class="info">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
+                                                </div>
+                                            </div>
+                                            <?php //$services_list = explode('||',$service->basic_services_list); ?>
+                                            @if(count($service->standard_services_list) > 0)
+                                                <ul class="serv-features">
+                                                    @foreach($service->standard_services_list as $value)
+                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+
+                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="premium-plan" role="tabpanel">
+                                        <div class="plan-details-wrapper">
+                                            <div class="head d-flex align-items-center justify-content-between">
+                                                <h4>{{ $service->premium_title }}</h4>
+                                                <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
+                                            </div>
+                                            <div class="brief">
+                                                <p>{{ $service->premium_description }}</p>
+                                            </div>
+                                            <div class="meta d-flex align-items-center flex-wrap">
+                                                <div class="info">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
                                                 </div>
                                                 {{--                                                <div class="info">--}}
                                                 {{--                                                    <i class="fas fa-sync"></i>--}}

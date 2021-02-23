@@ -96,19 +96,6 @@
                                         @endif
                                     </div>
                                 </a>
-                                <div class="serv-author media align-items-center">
-                                    @if(isset($service->user) && !empty($service->user))
-                                        @if(file_exists(asset('uploads/users/'.$service->user->avatar)))
-                                            <img src="{{ asset('uploads/users/'.$service->user->avatar) }}" class="author-img">
-                                        @else
-                                            <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
-                                        @endif
-                                        <div class="media-body">
-                                            <h4>{{ $service->user->name }}</h4>
-{{--                                            <p>Creator</p>--}}
-                                        </div>
-                                    @endif
-                                </div>
                                 <div class="total-meta d-flex align-item-center">
                                     <p class="total-rate"><i class="fas fa-star"></i> {{ $service->rating_avg }}</p>
                                     <p class="total-reviews">1k+ @lang('site.reviews')</p>

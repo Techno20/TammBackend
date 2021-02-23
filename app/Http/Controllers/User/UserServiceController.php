@@ -13,13 +13,14 @@ use App\Models\OrderExtra;
 use App\Models\User;
 use Helper, Storage;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class UserServiceController extends Controller
 {
 
     /**
      * Get services list
-     * 
+     *
      * @param Request $q
      */
     public function getList(Request $q)
@@ -75,7 +76,7 @@ class UserServiceController extends Controller
 
     /**
      * Get service
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */
@@ -92,15 +93,15 @@ class UserServiceController extends Controller
 
     /**
      * Save service
-     * 
+     *
      * @param mixed $serviceId
      * @param Request $q
      */
     public function Save($serviceId = null,Request $q)
     {
         $validator = validator()->make($q->all(), [
-            'main_category_type' => ['required',new \App\Rules\MainCategoryTypeRule],
-            'category_id' => ['required',new \App\Rules\CategoryRule($q->main_category_type)],
+            'main_category_type' => ['required',Rule::in(['technical','training','consultation'])],
+            'category_id' => ['required', Rule::exists('categories', 'id')],
             'title' => 'required|max:255',
             'is_active' => 'boolean',
             'basic_price' => 'numeric',
@@ -115,11 +116,11 @@ class UserServiceController extends Controller
             'gallery' => 'array'
         ]);
         if($validator->fails()) {
-        return Helper::responseValidationError($validator->messages());
+            return Helper::responseValidationError($validator->messages());
         }
-
+        $serviceId = $q['id'];
         if($serviceId){
-            $Service = Service::where('id',$serviceId)->authorized()->with('Extras')->first();
+            $Service = Service::where('id',$serviceId)->where('user_id', auth()->id())->with('Extras')->first();
         }else {
             $Service = new Service;
             $Service->user_id = auth()->user()->id;
@@ -224,7 +225,7 @@ class UserServiceController extends Controller
 
     /**
      * Delete service
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */
@@ -245,7 +246,7 @@ class UserServiceController extends Controller
 
     /**
      * Activation
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */

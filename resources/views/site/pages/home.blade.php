@@ -97,39 +97,39 @@
                     <div class="top-rated-seller-slider owl-carousel owl-navs-with-header">
                         @foreach($result['top_rated_seller'] as $key => $value)
                             @if($key == 0)
-                            <div class="item item-lg">
-                                <div class="seller-item-2">
-                                    <a href="{{ url('service/show/'.$value->id) }}">
-                                        <figure>
-                                            {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
-                                                {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
-                                            {{--@else--}}
-                                                {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
-                                            {{--@endif--}}
-                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
-                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
-                                            @else
-                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
-                                            @endif
-                                        </figure>
-                                        <div class="details d-flex align-items-center">
-                                            <div class="seller">
-                                                <img src="{{ $value->user->avatar_full_path }}" class="author-img">
-                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                <div class="item item-lg">
+                                    <div class="seller-item-2">
+                                        <a href="{{ url('service/show/'.$value->id) }}">
+                                            <figure>
+                                                {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                    {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                                {{--@else--}}
+                                                    {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                                {{--@endif--}}
+                                                @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                    <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                                @else
+                                                    <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
+                                                @endif
+                                            </figure>
+                                            <div class="details d-flex align-items-center">
+                                                <div class="seller">
+                                                    <img src="{{ $value->user->avatar_full_path }}" class="author-img">
+                                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                </div>
+                                                <div class="content">
+                                                    <h3>{{ $value->user->name }}</h3>
+                                                    <p class="job">{{ $value->title }}</p>
+                                                    <p class="brief">{{ \Str::limit($value->description , 70)}}</p>
+                                                </div>
                                             </div>
-                                            <div class="content">
-                                                <h3>{{ $value->user->name }}</h3>
-                                                <p class="job">{{ $value->title }}</p>
-                                                <p class="brief">{{ \Str::limit($value->description , 70)}}</p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             @else
                             <div class="item">
                                 <div class="seller-item-1">
-                                    <a href="">
+                                    <a href="{{ url('service/show/'.$value->id) }}">
                                         <figure>
                                             {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
                                                 {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}

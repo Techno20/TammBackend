@@ -100,7 +100,7 @@ class UserServiceController extends Controller
     public function Save($serviceId = null,Request $q)
     {
         $validator = validator()->make($q->all(), [
-            'main_category_type' => ['required',Rule::in(['technical','training','consultation'])],
+            'main_category_type' => ['required',Rule::in(['all','technical','training','consultation'])],
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'title' => 'required|max:255',
             'is_active' => 'boolean',
@@ -116,7 +116,7 @@ class UserServiceController extends Controller
             'gallery' => 'array'
         ]);
         if($validator->fails()) {
-            return Helper::responseValidationError($validator->messages());
+            return back()->withInput();
         }
         $serviceId = $q['id'];
         if($serviceId){

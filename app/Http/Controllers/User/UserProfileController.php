@@ -59,7 +59,8 @@ class UserProfileController extends Controller
       $Result['new_favourites'] = UserFavouriteService::where('user_id',auth()->user()->id)->orderBy('created_at','DESC')->take(5)->get();
       $Result['statistics'] = $Statistics;
 
-      return Helper::responseData('success',true,$Result);
+//      return Helper::responseData('success',true,$Result);
+      return view('site.user.dashboard.index')->with('result',$Result);
     }
 
     /**
@@ -77,7 +78,38 @@ class UserProfileController extends Controller
         return $UserSkills->where('user_id',$userId);
       })->selectCard()->get();
       $User->skills = $Skills;
-      return Helper::responseData('success',true,$User);
+//      dd($User->toArray());
+//      return Helper::responseData('success',true,$User);
+        $Services = Service::selectCard()
+            ->where('user_id',$userId)
+            ->with('Category')
+            ->orderBy('id','DESC')
+            ->paginate(6);
+        return view('site.user.profile')->with('user',$User)->with('services',$Services);
+    }
+    /**
+     * Get specific user profile
+     *
+     * @param integer $userId
+     */
+    public function getMyProfile()
+    {
+        $userId = auth()->user()->id;
+        $User = User::where('id',$userId)->with('LastDeliveredOrder')->first();
+        if(!$User){
+            return Helper::responseData('user_not_found',false,false,__('default.error_message.user_not_found'),404);
+        }
+        $Skills = Skill::whereHas('UserSkills',function($UserSkills) use($userId){
+            return $UserSkills->where('user_id',$userId);
+        })->selectCard()->get();
+        $User->skills = $Skills;
+//      return Helper::responseData('success',true,$User);
+        $Services = Service::selectCard()
+            ->where('user_id',auth()->user()->id)
+            ->with('Category')
+            ->orderBy('id','DESC')
+            ->paginate(5);
+        return view('site.user.my_profile')->with('user',$User)->with('services',$Services);
     }
 
     

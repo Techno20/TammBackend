@@ -18,6 +18,11 @@ class ApiLocalization
   {
     // Check header request and determine localizaton
 //    $local = ($request->hasHeader('X-localization')) ? $request->header('X-localization') : config('app.locale');
+//      if(isset($_GET['testing']) && !empty($_GET['testing']) && $_GET['testing'] == 'true'){
+//
+//      }else{
+//        echo '<center>جاري رفع نسخة جديدة , الرجاء الانتظار</center>';die();
+//      }
     $local = config('app.locale');
     if(session()->get('locale')){
         $local = session()->get('locale');

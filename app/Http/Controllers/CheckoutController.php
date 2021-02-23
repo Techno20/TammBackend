@@ -12,6 +12,7 @@ use App\Models\Order;
 use App\Models\OrderExtra;
 use App\Models\Setting;
 use Helper;
+use Illuminate\Support\Facades\Redirect;
 
 class CheckoutController extends Controller
 {
@@ -52,7 +53,8 @@ class CheckoutController extends Controller
             'service' => $Service,
             'order_summary' => $OrderSummary
         ];
-        return Helper::responseData('success',true,$Result);
+//        return Helper::responseData('success',true,$Result);
+        return view('site.user.order.create')->with('result',$Result);
     }
 
     /**

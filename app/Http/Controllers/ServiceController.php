@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\HowWeWork;
+use App\Models\Say;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -107,7 +109,7 @@ class ServiceController extends Controller
             $Services = $Services->orderBy('id','DESC');
         }
 
-        $Services = $Services->paginate(20);
+        $Services = $Services->where('is_approved',1)->paginate(20);
 
 
 //        return Helper::responseData('success',true,$Services);
@@ -161,9 +163,24 @@ class ServiceController extends Controller
         $topRatedServices = Service::selectCard()->orderByTopRated()->take(32)->get();
         $result['top_rated_services'] = $topRatedServices;
 
+        // Top Rated seller
+//        $topRatedSeller = Service::selectCard()->orderByTopRated()->groupBy('user_id')->take(32)->get();
+        $topRatedSeller = Service::selectCard()->orderByTopRated()->take(32)->get();
+        $result['top_rated_seller'] = $topRatedSeller;
+
         // Top Selling Services
         $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
+
+        // Top Selling Services
+        $categories = Category::selectCard()->take(32)->get();
+        $result['categories'] = $categories;
+
+        $says = Say::where('status',1)->where('lang',app()->getLocale())->limit(5)->get();
+        $result['says'] = $says;
+
+        $how_we_work = HowWeWork::where('status',1)->where('lang',app()->getLocale())->limit(3)->get();
+        $result['how_we_work'] = $how_we_work;
 
         return view('site.pages.home')->with('result',$result);
 //        return Helper::responseData('success',true,$result);

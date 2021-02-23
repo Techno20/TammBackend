@@ -41,6 +41,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         });
         Route::get('profile/{user_id}', [UserProfileController::class, 'getProfile']);
         Route::get('dashboard', [UserProfileController::class, 'getDashboard']);
+        Route::get('profile', [UserProfileController::class, 'getMyProfile']);
 
         Route::group(['middleware' => 'auth'],function(){
             Route::get('me', [AuthController::class, 'getMe']);
@@ -53,10 +54,14 @@ Route::group(['middleware' => 'api-localization'],function(){
             Route::group(['prefix' => 'service'],function(){
                 Route::get('list', [UserServiceController::class, 'getList']);
                 Route::get('show/{service_id}', [UserServiceController::class, 'getShow']);
+                Route::get('add/{id?}', [UserServiceController::class, 'getForm']);
                 Route::post('add', [UserServiceController::class, 'Save']);
                 Route::post('edit/{service_id}', [UserServiceController::class, 'Save']);
                 Route::post('activation/{service_id}', [UserServiceController::class, 'postActivation']);
                 Route::delete('delete/{service_id}', [UserServiceController::class, 'Delete']);
+                Route::get('pricing', [UserServiceController::class, 'getPricing']);
+                Route::get('description', [UserServiceController::class, 'getDescription']);
+//                Route::get('description', [UserServiceController::class, 'getDescription']);
             });
 
             Route::group(['prefix' => 'order'],function(){
@@ -89,6 +94,13 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('/', [ServiceController::class, 'getHomeData']);
         Route::get('home', [ServiceController::class, 'getHomeData']);
         Route::get('lang/{lang}', [SiteController::class, 'changeLanguage']);
+
+        Route::get('search', [SiteController::class, 'getSearch']);
+
+        Route::get('about-us', [SiteController::class, 'getAboutUs']);
+        Route::get('how-it-work', [SiteController::class, 'getHowItWok']);
+        Route::get('logout', [SiteController::class, 'getLogout']);
+
     });
     Route::group(['prefix' => 'service'],function(){
         Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);

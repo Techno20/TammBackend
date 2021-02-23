@@ -9,7 +9,7 @@
         <nav class="cs-breadcrumb" aria-label="breadcrumb">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ url('/') }}"><span>Tamm</span>
+                    <li class="breadcrumb-item"><a href="{{ url('/') }}"><span>@lang('site.tamm')</span>
                             <i class="fas fa-chevron-right"></i></a></li>
                     @if(isset($result['category']) && !empty($result['category']))
                     <li class="breadcrumb-item active" aria-current="page">
@@ -44,69 +44,69 @@
                 </header>
                 <div class="sec-content">
                     <!-- p-filter-1 -->
-                    <div class="p-filter-1 d-flex align-items-center flex-wrap">
-                        <div class="search-input">
-                            <input type="text" class="form-control" name="" placeholder="Find Services">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <div class="cs-dropdown-select dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Service Options
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Service 1</a>
-                                <a class="dropdown-item" href="#">Service 2</a>
-                                <a class="dropdown-item" href="#">Service 3</a>
-                            </div>
-                        </div>
-                        <div class="cs-dropdown-select dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Seller Details
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Seller 1</a>
-                                <a class="dropdown-item" href="#">Seller 2</a>
-                                <a class="dropdown-item" href="#">Seller 3</a>
-                            </div>
-                        </div>
-                        <div class="cs-dropdown-select dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Budget
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Budget 1</a>
-                                <a class="dropdown-item" href="#">Budget 2</a>
-                                <a class="dropdown-item" href="#">Budget 3</a>
-                            </div>
-                        </div>
-                        <div class="cs-dropdown-select dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Delivery Time
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Delivery Time 1</a>
-                                <a class="dropdown-item" href="#">Delivery Time 2</a>
-                                <a class="dropdown-item" href="#">Delivery Time 3</a>
-                            </div>
-                        </div>
-                        <div class="cs-switch ml-auto">
-                            <div class="custom-control custom-switch yallow">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Pro Services</label>
-                            </div>
-                        </div>
-                        <div class="cs-switch">
-                            <div class="custom-control custom-switch yallow">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                <label class="custom-control-label" for="customSwitch2">Online Sellers</label>
-                            </div>
-                        </div>
+                    {{--<div class="p-filter-1 d-flex align-items-center flex-wrap">--}}
+                        {{--<div class="search-input">--}}
+                            {{--<input type="text" class="form-control" name="" placeholder="Find Services">--}}
+                            {{--<i class="fas fa-search"></i>--}}
+                        {{--</div>--}}
+                        {{--<div class="cs-dropdown-select dropdown">--}}
+                            {{--<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                                {{--Service Options--}}
+                                {{--<i class="fas fa-chevron-down"></i>--}}
+                            {{--</button>--}}
+                            {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                                {{--<a class="dropdown-item" href="#">Service 1</a>--}}
+                                {{--<a class="dropdown-item" href="#">Service 2</a>--}}
+                                {{--<a class="dropdown-item" href="#">Service 3</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="cs-dropdown-select dropdown">--}}
+                            {{--<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                                {{--Seller Details--}}
+                                {{--<i class="fas fa-chevron-down"></i>--}}
+                            {{--</button>--}}
+                            {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                                {{--<a class="dropdown-item" href="#">Seller 1</a>--}}
+                                {{--<a class="dropdown-item" href="#">Seller 2</a>--}}
+                                {{--<a class="dropdown-item" href="#">Seller 3</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="cs-dropdown-select dropdown">--}}
+                            {{--<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                                {{--Budget--}}
+                                {{--<i class="fas fa-chevron-down"></i>--}}
+                            {{--</button>--}}
+                            {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                                {{--<a class="dropdown-item" href="#">Budget 1</a>--}}
+                                {{--<a class="dropdown-item" href="#">Budget 2</a>--}}
+                                {{--<a class="dropdown-item" href="#">Budget 3</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="cs-dropdown-select dropdown">--}}
+                            {{--<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                                {{--Delivery Time--}}
+                                {{--<i class="fas fa-chevron-down"></i>--}}
+                            {{--</button>--}}
+                            {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                                {{--<a class="dropdown-item" href="#">Delivery Time 1</a>--}}
+                                {{--<a class="dropdown-item" href="#">Delivery Time 2</a>--}}
+                                {{--<a class="dropdown-item" href="#">Delivery Time 3</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="cs-switch ml-auto">--}}
+                            {{--<div class="custom-control custom-switch yallow">--}}
+                                {{--<input type="checkbox" class="custom-control-input" id="customSwitch1">--}}
+                                {{--<label class="custom-control-label" for="customSwitch1">Pro Services</label>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="cs-switch">--}}
+                            {{--<div class="custom-control custom-switch yallow">--}}
+                                {{--<input type="checkbox" class="custom-control-input" id="customSwitch2">--}}
+                                {{--<label class="custom-control-label" for="customSwitch2">Online Sellers</label>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                    </div>
+                    {{--</div>--}}
                     <!-- p-filter-1 -->
 
                     <!-- services -->
@@ -119,28 +119,10 @@
                                             <div class="service-item-slider owl-carousel">
                                                 <div class="item">
                                                     <a href="{{ url('service/show/'.$value->id) }}">
-                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                            <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                                         @else
-                                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
-                                                        @endif
-                                                    </a>
-                                                </div>
-                                                <div class="item">
-                                                    <a href="{{ url('service/show/'.$value->id) }}">
-                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
-                                                        @else
-                                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
-                                                        @endif
-                                                    </a>
-                                                </div>
-                                                <div class="item">
-                                                    <a href="{{ url('service/show/'.$value->id) }}">
-                                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                            <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
-                                                        @else
-                                                            <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                                            <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                                         @endif
                                                     </a>
                                                 </div>
@@ -153,11 +135,11 @@
                                                     @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
                                                         <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
                                                     @else
-                                                        <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
+                                                        <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                     @endif
                                                     <div class="media-body">
                                                         <h4>{{ $value->user->name }}</h4>
-                                                        <p>Creator</p>
+{{--                                                        <p>Creator</p>--}}
                                                     </div>
                                                 @endif
                                             </div>

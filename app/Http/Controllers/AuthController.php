@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth, Helper;
 use App\Models\User;
@@ -61,8 +62,8 @@ class AuthController extends Controller
 
     $token = $this->guard()->attempt(['email' => $q->email,'password' => $q->password]);
 
-    \Mail::to($User->email)->send(new \App\Mail\UserRegisterWelcomeMail($User));
-    return Helper::responseData('user_created',true,['token' => $token,'expires_in' => (auth()->factory()->getTTL() * 60),'user' => auth()->user()],__('default.success_message.user_registered'));
+//    \Mail::to($User->email)->send(new \App\Mail\UserRegisterWelcomeMail($User));
+    return Helper::responseData('user_created',true,['token' => $token,'expires_in' => (auth('api')->factory()->getTTL() * 60),'user' => auth()->user()],__('default.success_message.user_registered'));
   }
 
   /**
@@ -95,7 +96,7 @@ class AuthController extends Controller
       return Helper::responseData('login_failed',false,false,__('auth.failed'));
     }
     $User = auth()->user();
-    return Helper::responseData('logged_in',true,['token' => $token,'expires_in' => (auth()->factory()->getTTL() * 60),'user' => auth()->user()],__('auth.logged_in'));
+    return Helper::responseData('logged_in',true,['token' => $token,'expires_in' => (auth('api')->factory()->getTTL() * 60),'user' => auth()->user()],__('auth.logged_in'));
   }
 
 
@@ -109,7 +110,8 @@ class AuthController extends Controller
       $User = $User->makeVisible(['is_admin_permissions']);
     }
     if ($User) {
-      return Helper::responseData('success',true,['user' => $User]);
+        return view('site.user.account');
+//      return Helper::responseData('success',true,['user' => $User]);
     }else {
       return Helper::responseData('user_not_found',false);
     }
@@ -123,7 +125,7 @@ class AuthController extends Controller
   {
     try {
       if (auth()->user()) {
-        return Helper::responseData('token_refreshed',true,['token' => auth()->refresh(),'expires_in' => auth()->factory()->getTTL() * 60]);
+        return Helper::responseData('token_refreshed',true,['token' => auth()->refresh(),'expires_in' => auth('api')->factory()->getTTL() * 60]);
       }else {
         return Helper::responseData('token_failed',false);
       }
@@ -140,9 +142,12 @@ class AuthController extends Controller
   public function getLogout(Request $q) {
     if(auth()->user()){
       auth()->logout();
-      return Helper::responseData('logged_out',true,false,__('auth.logged_out'));
+//      return Helper::responseData('logged_out',true,false,__('auth.logged_out'));
+//        return Redirect::back();
+        return Redirect::to('/');
     }else {
-      return Helper::responseData('logout_failed',false);
+//      return Helper::responseData('logout_failed',false);
+        return Redirect::back();
     }
   }
 
@@ -241,7 +246,7 @@ class AuthController extends Controller
       $User->password_reset_code = null;
       $User->save();
       $token = $this->guard()->attempt(['email' => $q->email,'password' => $q->password]);
-      return Helper::responseData('success',true,['token' => $token,'expires_in' => (auth()->factory()->getTTL() * 60),'user' => auth()->user()]);
+      return Helper::responseData('success',true,['token' => $token,'expires_in' => (auth('api')->factory()->getTTL() * 60),'user' => auth()->user()]);
     }else {
       return Helper::responseData('invalid_code',false,false,__('auth.password_reset.invalid_code'));
     }

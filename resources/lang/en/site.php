@@ -207,4 +207,9 @@ return [
     'text_file_details' => 'File Details',
     'text_click_to_browse' => 'Or Click To Browse',
 
+    'extras' => 'Extras',
+    'submit' => 'Submit',
+    'payment_gateway' => 'Payment Gateway',
+    'payment_cash' => 'Cash',
+
 ];

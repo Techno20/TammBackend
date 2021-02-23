@@ -569,7 +569,7 @@
                                                         </div>
                                                         <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <input type="number" min="0.01" value="{{ ($service && $service->basic_price) ? $service->basic_price : '0.01' }}"
+                                                                <input type="number" min="0.01" value="{{ ($service && $service->basic_price) ? $service->basic_price : '1' }}"
                                                                        id="basic-pricing-price" name="basic_price" class="form-control input_to_count title wizard-required"
                                                                        placeholder="@lang('site.pricing_price')"/>
                                                                 <div class="wizard-form-error"></div>
@@ -610,7 +610,7 @@
                                                             <div class="form-group">
                                                                 <select name="basic_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
                                                                         placeholder="@lang('site.pricing_services_list')" id="basic-pricing-services_list" style="width: 100%;">
-                                                                    @if($service->basic_services_list && count($service->basic_services_list))
+                                                                    @if($service && $service->basic_services_list && count($service->basic_services_list))
                                                                         @foreach($service->basic_services_list as $item)
                                                                             <option selected>{{$item}}</option>
                                                                         @endforeach
@@ -643,7 +643,7 @@
                                                         </div>
                                                         <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <input type="number" min="0.01" value="{{ ($service && $service->standard_price) ? $service->standard_price : '0.01' }}" id="standard-pricing-price" name="standard_price"
+                                                                <input type="number" min="0.01" value="{{ ($service && $service->standard_price) ? $service->standard_price : '1' }}" id="standard-pricing-price" name="standard_price"
                                                                        class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')"/>
                                                                 <div class="wizard-form-error"></div>
                                                             </div>
@@ -681,7 +681,7 @@
                                                             <div class="form-group">
                                                                 <select name="standard_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
                                                                         placeholder="@lang('site.pricing_services_list')" id="standard-pricing-services_list" style="width: 100%;">
-                                                                    @if($service->standard_services_list && count($service->standard_services_list))
+                                                                    @if($service && $service->standard_services_list && count($service->standard_services_list))
                                                                         @foreach($service->standard_services_list as $item)
                                                                             <option selected>{{$item}}</option>
                                                                         @endforeach
@@ -715,7 +715,7 @@
                                                         </div>
                                                         <div class="col-md-9">
                                                             <div class="form-group">
-                                                                <input type="number" min="0.01" value="{{ ($service && $service->premium_price) ? $service->premium_price : '0.01' }}" id="premium-pricing-price" name="premium_price"
+                                                                <input type="number" min="0.01" value="{{ ($service && $service->premium_price) ? $service->premium_price : '1' }}" id="premium-pricing-price" name="premium_price"
                                                                        class="form-control input_to_count title wizard-required" placeholder="@lang('site.pricing_price')"/>
                                                                 <div class="wizard-form-error"></div>
                                                             </div>
@@ -753,7 +753,7 @@
                                                             <div class="form-group">
                                                                 <select name="premium_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
                                                                         placeholder="@lang('site.pricing_services_list')" id="premium-pricing-services_list" style="width: 100%;">
-                                                                    @if($service->premium_services_list && count($service->premium_services_list))
+                                                                    @if($service && $service->premium_services_list && count($service->premium_services_list))
                                                                         @foreach($service->premium_services_list as $item)
                                                                             <option selected>{{$item}}</option>
                                                                         @endforeach
@@ -841,7 +841,7 @@
                                                                     </div>
                                                                     <div class="col-md-3">
                                                                         <div class="form-group">
-                                                                            <input type="number" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
+                                                                            <input type="number" value="1" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
                                                                                    placeholder="@lang('site.pricing_price')"/>
                                                                             <div class="wizard-form-error"></div>
                                                                         </div>
@@ -893,7 +893,7 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
-                                                                        <input type="number" min="0.01" value="0.01" id="basic-pricing-title" name="extras_price[]"
+                                                                        <input type="number" min="0.01" value="1" id="basic-pricing-title" name="extras_price[]"
                                                                                class="form-control input_to_count title" placeholder="@lang('site.pricing_price')"/>
                                                                         <div class="wizard-form-error"></div>
                                                                     </div>
@@ -915,7 +915,7 @@
                                                                     </div>
                                                                     <div class="col-md-3">
                                                                         <div class="form-group">
-                                                                            <input type="number" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
+                                                                            <input type="number" value="1" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title"
                                                                                    placeholder="@lang('site.pricing_price')"/>
                                                                             <div class="wizard-form-error"></div>
                                                                         </div>

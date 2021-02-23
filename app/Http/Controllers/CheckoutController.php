@@ -19,7 +19,7 @@ class CheckoutController extends Controller
 
     /**
      * Get order details
-     * 
+     *
      * @param Request $q
      */
     public function getOrderDetails(Request $q)
@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         if($validator->fails()) {
             return Helper::responseValidationError($validator->messages());
         }
-        $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic'; 
+        $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic';
         $Service = Service::where('id',$q->service_id)->select('*')->selectRatingAverage();
         $Service = $Service->with(['Image','Category','User'])->withCount('Reviews');
         if(auth()->user() && !auth()->user()->is_admin){
@@ -59,15 +59,15 @@ class CheckoutController extends Controller
 
     /**
      * Send order
-     * 
+     *
      * @param Request $q
      */
     public function postSendOrder(Request $q)
     {
         $validator = validator()->make(request()->all(), [
             'service_id' => 'required',
-            'extra_services' => 'array',
-            'attachments' => 'array',
+            'extra_services' => 'nullable|array',
+            'attachments' => 'nullable|array',
             'package' => 'required'
         ]);
         if($validator->fails()) {
@@ -77,13 +77,12 @@ class CheckoutController extends Controller
         if(!$Service) {
             return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
         }
-
         $paidTotal = 0;
-        
+
         // Subtract package price
-        $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic'; 
+        $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic';
         $paidTotal += $Service->{$Package.'_price'};
-        
+
         // Subtract extra services prices
         if(is_array($q->extra_services) && count($q->extra_services)){
             $insertOrderExtraServices = [];

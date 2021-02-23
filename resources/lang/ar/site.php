@@ -206,4 +206,9 @@ return [
     'text_file_details' => 'تفاصيل الملف',
     'text_click_to_browse' => 'أو اضغط هنا للاستعراض',
 
+    'extras' => 'الخدمات الاضافية',
+    'submit' => 'إرسال',
+    'payment_gateway' => 'دفع الكتروني',
+    'payment_cash' => 'دفع كاش',
+
 ];

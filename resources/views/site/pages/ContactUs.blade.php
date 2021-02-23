@@ -14,7 +14,7 @@
             <div class="col-lg-6  order-lg-last ">
                 <figure class="wow fadeInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">
                     <img src="/assets/site/images/how-its-work/main-img.png" class="img-fluid">
-                   
+
                 </figure>
             </div>
             <div class="col-lg-6">

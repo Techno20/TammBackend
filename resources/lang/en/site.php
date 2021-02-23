@@ -191,6 +191,11 @@ return [
     'your_dream_it' => 'Your Dream It. We Build It',
     'work_with_the_best_freelance' => 'Work with the best freelance talent from around the world on our secure,flexible and cost-effective platform.',
     'more_services' => 'More Services By',
+<<<<<<< HEAD
+    'Policies and terms' => 'Policies and terms',
+    'contactus' => 'contactus',
+=======
     'member_since' => 'Member Since',
+>>>>>>> 56727c7caa7d708ddf7af035feb0e5fb6bffa58f
 
 ];

@@ -1613,7 +1613,7 @@ a:hover{
 .f-widget{}
 .f-widget .w-title{
     font-family: var(--font700);
-    font-size: 28px;
+    font-size: 20px;
     color: var(--mainColor);
     margin-bottom: 15px;
 }

@@ -141,6 +141,8 @@ return [
     'if_you_have_any_quastions' => 'اذا كان لديك اي سؤال او استفسار',
 
     'about' => 'من نحن',
+    'Policies and terms' => 'السياسات والشروط',
+    'contactus' => 'اتصل بنا',
     'careers' => 'التوظيف',
     'news' => 'الاخبار',
     'privacy_policy' => 'سياسة الخصوصية',

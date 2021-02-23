@@ -17,7 +17,7 @@ class UserProfileController extends Controller
 {
     /**
      * Get user dashboard
-     * 
+     *
      */
     public function getDashboard()
     {
@@ -65,7 +65,7 @@ class UserProfileController extends Controller
 
     /**
      * Get specific user profile
-     * 
+     *
      * @param integer $userId
      */
     public function getProfile($userId)
@@ -112,6 +112,6 @@ class UserProfileController extends Controller
         return view('site.user.my_profile')->with('user',$User)->with('services',$Services);
     }
 
-    
+
 
 }

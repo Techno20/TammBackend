@@ -73,7 +73,7 @@
         <h3>@lang('site.need_help')</h3>
         <p>@lang('site.need_help_text').</p>
         <div class="actions">
-            <a href="{{ url('contact') }}" class="btn btn-yallow">@lang('site.contact_seller')</a>
+            <a href="{{ url('contactus') }}" class="btn btn-yallow">@lang('site.contact_seller')</a>
         </div>
     </div>
 </aside>

@@ -73,7 +73,11 @@
                         <tr>
                             <td>
                                 <div class="media align-items-center">
-                                    <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
+                                    @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                        <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                    @else
+                                        <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
+                                    @endif
                                     <div class="media-body">
                                         <h3>{{ $value->title }}</h3>
                                     </div>

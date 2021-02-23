@@ -138,7 +138,7 @@
                                                         <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                     @endif
                                                     <div class="media-body">
-                                                        <h4>{{ $value->user->name }}</h4>
+                                                      <a href="{{$value->user ? url('user/profile/'.$value->user->id) : ''}}">  <h4>{{ $value->user->name }}</h4> </a>
 {{--                                                        <p>Creator</p>--}}
                                                     </div>
                                                 @endif

@@ -322,7 +322,7 @@
                 <div class="row no-gutters">
                     <div class="col-lg-12 col-md-12">
                         <div class="form-wizard">
-                            <form action="{{ url('user/service/add') }}" method="post" role="form" enctype="multipart/form-data">
+                            <form action="{{ url('user/service/add') }}" method="post" role="form" enctype="multipart/form-data" novalidate>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="id" value="{{ $service ? $service->id : '' }}">
                                 <div class="form-wizard-header">
@@ -726,7 +726,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <input type="number" min="0.01" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title" placeholder="@lang('site.pricing_price')" />
+                                                    <input type="number" value="0.01" id="basic-pricing-title" name="extras_price[]" class="form-control input_to_count title" placeholder="@lang('site.pricing_price')" />
                                                     <div class="wizard-form-error"></div>
                                                 </div>
                                             </div>

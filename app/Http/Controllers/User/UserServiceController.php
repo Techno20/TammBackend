@@ -152,10 +152,10 @@ class UserServiceController extends Controller
 
         // Save gallery images and videos
         if(is_array($q->gallery) && count($q->gallery)){
-            if($serviceId){
-                // Delete previous records
-                ServiceGallery::where('service_id',$Service->id)->delete();
-            }
+//            if($serviceId){
+//                // Delete previous records
+//                ServiceGallery::where('service_id',$Service->id)->delete();
+//            }
 
             $galleryItems = [];
             foreach($q->gallery as $galleryItem){

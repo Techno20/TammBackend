@@ -196,4 +196,14 @@ return [
     'more_services' => 'خدمات اخرى من',
     'member_since' => 'منضم من',
 
+    'text_browse'  => 'استعراض',
+    'text_delete'  => 'حذف',
+    'text_select_files' => 'اختر',
+    'text_selected' => 'تم اختيار',
+    'text_one_files' => 'ملف',
+    'text_multi_files' => 'ملفات',
+    'text_drag_drop_files_here' => 'اسحب الملفات وإسقطها هنا',
+    'text_file_details' => 'تفاصيل الملف',
+    'text_click_to_browse' => 'أو اضغط هنا للاستعراض',
+
 ];

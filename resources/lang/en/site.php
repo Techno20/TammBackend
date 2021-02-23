@@ -195,4 +195,16 @@ return [
     'contactus' => 'contactus',
     'member_since' => 'Member Since',
 
+    //------------------------------------FileInput
+
+    'text_browse'  => 'Browse',
+    'text_delete'  => 'Delete',
+    'text_select_files' => 'Select',
+    'text_selected' => 'Selected',
+    'text_one_files' => 'File',
+    'text_multi_files' => 'Files',
+    'text_drag_drop_files_here' => 'Drag files and drop them here',
+    'text_file_details' => 'File Details',
+    'text_click_to_browse' => 'Or Click To Browse',
+
 ];

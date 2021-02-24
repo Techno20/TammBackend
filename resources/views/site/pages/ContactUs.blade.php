@@ -48,8 +48,4 @@
         </div>
     </div>
 </section>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec

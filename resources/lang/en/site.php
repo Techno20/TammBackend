@@ -143,11 +143,7 @@ return [
     'news' => 'News',
     'privacy_policy' => 'Privacy Policy',
     'terms_of_service' => 'Terms of Service',
-<<<<<<< HEAD
-    'more' => 'More',
-=======
     'more' => 'Services',
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     'support' => 'Support',
     'help_support' => 'Help Support',
     'trust_safety' => 'Trust & Safety',
@@ -179,11 +175,7 @@ return [
     'submit_requirements' => 'Submit Requirements',
 
     'customize_your_package' => 'Customize Your Package',
-<<<<<<< HEAD
 'total_reviews' => 'reviews',
-=======
-
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     'add_extras' => 'Add Extras',
     'add_extras_text' => 'Add extra services for your order to get a best goal',
 
@@ -201,8 +193,6 @@ return [
     'more_services' => 'More Services By',
     'Policies and terms' => 'Policies and terms',
     'contactus' => 'contactus',
-<<<<<<< HEAD
-=======
     'member_since' => 'Member Since',
 
     //------------------------------------FileInput
@@ -235,6 +225,5 @@ return [
     'All_Conversations'=>'كل المحادثات',
 
 
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 
 ];

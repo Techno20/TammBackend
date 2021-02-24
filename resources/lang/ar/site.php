@@ -147,11 +147,7 @@ return [
     'news' => 'الاخبار',
     'privacy_policy' => 'سياسة الخصوصية',
     'terms_of_service' => 'الشروط والاحكام',
-<<<<<<< HEAD
-    'more' => 'اخرى',
-=======
     'more' => 'خدمات',
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     'support' => 'الدعم الفني',
     'help_support' => 'المساعدة',
     'trust_safety' => 'موثوقية البيانات',
@@ -183,11 +179,7 @@ return [
     'submit_requirements' => 'اكتب متطلباتك',
 
     'customize_your_package' => 'رتب باقتك',
-<<<<<<< HEAD
     'total_reviews' => 'تقيم',
-=======
-
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     'add_extras' => 'اضف الخدمات الاضافية',
     'add_extras_text' => 'لتحقيق افضل نتيجة من الخدمة اختر الخدمات الاضافية المناسبة',
 
@@ -204,8 +196,6 @@ return [
     'more_services' => 'خدمات اخرى من',
     'member_since' => 'منضم من',
 
-<<<<<<< HEAD
-=======
     'text_browse'  => 'استعراض',
     'text_delete'  => 'حذف',
     'text_select_files' => 'اختر',
@@ -234,5 +224,4 @@ return [
    
     
 
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 ];

@@ -3,11 +3,7 @@
     <div class="f-top">
         <div class="container">
             <div class="row">
-<<<<<<< HEAD
                 <div class="col-lg-2-5 col-md-4 col-12">
-=======
-                <div class="col-lg-2-5 col-md-4 col-6">
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                     <div class="f-widget">
                         <h3 class="w-title">@lang('site.categories')</h3>
                         <ul class="footer-ul-two-col">
@@ -28,11 +24,7 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
                 {{--<div class="col-lg-1-5 col-md-4 col-12">--}}
-=======
-                {{--<div class="col-lg-1-5 col-md-4 col-6">--}}
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                     {{--<div class="f-widget">--}}
                         {{--<h3 class="w-title">@lang('site.support')</h3>--}}
                         {{--<ul>--}}
@@ -43,11 +35,7 @@
                         {{--</ul>--}}
                     {{--</div>--}}
                 {{--</div>--}}
-<<<<<<< HEAD
                 <div class="col-lg-1-5 col-md-4 col-12">
-=======
-                <div class="col-lg-1-5 col-md-4 col-6">
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                     <div class="f-widget">
                         <h3 class="w-title">@lang('site.tamm')</h3>
                         <ul>
@@ -78,11 +66,7 @@
         <div class="container">
             <div class="wrapper d-flex align-items-center justify-content-between">
                 <div class="content d-flex align-items-center">
-<<<<<<< HEAD
                     <a href="/" class="f-logo">
-=======
-                    <a href="" class="f-logo">
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                         @if(app()->getLocale() == 'ar')
                             <img src="{{ asset('assets/shared/img/logo.svg') }}" alt="logo">
                         @else

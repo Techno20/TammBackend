@@ -119,11 +119,7 @@
                                             <div class="service-item-slider owl-carousel">
                                             <a href="{{ url('service/show/'.$value->id) }}">
                                                 <div class="item">
-<<<<<<< HEAD
-                                                    
-=======
                                                     <a href="{{ url('service/show/'.$value->id) }}">
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                                                         @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
                                                             <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                                         @else
@@ -144,11 +140,7 @@
                                                         <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                     @endif
                                                     <div class="media-body">
-<<<<<<< HEAD
-                                                        <h4>{{ $value->user->name }}</h4>
-=======
                                                       <a href="{{$value->user ? url('user/profile/'.$value->user->id) : ''}}">  <h4>{{ $value->user->name }}</h4> </a>
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 {{--                                                        <p>Creator</p>--}}
                                                     </div>
                                                 @endif

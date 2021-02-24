@@ -91,11 +91,8 @@
 @endsection
 
 @section('js')
-<<<<<<< HEAD
-=======
     <script src="{{ asset('assets/site/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('assets/site/js/theme.min.js') }}"></script>
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     <script>
         $(document).ready(function () {
             if ($('select.nice-select-me').length != 0) {

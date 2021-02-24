@@ -179,7 +179,7 @@ return [
     'submit_requirements' => 'اكتب متطلباتك',
 
     'customize_your_package' => 'رتب باقتك',
-
+    'total_reviews' => 'تقيم',
     'add_extras' => 'اضف الخدمات الاضافية',
     'add_extras_text' => 'لتحقيق افضل نتيجة من الخدمة اختر الخدمات الاضافية المناسبة',
 
@@ -221,6 +221,10 @@ return [
     
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
+
+
+    'Earned'=>'الارباح',
+    
    
     
 

@@ -457,8 +457,10 @@
                                         <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
                                     </div>
                                 </div>
+
                             </form>
-                        </div>
+                        </div>                     
+
                     </div>
                 </div>
             </div>

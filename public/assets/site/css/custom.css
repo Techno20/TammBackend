@@ -41,17 +41,29 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
-.pagination svg{
+.pagination svg {
     width: 36px;
 }
-.pagination .leading-5{
+
+.pagination .leading-5 {
     padding-top: 15px;
+    border-radius: 30px;
 }
 
-.pagination nav{
+.pagination nav {
     margin: 15px auto 15px auto !important;
 }
 
-.freelancer-info-box .education{
+.freelancer-info-box .education {
     border-bottom: 0;
+}
+
+@media (max-width: 990px) {
+    .footer-ul-two-col {
+        display: block;
+    }
+
+    .main-categories-slider .owl-stage {
+        width: 400px !important;
+    }
 }

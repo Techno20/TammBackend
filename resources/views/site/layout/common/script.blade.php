@@ -149,5 +149,9 @@
         $('body').on('click keyup keydown change','.input_to_count_3',function (){
             $('.input_text_count_2').text(this.value.length);
         });
+
+        @if(session()->has('have_to_login') && session('have_to_login'))
+            $('.btn.btn-white.sign-in').trigger('click');
+        @endif
     });
 </script>

@@ -175,7 +175,7 @@ return [
     'submit_requirements' => 'Submit Requirements',
 
     'customize_your_package' => 'Customize Your Package',
-
+'total_reviews' => 'reviews',
     'add_extras' => 'Add Extras',
     'add_extras_text' => 'Add extra services for your order to get a best goal',
 
@@ -224,6 +224,6 @@ return [
     'Messages'=> 'Messages',
     'All_Conversations'=>'كل المحادثات',
 
-
+    'Earned'=>'الارباح',
 
 ];

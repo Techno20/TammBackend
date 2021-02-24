@@ -94,7 +94,7 @@ class CheckoutController extends Controller
                     $paidTotal += $getExtraService->price;
                     $insertOrderExtraServices[] = [
                         'order_id' => $getExtraService->service_id,
-                        'service_id' => $getExtraService->service_id,
+//                        'service_id' => $getExtraService->service_id,
                         'services_extra_id' => $getExtraService->id,
                         'pay_total' => $getExtraService->price
                     ];

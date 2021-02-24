@@ -45,7 +45,7 @@
                         <h3>@lang('site.improve_your_success_title')</h3>
                         <p>@lang('site.improve_your_success_text').</p>
                         <div class="actions">
-                            <a href="" class="btn btn-yallow">@lang('site.read_more')</a>
+                            <a href="https://tamm.work/blog" class="btn btn-yallow">@lang('site.read_more')</a>
                         </div>
                     </div>
                     <figure>

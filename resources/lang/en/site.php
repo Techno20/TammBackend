@@ -220,6 +220,7 @@ return [
     'budget' => 'budget',
     'Write_your_message' => 'Write your message',
     'send' => 'send',
+    'country' => 'Country',
 
     'Messages'=> 'Messages',
     'All_Conversations'=>'كل المحادثات',

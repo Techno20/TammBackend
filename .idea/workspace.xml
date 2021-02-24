@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09f0a48f-c721-4979-a4eb-ca8005cb9a9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Business.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Design.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Marketing.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Musics.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Programming.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Translation.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/images/Videos.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/User/UserBuyerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/UserBuyerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/ar/site.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/site.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/services/categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/services/categories.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/site.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/site/user/dashboard/buyers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/user/dashboard/buyers.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -428,7 +421,7 @@
       <workItem from="1614080037512" duration="17331000" />
       <workItem from="1614112939444" duration="8554000" />
       <workItem from="1614180724994" duration="8927000" />
-      <workItem from="1614194249947" duration="11945000" />
+      <workItem from="1614194249947" duration="12639000" />
     </task>
     <servers />
   </component>

@@ -221,6 +221,7 @@ return [
 
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
+    'country' => 'الدولة',
 
 
     'Earned'=>'الارباح',

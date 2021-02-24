@@ -17,7 +17,7 @@ class ServiceController extends Controller
 
     /**
      * Get service details
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */
@@ -46,7 +46,7 @@ class ServiceController extends Controller
      * Get Services List
      */
     public function getList(){
-        
+
         $validator = validator()->make(request()->all(), [
             'main_category_type' => [new \App\Rules\MainCategoryTypeRule],
             'user_id' => 'integer',
@@ -119,7 +119,7 @@ class ServiceController extends Controller
 
     /**
      * Get Service Reviews
-     * 
+     *
      * @param integer $serviceId
      */
     public function getReviews($serviceId){
@@ -147,7 +147,7 @@ class ServiceController extends Controller
 
     /**
      * Get home data
-     * 
+     *
      * @param Request $q
      */
     public function getHomeData(Request $q)
@@ -204,10 +204,10 @@ class ServiceController extends Controller
 
 
     public function getMainCategoriesType(){
-        return ['all'=>'الكل','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
+        return ['all'=>'جميع الخدمات','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
     }
 
 
-    
+
 
 }

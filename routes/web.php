@@ -101,7 +101,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('how-it-work', [SiteController::class, 'getHowItWok']);
         Route::get('logout', [SiteController::class, 'getLogout']);
     });
-    Route::group(['prefix' => 'service'],function(){
+        Route::group(['prefix' => 'service'],function(){
         Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);
         Route::get('list/{category?}', [ServiceController::class, 'getList']);
         // Route::get('show/{service_id}/recipient_id/{recipient_id}', [ServiceController::class, 'getShow']);

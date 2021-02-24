@@ -54,8 +54,8 @@
                             <div class="serv-main-cat-item wow fadeInUp" data-wow-duration="1.5s">
                                 <a href="{{ url('service/list?category_id='.$value->id) }}">
                                     <figure>
-                                        @if(isset($value->image) && !empty($value->image) &&file_exists(asset('uploads/categories/'.$value->image)))
-                                            <img src="{{ asset('uploads/users/'.$value->image) }}" class="img-fluid">
+                                        @if(isset($value->image) && !empty($value->image))
+                                            <img src="{{ asset('assets/images/'.$value->image) }}" class="img-fluid">
                                         @else
                                             <img src="{{ asset('assets/site/images/services/m-cat-1.png') }}" class="img-fluid">
                                         @endif

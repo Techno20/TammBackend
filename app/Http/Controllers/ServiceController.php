@@ -207,4 +207,7 @@ class ServiceController extends Controller
         return ['all'=>'الكل','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
     }
 
+
+    
+
 }

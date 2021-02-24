@@ -6,12 +6,14 @@
 <script src="{{ asset('assets/site/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/jquery-nice-select-master/js/jquery.nice-select.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js') }}"></script>
+<script src="{{ asset('assets/site/js/customJS.js') }}"></script>
 
 <script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
 @if(app()->getLocale() == 'ar')
     <script src="{{ asset('assets/site/js/main-rtl.js') }}"></script>
 @else
     <script src="{{ asset('assets/site/js/main.js') }}"></script>
+
 @endif
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>
@@ -19,6 +21,7 @@
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{ asset('assets/site/plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
+
 <script>
     $(document).ready(function () {
         $('.select2').select2({

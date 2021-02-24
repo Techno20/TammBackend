@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
     <div class="body-content">
         <!-- cs-breadcrumb -->
         <nav class="cs-breadcrumb" aria-label="breadcrumb">

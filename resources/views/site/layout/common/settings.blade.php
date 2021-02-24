@@ -1,6 +1,6 @@
 <div class="col-xl-4">
     <aside class="account-setting-sidebar">
-        <h3 class="m-title">Settings</h3>
+        <h3 class="m-title">{{__('site.settings')}}</h3>
         <div class="links">
             <ul>
                 <li>
@@ -14,8 +14,8 @@
                                                         </svg>
                                                     </span>
                             <div class="content">
-                                <h4>Account</h4>
-                                <p>Update your persoal info.</p>
+                                <h4>{{__('site.Account')}}</h4>
+                                <p>{{__('site.Update your persoal info.')}}</p>
                             </div>
                             <i class="fas fa-chevron-right arrow"></i>
                         </div>
@@ -32,14 +32,14 @@
                                                         </svg>
                                                     </span>
                             <div class="content">
-                                <h4>Security</h4>
-                                <p>check your security and chage password</p>
+                                <h4>{{__('site.Security')}}</h4>
+                                <p>{{__('site.check your security and chage password')}}</p>
                             </div>
                             <i class="fas fa-chevron-right arrow"></i>
                         </div>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="">
                         <div class="item d-flex align-items-center">
                                                     <span class="icon">
@@ -59,8 +59,8 @@
                             <i class="fas fa-chevron-right arrow"></i>
                         </div>
                     </a>
-                </li>
-                <li>
+                </li> --}}
+                {{-- <li>
                     <a href="">
                         <div class="item d-flex align-items-center">
                                                     <span class="icon">
@@ -75,8 +75,8 @@
                             <i class="fas fa-chevron-right arrow"></i>
                         </div>
                     </a>
-                </li>
-                <li>
+                </li> --}}
+                {{-- <li>
                     <a href="">
                         <div class="item d-flex align-items-center">
                                                     <span class="icon">
@@ -95,7 +95,7 @@
                             <i class="fas fa-chevron-right arrow"></i>
                         </div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </aside>

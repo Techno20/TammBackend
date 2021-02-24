@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <div class="body-content">
         <!-- h-main-section -->
         <section class="h-main-section">
@@ -54,7 +55,7 @@
                 <div class="sec-content">
                     <div class="services-cat-slider-1 owl-carousel owl-navs-with-header">
                         @foreach($result['top_rated_services'] as $key => $value)
-
+                        {{-- {{$value->user_id}} --}}
                         <div class="item">
                             <div class="service-cat-item">
                                 <a href="{{ url('service/show/'.$value->id) }}">

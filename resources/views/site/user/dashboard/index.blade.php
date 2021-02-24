@@ -45,7 +45,7 @@
                         <h3>@lang('site.improve_your_success_title')</h3>
                         <p>@lang('site.improve_your_success_text').</p>
                         <div class="actions">
-                            <a href="" class="btn btn-yallow">@lang('site.read_more')</a>
+                            <a href="https://tamm.work/blog" class="btn btn-yallow">@lang('site.read_more')</a>
                         </div>
                     </div>
                     <figure>
@@ -86,14 +86,15 @@
                                     <table class="table table-borderless cs-table-1">
                                         <thead>
                                         <tr>
-                                            <th>Service name</th>
-                                            <th>Order Date</th>
-                                            <th>Due on</th>
-                                            <th>Total</th>
-                                            <th>Status</th>
+                                            <th>{{__('site.Service_name')}}</th>
+                                            <th>{{__('site.Order_Date')}}</th>
+                                            <th>{{__('site.Due_on')}}</th>
+                                            <th>{{__('site.Total')}}</th>
+                                            <th>{{__('site.Status')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                            
                                         <tr>
                                             <td><a href="">create intuitive mobile..</a></td>
                                             <td>22 Jun 2020</td>
@@ -101,41 +102,7 @@
                                             <td>12.00 SAR</td>
                                             <td><span class="stauts-label red">Active</span></td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="">elegant wedding invita..</a></td>
-                                            <td>22 Jun 2020</td>
-                                            <td>23 Jun 2020</td>
-                                            <td>12.00 SAR</td>
-                                            <td><span class="stauts-label red">Active</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="">remove malware recov..</a></td>
-                                            <td>22 Jun 2020</td>
-                                            <td>23 Jun 2020</td>
-                                            <td>12.00 SAR</td>
-                                            <td><span class="stauts-label red">Active</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="">professional logo and..</a></td>
-                                            <td>22 Jun 2020</td>
-                                            <td>23 Jun 2020</td>
-                                            <td>12.00 SAR</td>
-                                            <td><span class="stauts-label red">Active</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="">compelling blog post ..</a></td>
-                                            <td>22 Jun 2020</td>
-                                            <td>23 Jun 2020</td>
-                                            <td>12.00 SAR</td>
-                                            <td><span class="stauts-label red">Active</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="">business card and stat..</a></td>
-                                            <td>22 Jun 2020</td>
-                                            <td>23 Jun 2020</td>
-                                            <td>12.00 SAR</td>
-                                            <td><span class="stauts-label">Active</span></td>
-                                        </tr>
+                                 
                                         </tbody>
                                     </table>
                                 </div>

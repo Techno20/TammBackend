@@ -19,9 +19,8 @@ class UserConversationController extends Controller
     {
         $validator = validator()->make($q->all(), [
           'service_provider_id' => ['required',new \App\Rules\UserRule],
-          'title' => 'required',
           'message' => 'required',
-          'attachments' => 'array'
+          // 'attachments' => 'array'
         ]);
         if($validator->fails()) {
           return Helper::responseValidationError($validator->messages());
@@ -29,7 +28,7 @@ class UserConversationController extends Controller
         
 
         $Conversation = new Conversation;
-        $Conversation->title = $q->title;
+        $Conversation->title = "q->title";
         $Conversation->user_sender_id = auth()->user()->id;
         $Conversation->user_recipient_id = $q->service_provider_id;
         $Conversation->save();
@@ -53,6 +52,7 @@ class UserConversationController extends Controller
     {
       $Conversations = Conversation::selectCard()->authorized()->paginate(50);
 //      return Helper::responseData('success',true,$Conversations);
+      // return response($Conversations, 200);
        return view('site.user.dashboard.messages')->with('conversations',$Conversations);
     }
 
@@ -61,14 +61,14 @@ class UserConversationController extends Controller
      * 
      * @param integer $conversationId
      */
-    public function getMessages($conversationId)
+    public function getMessages($conversationId , Request $q)
     {
       $validator = validator()->make($q->all(), [
         'conversation_id' => 'required'
       ]);
-      if($validator->fails()) {
-        return Helper::responseValidationError($validator->messages());
-      }
+      // if($validator->fails()) {
+      //   return Helper::responseValidationError($validator->messages());
+      // }
       $conversationId = $q->conversation_id;
       // Check conversation
       $Conversation = Conversation::authorized()->where('id',$conversationId)->first();
@@ -90,11 +90,11 @@ class UserConversationController extends Controller
       $validator = validator()->make($q->all(), [
         'conversation_id' => 'required',
         'message' => 'required',
-        'attachments' => 'array'
+        // 'attachments' => 'array'
       ]);
-      if($validator->fails()) {
-        return Helper::responseValidationError($validator->messages());
-      }
+      // if($validator->fails()) {
+      //   return Helper::responseValidationError($validator->messages());
+      // }
       $conversationId = $q->conversation_id;
       // Check conversation
       $Conversation = Conversation::authorized()->where('id',$conversationId)->first();

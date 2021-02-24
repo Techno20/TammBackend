@@ -221,6 +221,26 @@ return [
     
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
+
+
+    'Earned'=>'الارباح',
+    'Service_name'=>'اسم الخدمة',
+    'Order_Date'=>'تاريخ الطلب',
+    'Due_on'=>'تاريخ الاستحقاق',
+    'Total'=>'مجموع',
+    'Status'=>'حالة',
+
+    'Account'=> 'الملف الشخصي',
+    'Update your persoal info.'=>'تحديث معلوماتك الشخصية',
+    'Security'=>'الأمان',
+    'check your security and chage password'=>'تحقق من أمنك وقم بتغيير كلمة المرور',
+    'Change Password'=>'تغيير كلمة المرور',
+    'New Password'=>'كلمة السر الجديدة',
+    'Confirm Password'=>'تأكيد كلمة المرور',
+    'Confirm Password'=>'تأكيد كلمة المرور',
+    'characters_or_longer'=> '8 أحرف أو أكثر. اجمع بين الأحرف الكبيرة والصغيرة والأرقام.',
+    'Save Chages'=>'حفظ التغييرات',
+    
    
     
 

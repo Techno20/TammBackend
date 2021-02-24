@@ -41,7 +41,7 @@
                         <ul>
                             <li><a href="{{ url('service/categories') }}">@lang('site.services')</a></li>
                             <li><a href="{{ url('how-it-work') }}">@lang('site.how_it_works')</a></li>
-                            <li><a href="#">@lang('site.blog')</a></li>
+                            <li><a href="https://tamm.work/blog">@lang('site.blog')</a></li>
                             <li><a href="{{ url('about-us') }}">@lang('site.about_us')</a></li>
                             <li><a href="{{ url('contactus') }}">@lang('site.contactus')</a></li>
                         </ul>

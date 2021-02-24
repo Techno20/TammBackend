@@ -37,7 +37,7 @@
                     <a class="nav-link {{ str_contains(request()->url(), '/how-it-work') ? 'active' : '' }}" href="{{ url('how-it-work') }}">@lang('site.how_it_work')</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">@lang('site.blog')</a>
+                    <a class="nav-link" href="https://tamm.work/blog">@lang('site.blog')</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ str_contains(request()->url(), '/about-us') ? 'active' : '' }}" href="{{ url('about-us') }}">@lang('site.about_us')</a>
@@ -165,7 +165,7 @@
                         <a class="nav-link {{ str_contains(request()->url(), '/how-it-work') ? 'active' : '' }}" href="{{ url('how-it-work') }}">@lang('site.how_it_works')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">@lang('site.blog')</a>
+                        <a class="nav-link" href="https://tamm.work/blog">@lang('site.blog')</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ str_contains(request()->url(), '/about-us') ? 'active' : '' }}" href="{{ url('about-us') }}">@lang('site.about_us')</a>

@@ -219,5 +219,9 @@ return [
     'Write_your_message' => 'اكتب رسالتك هنا',
     'send' => 'ارسال',
     
+    'Messages'=> 'الرسائل',
+    'All_Conversations'=>'كل المحادثات',
+   
+    
 
 ];

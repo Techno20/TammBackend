@@ -221,6 +221,9 @@ return [
     'Write_your_message' => 'Write your message',
     'send' => 'send',
 
+    'Messages'=> 'Messages',
+    'All_Conversations'=>'كل المحادثات',
+
 
 
 ];

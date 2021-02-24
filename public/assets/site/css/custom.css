@@ -1,4 +1,4 @@
-.main-categories-slider .owl-stage {
+.main-categories-slider .owl-stage{
     width: 100% !important;
 }
 
@@ -13,25 +13,24 @@
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple,
-.select2-container--default .select2-selection--multiple {
+.select2-container--default .select2-selection--multiple{
     border-color: #ccc !important;
     height: 80px !important;
 }
 
-.select2-keywords {
+.select2-keywords{
     width: 100% !important;
 }
-
-.select2-container--default .select2-search--inline .select2-search__field {
+.select2-container--default .select2-search--inline .select2-search__field{
     height: 20px;
 }
 
-.btn-add-new-record {
+.btn-add-new-record{
     background-color: var(--green);
     color: #fff;
 }
 
-.btn-remove-record {
+.btn-remove-record{
     background-color: var(--red);
     color: #fff;
 }

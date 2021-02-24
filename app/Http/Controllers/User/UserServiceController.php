@@ -70,6 +70,10 @@ class UserServiceController extends Controller
         }
 
         $Services = $Services->with('Category')->paginate(50);
+<<<<<<< HEAD
+=======
+
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 //        return Helper::responseData('success',true,$Services);
         return view('site.user.dashboard.services')->with('services',$Services);
     }
@@ -151,10 +155,10 @@ class UserServiceController extends Controller
 
         // Save gallery images and videos
         if(is_array($q->gallery) && count($q->gallery)){
-            if($serviceId){
-                // Delete previous records
-                ServiceGallery::where('service_id',$Service->id)->delete();
-            }
+//            if($serviceId){
+//                // Delete previous records
+//                ServiceGallery::where('service_id',$Service->id)->delete();
+//            }
 
             $galleryItems = [];
             foreach($q->gallery as $galleryItem){
@@ -178,26 +182,31 @@ class UserServiceController extends Controller
         }
 
         // Check deleted extra services
-        if($serviceId){
-            $oldServiceExtras = $Service->Extras;
-            if($oldServiceExtras->count()){
-                $newServiceExtras = collect($q->extras);
-                foreach($oldServiceExtras as $oldServiceExtra){
-                    if(!$newServiceExtras->where('id',$oldServiceExtra->id)->count()){
-                        // check if it has orders
-                        $checkOrderExtra = OrderExtra::where('services_extra_id',$oldServiceExtra->id)->count();
-                        if($checkOrderExtra){
-                            $oldServiceExtra->delete();
-                        }else {
-                            $oldServiceExtra->forceDelete();
-                        }
-                    }
-                }
-            }
-        }
+//        if($serviceId){
+//            $oldServiceExtras = $Service->Extras;
+//            if($oldServiceExtras->count()){
+//                $newServiceExtras = collect($q->extras);
+//                foreach($oldServiceExtras as $oldServiceExtra){
+//                    if(!$newServiceExtras->where('id',$oldServiceExtra->id)->count()){
+//                        // check if it has orders
+//                        $checkOrderExtra = OrderExtra::where('services_extra_id',$oldServiceExtra->id)->count();
+//                        if($checkOrderExtra){
+//                            $oldServiceExtra->delete();
+//                        }else {
+//                            $oldServiceExtra->forceDelete();
+//                        }
+//                    }
+//                }
+//            }
+//        }
         // Add or Update service extras
+<<<<<<< HEAD
 //        dd($q->extras);
         if(is_array($q->extras_title) && count($q->extras_title) && is_array($q->extras_price) && count($q->extras_price)){
+=======
+        if(is_array($q->extras_title) && count($q->extras_title) && is_array($q->extras_price) && count($q->extras_price)){
+            ServiceExtra::query()->where('service_id', $Service->id)->delete();
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
             $insertExtraServices = [];
             $prices = $q->extras_price;
             foreach($q->extras_title as $key => $value){

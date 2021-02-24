@@ -25,9 +25,15 @@
         <!-- header -->
         <header class="dashboard-header d-flex align-items-center justify-content-between">
             <div class="title">
+<<<<<<< HEAD
                 <h3>Messages</h3>
                 <p>
                     Hi, Emilee welcome back
+=======
+                <h3>{{__('site.Messages')}}</h3>
+                <p>
+                    @lang('site.welcome'), {{ auth()->user()->name }} @lang('site.welcome_back')
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                 </p>
             </div>
             <div class="page-header-btns">
@@ -57,12 +63,18 @@
         <div class="messages-section">
             <div class="wrapper d-flex">
                 <div class="messages-side-menu">
+<<<<<<< HEAD
                 <a href="" class="btn message-menu-toggle" id="">
                     <i class="fas fa-align-left"></i>
                 </a>
                     <div class="messages-side-content">
                         <header class="messages-side-header d-flex align-items-center">
                             <h3>All Conversations </h3>
+=======
+                    <div class="messages-side-content">
+                        <header class="messages-side-header d-flex align-items-center">
+                            <h3>{{__('site.All_Conversations')}}</h3>
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                             <i class="fas fa-chevron-down"></i>
                         </header>
                         <div class="conversations">

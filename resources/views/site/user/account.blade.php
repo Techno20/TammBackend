@@ -84,7 +84,11 @@
                                             <div class="col-lg-5">
                                                 <div class="form-group">
                                                     <select class="custom-select cs-select-style">
+<<<<<<< HEAD
                                                         <option selected>Choose your questions</option>
+=======
+                                                        <option selected>Choose your quastion</option>
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
                                                         <option value="1">One</option>
                                                         <option value="2">Two</option>
                                                         <option value="3">Three</option>

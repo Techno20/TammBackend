@@ -46,6 +46,7 @@ class ServiceController extends Controller
      * Get Services List
      */
     public function getList(){
+        
         $validator = validator()->make(request()->all(), [
             'main_category_type' => [new \App\Rules\MainCategoryTypeRule],
             'user_id' => 'integer',

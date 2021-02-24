@@ -147,7 +147,11 @@ return [
     'news' => 'الاخبار',
     'privacy_policy' => 'سياسة الخصوصية',
     'terms_of_service' => 'الشروط والاحكام',
+<<<<<<< HEAD
     'more' => 'اخرى',
+=======
+    'more' => 'خدمات',
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     'support' => 'الدعم الفني',
     'help_support' => 'المساعدة',
     'trust_safety' => 'موثوقية البيانات',
@@ -179,7 +183,11 @@ return [
     'submit_requirements' => 'اكتب متطلباتك',
 
     'customize_your_package' => 'رتب باقتك',
+<<<<<<< HEAD
     'total_reviews' => 'تقيم',
+=======
+
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     'add_extras' => 'اضف الخدمات الاضافية',
     'add_extras_text' => 'لتحقيق افضل نتيجة من الخدمة اختر الخدمات الاضافية المناسبة',
 
@@ -196,4 +204,35 @@ return [
     'more_services' => 'خدمات اخرى من',
     'member_since' => 'منضم من',
 
+<<<<<<< HEAD
+=======
+    'text_browse'  => 'استعراض',
+    'text_delete'  => 'حذف',
+    'text_select_files' => 'اختر',
+    'text_selected' => 'تم اختيار',
+    'text_one_files' => 'ملف',
+    'text_multi_files' => 'ملفات',
+    'text_drag_drop_files_here' => 'اسحب الملفات وإسقطها هنا',
+    'text_file_details' => 'تفاصيل الملف',
+    'text_click_to_browse' => 'أو اضغط هنا للاستعراض',
+
+    'extras' => 'الخدمات الاضافية',
+    'submit' => 'إرسال',
+    'payment_gateway' => 'دفع الكتروني',
+    'payment_cash' => 'دفع كاش',
+   
+    'Service_information' => 'زودانا بمعلومات مثل:',
+    'Description_service' => 'وصف الخدمة',
+    'Specific_information' => 'معلومات محددة',
+    'Related_files' => 'ملفات ذات صلة',
+    'budget' => 'الميزانية',
+    'Write_your_message' => 'اكتب رسالتك هنا',
+    'send' => 'ارسال',
+    
+    'Messages'=> 'الرسائل',
+    'All_Conversations'=>'كل المحادثات',
+   
+    
+
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ServiceGallery;
 use Illuminate\Http\Request;
 use App\Models\ContactusMessage;
 use App\Models\User;
@@ -15,10 +16,14 @@ use Helper;
 
 class HelperController extends Controller
 {
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     /**
      * Get default parameters
-     * 
+     *
      * @param Request $q
      */
     public function getDefault(Request $q)
@@ -34,7 +39,7 @@ class HelperController extends Controller
 
     /**
      * Get all lists that we will use it in different ways like in website filters
-     * 
+     *
      * @param Request $q
      */
     public function getLists(Request $q)
@@ -69,11 +74,21 @@ class HelperController extends Controller
         $ContactusMessage->email = $q->email;
         $ContactusMessage->message = $q->message;
         $ContactusMessage->save();
-        
+
         \Mail::to(Setting::first()->contact_email)->send(new \App\Mail\ContactUsMail(request()));
         return Helper::responseData('email_sent',true,false,__('default.success_message.email_sent'));
     }
 
+<<<<<<< HEAD
     
+=======
+    public function delete_image(Request $request) {
+        ServiceGallery::query()->where('id', $request['key'])->delete();
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 }
 

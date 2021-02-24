@@ -23,6 +23,10 @@
                             <div class="sec-content">
                                 <div class="setting-security-sec gray-form">
                                     <div class="change-password ">
+                                        <form action="{{url('user/me/update')}}" method="POST">
+                                            @method('put')
+                                            @csrf
+                                        
                                         {{-- <div class="form-row">
                                             <div class="col-lg-4">
                                                 <label>Current Password</label>
@@ -39,7 +43,7 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="">
+                                                    <input type="password" class="form-control" name="password">
                                                 </div>
                                             </div>
                                         </div>
@@ -49,7 +53,7 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="">
+                                                    <input type="password" class="form-control" name="vpassword">
                                                     <small class="form-text">
                                                        {{__('site.characters_or_longer')}}
                                                     </small>
@@ -58,8 +62,9 @@
                                         </div>
 
                                         <div class="actions text-right">
-                                            <button type="button" class="btn btn-yallow">{{__('site.Save Chages')}}</button>
+                                            <button type="submit" class="btn btn-yallow">{{__('site.Save Chages')}}</button>
                                         </div>
+                                    </form>
                                     </div>
                                     {{-- <div class="additional-info">
                                         <div class="form-row">

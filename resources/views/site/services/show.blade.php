@@ -414,19 +414,19 @@
                                     </div> --}}
                                 </div>
                                 <div class="includes-box">
-                                    <p>زودانا بمعلومات مثل:</p>
+                                    <p>{{ __('site.Service_information')}}</p>
                                     <ol class="includes d-flex flex-wrap">
-                                        <li>وصف الخدمة</li>
-                                        <li>معلومات محددة</li>
-                                        <li>ملفات ذات صلة</li>
-                                        <li>الميزانية</li>
+                                        <li>{{__('site.Description_service') }}</li>
+                                        <li>{{__('site.Specific_information')}}</li>
+                                        <li>{{__('site.Related_files')}}</li>
+                                        <li>{{ __('site.budget')}}</li>
                                     </ol>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="message-wrapper d-flex flex-column ">
-                                <textarea name="" class="form-control" placeholder="اكتب رسالتك"></textarea>
+                                <textarea name="" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
                                 {{-- <div class="attachments d-flex align-items-center flex-wrap">
                                     <label>المرفقات:</label>
                                     <div class="attachment">
@@ -450,7 +450,7 @@
                                         <span class="total">/ 2500</span>
                                     </p>
                                     <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
-                                    <button type="button" class="btn btn-yallow">ارسل</button>
+                                    <button type="button" class="btn btn-yallow">{{__('site.send')}}</button>
                                 </div>
                             </div>
                         </div>

@@ -210,5 +210,14 @@ return [
     'submit' => 'إرسال',
     'payment_gateway' => 'دفع الكتروني',
     'payment_cash' => 'دفع كاش',
+   
+    'Service_information' => 'زودانا بمعلومات مثل:',
+    'Description_service' => 'وصف الخدمة',
+    'Specific_information' => 'معلومات محددة',
+    'Related_files' => 'ملفات ذات صلة',
+    'budget' => 'الميزانية',
+    'Write_your_message' => 'اكتب رسالتك هنا',
+    'send' => 'ارسال',
+    
 
 ];

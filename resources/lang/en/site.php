@@ -212,4 +212,15 @@ return [
     'payment_gateway' => 'Payment Gateway',
     'payment_cash' => 'Cash',
 
+
+    'Service_information' => 'Provide us with service information',
+    'Description_service' => 'Description of the service',
+    'Specific_information' => 'Description of the service',
+    'Related_files' => 'Related files',
+    'budget' => 'budget',
+    'Write_your_message' => 'Write your message',
+    'send' => 'send',
+
+
+
 ];

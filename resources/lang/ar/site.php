@@ -179,7 +179,7 @@ return [
     'submit_requirements' => 'اكتب متطلباتك',
 
     'customize_your_package' => 'رتب باقتك',
-
+    'total_reviews' => 'تقيم',
     'add_extras' => 'اضف الخدمات الاضافية',
     'add_extras_text' => 'لتحقيق افضل نتيجة من الخدمة اختر الخدمات الاضافية المناسبة',
 
@@ -210,5 +210,18 @@ return [
     'submit' => 'إرسال',
     'payment_gateway' => 'دفع الكتروني',
     'payment_cash' => 'دفع كاش',
+   
+    'Service_information' => 'زودانا بمعلومات مثل:',
+    'Description_service' => 'وصف الخدمة',
+    'Specific_information' => 'معلومات محددة',
+    'Related_files' => 'ملفات ذات صلة',
+    'budget' => 'الميزانية',
+    'Write_your_message' => 'اكتب رسالتك هنا',
+    'send' => 'ارسال',
+    
+    'Messages'=> 'الرسائل',
+    'All_Conversations'=>'كل المحادثات',
+   
+    
 
 ];

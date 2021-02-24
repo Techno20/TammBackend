@@ -25,9 +25,9 @@
         <!-- header -->
         <header class="dashboard-header d-flex align-items-center justify-content-between">
             <div class="title">
-                <h3>Messages</h3>
+                <h3>{{__('site.Messages')}}</h3>
                 <p>
-                    Hi, Emilee welcome back
+                    @lang('site.welcome'), {{ auth()->user()->name }} @lang('site.welcome_back')
                 </p>
             </div>
             <div class="page-header-btns">
@@ -58,8 +58,11 @@
             <div class="wrapper d-flex">
                 <div class="messages-side-menu">
                     <div class="messages-side-content">
+                    <a href="" class="btn message-menu-toggle" id="">
+                    <i class="fas fa-align-left"></i>
+                </a>
                         <header class="messages-side-header d-flex align-items-center">
-                            <h3>All Conversations </h3>
+                            <h3>{{__('site.All_Conversations')}}</h3>
                             <i class="fas fa-chevron-down"></i>
                         </header>
                         <div class="conversations">

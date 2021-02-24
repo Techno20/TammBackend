@@ -592,7 +592,7 @@ a:hover{
     color: var(--mainColor);
 }
 .sec-header-2 p{
-    margin-bottom: 0
+    margin-bottom: 0;
     font-size:17px;
     color: var(--secondaryColor);
 }
@@ -951,6 +951,9 @@ a:hover{
     height: 60px;
     width: 60px;
     font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-form .btn:hover{
@@ -3037,7 +3040,7 @@ z-index: 3;
     font-family: var(--font700);
     border-radius: 20px 0 0 20px;
     line-height: 40px;
-    margin-left: -15px;
+    /* margin-left: -15px; */
     margin-bottom: 0;
 }
 .plan-details-wrapper .brief{
@@ -6514,7 +6517,8 @@ z-index: 3;
         height: auto;
     }
     .p-header-1 h1{
-        height: 28px;
+        /* height: 28px; */
+        padding: .75rem 1rem;
     }
     .p-header-1 p{
         font-size: 14px;
@@ -6997,4 +7001,5 @@ z-index: 3;
 }
 @media (max-width: 320px){
 }
+
 /* responsive 

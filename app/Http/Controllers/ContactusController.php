@@ -39,6 +39,8 @@ class ContactusController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
+=======
         $validator = validator()->make(request()->all(), [
             'name' => 'required|max:255',
             'email' => 'required|max:255',
@@ -47,6 +49,7 @@ class ContactusController extends Controller
         if($validator->fails()) {
             return Helper::responseValidationError($validator->messages());
         }
+>>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
         $contactus = new ContactusMessage();
         $contactus->name = $request->name;
         $contactus->message = $request->message;

@@ -175,7 +175,7 @@ return [
     'submit_requirements' => 'Submit Requirements',
 
     'customize_your_package' => 'Customize Your Package',
-
+'total_reviews' => 'reviews',
     'add_extras' => 'Add Extras',
     'add_extras_text' => 'Add extra services for your order to get a best goal',
 
@@ -211,5 +211,19 @@ return [
     'submit' => 'Submit',
     'payment_gateway' => 'Payment Gateway',
     'payment_cash' => 'Cash',
+
+
+    'Service_information' => 'Provide us with service information',
+    'Description_service' => 'Description of the service',
+    'Specific_information' => 'Description of the service',
+    'Related_files' => 'Related files',
+    'budget' => 'budget',
+    'Write_your_message' => 'Write your message',
+    'send' => 'send',
+
+    'Messages'=> 'Messages',
+    'All_Conversations'=>'كل المحادثات',
+
+
 
 ];

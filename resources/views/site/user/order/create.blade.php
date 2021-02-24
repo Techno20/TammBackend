@@ -46,7 +46,6 @@
             top: 16px;
             transition: 0.2s linear all;
         }
-
         .form-wizard .focus-input .wizard-form-text-label {
             color: #d65470;
             top: -18px;
@@ -61,7 +60,6 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
-
         @keyframes click-radio-wave {
             0% {
                 width: 25px;
@@ -77,7 +75,6 @@
                 opacity: 0.0;
             }
         }
-
         @media screen and (max-width: 767px) {
             .wizard-content-left {
                 height: auto;
@@ -96,7 +93,6 @@
             float: left;
             background-color: #ededed;
         }
-
         #card-element {
             background-color: transparent;
             height: 40px;

@@ -57,4 +57,28 @@ function getMassegeChats(id) {
     });
   }
 
+  $(document).ready(function () {
+    $("#btnReplayMessege").click(function (event) {
+        event.preventDefault();
+        var form = $('#formReplayMessege')[0];
+        var data = new FormData(form);
+        $.ajax({
+            type: "POST",
+            url: "/user/conversation/send-reply/6",
+            data: data,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 800000,
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    });
+});
+
+
+
+
 

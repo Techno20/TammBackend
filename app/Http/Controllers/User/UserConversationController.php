@@ -90,11 +90,11 @@ class UserConversationController extends Controller
       $validator = validator()->make($q->all(), [
         'conversation_id' => 'required',
         'message' => 'required',
-        'attachments' => 'array'
+        // 'attachments' => 'array'
       ]);
-      if($validator->fails()) {
-        return Helper::responseValidationError($validator->messages());
-      }
+      // if($validator->fails()) {
+      //   return Helper::responseValidationError($validator->messages());
+      // }
       $conversationId = $q->conversation_id;
       // Check conversation
       $Conversation = Conversation::authorized()->where('id',$conversationId)->first();

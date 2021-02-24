@@ -112,7 +112,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::post('{type}', [UploaderController::class, 'postUpload'])->where('type','service-image|service-video|user-avatar|attachment');
     });
 
-    Route::group(['prefix' => 'checkout'], function() {
+    Route::prefix('checkout')->middleware('auth')->group(function() {
         Route::get('order-details', [CheckoutController::class, 'getOrderDetails']);
         Route::post('send-order', [CheckoutController::class, 'postSendOrder']);
     });

@@ -26,21 +26,15 @@ class AuthController extends Controller
       return Auth::guard();
   }
 
-  /**
-   * Authentication invalid token
-   * used instead of redirect to login page when the token provided in API is invalid
-   * 
-   * @param Request $q
-   * @return \Illuminate\Http\JsonResponse
-   */
   public function getAuthInvalidToken(Request $q)
   {
-    return Helper::responseData('invalid_token',false,false,__('auth.invalid_token'));
+    return back()->with('have_to_login', true);
+//    return Helper::responseData('invalid_token',false,false,__('auth.invalid_token'));
   }
 
   /**
    * Register new merchant
-   * 
+   *
    * @param Request $q
    * @return \Illuminate\Http\JsonResponse
    */
@@ -68,7 +62,7 @@ class AuthController extends Controller
 
   /**
    * API Login, on success return JWT Auth token
-   * 
+   *
    * @param Request $q
    * @return \Illuminate\Http\JsonResponse
    */
@@ -206,7 +200,7 @@ class AuthController extends Controller
 
     $validator = validator()->make($q->all(), [
       'code' => 'required',
-      'user_id' => 'required|integer' 
+      'user_id' => 'required|integer'
     ]);
     if($validator->fails()) {
       return Helper::responseValidationError($validator->messages());
@@ -226,7 +220,7 @@ class AuthController extends Controller
 
   /**
    * Reset Password
-   * 
+   *
    * @param Request $q
    */
   public function postResetPassword(Request $q) {
@@ -254,7 +248,7 @@ class AuthController extends Controller
 
   /**
    * Update user profile
-   * 
+   *
    * @param Request $q
    */
   public function postUpdateProfile(Request $q) {
@@ -325,7 +319,7 @@ class AuthController extends Controller
 
   /**
    * Add skill to user profile
-   * 
+   *
    * @param Request $q
    */
   public function postAddSkill(Request $q) {
@@ -343,7 +337,7 @@ class AuthController extends Controller
 
   /**
    * Remove skill from user profile
-   * 
+   *
    * @param Request $q
    */
   public function deleteSkill(Request $q) {

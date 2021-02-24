@@ -221,6 +221,7 @@ return [
     'Write_your_message' => 'Write your message',
     'send' => 'send',
     'country' => 'Country',
+    'orders_count' => 'Orders Count',
 
     'Messages'=> 'Messages',
     'All_Conversations'=>'كل المحادثات',

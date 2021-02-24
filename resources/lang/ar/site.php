@@ -222,6 +222,7 @@ return [
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
     'country' => 'الدولة',
+    'orders_count' => 'عدد الطلبات',
 
 
     'Earned'=>'الارباح',

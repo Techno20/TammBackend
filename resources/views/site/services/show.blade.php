@@ -19,21 +19,21 @@
                         {{--                        <a href="">FAQ</a>--}}
                         {{--                        <a href="">Review</a>--}}
                     </div>
-                    <div class="tools d-flex align-items-center ml-auto">
-                        <div class="favorites-count">
-                            <i class="fas fa-heart"></i>
-                            <span>1,535</span>
-                        </div>
-                        <div class="share-list dropdown">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">facebook</a>
-                                <a class="dropdown-item" href="#">twitter</a>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="tools d-flex align-items-center ml-auto">--}}
+{{--                        <div class="favorites-count">--}}
+{{--                            <i class="fas fa-heart"></i>--}}
+{{--                            <span>1,535</span>--}}
+{{--                        </div>--}}
+{{--                        <div class="share-list dropdown">--}}
+{{--                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">--}}
+{{--                                <i class="fas fa-share-alt"></i>--}}
+{{--                            </button>--}}
+{{--                            <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                                <a class="dropdown-item" href="#">facebook</a>--}}
+{{--                                <a class="dropdown-item" href="#">twitter</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </section>
@@ -338,7 +338,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
+{{--                                        <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>--}}
                                     </div>
                                     <div class="details">
                                         <a href="{{url('user/profile/'.$service->user->id)}}">

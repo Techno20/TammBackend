@@ -72,7 +72,7 @@ return [
     'categories' => 'التصنيفات',
 
     'overview' => 'نظرة عامة',
-    'pricing' => 'التسعير',
+    'pricing' => 'سعر الباقات',
     'service_description' => 'وصف الخدمة',
     'requirements' => 'المتطلبات',
     'gallery' => 'المعرض',
@@ -210,7 +210,7 @@ return [
     'submit' => 'إرسال',
     'payment_gateway' => 'دفع الكتروني',
     'payment_cash' => 'دفع كاش',
-   
+
     'Service_information' => 'زودانا بمعلومات مثل:',
     'Description_service' => 'وصف الخدمة',
     'Specific_information' => 'معلومات محددة',
@@ -218,7 +218,7 @@ return [
     'budget' => 'الميزانية',
     'Write_your_message' => 'اكتب رسالتك هنا',
     'send' => 'ارسال',
-    
+
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
 
@@ -240,8 +240,8 @@ return [
     'Confirm Password'=>'تأكيد كلمة المرور',
     'characters_or_longer'=> '8 أحرف أو أكثر. اجمع بين الأحرف الكبيرة والصغيرة والأرقام.',
     'Save Chages'=>'حفظ التغييرات',
-    
-   
-    
+
+
+
 
 ];

@@ -114,7 +114,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
+{{--                                            <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>--}}
                                         </div>
                                         <div class="details">
                                             <div class="serv-author media">

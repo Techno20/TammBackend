@@ -9,7 +9,7 @@ class Helper {
     /**
      * Response data
      * return response as json in specific format includes message code and description
-     * 
+     *
      * @param string $message
      * @param boolean $status
      * @param mixed $data
@@ -32,7 +32,7 @@ class Helper {
 
     /**
      * Response validation error
-     * 
+     *
      * @param array $errors
      */
     public static function responseValidationError($errors){
@@ -42,7 +42,7 @@ class Helper {
 
     /**
      * Clean array values if has value contains specific seperator
-     * 
+     *
      * @param array $Items
      * @param string $Seperator
      */
@@ -72,6 +72,84 @@ class Helper {
     public static function getCategories(){
         $categories = Category::selectCard()->get();
         return $categories;
+    }
+
+    public static function payment($user, $amount = 0) {
+        $url = "https://api.tap.company/v2/charges";
+        $body = [
+            'amount' => 1,
+            'currency' => 'SAR',
+            'threeDSecure' => true,
+            'save_card' => false,
+            'description' => 'description',
+            'statement_descriptor' => 'statement_descriptor',
+            'metadata' => [
+                'udf1' => 'test 1',
+                'udf2' => 'test 2',
+            ],
+            'reference' => [
+                'invoice' => uniqid(),
+                'order' => uniqid(),
+            ],
+            'receipt' => [
+                'email' => true,
+                'sms' => true,
+            ],
+            'customer' => [
+                'first_name' => $user->name,
+                'middle_name' => '',
+                'last_name' => '',
+                'email' => $user->email,
+                'phone' => [
+                    'country_code' => '966',
+                    'number' => $user->phone ? ''.$user->phone : '5098465151',
+                ],
+            ],
+            'merchant' => [
+                'id' => '6824235'
+            ],
+            'source' => [
+                'id' => 'src_card'
+            ],
+            'post' => [
+                'id' => url('/')
+            ],
+            'redirect' => [
+                'id' => url('/')
+            ],
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization:Bearer sk_test_vCLBYaJsDTwlIGu3FS8efmtO'));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $responseData = curl_exec($ch);
+        if(curl_errno($ch)) {
+            return curl_error($ch);
+        }
+        curl_close($ch);
+        return json_decode($responseData, true);
+    }
+
+    public static function payment_response($id) {
+        $url = "https://api.tap.company/v2/charges/" . $id;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization:Bearer sk_test_vCLBYaJsDTwlIGu3FS8efmtO'));
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $responseData = curl_exec($ch);
+        if(curl_errno($ch)) {
+            return curl_error($ch);
+        }
+        curl_close($ch);
+        return json_decode($responseData, true);
     }
 
 }

@@ -515,6 +515,7 @@
         });
 
         $('#submit_btn').click(function () {
+            // $(this).prop('disabled', true);
             $.ajax({
                 url: '{{url('checkout/send-order')}}',
                 type: "POST",
@@ -826,7 +827,7 @@
                                                                     <span class="current input_text_count">0</span>
                                                                     <span class="total">/ 2500</span>
                                                                 </p>
-                                                                <input type="file" id="requirements" name="attachments" multiple>
+                                                                <input type="file" id="requirements" name="requirements_attachments">
                                                                 <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
                                                                 {{--                                                <button type="button" data-target="#successfullySendRequest" data-toggle="modal" class="btn btn-yallow">Send</button>--}}
                                                             </div>

@@ -67,7 +67,6 @@ class CheckoutController extends Controller
         $validator = validator()->make(request()->all(), [
             'service_id' => 'required',
             'extra_services' => 'nullable|array',
-            'attachments' => 'nullable|array',
             'package' => 'required'
         ]);
         if($validator->fails()) {
@@ -77,6 +76,27 @@ class CheckoutController extends Controller
         if(!$Service) {
             return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
         }
+
+        session()->put('checkout', $q);
+
+        $paidTotal = 0;
+
+        $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic';
+        $paidTotal += $Service->{$Package.'_price'};
+
+        if(is_array($q->extra_services) && count($q->extra_services)){
+            foreach($q->extra_services as $extraServiceId){
+                $getExtraService = ServiceExtra::where([['id',$extraServiceId],['service_id',$q->service_id]])->first();
+                if($getExtraService){
+                    $paidTotal += $getExtraService->price;
+                }
+            }
+        }
+
+        $payment = Helper::payment(auth()->user(), $paidTotal);
+
+        dd($payment);
+
         $paidTotal = 0;
 
         // Subtract package price

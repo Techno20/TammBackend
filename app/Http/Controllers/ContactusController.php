@@ -19,7 +19,7 @@ class ContactusController extends Controller
         return view('site.pages.ContactUs');
     }
 
-   
+
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +39,14 @@ class ContactusController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $validator = validator()->make(request()->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'message' => 'required'
+        ]);
+        if($validator->fails()) {
+            return Helper::responseValidationError($validator->messages());
+        }
         $contactus = new ContactusMessage();
         $contactus->name = $request->name;
         $contactus->message = $request->message;

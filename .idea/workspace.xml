@@ -2,15 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09f0a48f-c721-4979-a4eb-ca8005cb9a9e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Tamm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tamm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Business.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Design.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Marketing.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Musics.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Programming.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Translation.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/images/Videos.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/ar/site.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/site/services/categories.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/services/categories.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,6 +401,9 @@
       <recent name="C:\wamp64\www\tamm\public\assets\site\js" />
       <recent name="C:\wamp64\www\tamm\public\assets\site\css" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\tamm\public\assets\images" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -422,7 +428,7 @@
       <workItem from="1614080037512" duration="17331000" />
       <workItem from="1614112939444" duration="8554000" />
       <workItem from="1614180724994" duration="8927000" />
-      <workItem from="1614194249947" duration="420000" />
+      <workItem from="1614194249947" duration="11945000" />
     </task>
     <servers />
   </component>

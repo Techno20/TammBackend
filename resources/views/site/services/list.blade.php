@@ -120,17 +120,17 @@
                                             <div class="service-item-slider owl-carousel">
                                             <a href="{{$value->user ? url('user/profile/'.$value->user->id) : ''}}">
                                                 <div class="item">
-                                                    
+
                                                         @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
                                                             <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                                         @else
                                                             <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                                         @endif
-                                                    
+
                                                 </div>
                                                 </a>
                                             </div>
-                                            <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>
+{{--                                            <a href="" class="add-to-favorites"><i class="fas fa-heart"></i></a>--}}
                                         </div>
                                         <div class="details">
                                             <div class="serv-author media">

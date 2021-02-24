@@ -418,76 +418,76 @@
         });
 
         //pass your public key from tap's dashboard
-        var tap = Tapjsli('pk_test_OanSHyNLEKBiFcUZMt8zDXds');
-
-        var elements = tap.elements({});
-        var style = {
-            base: {
-                color: '#535353',
-                lineHeight: '18px',
-                fontFamily: 'sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: 'rgba(0, 0, 0, 0.26)',
-                    fontSize: '15px'
-                }
-            },
-            invalid: {
-                color: 'red'
-            }
-        };
-        // input labels/placeholders
-        var labels = {
-            cardNumber: "Card Number",
-            expirationDate: "MM/YY",
-            cvv: "CVV",
-            cardHolder: "Card Holder Name"
-        };
-        //payment options
-        var paymentOptions = {
-            currencyCode: ["KWD", "USD", "SAR"],
-            labels: labels,
-            TextDirection: 'ltr'
-        }
-        //create element, pass style and payment options
-        var card = elements.create('card', {style: style}, paymentOptions);
-        //mount element
-        card.mount('#element-container');
-        //card change event listener
-        card.addEventListener('change', function (event) {
-            if (event.BIN) {
-                console.log(event.BIN)
-            }
-            if (event.loaded) {
-                console.log("UI loaded :" + event.loaded);
-                console.log("current currency is :" + card.getCurrency())
-            }
-            var displayError = document.getElementById('error-handler');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
-
-        // Handle form submission
-        var form = document.getElementById('form-container');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            tap.createToken(card).then(function (result) {
-                console.log(result);
-                if (result.error) {
-                    // Inform the user if there was an error
-                    var errorElement = document.getElementById('error-handler');
-                    errorElement.textContent = result.error.message;
-                } else {
-                    $('#payment_token').val(result.id);
-                    $('#form-container').submit();
-                }
-            });
-        });
+        // var tap = Tapjsli('pk_test_OanSHyNLEKBiFcUZMt8zDXds');
+        //
+        // var elements = tap.elements({});
+        // var style = {
+        //     base: {
+        //         color: '#535353',
+        //         lineHeight: '18px',
+        //         fontFamily: 'sans-serif',
+        //         fontSmoothing: 'antialiased',
+        //         fontSize: '16px',
+        //         '::placeholder': {
+        //             color: 'rgba(0, 0, 0, 0.26)',
+        //             fontSize: '15px'
+        //         }
+        //     },
+        //     invalid: {
+        //         color: 'red'
+        //     }
+        // };
+        // // input labels/placeholders
+        // var labels = {
+        //     cardNumber: "Card Number",
+        //     expirationDate: "MM/YY",
+        //     cvv: "CVV",
+        //     cardHolder: "Card Holder Name"
+        // };
+        // //payment options
+        // var paymentOptions = {
+        //     currencyCode: ["KWD", "USD", "SAR"],
+        //     labels: labels,
+        //     TextDirection: 'ltr'
+        // }
+        // //create element, pass style and payment options
+        // var card = elements.create('card', {style: style}, paymentOptions);
+        // //mount element
+        // // card.mount('#element-container');
+        // //card change event listener
+        // card.addEventListener('change', function (event) {
+        //     if (event.BIN) {
+        //         console.log(event.BIN)
+        //     }
+        //     if (event.loaded) {
+        //         console.log("UI loaded :" + event.loaded);
+        //         console.log("current currency is :" + card.getCurrency())
+        //     }
+        //     var displayError = document.getElementById('error-handler');
+        //     if (event.error) {
+        //         displayError.textContent = event.error.message;
+        //     } else {
+        //         displayError.textContent = '';
+        //     }
+        // });
+        //
+        // // Handle form submission
+        // var form = document.getElementById('form-container');
+        // form.addEventListener('submit', function (event) {
+        //     event.preventDefault();
+        //
+        //     tap.createToken(card).then(function (result) {
+        //         console.log(result);
+        //         if (result.error) {
+        //             // Inform the user if there was an error
+        //             var errorElement = document.getElementById('error-handler');
+        //             errorElement.textContent = result.error.message;
+        //         } else {
+        //             $('#payment_token').val(result.id);
+        //             $('#form-container').submit();
+        //         }
+        //     });
+        // });
 
         $('.extra-checkbox').change(function () {
             let extra_price_hidden = true;
@@ -517,6 +517,90 @@
             }
             $('.total_price').html(total_price);
         });
+
+        $('#submit_btn').click(function () {
+            $.ajax({
+                url: '{{url('checkout/send-order')}}',
+                type: "POST",
+                data: new FormData($('#form-container').get(0)),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.status && data.message == 'success') {
+                        Swal.fire({
+                            icon: "success",
+                            title: "نجاح",
+                            text: "تم طلب الخدمة بنجاح",
+                        }).then((result) => {
+                            window.location = "{{ url('/') }}";
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطأ',
+                            html: 'الرجاء التأكد من البيانات المدخلة',
+                        })
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+            });
+            {{--Swal.fire({--}}
+            {{--    title: '@lang('constants.deleteItem')',--}}
+            {{--    text: "@lang('constants.sure')",--}}
+            {{--    type: 'warning',--}}
+            {{--    showCancelButton: true,--}}
+            {{--    confirmButtonColor: '#84dc61',--}}
+            {{--    cancelButtonColor: '#d33',--}}
+            {{--    confirmButtonText: '@lang('constants.yes')',--}}
+            {{--    cancelButtonText: '@lang('constants.no')'--}}
+            {{--}).then((result) => {--}}
+            {{--    if (result.value) {--}}
+            {{--        $.ajax({--}}
+            {{--            url: $(this).data('url'),--}}
+            {{--            type: "POST",--}}
+            {{--            data: {--}}
+            {{--                "_token": "{{ csrf_token() }}",--}}
+            {{--                'ids': data--}}
+            {{--            },--}}
+            {{--            beforeSend(){--}}
+            {{--                KTApp.blockPage({--}}
+            {{--                    overlayColor: '#000000',--}}
+            {{--                    type: 'v2',--}}
+            {{--                    state: 'success',--}}
+            {{--                    message: '@lang('constants.please_wait') ...'--}}
+            {{--                });--}}
+            {{--            },--}}
+            {{--            success: function (data) {--}}
+            {{--                if (data.success) {--}}
+            {{--                    if (here.data('table')) {--}}
+            {{--                        $(here.data('table')).DataTable().ajax.reload(null, false);--}}
+            {{--                    } else {--}}
+            {{--                        $('#items_table').DataTable().ajax.reload(null, false);--}}
+            {{--                    }--}}
+            {{--                    showAlertMessage('success', data.message);--}}
+            {{--                } else {--}}
+            {{--                    if (data.message) {--}}
+            {{--                        showAlertMessage('error', data.message);--}}
+            {{--                    } else {--}}
+            {{--                        showAlertMessage('error', '@lang('constants.unknown_error')');--}}
+            {{--                    }--}}
+            {{--                }--}}
+            {{--                KTApp.unblockPage();--}}
+            {{--            },--}}
+            {{--            error: function (data) {--}}
+            {{--                console.log(data);--}}
+            {{--            },--}}
+            {{--            statusCode: {--}}
+            {{--                500: function (data) {--}}
+            {{--                    console.log(data);--}}
+            {{--                }--}}
+            {{--            }--}}
+            {{--        });--}}
+            {{--    }--}}
+            {{--});--}}
+        });
     </script>
 @endsection
 
@@ -531,8 +615,8 @@
                         <form action="{{ url('checkout/send-order') }}" id="form-container" method="post" role="form" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="payment_token" value="">
-                            <input type="hidden" name="service_id" value="{{request()->has('service_id')}}">
-                            <input type="hidden" name="package" value="{{request()->has('package')}}">
+                            <input type="hidden" name="service_id" value="{{request('service_id')}}">
+                            <input type="hidden" name="package" value="{{request('package')}}">
                             <div class="form-wizard-header">
                                 <div class="form-paginator">
                                     <div class="container">
@@ -653,7 +737,7 @@
                                                                                 @foreach($result['service']->Extras()->get() as $key => $value)
                                                                                     <div class="order-extra-feature-item d-flex">
                                                                                         <div class="custom-control custom-checkbox yallow">
-                                                                                            <input type="checkbox" name="extra_services[]" class="custom-control-input extra-checkbox" data-value="{{$value->price}}" id="customCheck1{{$key}}">
+                                                                                            <input type="checkbox" name="extra_services[]" value="{{$value->id}}" class="custom-control-input extra-checkbox" data-value="{{$value->price}}" id="customCheck1{{$key}}">
                                                                                             <label class="custom-control-label" for="customCheck1{{$key}}"></label>
                                                                                         </div>
                                                                                         <div class="content">
@@ -777,7 +861,7 @@
                                                                         <div class="payment-option-item checked">
                                                                             <header class="head d-flex align-items-center" data-toggle="collapse" data-target="#payment-1">
                                                                                 <div class="custom-control custom-radio yallow">
-                                                                                    <input type="radio" checked id="option1" name="payment" class="custom-control-input">
+                                                                                    <input type="radio" checked id="option1" name="payment_type" value="1" class="custom-control-input">
                                                                                     <label class="custom-control-label" for="option1">
                                                                                         <h3>@lang('site.payment_gateway')</h3>
                                                                                     </label>
@@ -796,16 +880,16 @@
 {{--                                                                                </div>--}}
 {{--                                                                            </div>--}}
                                                                         </div>
-                                                                        <div class="payment-option-item checked">
-                                                                            <header class="head d-flex align-items-center" data-toggle="collapse" data-target="#payment-1">
-                                                                                <div class="custom-control custom-radio yallow">
-                                                                                    <input type="radio" id="option2" name="payment" class="custom-control-input">
-                                                                                    <label class="custom-control-label" for="option2">
-                                                                                        <h3>@lang('site.payment_cash')</h3>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </header>
-                                                                        </div>
+{{--                                                                        <div class="payment-option-item checked">--}}
+{{--                                                                            <header class="head d-flex align-items-center" data-toggle="collapse" data-target="#payment-1">--}}
+{{--                                                                                <div class="custom-control custom-radio yallow">--}}
+{{--                                                                                    <input type="radio" id="option2" name="payment_type" value="2" class="custom-control-input">--}}
+{{--                                                                                    <label class="custom-control-label" for="option2">--}}
+{{--                                                                                        <h3>@lang('site.payment_cash')</h3>--}}
+{{--                                                                                    </label>--}}
+{{--                                                                                </div>--}}
+{{--                                                                            </header>--}}
+{{--                                                                        </div>--}}
 
                                                                     </div>
                                                                 </section>
@@ -852,7 +936,7 @@
 {{--                                                        <button id="tap-btn" style="float: @if(app()->getLocale() == 'ar') right @else left @endif">@lang('site.submit')</button>--}}
                                                         <div class="add-service-footer d-flex align-items-center justify-content-between" style="margin-top: 10px">
                                                             <a href="javascript:;" class="form-wizard-previous-btn btn btn-light">@lang('site.previous')</a>
-                                                            <button type="submit" class="btn btn-tamm add_service_overview_button">@lang('site.submit')</button>
+                                                            <button type="button" class="btn btn-tamm add_service_overview_button" id="submit_btn">@lang('site.submit')</button>
                                                         </div>
                                                     </div>
                                                 </div>

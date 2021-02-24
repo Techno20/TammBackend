@@ -121,7 +121,6 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('default', [HelperController::class, 'getDefault']);
         Route::get('lists', [HelperController::class, 'getLists']);
         Route::post('contact-us', [HelperController::class, 'postContactUs']);
-
     });
 });
 

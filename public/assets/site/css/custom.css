@@ -1,0 +1,70 @@
+.main-categories-slider .owl-stage {
+    width: 100% !important;
+}
+
+.paginator-holder ul li a.activated,
+.paginator-holder ul li a:hover {
+    color: #FCB52D !important;
+}
+
+.paginator-holder ul li a.activated span {
+    background-color: #FCB52D;
+    color: #FFF;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default .select2-selection--multiple {
+    border-color: #ccc !important;
+    height: 80px !important;
+}
+
+.select2-keywords {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    height: 20px;
+}
+
+.btn-add-new-record {
+    background-color: var(--green);
+    color: #fff;
+}
+
+.btn-remove-record {
+    background-color: var(--red);
+    color: #fff;
+}
+
+
+.footer-ul-two-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.pagination svg {
+    width: 36px;
+}
+
+.pagination .leading-5 {
+    padding-top: 15px;
+    border-radius: 30px;
+}
+
+.pagination nav {
+    margin: 15px auto 15px auto !important;
+}
+
+.freelancer-info-box .education {
+    border-bottom: 0;
+}
+
+@media (max-width: 990px) {
+    .footer-ul-two-col {
+        display: block;
+    }
+
+    .main-categories-slider .owl-stage {
+        width: 400px !important;
+    }
+}

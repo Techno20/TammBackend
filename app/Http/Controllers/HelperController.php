@@ -15,6 +15,7 @@ use Helper;
 
 class HelperController extends Controller
 {
+    
     /**
      * Get default parameters
      * 
@@ -73,4 +74,6 @@ class HelperController extends Controller
         return Helper::responseData('email_sent',true,false,__('default.success_message.email_sent'));
     }
 
+    
 }
+

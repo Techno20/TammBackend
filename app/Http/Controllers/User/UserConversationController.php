@@ -52,7 +52,8 @@ class UserConversationController extends Controller
     public function getList()
     {
       $Conversations = Conversation::selectCard()->authorized()->paginate(50);
-      return Helper::responseData('success',true,$Conversations);
+//      return Helper::responseData('success',true,$Conversations);
+       return view('site.user.dashboard.messages')->with('conversations',$Conversations);
     }
 
     /**

@@ -13,19 +13,26 @@
             <div class="container">
                 <div class="wrapper d-flex align-items-xl-center align-items-end justify-content-center">
                     <div class="info">
-                        <h2 class="wow fadeInUp" data-wow-duration="1.5s">Get your business done, easily, starting at just <span>50 SAR</span></h2>
-                        <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">Work with the best freelance talent from around the world on our secure,flexible and cost-effective platform.</p>
+                        <h2 class="wow fadeInUp" data-wow-duration="1.5s">@lang('site.slide_title')</h2>
+                        <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">@lang('site.slide_desc')</p>
                         <div class="search-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
                             <div class="search-form">
-                                <input type="text" class="form-control" placeholder="What are you looking for?" name="">
-                                <button type="button" class="btn"><i class="fa fa-search"></i></button>
+                                <form action="{{ url('search') }}" method="get">
+                                    <input type="text" class="form-control" placeholder="@lang('site.search_placeholder')" name="s">
+                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
                             <div class="skills">
-                                Try skills like:
-                                <span>Desgin</span>
-                                <span>Branding</span>
-                                <span>Shopify</span>
-                                <span>UI/UX Design</span>
+                                @lang('site.try_skills'):
+                                @if(isset($result['categories']) && !empty($result['categories']) && count($result['categories']) > 0)
+                                    @foreach($result['categories'] as $key => $value)
+                                        @if($key < 4)
+                                        <span>{{ $value->name }}</span>
+                                        @else
+                                            @break
+                                        @endif
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -36,214 +43,133 @@
             </div>
         </section>
         <!-- h-main-section -->
+
+        @if(isset($result['top_rated_services']) && !empty($result['top_rated_services']) && count($result['top_rated_services']) > 0)
         <!-- popular-services-section -->
         <section class="popular-services-section">
             <div class="container wow fadeInUp" data-wow-duration="1.5s">
                 <header class="sec-header-1">
-                    <h2>Popular Services</h2>
+                    <h2>@lang('site.popular_services')</h2>
                 </header>
                 <div class="sec-content">
                     <div class="services-cat-slider-1 owl-carousel owl-navs-with-header">
+                        @foreach($result['top_rated_services'] as $key => $value)
+
                         <div class="item">
                             <div class="service-cat-item">
-                                <a href="">
+                                <a href="{{ url('service/show/'.$value->id) }}">
                                     <figure>
-                                        <img src="{{ asset('assets/site/images/services/cat-1.png') }}">
+                                        @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                            <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                        @else
+                                            <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
+                                        @endif
+                                        {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                            {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                        {{--@else--}}
+                                            {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="">--}}
+                                        {{--@endif--}}
                                     </figure>
                                     <div class="caption">
-                                        <h3>Illustration</h3>
-                                        <p>Draw your imagination</p>
+                                        <h3>{{ $value->title }}</h3>
+                                        <p>{{ \Str::limit($value->description , 70)}}</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="service-cat-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/cat-2.png') }}">
-                                    </figure>
-                                    <div class="caption">
-                                        <h3>Design</h3>
-                                        <p>Color your dreams</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-cat-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/cat-3.png') }}">
-                                    </figure>
-                                    <div class="caption">
-                                        <h3>Data Entry</h3>
-                                        <p>Learn your business</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-cat-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/cat-4.png') }}">
-                                    </figure>
-                                    <div class="caption">
-                                        <h3>Voice Over</h3>
-                                        <p>Color your dreams</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-cat-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/cat-5.png') }}">
-                                    </figure>
-                                    <div class="caption">
-                                        <h3>Branding</h3>
-                                        <p>Achiave your dream</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="service-cat-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/services/cat-5.png') }}">
-                                    </figure>
-                                    <div class="caption">
-                                        <h3>Branding</h3>
-                                        <p>Achiave your dream</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+
+                        @endforeach
                     </div>
                 </div>
             </div>
         </section>
         <!-- popular-services-section -->
+        @endif
 
+        @if(isset($result['top_rated_seller']) && !empty($result['top_rated_seller']) && count($result['top_rated_seller']) > 0)
         <!-- top-rated-seller-section -->
         <section class="top-rated-seller-section">
             <div class="container wow fadeInUp" data-wow-duration="1.5s">
                 <header class="sec-header-1">
-                    <h2>Top Rated Seller</h2>
+                    <h2>@lang('site.top_rated_seller')</h2>
                 </header>
                 <div class="sec-content">
                     <div class="top-rated-seller-slider owl-carousel owl-navs-with-header">
-                        <div class="item item-lg">
-                            <div class="seller-item-2">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/sellers/item-lg-1.png') }}" class="main-img">
-                                    </figure>
-                                    <div class="details d-flex align-items-center">
-                                        <div class="seller">
-                                            <img src="{{ asset('assets/site/images/sellers/u-1.png') }}" class="author-img">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                        </div>
-                                        <div class="content">
-                                            <h3>Emilee Simchenko</h3>
-                                            <p class="job">UI/UX Designer</p>
-                                            <p class="brief">As a UX and Web designer with years of building all types of unique..</p>
-                                        </div>
+                        @foreach($result['top_rated_seller'] as $key => $value)
+                            @if($key == 0)
+                                <div class="item item-lg">
+                                    <div class="seller-item-2">
+                                        <a href="{{ url('service/show/'.$value->id) }}">
+                                            <figure>
+                                                {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                    {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                                {{--@else--}}
+                                                    {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                                {{--@endif--}}
+                                                @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                    <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                                @else
+                                                    <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
+                                                @endif
+                                            </figure>
+                                            <div class="details d-flex align-items-center">
+                                                <div class="seller">
+                                                    <img src="{{ $value->user->avatar_full_path }}" class="author-img">
+                                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                </div>
+                                                <div class="content">
+                                                    <h3>{{ $value->user->name }}</h3>
+                                                    <p class="job">{{ $value->title }}</p>
+                                                    <p class="brief">{{ \Str::limit($value->description , 70)}}</p>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                </div>
+                            @else
+                            <div class="item">
+                                <div class="seller-item-1">
+                                    <a href="{{ url('service/show/'.$value->id) }}">
+                                        <figure>
+                                            {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                            {{--@else--}}
+                                                {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                            {{--@endif--}}
+                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                            @else
+                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
+                                            @endif
+                                        </figure>
+                                        <div class="details">
+                                            <div class="seller">
+                                                <img src="{{ $value->user->avatar_full_path }}" class="author-img">
+                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                            </div>
+                                            <div class="content">
+                                                <h3>{{ $value->user->name }}</h3>
+                                                <p class="job">{{ $value->title }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="seller-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/sellers/item-1.png') }}" class="main-img">
-                                    </figure>
-                                    <div class="details">
-                                        <div class="seller">
-                                            <img src="{{ asset('assets/site/images/sellers/u-2.png') }}" class="author-img">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                        </div>
-                                        <div class="content">
-                                            <h3>Jenny Murtaugh</h3>
-                                            <p class="job">CEO & Mareketing </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="seller-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/sellers/item-2.png') }}" class="main-img">
-                                    </figure>
-                                    <div class="details">
-                                        <div class="seller">
-                                            <img src="{{ asset('assets/site/images/sellers/u-3.png') }}" class="author-img">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                        </div>
-                                        <div class="content">
-                                            <h3>Beth Murphy</h3>
-                                            <p class="job">Brand Designer</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="seller-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/sellers/item-3.png') }}" class="main-img">
-                                    </figure>
-                                    <div class="details">
-                                        <div class="seller">
-                                            <img src="{{ asset('assets/site/images/sellers/u-4.png') }}" class="author-img">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                        </div>
-                                        <div class="content">
-                                            <h3>Marysa Labrone</h3>
-                                            <p class="job">DevOps Engineer</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="seller-item-1">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/sellers/item-3.png') }}" class="main-img">
-                                    </figure>
-                                    <div class="details">
-                                        <div class="seller">
-                                            <img src="{{ asset('assets/site/images/sellers/u-4.png') }}" class="author-img">
-                                            <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                        </div>
-                                        <div class="content">
-                                            <h3>Marysa Labrone</h3>
-                                            <p class="job">DevOps Engineer</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
         </section>
         <!-- top-rated-seller-section -->
+        @endif
 
         @if(isset($result['top_selling_services']) && !empty($result['top_selling_services']) && count($result['top_selling_services']) > 0)
         <!-- best-selling-services-section -->
         <section class="best-selling-services-section">
             <div class="container wow fadeInUp" data-wow-duration="1.5s">
                 <header class="sec-header-1">
-                    <h2>Top Selling Services</h2>
+                    <h2>@lang('site.top_selling_services')</h2>
                 </header>
                 <div class="sec-content">
                     <div class="services-slider-1 owl-carousel owl-navs-with-header">
@@ -252,20 +178,21 @@
                                 <div class="service-item-1">
                                     <a href="{{ url('service/show/'.$value->id) }}">
                                         <figure>
-                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))
-                                                <img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">
+                                            {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
+                                                {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
+                                            {{--@else--}}
+                                                {{--<img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">--}}
+                                            {{--@endif--}}
+                                            @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
+                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                             @else
-                                                <img src="{{ asset('assets/site/images/services/s-1.png') }}" class="main-img">
+                                                <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                             @endif
                                             <div class="caption media">
                                                 @if(isset($value->user) && !empty($value->user))
-                                                    @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
-                                                        <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
-                                                    @else
-                                                        <img src="{{ asset('assets/site/images/services/u-1.png') }}" class="author-img">
-                                                    @endif
+                                                    <img src="{{ $value->user->avatar_full_path }}" class="author-img">
                                                     <div class="media-body">
-                                                        <p>Creator</p>
+{{--                                                        <p>Creator</p>--}}
                                                         <h4>{{ $value->user->name }}</h4>
                                                     </div>
                                                 @endif
@@ -292,6 +219,7 @@
         <!-- best-selling-services-section -->
         @endif
 
+        @if(isset($result['how_we_work']) && !empty($result['how_we_work']) && $result['how_we_work']->count() > 0)
         <!-- how-its-work-section -->
         <section class="how-its-work-section">
             <div class="container">
@@ -304,31 +232,19 @@
                     <div class="col-lg-5">
                         <div class="info">
                             <header class="wow fadeInUp" data-wow-duration="1.5s">
-                                <h2>How it’s Work</h2>
-                                <p>Dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
+                                <h2>@lang('site.how_it_work')</h2>
+                                <p>@lang('site.how_it_work_desc')</p>
                             </header>
                             <div class="steps">
+                                @foreach($result['how_we_work'] as $key => $value)
                                 <div class="step d-flex wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">
                                     <i class="fas fa-play"></i>
                                     <div class="content">
-                                        <h3>Find your business</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                        <h3>{{ $value->name }}</h3>
+                                        <p>{{ $value->text }}</p>
                                     </div>
                                 </div>
-                                <div class="step d-flex wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.3s">
-                                    <i class="fas fa-play"></i>
-                                    <div class="content">
-                                        <h3>Choose the best service</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                </div>
-                                <div class="step d-flex wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                                    <i class="fas fa-play"></i>
-                                    <div class="content">
-                                        <h3>Pay safley and got your service</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -337,147 +253,41 @@
             </div>
         </section>
         <!-- how-its-work-section -->
+        @endif
 
+        @if(isset($result['categories']) && !empty($result['categories']) && count($result['categories']) > 0)
         <!-- marketplaces-section -->
         <section class="marketplaces-section">
             <div class="container wow fadeInUp" data-wow-duration="1.5s">
                 <header class="sec-header-1">
-                    <h2>Explore The Marketplace</h2>
+                    <h2>@lang('site.explore_marketplace')</h2>
                 </header>
                 <div class="sec-content">
                     <div class="marketplace-slider-1 owl-carousel owl-navs-with-header">
+                        @foreach($result['categories'] as $key => $value)
                         <div class="item">
                             <div class="marketplace-item">
                                 <a href="">
                                     <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-1.png') }}" class="img-fluid">
+                                        @if(isset($value->image) && !empty($value->image) &&file_exists(asset('uploads/categories/'.$value->image)))
+                                            <img src="{{ asset('uploads/users/'.$value->image) }}" class="img-fluid">
+                                        @else
+                                            <img src="{{ asset('assets/site/images/marketplaces/p-1.png') }}" class="img-fluid">
+                                        @endif
                                     </figure>
-                                    <h3>Graphic Design</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-5.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Video & Animation</h3>
+                                    <h3>{{ $value->name }}</h3>
                                 </a>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-2.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Digital Marketing</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-6.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Business</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-3.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Writing & Translation</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-7.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Programming & Tech</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-4.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Music & Audio</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-9.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Lifestyle</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-5.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Illustration</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-10.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Book Editing</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-5.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Illustration</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-10.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Book Editing</h3>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-5.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Illustration</h3>
-                                </a>
-                            </div>
-                            <div class="marketplace-item">
-                                <a href="">
-                                    <figure>
-                                        <img src="{{ asset('assets/site/images/marketplaces/p-10.png') }}" class="img-fluid">
-                                    </figure>
-                                    <h3>Book Editing</h3>
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </section>
         <!-- marketplaces-section -->
+        @endif
 
+        @if(isset($result['says']) && !empty($result['says']) && count($result['says']) > 0)
         <!-- testimonials-section -->
         <section class="testimonials-section">
             <div class="container">
@@ -485,48 +295,31 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="info">
-                                <h2 class="wow fadeInUp" data-wow-duration="1.5s">What Our Customer Are <span>Saying</span></h2>
-                                <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">Work with the best freelance talent from around the world on our secure,flexible and cost-effective platform.</p>
+                                <h2 class="wow fadeInUp" data-wow-duration="1.5s">@lang('site.customer_saying')</h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">@lang('site.customer_saying_desc')</p>
                             </div>
                         </div>
                         <div class="col-lg-6 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".3s">
+
+                                @foreach($result['says'] as $key => $value)
                             <div class="testimonials-slider owl-carousel">
                                 <div class="testimonial-item">
                                     <div class="user-sec media">
-                                        <img src="{{ asset('assets/site/images/u-1.png') }}">
+                                        @if(isset($value->image) && !empty($value->image) && Storage::exists('says/'.$value->image))
+                                            <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}">
+                                        @else
+                                            <img src="{{ asset('assets/site/images/user.png') }}">
+                                        @endif
                                         <div class="media-body">
-                                            <h4>Ghassan Hani</h4>
-                                            <p>Product Designer @ REF Group</p>
+                                            <h4>{{ $value->name }}</h4>
+                                            <p>{{ $value->postion }}</p>
                                         </div>
                                     </div>
                                     <div class="content">
-                                        “Great website ✌️ AI Test, 3000 programs, 200 institutions, 5 continents, Free and paid education opportunities, and one common application.”
+                                        {{ $value->text }}
                                     </div>
                                 </div>
-                                <div class="testimonial-item">
-                                    <div class="user-sec media">
-                                        <img src="{{ asset('assets/site/images/u-1.png') }}">
-                                        <div class="media-body">
-                                            <h4>Ghassan Hani</h4>
-                                            <p>Product Designer @ REF Group</p>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        “Great website ✌️ AI Test, 3000 programs, 200 institutions, 5 continents, Free and paid education opportunities, and one common application.”
-                                    </div>
-                                </div>
-                                <div class="testimonial-item">
-                                    <div class="user-sec media">
-                                        <img src="{{ asset('assets/site/images/u-1.png') }}">
-                                        <div class="media-body">
-                                            <h4>Ghassan Hani</h4>
-                                            <p>Product Designer @ REF Group</p>
-                                        </div>
-                                    </div>
-                                    <div class="content">
-                                        “Great website ✌️ AI Test, 3000 programs, 200 institutions, 5 continents, Free and paid education opportunities, and one common application.”
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -534,6 +327,7 @@
             </div>
         </section>
         <!-- testimonials-section -->
+        @endif
 
         <!-- call-action-1-section -->
         <section class="call-action-1-section">
@@ -547,8 +341,8 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="info wow fadeInUp" data-wow-duration="1.5s">
-                                <h2>Find the talent needed to get your business <span>growing</span>.</h2>
-                                <a href="" class="btn btn-yallow">Let’s Start</a>
+                                <h2>@lang('site.find_talent_needed')</h2>
+                                <a href="{{ url('service/categories') }}" class="btn btn-yallow">@lang('site.lets_start')</a>
                             </div>
                         </div>
 

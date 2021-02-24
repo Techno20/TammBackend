@@ -109,6 +109,10 @@ class User extends Authenticatable implements JWTSubject
     public function Orders(){
         return $this->hasMany('App\Models\Order');
     }
+    // Orders
+    public function CompleteOrders(){
+        return $this->hasMany('App\Models\Order')->where('status','delivered');
+    }
 
     // Last Delivered Order
     public function LastDeliveredOrder(){
@@ -123,6 +127,10 @@ class User extends Authenticatable implements JWTSubject
     // Bank
     public function Bank(){
         return $this->belongsTo('App\Models\Bank')->selectCard();
+    }
+    // Bank
+    public function Country(){
+        return $this->belongsTo('App\Models\Country')->selectCard();
     }
 
     /* START ATTRIBUTES */
@@ -148,10 +156,11 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getAvatarFullPathAttribute()
     {
-        if ($this->avatar) {
+        if ($this->avatar && Storage::exists('users/avatars/'.$this->avatar)) {
             $avatar = Storage::url('users/avatars/'.$this->avatar);
         }else {
-            $avatar = asset('assets/images/no-avatar.png');
+//            $avatar = asset('assets/images/no-avatar.png');
+            $avatar = asset('assets/site/images/user.png');
         }
         return $avatar;
     }

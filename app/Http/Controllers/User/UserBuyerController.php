@@ -16,16 +16,17 @@ class UserBuyerController extends Controller
      */
     public function getList()
     {
-      $Buyers = User::selectCard()->whereHas('Orders',function($Orders){
+      $Buyers = User::selectCard()->whereHas('CompleteOrders',function($Orders){
         return $Orders->whereHas('Service',function($Service){
           return $Service->where('user_id',auth()->user()->id);
         });
-      })->withCount(['Orders' => function($Orders){
+      })->withCount(['CompleteOrders' => function($Orders){
         return $Orders->whereHas('Service',function($Service){
           return $Service->where('user_id',auth()->user()->id);
         });
       }])->paginate(50);
-      return Helper::responseData('success',true,$Buyers);
+//      return Helper::responseData('success',true,$Buyers);
+        return view('site.user.dashboard.buyers')->with('buyers',$Buyers);
     }
 
     

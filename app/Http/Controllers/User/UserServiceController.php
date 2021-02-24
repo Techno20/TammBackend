@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UploaderController;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -11,13 +12,15 @@ use App\Models\ServiceExtra;
 use App\Models\OrderExtra;
 use App\Models\User;
 use Helper, Storage;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class UserServiceController extends Controller
 {
 
     /**
      * Get services list
-     * 
+     *
      * @param Request $q
      */
     public function getList(Request $q)
@@ -27,7 +30,7 @@ class UserServiceController extends Controller
         /* Filters */
 
         // By main category type
-        if (request()->main_category_type) {
+        if (request()->main_category_type && request()->main_category_type != 'all') {
             $Services = $Services->where('main_category_type',request()->main_category_type);
         }
 
@@ -66,13 +69,14 @@ class UserServiceController extends Controller
             $Services = $Services->orderBy('id','DESC');
         }
 
-        $Services = $Services->paginate(50)->toArray();
-        return Helper::responseData('success',true,$Services);
+        $Services = $Services->with('Category')->paginate(50);
+//        return Helper::responseData('success',true,$Services);
+        return view('site.user.dashboard.services')->with('services',$Services);
     }
 
     /**
      * Get service
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */
@@ -89,15 +93,15 @@ class UserServiceController extends Controller
 
     /**
      * Save service
-     * 
+     *
      * @param mixed $serviceId
      * @param Request $q
      */
     public function Save($serviceId = null,Request $q)
     {
         $validator = validator()->make($q->all(), [
-            'main_category_type' => ['required',new \App\Rules\MainCategoryTypeRule],
-            'category_id' => ['required',new \App\Rules\CategoryRule($q->main_category_type)],
+            'main_category_type' => ['required',Rule::in(['all','technical','training','consultation'])],
+            'category_id' => ['required', Rule::exists('categories', 'id')],
             'title' => 'required|max:255',
             'is_active' => 'boolean',
             'basic_price' => 'numeric',
@@ -106,15 +110,17 @@ class UserServiceController extends Controller
             'basic_services_list' => 'array',
             'standard_services_list' => 'array',
             'premium_services_list' => 'array',
-            'extras' => 'array',
+//            'extras' => 'array',
+            'extras_title' => 'array',
+            'extras_price' => 'array',
             'gallery' => 'array'
         ]);
         if($validator->fails()) {
-        return Helper::responseValidationError($validator->messages());
+            return back()->withInput();
         }
-
+        $serviceId = $q['id'];
         if($serviceId){
-            $Service = Service::where('id',$serviceId)->authorized()->with('Extras')->first();
+            $Service = Service::where('id',$serviceId)->where('user_id', auth()->id())->with('Extras')->first();
         }else {
             $Service = new Service;
             $Service->user_id = auth()->user()->id;
@@ -152,10 +158,16 @@ class UserServiceController extends Controller
 
             $galleryItems = [];
             foreach($q->gallery as $galleryItem){
-                if(isset($galleryItem['path']) && Storage::exists('services/gallery/'.$galleryItem['path'])){
+                $upload = new UploaderController();
+//                $galleryItemResponse = $upload->postUpload('service-image',$q);
+                $upload->folder = 'services/gallery';
+                $upload->thumbFolder = 'services/thumbs';
+                $galleryItemResponse = $upload->uploadSingle($galleryItem,true,1000,0,320);
+//                $galleryItemResponse = $upload->postUpload('service-image',$q);
+                if(isset($galleryItemResponse['path']) && Storage::exists('services/gallery/'.$galleryItemResponse['path'])){
                     $galleryItems[] = [
                         'service_id' => $Service->id,
-                        'path' => $galleryItem['path']
+                        'path' => $galleryItemResponse['path']
                     ];
                 }
             }
@@ -184,33 +196,36 @@ class UserServiceController extends Controller
             }
         }
         // Add or Update service extras
-        if(is_array($q->extras) && count($q->extras)){
+//        dd($q->extras);
+        if(is_array($q->extras_title) && count($q->extras_title) && is_array($q->extras_price) && count($q->extras_price)){
             $insertExtraServices = [];
-            foreach($q->extras as $extraService){
-                if(isset($extraService['title'])){
-                    $servicePrice = (isset($extraService['price']) && is_numeric($extraService['price'])) ? $extraService['price'] : 0;
+            $prices = $q->extras_price;
+            foreach($q->extras_title as $key => $value){
+                if(isset($value) && !empty($value)){
+                    $servicePrice = (isset($prices[$key]) && is_numeric($prices[$key])) ? $prices[$key] : 0;
                     $saveExtraDetails = [
                         'service_id' => $Service->id,
-                        'title' => $extraService['title'],
+                        'title' => $value,
                         'price' => $servicePrice
                     ];
-                    if(isset($extraService['id'])){
-                        $updateServiceExtra = ServiceExtra::where('id',$extraService['id'])->where('service_id',$Service->id)->update($saveExtraDetails);
-                    }else {
+//                    if(isset($extraService['id'])){
+//                        $updateServiceExtra = ServiceExtra::where('id',$extraService['id'])->where('service_id',$Service->id)->update($saveExtraDetails);
+//                    }else {
                         $insertExtraServices[] = $saveExtraDetails;
-                    }
+//                    }
                 }
             }
             $ServiceExtra = ServiceExtra::insert($insertExtraServices);
         }
         $Service = Service::where('id',$serviceId)->with('Extras')->authorized()->first();
 
-        return Helper::responseData('service_saved',true,$Service,__('default.success_message.service_saved'));
+//        return Helper::responseData('service_saved',true,$Service,__('default.success_message.service_saved'));
+        return Redirect::to('user/service/list');
     }
 
     /**
      * Delete service
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */
@@ -231,7 +246,7 @@ class UserServiceController extends Controller
 
     /**
      * Activation
-     * 
+     *
      * @param integer $serviceId
      * @param Request $q
      */
@@ -252,5 +267,21 @@ class UserServiceController extends Controller
         }else {
             return Helper::responseData('success',false);
         }
+    }
+
+    /**
+     * new Code By Mohammed Ali Fnannah
+     * add new services page
+     */
+
+    public function getForm(Request $request,$service_id = null){
+        $service = null;
+        if(isset($service_id) && !empty($service_id) && intval($service_id) > 0){
+            $service = Service::where('id',$service_id)->where('user_id',auth()->user()->id)->first();
+        }
+        return view('site.user.service.create')->with('service',$service);
+    }
+    public function getPricing(Request $request){
+        return view('site.user.service.pricing');
     }
 }

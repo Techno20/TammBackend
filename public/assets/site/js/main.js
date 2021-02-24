@@ -450,7 +450,7 @@ $(document).ready(function () {
     $('.main-categories-slider').owlCarousel({
         // center: true,
         autoWidth:true,
-        loop: true,
+        loop: false,
         rtl: false,
         nav:true,
         navText: ["<i class='fas fa-chevron-left' title='Prev'></i>","<i class='fas fa-chevron-right' title='Next'></i>"],      

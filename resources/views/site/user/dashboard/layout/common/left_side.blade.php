@@ -146,7 +146,7 @@
             <img src="{{ asset('assets/site/images/dashboard/bottom.png') }}" alt="" title="" class="img-fluid" />
 
             <p>@lang('site.learn_more_about_tamm')</p>
-            <a href="{{ url('/') }}" class="btn btn-yallow btn-block">@lang('site.go_now')</a>
+            <a href="https://tamm.work/blog/" class="btn btn-yallow btn-block">@lang('site.go_now')</a>
         </div>
     </div>
 </aside>

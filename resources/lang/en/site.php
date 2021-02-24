@@ -224,6 +224,6 @@ return [
     'Messages'=> 'Messages',
     'All_Conversations'=>'كل المحادثات',
 
-
+    'Earned'=>'الارباح',
 
 ];

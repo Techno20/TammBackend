@@ -221,6 +221,10 @@ return [
     
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
+
+
+    'Earned'=>'الارباح',
+    
    
     
 

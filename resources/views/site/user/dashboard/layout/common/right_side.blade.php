@@ -10,7 +10,7 @@
         </div>
         <div class="summary">
             <div class="item d-flex align-items-center justify-content-between">
-                <label>Earned in November</label>
+                <label>{{__('site.Earned')}}</label>
                 <p>324 SAR</p>
             </div>
             <div class="item d-flex align-items-center justify-content-between">

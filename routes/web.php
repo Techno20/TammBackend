@@ -104,7 +104,8 @@ Route::group(['middleware' => 'api-localization'],function(){
     Route::group(['prefix' => 'service'],function(){
         Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);
         Route::get('list/{category?}', [ServiceController::class, 'getList']);
-        Route::get('show/{service_id}/recipient_id/{recipient_id}', [ServiceController::class, 'getShow']);
+        // Route::get('show/{service_id}/recipient_id/{recipient_id}', [ServiceController::class, 'getShow']);
+        Route::get('show/{service_id}', [ServiceController::class, 'getShow']);
         
         Route::get('reviews/{service_id}', [ServiceController::class, 'getReviews']);
     });

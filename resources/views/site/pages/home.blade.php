@@ -58,7 +58,7 @@
                         {{-- {{$value->user_id}} --}}
                         <div class="item">
                             <div class="service-cat-item">
-                                <a href="{{ url('service/show/'.$value->id.'/'.'recipient_id'.'/'.$value->user_id.'/') }}">
+                                <a href="{{ url('service/show/'.$value->id) }}">
                                     <figure>
                                         @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
                                             <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
@@ -100,7 +100,7 @@
                             @if($key == 0)
                                 <div class="item item-lg">
                                     <div class="seller-item-2">
-                                        <a href="{{ url('service/show/'.$value->id.'/'.'recipient_id'.'/'.$value->user_id.'/') }}">
+                                        <a href="{{ url('service/show/'.$value->id) }}">
                                             <figure>
                                                 {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
                                                     {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
@@ -130,7 +130,7 @@
                             @else
                             <div class="item">
                                 <div class="seller-item-1">
-                                    <a href="{{ url('service/show/'.$value->id.'/'.'recipient_id'.'/'.$value->user_id.'/') }}">
+                                    <a href="{{ url('service/show/'.$value->id) }}">
                                         <figure>
                                             {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
                                                 {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}
@@ -177,7 +177,7 @@
                         @foreach($result['top_selling_services'] as $key => $value)
                         <div class="item">
                                 <div class="service-item-1">
-                                    <a href="{{ url('service/show/'.$value->id.'/'.'recipient_id'.'/'.$value->user_id.'/') }}">
+                                    <a href="{{ url('service/show/'.$value->id) }}">
                                         <figure>
                                             {{--@if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && file_exists(asset('uploads/services/'.$value->image->path)))--}}
                                                 {{--<img src="{{ asset('uploads/services/'.$value->image->path) }}" class="main-img">--}}

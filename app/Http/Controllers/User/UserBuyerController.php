@@ -15,11 +15,11 @@ class UserBuyerController extends Controller
      */
     public function getList()
     {
-        $Buyers = User::query()->selectCard()->whereHas('CompleteOrders', function ($Orders) {
+        $Buyers = User::query()->selectCard()->whereHas('Orders', function ($Orders) {
             return $Orders->whereHas('Service', function ($Service) {
                 return $Service->where('user_id', auth()->user()->id);
             });
-        })->withCount(['CompleteOrders' => function ($Orders) {
+        })->withCount(['Orders' => function ($Orders) {
             return $Orders->whereHas('Service', function ($Service) {
                 return $Service->where('user_id', auth()->user()->id);
             });

@@ -13,10 +13,10 @@
                 <label>{{__('site.Earned')}}</label>
                 <p>324 SAR</p>
             </div>
-            <div class="item d-flex align-items-center justify-content-between">
+            {{-- <div class="item d-flex align-items-center justify-content-between">
                 <label>Response Time</label>
                 <p class="yallow">1 hour</p>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="user-statistics-box">

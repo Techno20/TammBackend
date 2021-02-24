@@ -176,17 +176,17 @@
             @if(auth()->guard('web')->check())
             <div class="auth-header-tools">
                 <a href="" class="btn btn-gray switch-account"><span>@lang('site.welcome')</span>:{{ auth()->guard('web')->user()->name }}</a>
-                <a href="" class="btn btn-gray notification-btn">
+                {{-- <a href="" class="btn btn-gray notification-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13.585" height="15.863" viewBox="0 0 13.585 15.863">
                         <g id="bell" transform="translate(0)">
                             <path id="Combined_Shape" data-name="Combined Shape" d="M3.97,13.542H.742l-.05.007a.587.587,0,0,1-.642-.518A8.151,8.151,0,0,1,0,12.142v-3.3a6.964,6.964,0,0,1,6.23-7.152V.581a.58.58,0,1,1,1.16,0v1.1a6.539,6.539,0,0,1,4.217,2.1,7.374,7.374,0,0,1,1.974,5.061v3.3a8.179,8.179,0,0,1-.047.89.586.586,0,0,1-.139.315.579.579,0,0,1-.442.2h-3.3a2.9,2.9,0,0,1-5.688,0ZM6.813,14.7a1.742,1.742,0,0,0,1.642-1.161H5.172A1.742,1.742,0,0,0,6.813,14.7Zm5.6-2.322c.005-.083.009-.168.009-.256V8.837A6.193,6.193,0,0,0,10.76,4.566,5.418,5.418,0,0,0,6.813,2.809,5.843,5.843,0,0,0,1.2,8.837v3.544Z" fill="currentcolor"/>
                         </g>
                     </svg>
-                </a>
+                </a> --}}
                 <div class="user-quick-menu d-inline-block">
                     <a href="" class="user">
                         <img src="{{ asset('assets/site/images/user.png') }}" alt="">
-                        <span></span>
+                        {{-- <span></span> --}}
                     </a>
                     <div class="h-user-quick-menu-dropdown">
                         <div class="row no-gutters">
@@ -267,9 +267,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="javascript:void(0)" class="btn btn-gray search-btn">
+                {{-- <a href="javascript:void(0)" class="btn btn-gray search-btn">
                     <i class="fa fa-search fa-fw"></i>
-                </a>
+                </a> --}}
             </div>
             @else
             <div class="header-tools">

@@ -18,12 +18,12 @@
                         <button type="button" id="openSettingSidebar" class="btn setting-sidebar-toggle"><i class="fas fa-bars"></i></button>
                         <div class="account-setting-body">
                             <header class="setting-body-header">
-                                <h1>Change Password</h1>
+                                <h1>{{__('site.Change Password')}}</h1>
                             </header>
                             <div class="sec-content">
                                 <div class="setting-security-sec gray-form">
                                     <div class="change-password ">
-                                        <div class="form-row">
+                                        {{-- <div class="form-row">
                                             <div class="col-lg-4">
                                                 <label>Current Password</label>
                                             </div>
@@ -32,10 +32,10 @@
                                                     <input type="text" class="form-control" name="">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-row">
                                             <div class="col-lg-4">
-                                                <label>New Password</label>
+                                                <label>{{__('site.New Password')}}</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
@@ -45,23 +45,23 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-4">
-                                                <label>Confirm Password</label>
+                                                <label>{{__('site.Confirm Password')}}</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="">
                                                     <small class="form-text">
-                                                        8 characters or longer. Combine upper and lowercase letters and numbers.
+                                                       {{__('site.characters_or_longer')}}
                                                     </small>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="actions text-right">
-                                            <button type="button" class="btn btn-yallow">Save Chages</button>
+                                            <button type="button" class="btn btn-yallow">{{__('site.Save Chages')}}</button>
                                         </div>
                                     </div>
-                                    <div class="additional-info">
+                                    {{-- <div class="additional-info">
                                         <div class="form-row">
                                             <div class="col-lg-4">
                                                 <label>PHONE VERIFICATION</label>
@@ -101,7 +101,7 @@
                                             <button type="button" class="btn btn-white">Cancel</button>
                                             <button type="button" class="btn btn-yallow ml-2">Submit</button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -110,5 +110,6 @@
             </div>
         </section>
         <!-- account-setting-page -->
+        
     </div>
 @endsection

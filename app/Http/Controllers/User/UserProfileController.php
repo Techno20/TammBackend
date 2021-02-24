@@ -115,13 +115,17 @@ class UserProfileController extends Controller
 
     public function updatePassword(Request $request)
     {
+      
       $pass = $request->password;
       $vPass = $request->vpassword;
-      if($pass == $vPass){
+      if($pass === $vPass){
         $user = User::find(auth()->user()->id);
         $user->password = Hash::make($request->password);
         $user->save();
         return back()->with('success',trans('تم اضافة بنجاح'));
+      }else{
+        return back()->with('success',trans('خطأ'));
+
       }
     }
 

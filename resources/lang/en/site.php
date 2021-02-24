@@ -224,6 +224,20 @@ return [
     'Messages'=> 'Messages',
     'All_Conversations'=>'كل المحادثات',
 
-    'Earned'=>'الارباح',
+    'Earned'=>'Earned',
+    'Service_name'=>'Service name',
+    'Order_Date'=>'Order Date',
+    'Due_on'=>'Due on',
+    'Total'=>'Total',
+    'Status'=>'Status',
+    'Account'=> 'Account',
+    'Update your persoal info.'=>'Update your persoal info.',
+    'Security'=>'Security',
+    'check your security and chage password'=>'check your security and chage password',
+    'Change Password'=>'Change Password',
+    'New Password'=>'New Password',
+    'Confirm Password'=>'Confirm Password',
+    'characters_or_longer'=> '8 characters or longer. Combine upper and lowercase letters and numbers.',
+    'Save Chages'=>'Save Chages',
 
 ];

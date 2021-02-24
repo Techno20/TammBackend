@@ -11,13 +11,13 @@
             <div class="container">
                 <div class="wrapper d-flex align-items-center">
                     <div class="links d-flex align-items-center flex-wrap">
-{{--                        <a href="" class="active">Overview</a>--}}
-{{--                        <a href="">Description</a>--}}
-{{--                        <a href="">About The Seller</a>--}}
-{{--                        <a href="">Compare Packages</a>--}}
-{{--                        <a href="">Recommendations</a>--}}
-{{--                        <a href="">FAQ</a>--}}
-{{--                        <a href="">Review</a>--}}
+                        {{--                        <a href="" class="active">Overview</a>--}}
+                        {{--                        <a href="">Description</a>--}}
+                        {{--                        <a href="">About The Seller</a>--}}
+                        {{--                        <a href="">Compare Packages</a>--}}
+                        {{--                        <a href="">Recommendations</a>--}}
+                        {{--                        <a href="">FAQ</a>--}}
+                        {{--                        <a href="">Review</a>--}}
                     </div>
                     <div class="tools d-flex align-items-center ml-auto">
                         <div class="favorites-count">
@@ -176,7 +176,7 @@
                             <div class="plans-tabs">
                                 <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="basic-tab" data-toggle="pill" href="#basic-plan" role="tab" >@lang('site.basic')</a>
+                                        <a class="nav-link active" id="basic-tab" data-toggle="pill" href="#basic-plan" role="tab">@lang('site.basic')</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="standard-tab" data-toggle="pill" href="#standard-plan" role="tab">@lang('site.standard')</a>
@@ -207,84 +207,89 @@
                                             </div>
                                             <?php //$services_list = explode('||',$service->basic_services_list); ?>
                                             @if(count($service->basic_services_list) > 0)
-                                            <ul class="serv-features">
-                                               
-                                                @foreach($service->basic_services_list as $value)
-                                                <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
-                                                @endforeach
-                                            </ul>
+                                                <ul class="serv-features">
+
+                                                    @foreach($service->basic_services_list as $value)
+                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                    @endforeach
+                                                </ul>
                                             @endif
 
-                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=basic') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->basic_price }} @lang('site.sar'))</a>
+                                            @if($service->user_id != auth()->id())
+                                                <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=basic') }}"
+                                                   class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->basic_price }} @lang('site.sar'))</a>
+                                            @endif
                                         </div>
                                     </div>
-                                  <div class="tab-pane fade" id="standard-plan" role="tabpanel">
-                                    <div class="plan-details-wrapper">
-                                        <div class="head d-flex align-items-center justify-content-between">
-                                            <h4>{{ $service->standard_title }}</h4>
-                                            <p class="price">{{ $service->standard_price }} @lang('site.sar')</p>
-                                        </div>
-                                        <div class="brief">
-                                            <p>{{ $service->standard_description }}</p>
-                                        </div>
-                                        <div class="meta d-flex align-items-center flex-wrap">
-                                            <div class="info">
-                                                <i class="far fa-clock"></i>
-                                                <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
+                                    <div class="tab-pane fade" id="standard-plan" role="tabpanel">
+                                        <div class="plan-details-wrapper">
+                                            <div class="head d-flex align-items-center justify-content-between">
+                                                <h4>{{ $service->standard_title }}</h4>
+                                                <p class="price">{{ $service->standard_price }} @lang('site.sar')</p>
                                             </div>
-                                            {{-- <div class="info">
-                                                <i class="fas fa-sync"></i>
-                                                <span>4 Revisions</span>
-                                            </div> --}}
-                                        </div>
-                                        <?php //$services_list = explode('||',$service->basic_services_list); ?>
-                                        @if(count($service->standard_services_list) > 0)
-                                        <ul class="serv-features">
-                                           
-                                            @foreach($service->standard_services_list as $value)
-                                            <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
-                                            @endforeach
-                                        </ul>
-                                        @endif
-
-                                        <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
-                                    </div>
-                                      
-                                  </div>
-                                  <div class="tab-pane fade" id="premium-plan" role="tabpanel">
-                                    <div class="plan-details-wrapper">
-                                        <div class="head d-flex align-items-center justify-content-between">
-                                            <h4>{{ $service->premium_title }}</h4>
-                                            <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
-                                        </div>
-                                        <div class="brief">
-                                            <p>{{ $service->premium_description }}</p>
-                                        </div>
-                                        <div class="meta d-flex align-items-center flex-wrap">
-                                            <div class="info">
-                                                <i class="far fa-clock"></i>
-                                                <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
+                                            <div class="brief">
+                                                <p>{{ $service->standard_description }}</p>
                                             </div>
-                                            {{-- <div class="info">
-                                                <i class="fas fa-sync"></i>
-                                                <span>4 Revisions</span>
-                                            </div> --}}
+                                            <div class="meta d-flex align-items-center flex-wrap">
+                                                <div class="info">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>{{ $service->standard_delivery_days }} @lang('site.delivery_days')</span>
+                                                </div>
+                                                {{-- <div class="info">
+                                                    <i class="fas fa-sync"></i>
+                                                    <span>4 Revisions</span>
+                                                </div> --}}
+                                            </div>
+                                            <?php //$services_list = explode('||',$service->basic_services_list); ?>
+                                            @if(count($service->standard_services_list) > 0)
+                                                <ul class="serv-features">
+
+                                                    @foreach($service->standard_services_list as $value)
+                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+
+                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"
+                                               class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
                                         </div>
-                                        <?php //$services_list = explode('||',$service->basic_services_list); ?>
-                                        @if(count($service->premium_services_list) > 0)
-                                        <ul class="serv-features">
-                                           
-                                            @foreach($service->premium_services_list as $value)
-                                            <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
-                                            @endforeach
-                                        </ul>
-                                        @endif
 
-                                        <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"  class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
                                     </div>
+                                    <div class="tab-pane fade" id="premium-plan" role="tabpanel">
+                                        <div class="plan-details-wrapper">
+                                            <div class="head d-flex align-items-center justify-content-between">
+                                                <h4>{{ $service->premium_title }}</h4>
+                                                <p class="price">{{ $service->premium_price }} @lang('site.sar')</p>
+                                            </div>
+                                            <div class="brief">
+                                                <p>{{ $service->premium_description }}</p>
+                                            </div>
+                                            <div class="meta d-flex align-items-center flex-wrap">
+                                                <div class="info">
+                                                    <i class="far fa-clock"></i>
+                                                    <span>{{ $service->premium_delivery_days }} @lang('site.delivery_days')</span>
+                                                </div>
+                                                {{-- <div class="info">
+                                                    <i class="fas fa-sync"></i>
+                                                    <span>4 Revisions</span>
+                                                </div> --}}
+                                            </div>
+                                            <?php //$services_list = explode('||',$service->basic_services_list); ?>
+                                            @if(count($service->premium_services_list) > 0)
+                                                <ul class="serv-features">
+
+                                                    @foreach($service->premium_services_list as $value)
+                                                        <li class="active"><i class="fas fa-check"></i> {{ $value }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+
+                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"
+                                               class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->premium_price }} @lang('site.sar'))</a>
+                                        </div>
 
 
-                                  </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -303,8 +308,8 @@
         </section>
         <!-- service-details-section -->
 
-        @if($service->user)
-            <!-- services-by-author-section -->
+    @if($service->user)
+        <!-- services-by-author-section -->
             <section class="services-by-author-section">
                 <div class="container">
                     <h2 class="m-title">@lang('site.more_services') <span>{{$service->user->name}}</span></h2>
@@ -371,8 +376,8 @@
         @endif
     </div>
 
-     <!-- send-message modal -->
-     <div class="modal fade custom-modal send-message-modal" id="sendMessageModal" tabindex="-1">
+    <!-- send-message modal -->
+    <div class="modal fade custom-modal send-message-modal" id="sendMessageModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <header class="head d-flex justify-content-between">
@@ -401,7 +406,7 @@
                                             <div class="col-6">
                                                 <div class="time">
                                                     <label>Local Time</label>
-                                                    <p>Mon 18:02</p>   
+                                                    <p>Mon 18:02</p>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -453,131 +458,130 @@
                                     <button type="button" class="btn btn-yallow">{{__('site.send')}}</button>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- send-message modal -->
+        <!-- send-message modal -->
 
-@endsection
-
+        @endsection
 
 
-@section('js')
-    <script type="text/javascript">
 
-        $(document).ready(function() {
+        @section('js')
+            <script type="text/javascript">
 
-            var sync1 = $(".serv-details-slider-1");
-            var sync2 = $(".serv-details-slider-2");
-            var slidesPerPage = 3; //globaly define number of elements per page
-            var syncedSecondary = true;
+                $(document).ready(function () {
 
-            sync1.owlCarousel({
-                items : 1,
-                slideSpeed : 2000,
-                @if(app()->getLocale() == 'ar')
-                rtl:true,
-                @else
-                rtl:false,
-                @endif
-                nav: true,
-                autoplay: false,
-                dots: true,
-                loop: true,
-                responsiveRefreshRate : 200,
-                navText: ["<i class='fas fa-chevron-right' title='Prev'></i>","<i class='fas fa-chevron-left' title='Next'></i>"]
-            })
-                .on('changed.owl.carousel', syncPosition);
+                    var sync1 = $(".serv-details-slider-1");
+                    var sync2 = $(".serv-details-slider-2");
+                    var slidesPerPage = 3; //globaly define number of elements per page
+                    var syncedSecondary = true;
 
-            sync2
-                .on('initialized.owl.carousel', function () {
-                    sync2.find(".owl-item").eq(0).addClass("current");
-                })
-                .owlCarousel({
-                    // items : slidesPerPage,
-                    dots: false,
-                    rtl:true,
-                    nav: false,
-                    smartSpeed: 200,
-                    slideSpeed : 500,
-                    //slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
-                    responsiveRefreshRate : 100,
-                    margin:15,
-                    responsive : {
-                        // breakpoint from 0 up
-                        0 : {
-                            items:2,
-                        },
-                        // breakpoint from 480 up
-                        480 : {
-                            items:3,
-                        },
-                        // breakpoint from 768 up
-                        768 : {
-                            items:4,
-                        },
-                        // breakpoint from 768 up
-                        992 : {
-                            items:5,
-                        },
-                        // breakpoint from 992 up
-                        1200 : {
-                            items:5,
-                            slideBy:5,
+                    sync1.owlCarousel({
+                        items: 1,
+                        slideSpeed: 2000,
+                        @if(app()->getLocale() == 'ar')
+                        rtl: true,
+                        @else
+                        rtl: false,
+                        @endif
+                        nav: true,
+                        autoplay: false,
+                        dots: true,
+                        loop: true,
+                        responsiveRefreshRate: 200,
+                        navText: ["<i class='fas fa-chevron-right' title='Prev'></i>", "<i class='fas fa-chevron-left' title='Next'></i>"]
+                    })
+                        .on('changed.owl.carousel', syncPosition);
+
+                    sync2
+                        .on('initialized.owl.carousel', function () {
+                            sync2.find(".owl-item").eq(0).addClass("current");
+                        })
+                        .owlCarousel({
+                            // items : slidesPerPage,
+                            dots: false,
+                            rtl: true,
+                            nav: false,
+                            smartSpeed: 200,
+                            slideSpeed: 500,
+                            //slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
+                            responsiveRefreshRate: 100,
+                            margin: 15,
+                            responsive: {
+                                // breakpoint from 0 up
+                                0: {
+                                    items: 2,
+                                },
+                                // breakpoint from 480 up
+                                480: {
+                                    items: 3,
+                                },
+                                // breakpoint from 768 up
+                                768: {
+                                    items: 4,
+                                },
+                                // breakpoint from 768 up
+                                992: {
+                                    items: 5,
+                                },
+                                // breakpoint from 992 up
+                                1200: {
+                                    items: 5,
+                                    slideBy: 5,
+                                }
+                            }
+                        }).on('changed.owl.carousel', syncPosition2);
+
+
+                    function syncPosition(el) {
+                        //if you set loop to false, you have to restore this next line
+                        //var current = el.item.index;
+
+                        //if you disable loop you have to comment this block
+                        var count = el.item.count - 1;
+                        var current = Math.round(el.item.index - (el.item.count / 2) - .5);
+
+                        if (current < 0) {
+                            current = count;
+                        }
+                        if (current > count) {
+                            current = 0;
+                        }
+
+                        //end block
+
+                        sync2
+                            .find(".owl-item")
+                            .removeClass("current")
+                            .eq(current)
+                            .addClass("current");
+                        var onscreen = sync2.find('.owl-item.active').length - 1;
+                        var start = sync2.find('.owl-item.active').first().index();
+                        var end = sync2.find('.owl-item.active').last().index();
+
+                        if (current > end) {
+                            sync2.data('owl.carousel').to(current, 100, true);
+                        }
+                        if (current < start) {
+                            sync2.data('owl.carousel').to(current - onscreen, 100, true);
                         }
                     }
-                }).on('changed.owl.carousel', syncPosition2);
 
+                    function syncPosition2(el) {
+                        if (syncedSecondary) {
+                            var number = el.item.index;
+                            sync1.data('owl.carousel').to(number, 100, true);
+                        }
+                    }
 
-            function syncPosition(el) {
-                //if you set loop to false, you have to restore this next line
-                //var current = el.item.index;
-
-                //if you disable loop you have to comment this block
-                var count = el.item.count-1;
-                var current = Math.round(el.item.index - (el.item.count/2) - .5);
-
-                if(current < 0) {
-                    current = count;
-                }
-                if(current > count) {
-                    current = 0;
-                }
-
-                //end block
-
-                sync2
-                    .find(".owl-item")
-                    .removeClass("current")
-                    .eq(current)
-                    .addClass("current");
-                var onscreen = sync2.find('.owl-item.active').length - 1;
-                var start = sync2.find('.owl-item.active').first().index();
-                var end = sync2.find('.owl-item.active').last().index();
-
-                if (current > end) {
-                    sync2.data('owl.carousel').to(current, 100, true);
-                }
-                if (current < start) {
-                    sync2.data('owl.carousel').to(current - onscreen, 100, true);
-                }
-            }
-
-            function syncPosition2(el) {
-                if(syncedSecondary) {
-                    var number = el.item.index;
-                    sync1.data('owl.carousel').to(number, 100, true);
-                }
-            }
-
-            sync2.on("click", ".owl-item", function(e){
-                e.preventDefault();
-                var number = $(this).index();
-                sync1.data('owl.carousel').to(number, 300, true);
-            });
-        });
-    </script>
+                    sync2.on("click", ".owl-item", function (e) {
+                        e.preventDefault();
+                        var number = $(this).index();
+                        sync1.data('owl.carousel').to(number, 300, true);
+                    });
+                });
+            </script>
 @endsection

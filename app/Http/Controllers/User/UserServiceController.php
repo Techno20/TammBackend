@@ -70,10 +70,6 @@ class UserServiceController extends Controller
         }
 
         $Services = $Services->with('Category')->paginate(50);
-<<<<<<< HEAD
-=======
-
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 //        return Helper::responseData('success',true,$Services);
         return view('site.user.dashboard.services')->with('services',$Services);
     }
@@ -200,13 +196,8 @@ class UserServiceController extends Controller
 //            }
 //        }
         // Add or Update service extras
-<<<<<<< HEAD
-//        dd($q->extras);
-        if(is_array($q->extras_title) && count($q->extras_title) && is_array($q->extras_price) && count($q->extras_price)){
-=======
         if(is_array($q->extras_title) && count($q->extras_title) && is_array($q->extras_price) && count($q->extras_price)){
             ServiceExtra::query()->where('service_id', $Service->id)->delete();
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
             $insertExtraServices = [];
             $prices = $q->extras_price;
             foreach($q->extras_title as $key => $value){

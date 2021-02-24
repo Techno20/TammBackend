@@ -16,11 +16,6 @@ use Helper;
 
 class HelperController extends Controller
 {
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
     /**
      * Get default parameters
      *
@@ -79,9 +74,6 @@ class HelperController extends Controller
         return Helper::responseData('email_sent',true,false,__('default.success_message.email_sent'));
     }
 
-<<<<<<< HEAD
-    
-=======
     public function delete_image(Request $request) {
         ServiceGallery::query()->where('id', $request['key'])->delete();
         return response()->json([
@@ -89,6 +81,5 @@ class HelperController extends Controller
         ]);
     }
 
->>>>>>> ab56b91f26f3477c1fafa8dd53d46b7d37089cec
 }
 

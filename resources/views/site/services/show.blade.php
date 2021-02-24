@@ -425,34 +425,39 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="message-wrapper d-flex flex-column ">
-                                <textarea name="" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
-                                {{-- <div class="attachments d-flex align-items-center flex-wrap">
-                                    <label>المرفقات:</label>
-                                    <div class="attachment">
-                                        <i class="fas fa-paperclip"></i>
-                                        <span>image.png</span>
-                                        <a href="">
-                                            <i class="fas fa-times"></i>
-                                        </a>
+                            {{auth()->user()->id}}
+                            <form action="/user/conversation/send-message"  method="post" nctype="multipart/form-data" id="formSendMassege" >
+                                @csrf
+                                <div class="message-wrapper d-flex flex-column ">
+                                    <input type="text" id="service_provider_id" name="service_provider_id" value="{{$service->user->id}}">
+                                    <textarea name="message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
+                                    {{-- <div class="attachments d-flex align-items-center flex-wrap">
+                                        <label>المرفقات:</label>
+                                        <div class="attachment">
+                                            <i class="fas fa-paperclip"></i>
+                                            <span>image.png</span>
+                                            <a href="">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </div>
+                                        <div class="attachment">
+                                            <i class="fas fa-paperclip"></i>
+                                            <span>File.docx</span>
+                                            <a href="">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div> --}}
+                                    <div class="message-controls d-flex align-items-center">
+                                        <p class="counter">
+                                            <span class="current">87</span>
+                                            <span class="total">/ 2500</span>
+                                        </p>
+                                        <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
+                                        <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
                                     </div>
-                                    <div class="attachment">
-                                        <i class="fas fa-paperclip"></i>
-                                        <span>File.docx</span>
-                                        <a href="">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                <div class="message-controls d-flex align-items-center">
-                                    <p class="counter">
-                                        <span class="current">87</span>
-                                        <span class="total">/ 2500</span>
-                                    </p>
-                                    <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
-                                    <button type="button" class="btn btn-yallow">{{__('site.send')}}</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

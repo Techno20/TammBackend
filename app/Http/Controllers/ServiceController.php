@@ -21,7 +21,7 @@ class ServiceController extends Controller
      * @param integer $serviceId
      * @param Request $q
      */
-    public function getShow($serviceId,Request $q)
+    public function getShow($serviceId,$recipient_id,Request $q)
     {
         $Service = Service::where('id',$serviceId)->select('*')->selectRatingAverage()->selectIsFavorited()->with(['Gallery','Category','User' => function($User){
             return $User->addSelect('about_me');
@@ -36,7 +36,7 @@ class ServiceController extends Controller
             $result['category'] = Category::selectCard()->find($Service->category_id);
             $result['main_categories'] = $this->getMainCategoriesType();
 //            return Helper::responseData('success',true,$Service);
-            return view('site.services.show')->with('service',$Service)->with('result',$result);
+            return view('site.services.show')->with('service',$Service)->with('result',$result)->with('recipient_id',$recipient_id);
         }else {
             return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
         }
@@ -206,5 +206,8 @@ class ServiceController extends Controller
     public function getMainCategoriesType(){
         return ['all'=>'الكل','technical' => 'تقنية','consultation' => 'استشارات','training' => 'تدريب'];
     }
+
+
+    
 
 }

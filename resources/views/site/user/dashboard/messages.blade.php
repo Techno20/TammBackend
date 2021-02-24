@@ -63,7 +63,31 @@
                             <i class="fas fa-chevron-down"></i>
                         </header>
                         <div class="conversations">
-                            <div class="conv-item media unseen">
+                            @foreach ($conversations as $Conversations)
+                            {{$Conversations->id}}
+                                <div class="conv-item media unseen" id="{{$Conversations->id}}" onclick="getMassegeChats('{{$Conversations->id}}')">
+                                    <figure>
+                                        <img src="{{ asset('/assets\/site\/images\/user.png') }}" class="img-fluid">
+                                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
+                                            <g id="Oval" fill="#00db51" stroke="#fff" stroke-miterlimit="10" stroke-width="2">
+                                                <circle cx="6.5" cy="6.5" r="6.5" stroke="none"/>
+                                                <circle cx="6.5" cy="6.5" r="5.5" fill="none"/>
+                                            </g>
+                                        </svg> --}}
+                                    </figure>
+                                    <div class="media-body">
+                                        <h4>{{$Conversations->recipient->name}}</h4>
+                                        <p class="text">{{$Conversations->recipient->email}}</p>
+                                        {{-- <p class="date">1 WEEK AGO</p> --}}
+                                    </div>
+                                    <div class="status-bar">
+                                        <i class="fas fa-check-double seen"></i>
+                                        <i class="fas fa-check-double unseen"></i>
+                                        <i class="fas fa-chevron-right open-group"></i>
+                                    </div>
+                                </div>    
+                            @endforeach
+                            {{-- <div class="conv-item media unseen">
                                 <figure>
                                     <img src="{{ asset('assets/site/images/u-2.png') }}" class="img-fluid">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
@@ -100,6 +124,8 @@
                                         </g>
                                     </svg>
                                 </figure>
+
+
                                 <div class="media-body">
                                     <h4>Victor Roberts</h4>
                                     <p class="text">I’d like to officially welcome you to our design team. . .</p>
@@ -218,7 +244,7 @@
                                     <i class="fas fa-check-double unseen"></i>
                                     <i class="fas fa-chevron-right open-group"></i>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -226,7 +252,9 @@
                     <i class="fas fa-align-left"></i>
                 </a>
                 <div class="messages-body d-flex flex-column">
-                    <div class="messages-body-content">
+                    <div class="messages-body-content" id="messages_body_content">
+
+
                         <div class="message-item">
                             <div class="ms-head d-flex align-items-center justify-content-between">
                                 <div class="media">
@@ -241,6 +269,7 @@
                                 Hi Justin! We just wanted to welcome you to.
                             </div>
                         </div>
+
                         <div class="message-respond-item">
                             <p class="date">11:08 AM</p>
                             <div class="ms-contnet d-flex flex-row-reverse align-items-end">
@@ -250,7 +279,8 @@
                                 <i class="fas fa-check-double seen"></i>
                             </div>
                         </div>
-                        <div class="message-item">
+
+                        {{-- <div class="message-item">
                             <div class="ms-head d-flex align-items-center justify-content-between">
                                 <div class="media">
                                     <img src="{{ asset('assets/site/images/u-1.png') }}" class="img-fluid">
@@ -295,7 +325,7 @@
                                 </div>
                                 <i class="fas fa-check-double"></i>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="messages-body-footer mt-auto d-flex align-items-center">
                         <textarea name="" class="form-control" placeholder="Type a message..."></textarea>

@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <div class="body-content">
         <!-- h-main-section -->
         <section class="h-main-section">
@@ -54,10 +55,10 @@
                 <div class="sec-content">
                     <div class="services-cat-slider-1 owl-carousel owl-navs-with-header">
                         @foreach($result['top_rated_services'] as $key => $value)
-
+                        {{-- {{$value->user_id}} --}}
                         <div class="item">
                             <div class="service-cat-item">
-                                <a href="{{ url('service/show/'.$value->id) }}">
+                                <a href="{{ url('service/show/'.$value->id.'/'.'recipient_id'.'/'.$value->user_id.'/') }}">
                                     <figure>
                                         @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
                                             <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">

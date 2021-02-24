@@ -117,9 +117,9 @@
                                     <div class="service-item-2">
                                         <div class="top">
                                             <div class="service-item-slider owl-carousel">
-                                            <a href="{{ url('service/show/'.$value->id) }}">
+                                            <a href="{{$value->user ? url('user/profile/'.$value->user->id) : ''}}">
                                                 <div class="item">
-                                                    <a href="{{ url('service/show/'.$value->id) }}">
+                                                    
                                                         @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
                                                             <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
                                                         @else

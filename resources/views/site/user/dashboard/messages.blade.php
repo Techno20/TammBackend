@@ -58,6 +58,9 @@
             <div class="wrapper d-flex">
                 <div class="messages-side-menu">
                     <div class="messages-side-content">
+                    <a href="" class="btn message-menu-toggle" id="">
+                    <i class="fas fa-align-left"></i>
+                </a>
                         <header class="messages-side-header d-flex align-items-center">
                             <h3>{{__('site.All_Conversations')}}</h3>
                             <i class="fas fa-chevron-down"></i>

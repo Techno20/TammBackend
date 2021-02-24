@@ -127,5 +127,7 @@ Route::group(['middleware' => 'api-localization'],function(){
 });
 
  Route::resource('/contactus', 'App\Http\Controllers\ContactusController');
-Route::post('/delete_image', 'App\Http\Controllers\HelperController@delete_image')->name('services.delete_image');
+ Route::post('/delete_image', 'App\Http\Controllers\HelperController@delete_image')->name('services.delete_image');
+ Route::put('/user/me/update', 'App\Http\Controllers\User\UserProfileController@updatePassword');
+
 

@@ -53,7 +53,7 @@
                             <tr>
                             <th>@lang('site.buyer_name')</th>
                             <th>@lang('site.country')</th>
-                            <th>@lang('site.completed_orders')</th>
+                            <th>@lang('site.orders_count')</th>
                             <th>@lang('site.amount_spent')</th>
                             <th>@lang('site.last_order')</th>
                         </tr>
@@ -66,7 +66,7 @@
                                             @if(file_exists(asset('uploads/users/'.$value->avatar)))
                                                 <img src="{{ asset('uploads/users/'.$value->avatar) }}" class="">
                                             @else
-                                                <img src="{{ asset('assets/site/images/u-2.png') }}" class="">
+                                                <img src="{{ asset('assets/site/images/user.png') }}" class="">
                                             @endif
                                             <div class="media-body">
                                                 <h3>{{ $value->name }}</h3>
@@ -74,9 +74,9 @@
                                         </div>
                                     </td>
                                     <td>{{ $value->Country ? $value->Country->name : '-' }}</td>
-                                    <td>{{ $value->complete_orders_count }}</td>
-                                    <td>{{ $value->CompleteOrders()->sum('paid_total') }} @lang('site.sar')</td>
-                                    <td>{{ date('M d',strtotime($value->CompleteOrders()->latest()->first()->created_at)) }}</td>
+                                    <td>{{ $value->orders_count }}</td>
+                                    <td>{{ number_format($value->Orders()->sum('paid_total'), 2) }} @lang('site.sar')</td>
+                                    <td>{{ $value->Orders()->latest()->first() ? date('M d',strtotime($value->Orders()->latest()->first()->created_at)) : '' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

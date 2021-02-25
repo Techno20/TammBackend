@@ -22,6 +22,17 @@
                             </header>
                             <div class="sec-content">
                                 <div class="setting-security-sec gray-form">
+                                   
+                                    @if (isset($errorValidation))
+                                        <div class="alert alert-danger" role="alert">
+                                            تأكد من تطابق كلمة المرور 
+                                        </div>  
+                                    @endif
+                                        
+                                   
+                                    
+                                    
+                                    
                                     <div class="change-password ">
                                         <form action="{{url('user/me/update')}}" method="POST">
                                             @method('put')

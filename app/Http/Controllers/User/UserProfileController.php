@@ -124,8 +124,9 @@ class UserProfileController extends Controller
         $user->save();
         return back()->with('success',trans('تم اضافة بنجاح'));
       }else{
-        return back()->with('success',trans('خطأ'));
-
+        return back()
+        ->with('errorValidation','تأكد من كلمة المرور و تأكيد كلمة المرور متشابهة');
+        
       }
     }
 

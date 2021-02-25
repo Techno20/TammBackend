@@ -258,7 +258,7 @@
                     <div class="messages-body-content" id="messages_body_content">
 
 
-                        <div class="message-item">
+                        {{-- <div class="message-item">
                             <div class="ms-head d-flex align-items-center justify-content-between">
                                 <div class="media">
                                     <img src="{{ asset('assets/site/images/u-1.png') }}" class="img-fluid">
@@ -281,7 +281,7 @@
                                 </div>
                                 <i class="fas fa-check-double seen"></i>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="message-item">
                             <div class="ms-head d-flex align-items-center justify-content-between">
@@ -359,7 +359,7 @@
                                         <path id="Path-3" data-name="Path" d="M.375.094A.281.281,0,1,1,.094.375.281.281,0,0,1,.375.094" transform="translate(5.25 5.813)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
                                     </svg>
                                 </a>
-                                <input type="submit" id="btnReplayMessege" class="btn btn-yallow " value="ارسال">
+                                <input type="submit" id="btnReplayMessege" class="btn btn-yallow" value="ارسال">
                             </div>
                         </form>
                         

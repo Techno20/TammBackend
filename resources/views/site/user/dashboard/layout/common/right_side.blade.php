@@ -11,7 +11,7 @@
         <div class="summary">
             <div class="item d-flex align-items-center justify-content-between">
                 <label>{{__('site.Earned')}}</label>
-                <p>324 SAR</p>
+                <p>{{ number_format($clientsOrdersTotalPaidCount , 2, '.', '') }} $</p>
             </div>
             {{-- <div class="item d-flex align-items-center justify-content-between">
                 <label>Response Time</label>
@@ -22,46 +22,44 @@
     <div class="user-statistics-box">
         <div class="item">
             <div class="title">
-                <h5>55%</h5>
-                <p>Response Rate</p>
+                <h5>{{ number_format($currentClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}%</h5>
+                <p>@lang('site.orders') @lang('site.current_order')</p>
             </div>
             <div class="statistic">
                 <div class="period">
-                    <span>13 Jun - 14 Aug</span>
+
                     <i class="fas fa-angle-down"></i>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar" style="width: {{$currentClientsOrdersCount / $allClientsOrdersCount * 100}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
         <div class="item">
             <div class="title">
-                <h5>90%</h5>
-                <p>Delivered on Time</p>
+                <h5>{{ number_format($deliveredClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}%</h5>
+                <p>@lang('site.orders') @lang('site.delivered_order')</p>
             </div>
             <div class="statistic">
                 <div class="period">
-                    <span>13 Jun - 14 Aug</span>
                     <i class="fas fa-angle-down"></i>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar" style="width: {{$deliveredClientsOrdersCount / $allClientsOrdersCount * 100}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
         <div class="item">
             <div class="title">
-                <h5>30%</h5>
-                <p>Order Completion</p>
+                <h5>{{ number_format($cancelledClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}%</h5>
+                <p>@lang('site.orders') @lang('site.cancelled_order')</p>
             </div>
             <div class="statistic">
                 <div class="period">
-                    <span>13 Jun - 14 Aug</span>
                     <i class="fas fa-angle-down"></i>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar" style="width: {{$cancelledClientsOrdersCount / $allClientsOrdersCount * 100}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>

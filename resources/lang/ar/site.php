@@ -70,6 +70,7 @@ return [
     'delivered_order_message' => 'رسالة تسليم الخدمة',
     'delivered_order_message_example' => 'مثال ، لقد قمت بإنجاز العمل الخاص بك',
     'delivered_order_attachments' => 'مرفقات التسليم',
+    'show_attachments' => 'استعراض المرفقات',
 
     'all' => 'الكل',
     'add_new_service' => 'اضافة خدمة جديدة',
@@ -191,6 +192,12 @@ return [
     'total_reviews' => 'تقيم',
     'add_extras' => 'اضف الخدمات الاضافية',
     'add_extras_text' => 'لتحقيق افضل نتيجة من الخدمة اختر الخدمات الاضافية المناسبة',
+    'back_to_orders' => 'العودة الى الطلبات',
+    'order_id' => 'رقم الطلب',
+    'service_name' => 'اسم الخدمة',
+    'commission_rate' => 'العمولة',
+    'requirements_attachments' => 'مرفقات الطلب',
+
 
     'summary' => 'تفاصيل الطلب',
     'delivery_time' => 'وقت التسليم',

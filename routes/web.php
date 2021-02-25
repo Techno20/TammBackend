@@ -66,7 +66,7 @@ Route::group(['middleware' => 'api-localization'],function(){
 
             Route::group(['prefix' => 'order'],function(){
                 Route::get('list/{type}', [UserOrderController::class, 'getList'])->where('type','seller|buyer|all');
-                Route::get('show/{order_id}', [UserOrderController::class, 'getShow']);
+                Route::get('show/{order_id}', [UserOrderController::class, 'getShow'])->name('user.order.details');
                 Route::post('delivery/{order_id}', [UserOrderController::class, 'postDelivery'])->name('user.order.post.delivery');
             });
 

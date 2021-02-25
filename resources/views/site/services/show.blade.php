@@ -250,8 +250,10 @@
                                                 </ul>
                                             @endif
 
-                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"
-                                               class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                            @if($service->user_id != auth()->id())
+                                                <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=standard') }}"
+                                                   class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->standard_price }} @lang('site.sar'))</a>
+                                            @endif
                                         </div>
 
                                     </div>
@@ -284,8 +286,10 @@
                                                 </ul>
                                             @endif
 
-                                            <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"
-                                               class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->premium_price }} @lang('site.sar'))</a>
+                                            @if($service->user_id != auth()->id())
+                                                <a href="{{ url('checkout/order-details?service_id='.$service->id.'&package=premium') }}"
+                                                   class="btn btn-block btn-yallow serv-continue-btn">@lang('site.continue') ({{ $service->premium_price }} @lang('site.sar'))</a>
+                                            @endif
                                         </div>
 
 
@@ -293,14 +297,16 @@
                                 </div>
 
                             </div>
-                            <div class="serv-question d-flex align-items-center">
-                                <img src="{{ asset('assets/site/images/services/serv-question.png') }}" class="img-fluid" alt="">
-                                <div class="data">
-                                    <h5>@lang('site.any_quastions')?</h5>
-                                    <p>@lang('site.if_you_have_any_quastions').</p>
+                            @if($service->user_id != auth()->id())
+                                <div class="serv-question d-flex align-items-center">
+                                    <img src="{{ asset('assets/site/images/services/serv-question.png') }}" class="img-fluid" alt="">
+                                    <div class="data">
+                                        <h5>@lang('site.any_quastions')?</h5>
+                                        <p>@lang('site.if_you_have_any_quastions').</p>
+                                    </div>
+                                    <button class="btn btn-yallow" data-toggle="modal" data-target="#sendMessageModal">@lang('site.contact_seller')</button>
                                 </div>
-                                <button class="btn btn-yallow" data-toggle="modal" data-target="#sendMessageModal">@lang('site.contact_seller')</button>
-                            </div>
+                            @endif
                         </aside>
                     </div>
                 </div>
@@ -430,7 +436,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            
+
                             <form action="/user/conversation/send-message"  method="post" nctype="multipart/form-data" id="formSendMassege" >
                                 @csrf
                                 <div class="message-wrapper d-flex flex-column ">

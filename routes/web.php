@@ -80,7 +80,7 @@ Route::group(['middleware' => 'api-localization'],function(){
                 Route::get('list', [UserConversationController::class, 'getList']);
                 Route::get('messages/{conversation_id}', [UserConversationController::class, 'getMessages']);
                 Route::post('send-reply/{conversation_id}', [UserConversationController::class, 'postSendReply']);
-                Route::post('send-message', [UserConversationController::class, 'postSendMessage']);
+                Route::post('send-message', [UserConversationController::class, 'postSendMessage'])->name('user.conversation.send.message');
             });
 
             Route::group(['prefix' => 'buyer'],function(){

@@ -62,6 +62,15 @@ return [
     'cancelled_order' => 'الملغية',
     'all_order' => 'كل الطلبات',
 
+    'my_orders' => 'طلباتي',
+    'client_orders' => 'طلبات العملاء',
+    'operations' => 'العمليات',
+    'cancel_order' => 'الغاء الطلب',
+    'finish_order_delivered' => 'الانتهاء من تنفيذ الخدمة',
+    'delivered_order_message' => 'رسالة تسليم الخدمة',
+    'delivered_order_message_example' => 'مثال ، لقد قمت بإنجاز العمل الخاص بك',
+    'delivered_order_attachments' => 'مرفقات التسليم',
+
     'all' => 'الكل',
     'add_new_service' => 'اضافة خدمة جديدة',
     'save' => 'حفظ',
@@ -210,7 +219,7 @@ return [
     'submit' => 'إرسال',
     'payment_gateway' => 'دفع الكتروني',
     'payment_cash' => 'دفع كاش',
-   
+
     'Service_information' => 'زودانا بمعلومات مثل:',
     'Description_service' => 'وصف الخدمة',
     'Specific_information' => 'معلومات محددة',
@@ -218,7 +227,7 @@ return [
     'budget' => 'الميزانية',
     'Write_your_message' => 'اكتب رسالتك هنا',
     'send' => 'ارسال',
-    
+
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
 
@@ -240,8 +249,8 @@ return [
     'Confirm Password'=>'تأكيد كلمة المرور',
     'characters_or_longer'=> '8 أحرف أو أكثر. اجمع بين الأحرف الكبيرة والصغيرة والأرقام.',
     'Save Chages'=>'حفظ التغييرات',
-    
-   
-    
+
+
+
 
 ];

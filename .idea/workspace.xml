@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="09f0a48f-c721-4979-a4eb-ca8005cb9a9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/pages/search.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/pages/search.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/services/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/services/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/services/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/services/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/user/my_profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/user/my_profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/site/user/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/user/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/User/UserOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/UserOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/ar/site.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/site.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/site.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/site/user/dashboard/orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/site/user/dashboard/orders.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

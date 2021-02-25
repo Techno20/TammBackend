@@ -65,9 +65,9 @@ Route::group(['middleware' => 'api-localization'],function(){
             });
 
             Route::group(['prefix' => 'order'],function(){
-                Route::get('list/{type}', [UserOrderController::class, 'getList'])->where('type','seller|buyer');
+                Route::get('list/{type}', [UserOrderController::class, 'getList'])->where('type','seller|buyer|all');
                 Route::get('show/{order_id}', [UserOrderController::class, 'getShow']);
-                Route::post('delivery/{order_id}', [UserOrderController::class, 'postDelivery']);
+                Route::post('delivery/{order_id}', [UserOrderController::class, 'postDelivery'])->name('user.order.post.delivery');
             });
 
             Route::group(['prefix' => 'favourite'],function(){
@@ -106,7 +106,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('list/{category?}', [ServiceController::class, 'getList']);
         // Route::get('show/{service_id}/recipient_id/{recipient_id}', [ServiceController::class, 'getShow']);
         Route::get('show/{service_id}', [ServiceController::class, 'getShow']);
-        
+
         Route::get('reviews/{service_id}', [ServiceController::class, 'getReviews']);
     });
 

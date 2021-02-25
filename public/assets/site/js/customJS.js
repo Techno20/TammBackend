@@ -29,7 +29,7 @@ function getMassegeChats(id) {
         success: function (response) {
             document.getElementById('messages_body_content').innerHTML = ' '
             for (let i = 0; i < response.data.data.length; i++) {
-                if(response.data.data[i].user_id == $("#idMyUSer")){
+                if(response.data.data[i].user_id == $("#idMyUSer").val()){
                     document.getElementById('messages_body_content').innerHTML +=
                     `
                     <div class="message-respond-item">
@@ -81,7 +81,7 @@ function getMassegeChats(id) {
         var data = new FormData(form);
         $.ajax({
             type: "POST",
-            url: "/user/conversation/send-reply/6",
+            url: "/user/conversation/send-reply/"+$('#tempIdConversations').val(),
             data: data,
             dataType: "json",
             processData: false,

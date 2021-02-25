@@ -254,4 +254,8 @@ return [
     'characters_or_longer'=> '8 characters or longer. Combine upper and lowercase letters and numbers.',
     'Save Chages'=>'Save Chages',
 
+    'Reset_Password'=>'Reset Password',
+    'email_address'=>'Please enter email address and well send you a link to reset your password.',
+    'Back_to'=> 'Back to',
+
 ];

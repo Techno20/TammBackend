@@ -22,7 +22,7 @@
     {{-- <div class="user-statistics-box">
         <div class="item">
             <div class="title">
-                <h5>{{ number_format($currentClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}%</h5>
+                <h5>@if($allClientsOrdersCount == 0) 0 @else {{ number_format($currentClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}@endif%</h5>
                 <p>@lang('site.orders') @lang('site.current_order')</p>
             </div>
             <div class="statistic">
@@ -37,7 +37,7 @@
         </div>
         <div class="item">
             <div class="title">
-                <h5>{{ number_format($deliveredClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}%</h5>
+                <h5>@if($allClientsOrdersCount == 0) 0 @else{{ number_format($deliveredClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}@endif%</h5>
                 <p>@lang('site.orders') @lang('site.delivered_order')</p>
             </div>
             <div class="statistic">
@@ -51,7 +51,7 @@
         </div>
         <div class="item">
             <div class="title">
-                <h5>{{ number_format($cancelledClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}%</h5>
+                <h5>@if($allClientsOrdersCount == 0) 0 @else{{ number_format($cancelledClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}@endif%</h5>
                 <p>@lang('site.orders') @lang('site.cancelled_order')</p>
             </div>
             <div class="statistic">

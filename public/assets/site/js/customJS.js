@@ -36,7 +36,7 @@ function getMassegeChats(id) {
                             <img src="${response.data.data[i].user.avatar_full_path}" class="img-fluid">
                             <div class="media-body">
                                 <h5>
-                                    ${response.data.data[i].user.name}
+                                    
                                 </h5>
                             </div>
                         </div>

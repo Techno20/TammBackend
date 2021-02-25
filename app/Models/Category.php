@@ -15,7 +15,7 @@ class Category extends Model
     public function Services(){
       return $this->hasMany('App\Models\Service');
     }
-  
+
     /* START ATTRIBUTES */
     public function getCreatedAtAttribute($value){
         return date('Y-m-d H:i:s',strtotime($value));
@@ -25,7 +25,7 @@ class Category extends Model
         return date('Y-m-d H:i:s',strtotime($value));
     }
 
-  
+
     /**
      * Get main category type as string
      */
@@ -37,7 +37,7 @@ class Category extends Model
     /* START SCOPES */
     public function scopeSelectCard($query)
     {
-      return $query->select('id','main_category_type','name_'.app()->getLocale().' as name');
+      return $query->select('id','main_category_type','image','name_'.app()->getLocale().' as name');
     }
-    
+
 }

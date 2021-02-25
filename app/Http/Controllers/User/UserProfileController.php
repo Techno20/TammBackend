@@ -12,6 +12,7 @@ use App\Models\UserFavouriteService;
 use App\Models\Conversation;
 use App\Models\Service;
 use App\Models\ServiceReview;
+use Illuminate\Support\Facades\Hash;
 
 class UserProfileController extends Controller
 {
@@ -112,6 +113,21 @@ class UserProfileController extends Controller
         return view('site.user.my_profile')->with('user',$User)->with('services',$Services);
     }
 
+    public function updatePassword(Request $request)
+    {
+      
+      $pass = $request->password;
+      $vPass = $request->vpassword;
+      if($pass === $vPass){
+        $user = User::find(auth()->user()->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return back()->with('success',trans('تم اضافة بنجاح'));
+      }else{
+        return back()->with('success',trans('خطأ'));
+
+      }
+    }
 
 
 }

@@ -430,11 +430,11 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            {{auth()->user()->id}}
+                            
                             <form action="/user/conversation/send-message"  method="post" nctype="multipart/form-data" id="formSendMassege" >
                                 @csrf
                                 <div class="message-wrapper d-flex flex-column ">
-                                    <input type="text" id="service_provider_id" name="service_provider_id" value="{{$service->user->id}}">
+                                    <input type="hidden" id="service_provider_id" name="service_provider_id" value="{{$service->user->id}}">
                                     <textarea name="message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
                                     {{-- <div class="attachments d-flex align-items-center flex-wrap">
                                         <label>المرفقات:</label>

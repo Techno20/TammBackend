@@ -81,7 +81,7 @@ return [
     'categories' => 'التصنيفات',
 
     'overview' => 'نظرة عامة',
-    'pricing' => 'التسعير',
+    'pricing' => 'سعر الباقات',
     'service_description' => 'وصف الخدمة',
     'requirements' => 'المتطلبات',
     'gallery' => 'المعرض',
@@ -230,6 +230,8 @@ return [
 
     'Messages'=> 'الرسائل',
     'All_Conversations'=>'كل المحادثات',
+    'country' => 'الدولة',
+    'orders_count' => 'عدد الطلبات',
 
 
     'Earned'=>'الارباح',

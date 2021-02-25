@@ -82,8 +82,15 @@
                                         </svg> --}}
                                     </figure>
                                     <div class="media-body">
-                                        <h4>{{$Conversations->recipient->name}}</h4>
-                                        <p class="text">{{$Conversations->recipient->email}}</p>
+
+                                       
+                                        @if ($Conversations->recipient->id == auth()->user()->id)
+                                            <h4>{{$Conversations->sender->name}}</h4>
+                                            <p class="text">{{$Conversations->sender->email}}</p>
+                                        @else
+                                            <h4>{{$Conversations->recipient->name}}</h4>
+                                            <p class="text">{{$Conversations->recipient->email}}</p>
+                                        @endif
                                         {{-- <p class="date">1 WEEK AGO</p> --}}
                                     </div>
                                     <div class="status-bar">

@@ -13,7 +13,28 @@ $(document).ready(function () {
             cache: false,
             timeout: 800000,
             success: function (response) {
-                console.log(response);
+                // console.log(response);
+                if(response.message == "success"){
+                     document.getElementById('alertMessege').innerHTML =  `
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        تم ارسال الرسالة بنجاح
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                        `
+                
+                }else{
+                    document.getElementById('alertMessege').innerHTML =  `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    فشل العملية
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                    `
+                    
+                }
             }
         });
     });
@@ -69,7 +90,7 @@ function getMassegeChats(id) {
                 response.data.data[i].message
                 
             }
-            console.log(response);
+            // console.log(response);
         }
     });
   }
@@ -89,7 +110,7 @@ function getMassegeChats(id) {
             cache: false,
             timeout: 800000,
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 getMassegeChats(document.getElementById('tempIdConversations').value)
                 $("#txtAeraMessage").val(" ")
             }

@@ -460,9 +460,13 @@
                                         </p>
                                         <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
                                         <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
+                                       
                                     </div>
                                 </div>
                             </form>
+                            <div id="alertMessege">
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

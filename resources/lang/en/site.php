@@ -71,6 +71,12 @@ return [
     'delivered_order_message' => 'Service delivery message',
     'delivered_order_message_example' => 'Example, you have done your work',
     'delivered_order_attachments' => 'Delivery attachments',
+    'back_to_orders' => 'Back to orders',
+    'order_id' => 'Order Id',
+    'service_name' => 'Service name',
+    'commission_rate' => 'Commission rate',
+    'requirements_attachments' => 'Requirements attachments',
+    'show_attachments' => 'Review Attachment',
 
 
 
@@ -253,5 +259,9 @@ return [
     'Confirm Password'=>'Confirm Password',
     'characters_or_longer'=> '8 characters or longer. Combine upper and lowercase letters and numbers.',
     'Save Chages'=>'Save Chages',
+
+    'Reset_Password'=>'Reset Password',
+    'email_address'=>'Please enter email address and well send you a link to reset your password.',
+    'Back_to'=> 'Back to',
 
 ];

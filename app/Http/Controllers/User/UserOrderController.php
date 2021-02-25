@@ -104,12 +104,10 @@ class UserOrderController extends Controller
      */
     public function getShow($orderId,Request $q)
     {
-        $Order = Order::where('id',$orderId)->with('Extras')->first();
-        if($Order) {
-            return Helper::responseData('success',true,$Order);
-        }else {
-            return Helper::responseData('order_not_found',false,false,__('default.error_message.order_not_found'),404);
-        }
+        $type = 'seller';
+        $order = Order::findOrFail($orderId);
+
+        return view('site.user.dashboard.order-details' , compact('type' , 'order'));
     }
 
     /**

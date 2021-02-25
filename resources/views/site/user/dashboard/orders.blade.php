@@ -85,7 +85,7 @@
                                             <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
                                         @endif
                                         <div class="media-body">
-                                            <h3>{{ $value->Service()->selectCard()->first()->title }}</h3>
+                                            <h3><a href="{{ route('user.order.details' , $value->id) }}">{{ $value->Service()->selectCard()->first()->title }}</a></h3>
                                         </div>
                                     </div>
                                 </td>

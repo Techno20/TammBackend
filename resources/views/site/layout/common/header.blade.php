@@ -85,19 +85,19 @@
         <div class="modal-content">
             <div class="auth-modal reset-password-modal">
                 <header class="auth-header-2 text-center">
-                    <h3>Reset Password</h3>
-                    <p>Please @lang('site.enter_your') email address and we'll send you a link to reset your password.</p>
+                    <h3>{{__('site.Reset_Password')}}</h3>
+                    <p>{{__('site.email_address')}}</p>
                 </header>
 
 
                 <div class="auth-form sign-in-form gray-form">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="@lang('site.enter_your') email" name="">
+                        <input type="text" class="form-control form-control-lg" placeholder="@lang('site.enter_your') {{__('site.email')}}" name="">
                     </div>
 
                     <div class="actions">
                         <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
-                        <p class="text-center back"><a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="">Back to @lang('site.sign_in')</a></p>
+                        <p class="text-center back"><a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="">@lang('site.Back_to') @lang('site.sign_in')</a></p>
                     </div>
                 </div>
             </div>

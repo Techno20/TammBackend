@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Helper;
@@ -60,8 +61,50 @@ class UserProfileController extends Controller
       $Result['new_favourites'] = UserFavouriteService::where('user_id',auth()->user()->id)->orderBy('created_at','DESC')->take(5)->get();
       $Result['statistics'] = $Statistics;
 
-//      return Helper::responseData('success',true,$Result);
-      return view('site.user.dashboard.index')->with('result',$Result);
+        $clientsOrders = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->whereStatus('current')->orderBy('created_at', 'DESC')->take(5)->get();
+
+        $clientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->where('status', '!=', 'canceled')->whereMonth('created_at', Carbon::now()->month)->count();
+
+        $clientsOrdersPaidCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->whereStatus('delivered')
+            ->whereBetween('created_at', [Carbon::now()->startOfMonth()->subMonth(3), Carbon::now()])
+            ->sum('paid_total');
+
+        $clientsOrdersTotalPaidCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->whereStatus('delivered')
+            ->sum('paid_total');
+
+        $allClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        });
+
+        $currentClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->whereStatus('current')->count();
+
+        $deliveredClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->whereStatus('delivered')->count();
+
+        $cancelledClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->whereStatus('canceled')->count();
+
+        $allClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
+            return $Service->where('user_id', auth()->user()->id);
+        })->count();
+
+
+        return view('site.user.dashboard.index')->with(['result' => $Result , 'clientsOrders' => $clientsOrders , 'clientsOrdersCount' => $clientsOrdersCount
+          , 'clientsOrdersPaidCount' => $clientsOrdersPaidCount , 'clientsOrdersTotalPaidCount' => $clientsOrdersTotalPaidCount
+            , 'currentClientsOrdersCount' => $currentClientsOrdersCount , 'deliveredClientsOrdersCount' => $deliveredClientsOrdersCount ,
+            'cancelledClientsOrdersCount' => $cancelledClientsOrdersCount , 'allClientsOrdersCount' => $allClientsOrdersCount]);
     }
 
     /**
@@ -115,7 +158,7 @@ class UserProfileController extends Controller
 
     public function updatePassword(Request $request)
     {
-      
+
       $pass = $request->password;
       $vPass = $request->vpassword;
       if($pass === $vPass){
@@ -126,7 +169,7 @@ class UserProfileController extends Controller
       }else{
         return back()
         ->with('errorValidation','تأكد من كلمة المرور و تأكيد كلمة المرور متشابهة');
-        
+
       }
     }
 

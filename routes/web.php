@@ -66,7 +66,7 @@ Route::group(['middleware' => 'api-localization'],function(){
 
             Route::group(['prefix' => 'order'],function(){
                 Route::get('list/{type}', [UserOrderController::class, 'getList'])->where('type','seller|buyer|all');
-                Route::get('show/{order_id}', [UserOrderController::class, 'getShow']);
+                Route::get('show/{order_id}', [UserOrderController::class, 'getShow'])->name('user.order.details');
                 Route::post('delivery/{order_id}', [UserOrderController::class, 'postDelivery'])->name('user.order.post.delivery');
             });
 
@@ -80,7 +80,7 @@ Route::group(['middleware' => 'api-localization'],function(){
                 Route::get('list', [UserConversationController::class, 'getList']);
                 Route::get('messages/{conversation_id}', [UserConversationController::class, 'getMessages']);
                 Route::post('send-reply/{conversation_id}', [UserConversationController::class, 'postSendReply']);
-                Route::post('send-message', [UserConversationController::class, 'postSendMessage']);
+                Route::post('send-message', [UserConversationController::class, 'postSendMessage'])->name('user.conversation.send.message');
             });
 
             Route::group(['prefix' => 'buyer'],function(){

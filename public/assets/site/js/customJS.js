@@ -13,13 +13,34 @@ $(document).ready(function () {
             cache: false,
             timeout: 800000,
             success: function (response) {
-                console.log(response);
-            }
+                // console.log(response);
+                if(response.message == "success"){
+                     document.getElementById('alertMessege').innerHTML =  `
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        تم ارسال الرسالة بنجاح
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                        `
+                
+                }
+            },
+            error: function(r) { 
+                document.getElementById('alertMessege').innerHTML =  `
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                فشل العملية
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                `            } 
         });
     });
 });
 
 function getMassegeChats(id) {
+    document.getElementById('tempIdConversations').value = id;
     $.ajax({
         type: "GET",
         url: "/user/conversation/messages/"+id,
@@ -28,7 +49,21 @@ function getMassegeChats(id) {
         success: function (response) {
             document.getElementById('messages_body_content').innerHTML = ' '
             for (let i = 0; i < response.data.data.length; i++) {
-                document.getElementById('messages_body_content').innerHTML +=
+                if(response.data.data[i].user_id == $("#idMyUSer").val()){
+                    document.getElementById('messages_body_content').innerHTML +=
+                    `
+                    <div class="message-respond-item">
+                    <p class="date">${response.data.data[i].created_at}</p>
+                    <div class="ms-contnet d-flex flex-row-reverse align-items-end">
+                        <div class="content">
+                        ${response.data.data[i].message}                        </div>
+                        <i class="fas fa-check-double seen"></i>
+                    </div>
+                    </div>
+
+                    `
+                }else{
+                    document.getElementById('messages_body_content').innerHTML += 
                     `
                     <div class="message-item">
                     <div class="ms-head d-flex align-items-center justify-content-between">
@@ -40,19 +75,21 @@ function getMassegeChats(id) {
                                 </h5>
                             </div>
                         </div>
-                        <p class="date">9:52 AM</p>
+                        <p class="date">${response.data.data[i].created_at}</p>
                     </div>
                     <div class="ms-contnet">
                         ${response.data.data[i].message}
                     </div>
                 </div>
                     `
+                }
+                
                 
                 
                 response.data.data[i].message
                 
             }
-            console.log(response);
+            // console.log(response);
         }
     });
   }
@@ -64,7 +101,7 @@ function getMassegeChats(id) {
         var data = new FormData(form);
         $.ajax({
             type: "POST",
-            url: "/user/conversation/send-reply/6",
+            url: "/user/conversation/send-reply/"+$('#tempIdConversations').val(),
             data: data,
             dataType: "json",
             processData: false,
@@ -72,8 +109,11 @@ function getMassegeChats(id) {
             cache: false,
             timeout: 800000,
             success: function (response) {
-                console.log(response);
-            }
+                // console.log(response);
+                getMassegeChats(document.getElementById('tempIdConversations').value)
+                $("#txtAeraMessage").val(" ")
+            },
+           
         });
     });
 });

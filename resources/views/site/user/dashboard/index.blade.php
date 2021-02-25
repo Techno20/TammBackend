@@ -60,7 +60,7 @@
                                 <div class="balance-box">
                                     <label>@lang('site.earings_last_3_month')</label>
                                     <div class="text">
-                                        7,345.34 SAR <small>25%</small> <i class="fas fa-chevron-up"></i>
+                                        {{ number_format($clientsOrdersPaidCount , 2, '.', '') }} $
                                     </div>
                                     <div class="content">
                                         <img src="{{ asset('assets/site/images/dashboard/chart.png') }}" class="img-fluid">
@@ -69,7 +69,7 @@
                                 <div class="balance-box">
                                     <label>@lang('site.total_orders_this_month')</label>
                                     <div class="text red">
-                                        7,345.34 SAR <small>25%</small> <i class="fas fa-chevron-down"></i>
+                                        {{ $clientsOrdersCount }}
                                     </div>
                                     <div class="content">
                                         <img src="{{ asset('assets/site/images/dashboard/chart-red.png') }}" class="img-fluid">
@@ -88,21 +88,24 @@
                                         <tr>
                                             <th>{{__('site.Service_name')}}</th>
                                             <th>{{__('site.Order_Date')}}</th>
-                                            <th>{{__('site.Due_on')}}</th>
                                             <th>{{__('site.Total')}}</th>
                                             <th>{{__('site.Status')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            
-                                        <tr>
-                                            <td><a href="">create intuitive mobile..</a></td>
-                                            <td>22 Jun 2020</td>
-                                            <td>23 Jun 2020</td>
-                                            <td>12.00 SAR</td>
-                                            <td><span class="stauts-label red">Active</span></td>
-                                        </tr>
-                                 
+                                        @forelse($clientsOrders as $order)
+                                            <tr>
+                                                <td><a href="">{{ $order->Service()->selectCard()->first()->title }}</a>
+                                                </td>
+                                                <td>{{ date('M d',strtotime($order->created_at)) }}</td>
+                                                <td>{{ $order->paid_total }} $</td>
+                                                <td><span
+                                                        class="stauts-label">@lang('default.other.order_status.'.$order->status)</span>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                        @endforelse
+
                                         </tbody>
                                     </table>
                                 </div>

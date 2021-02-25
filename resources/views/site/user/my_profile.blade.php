@@ -264,7 +264,7 @@
                                                     <div class="top">
                                                         <div class="service-item-slider owl-carousel">
                                                             @if(isset($value->image) && !empty($value->image) && !empty($value->image->path) && Storage::exists('services/gallery/'.$value->image->path))
-                                                                <img src="{{ asset('storage/services/gallery/'.$value->image->path) }}" class="main-img">
+                                                                <img src="{{ asset('storage/app/public/services/gallery/'.$value->image->path) }}" class="main-img">
                                                             @else
                                                                 <img src="{{ asset('assets/site/images/services/s-2.png') }}" class="main-img">
                                                             @endif

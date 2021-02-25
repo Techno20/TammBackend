@@ -131,11 +131,6 @@ class CheckoutController extends Controller
         // Get commission rate from setting
         $commissionRate = Setting::select('commission_rate')->first()->commission_rate;
 
-        $upload = new UploaderController();
-        $upload->folder = 'orders';
-        $upload->thumbFolder = 'orders/thumbs';
-        $galleryItemResponse = $upload->uploadSingle($q->requirements_attachments,false);
-
         $Order = new Order;
         $Order->user_id = auth()->user()->id;
         $Order->service_id = $Service->id;
@@ -143,7 +138,7 @@ class CheckoutController extends Controller
         $Order->paid_total = $paidTotal;
         $Order->commission_rate = $commissionRate;
         $Order->requirements_details = $q->requirements_details;
-        $Order->requirements_attachments = $galleryItemResponse['path'];
+        $Order->requirements_attachments = $q->requirements_attachments;
         $Order->save();
 
 

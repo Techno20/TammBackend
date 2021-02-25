@@ -141,8 +141,8 @@
                             <tr>
                                 <td>
                                     <div class="media align-items-center">
-                                        @if(isset($value->Service()->image) && !empty($value->Service()->image) && !empty($value->Service()->image->path) && file_exists(asset('uploads/services/'.$value->Service()->image->path)))
-                                            <img src="{{ asset('uploads/services/'.$value->Service()->image->path) }}">
+                                        @if($value->Service->image && $value->Service->image->path)
+                                            <img src="{{ asset('storage/services/gallery/'.$value->Service->image->path) }}">
                                         @else
                                             <img src="{{ asset('assets/site/images/dashboard/s-1.png') }}">
                                         @endif

@@ -314,14 +314,14 @@
         </section>
         <!-- service-details-section -->
 
-    @if($service->user)
+    @if($service->user && $service->user->services()->where('id', '!=', $service->id)->count())
         <!-- services-by-author-section -->
             <section class="services-by-author-section">
                 <div class="container">
                     <h2 class="m-title">@lang('site.more_services') <span>{{$service->user->name}}</span></h2>
                     <!-- services -->
                     <div class="row">
-                        @foreach($service->user->services()->limit(4)->get() as $item)
+                        @foreach($service->user->services()->where('id', '!=', $service->id)->limit(4)->get() as $item)
                             <div class="col-xl-3 col-lg-4 col-sm-6">
                                 <div class="service-item-2">
                                     <div class="top">

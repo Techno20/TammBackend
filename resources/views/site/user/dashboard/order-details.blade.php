@@ -121,31 +121,35 @@
 
                         </div>
 
+
+
                         <div class="summbary d-flex">
                             <div class="info">
                                 <label>@lang('site.requirements_attachments')</label>
                                 <p>
-                                    <a href="#" target="_blank" class="btn btn-yallow">@lang('site.show_attachments')</a>
+                                    <a href="{{ asset($order->getRequirementsAttachmentsURL()) }}" target="_blank" class="btn btn-yallow">@lang('site.show_attachments')</a>
                                 </p>
                             </div>
                         </div>
 
-                        <div class="summbary d-flex">
-                            <div class="info">
-                                <label>@lang('site.delivered_order_message')</label>
-                                <p>{{ $order->service_delivery }}</p>
+                        @if($order->status == 'delivered')
+                            <div class="summbary d-flex">
+                                <div class="info">
+                                    <label>@lang('site.delivered_order_message')</label>
+                                    <p>{{ $order->service_delivery }}</p>
+                                </div>
+
                             </div>
 
-                        </div>
-
-                        <div class="summbary d-flex">
-                            <div class="info">
-                                <label>@lang('site.delivered_order_attachments')</label>
-                                <p>
-                                    <a href="#" target="_blank" class="btn btn-yallow">@lang('site.show_attachments')</a>
-                                </p>
+                            <div class="summbary d-flex">
+                                <div class="info">
+                                    <label>@lang('site.delivered_order_attachments')</label>
+                                    <p>
+                                        <a href="{{ asset($order->getServiceDeliveryAttachmentsURL()) }}" target="_blank" class="btn btn-yallow">@lang('site.show_attachments')</a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                     </div>
 

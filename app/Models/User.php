@@ -13,10 +13,10 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use SoftDeletes;
-    
+
     /**
      * Table name
-     * 
+     *
      * Note: here we used merchants table instead of users table
      */
     protected $table = 'users';
@@ -151,7 +151,7 @@ class User extends Authenticatable implements JWTSubject
 
     /**
      * Get user avatar attribute
-     * 
+     *
      * @return string
      */
     public function getAvatarFullPathAttribute()
@@ -168,7 +168,7 @@ class User extends Authenticatable implements JWTSubject
 
     /**
      * Get educations
-     * 
+     *
      */
     public function getEducationsAttribute($value){
         return ($value) ? explode('||',$value) : [];
@@ -176,7 +176,7 @@ class User extends Authenticatable implements JWTSubject
 
     /**
      * Set educations
-     * 
+     *
      */
     public function setEducationsAttribute($value){
         $this->attributes['educations'] = join('||',Helper::cleanArraySeperator($value,'||'));
@@ -216,11 +216,11 @@ class User extends Authenticatable implements JWTSubject
     /**
      * Log financial transaction and this function do so:
      * Generate different types of financial transactions such as Deposit, Withdraw, Profit, Charge and Refund.
-     * 
+     *
      * @param array $transactionDetails
      */
     public static function logFinancialTransaction($transactionDetails = []){
-        if(isset($transactionDetails['user_id']) && isset($transactionDetails['type'])){            
+        if(isset($transactionDetails['user_id']) && isset($transactionDetails['type'])){
             $FinancialTransaction = new FinancialTransaction;
             $FinancialTransaction->user_id = $transactionDetails['user_id'];
             $FinancialTransaction->no = md5(uniqid(rand(), true));
@@ -231,13 +231,13 @@ class User extends Authenticatable implements JWTSubject
             $FinancialTransaction->save();
 
             User::logTransactionUpdateBalance($FinancialTransaction->user_id,$FinancialTransaction->type,$FinancialTransaction->amount);
-            
+
         }
     }
 
     /**
      * Update user balance after logging the transaction
-     * 
+     *
      * @param integer $userId
      * @param string $transactionType
      * @param integer $amount
@@ -258,5 +258,12 @@ class User extends Authenticatable implements JWTSubject
             $User->save();
         }
     }
-    
+
+    public function getUserServicesReviews()
+    {
+        if($this->ServicesReviews()->count() == 0)
+            return 0;
+        else
+            return round($this->ServicesReviews()->sum('rating') / $this->ServicesReviews()->count() , 1);
+    }
 }

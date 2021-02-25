@@ -34,7 +34,7 @@
                                     <img src="{{ $user->avatar_full_path }}" alt="">
                                     <p class="rate">
                                         <i class="fas fa-star"></i>
-                                        4.7
+                                        {{ auth()->user()->getUserServicesReviews() }}
                                     </p>
                                 </figure>
                                 <h3>{{ auth()->user()->name }}</h3>

@@ -37,7 +37,7 @@ class Order extends Model
 
     /**
      * Get order no
-     * 
+     *
      */
     public function getOrderNoAttribute(){
         return 'T'.$this->id;
@@ -45,7 +45,7 @@ class Order extends Model
 
     /**
      * Get status as string
-     * 
+     *
      */
     public function getStatusStringAttribute(){
         return __('default.other.order_status.'.$this->status);
@@ -53,7 +53,7 @@ class Order extends Model
 
     /**
      * Get package as string
-     * 
+     *
      */
     public function getPackageStringAttribute(){
         return __('default.other.package.'.$this->package);
@@ -61,63 +61,63 @@ class Order extends Model
 
     /**
      * Get requirements attachments
-     * 
+     *
      */
-    public function getRequirementsAttachmentsAttribute($value){
-        if($value){
-            $result = [];
-            $exp = explode('||',$value);
-            foreach($exp as $exp_item){
-                $result[] = [
-                    'file_name' => $exp_item,
-                    'full_path' => Storage::url('attachments/'.$exp_item)
-                ];
-            }
-            return $result;
-        }else {
-            return [];
-        }
-    }
+//    public function getRequirementsAttachmentsAttribute($value){
+//        if($value){
+//            $result = [];
+//            $exp = explode('||',$value);
+//            foreach($exp as $exp_item){
+//                $result[] = [
+//                    'file_name' => $exp_item,
+//                    'full_path' => Storage::url('attachments/'.$exp_item)
+//                ];
+//            }
+//            return $result;
+//        }else {
+//            return [];
+//        }
+//    }
 
     /**
      * Set requirements attachments
-     * 
+     *
      */
-    public function setRequirementsAttachmentsAttribute($value){
-        $this->attributes['requirements_attachments'] = join('||',Helper::cleanArraySeperator($value,'||'));
-    }
+//    public function setRequirementsAttachmentsAttribute($value){
+//        $this->attributes['requirements_attachments'] = join('||',Helper::cleanArraySeperator($value,'||'));
+//    }
 
     /**
      * Get service delivery attachments
-     * 
+     *
      */
-    public function getServiceDeliveryAttachmentsAttribute($value){
-        if($value){
-            $result = [];
-            $exp = explode('||',$value);
-            foreach($exp as $exp_item){
-                $result[] = [
-                    'file_name' => $exp_item,
-                    'full_path' => Storage::url('attachments/'.$exp_item)
-                ];
-            }
-            return $result;
-        }else {
-            return [];
-        }
-    }
+//    public function getServiceDeliveryAttachmentsAttribute($value){
+//        if($value){
+//            $result = [];
+//            $exp = explode('||',$value);
+//            foreach($exp as $exp_item){
+//                $result[] = [
+//                    'file_name' => $exp_item,
+//                    'full_path' => Storage::url('attachments/'.$exp_item)
+//                ];
+//            }
+//            return $result;
+//        }else {
+//            return [];
+//        }
+//    }
 
     /**
      * Set service delivery attachments
-     * 
+     *
      */
-    public function setServiceDeliveryAttachmentsAttribute($value){
-        $this->attributes['service_delivery_attachments'] = join('||',Helper::cleanArraySeperator($value,'||'));
-    }
+//    public function setServiceDeliveryAttachmentsAttribute($value){
+//        $this->attributes['service_delivery_attachments'] = join('||',Helper::cleanArraySeperator($value,'||'));
+//    }
 
     /**
      * Commission Amount Attribute
-     * 
+     *
      */
     public function getCommissionAmountAttribute(){
         return $this->paid_total*(0.01*$this->commission_rate);
@@ -125,7 +125,7 @@ class Order extends Model
 
     /**
      * Net Amount Attribute
-     * 
+     *
      */
     public function getNetAmountAttribute(){
         return $this->paid_total-($this->paid_total*(0.01*$this->commission_rate));
@@ -143,4 +143,15 @@ class Order extends Model
             })->orWhere('user_id',auth()->user()->id);
         });
    }
+
+   public function getRequirementsAttachmentsURL()
+   {
+       return 'storage/orders/' . $this->requirements_attachments;
+   }
+
+    public function getServiceDeliveryAttachmentsURL()
+    {
+        return 'storage/orders/delivered/' . $this->service_delivery_attachments;
+    }
+
 }

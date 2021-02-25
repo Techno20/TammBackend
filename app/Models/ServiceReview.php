@@ -9,6 +9,14 @@ class ServiceReview extends Model
 
   protected $table = 'services_reviews';
 
+    protected $fillable = [
+        'order_id',
+        'user_id',
+        'service_id',
+        'comment',
+        'rating',
+    ];
+
   protected $guarded = [
     'id'
   ];

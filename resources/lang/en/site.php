@@ -264,4 +264,9 @@ return [
     'email_address'=>'Please enter email address and well send you a link to reset your password.',
     'Back_to'=> 'Back to',
 
+    'rating_service' => 'Rating',
+    'rating_service_title' => 'Rating Service',
+    'rating_service_text' => 'Rating text',
+    'rating_service_text_example' => 'Example, great service and fast delivery',
+
 ];

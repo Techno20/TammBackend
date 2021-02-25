@@ -97,7 +97,7 @@
                                     </div>
                                 </a>
                                 <div class="total-meta d-flex align-item-center">
-                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $service->rating_avg }}</p>
+                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $service->getAverageServiceRating() }}</p>
                                     <p class="total-reviews">1k+ @lang('site.reviews')</p>
                                 </div>
                                 <p class="orders-counts">{{ $service->Orders()->count() }} @lang('site.orders_in_queue')</p>
@@ -148,7 +148,7 @@
                                             </div>
                                         </a>
                                         <div class="total-meta d-flex align-item-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> {{$service->rating_avg}}</p>
+                                            <p class="total-rate"><i class="fas fa-star"></i> {{$service->getAverageServiceRating()}}</p>
                                         </div>
                                     </div>
                                     <div class="summbary d-flex">
@@ -367,7 +367,7 @@
                                                 <p>{{ $item->standard_price ?? 0 }} @lang('site.sar')</p>
                                             </div>
                                             <div class="total-meta">
-                                                <p class="total-rate"><i class="fas fa-star"></i> {{$item->rating_avg}}</p>
+                                                <p class="total-rate"><i class="fas fa-star"></i> {{$item->getAverageServiceRating()}}</p>
                                                 <p class="total-sell">{{ $item->Orders()->count() }} @lang('site.sell')</p>
                                             </div>
                                         </div>

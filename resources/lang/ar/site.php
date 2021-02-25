@@ -264,6 +264,9 @@ return [
     'email_address'=>'يرجى إدخال عنوان البريد الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور الخاصة بك.',
     'Back_to'=> 'الرجوع الي',
 
-
+    'rating_service' => 'تقييم',
+    'rating_service_title' => 'تقييم الخدمة',
+    'rating_service_text' => 'نص التقييم',
+    'rating_service_text_example' => 'مثال ، خدمة رائعة وتسليم سريع',
 
 ];

@@ -84,7 +84,9 @@
                                 </div>
                             </td>
                             <td>{{ $value->Category->name }}</td>
-                            <td>{{ 0 }}</td>
+                            <td>
+                                {{ $value->getAverageServiceRating() }}
+                            </td>
                             <td>
                                 <div class="actions">
                                     <a href="{{ url('service/show/'.$value->id) }}" class="btn btn-yallow"><i class="fa fa-eye"></i></a>

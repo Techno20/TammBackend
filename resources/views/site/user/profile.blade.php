@@ -26,7 +26,7 @@
                                     <img src="{{ $user->avatar_full_path }}" alt="">
                                     <p class="rate">
                                         <i class="fas fa-star"></i>
-                                        4.7
+                                        {{ $user->getUserServicesReviews() }}
                                     </p>
                                 </figure>
                                 <h3>{{ $user->name }}</h3>

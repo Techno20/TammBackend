@@ -64,6 +64,7 @@ class CheckoutController extends Controller
      */
     public function postSendOrder(Request $q)
     {
+
         $validator = validator()->make(request()->all(), [
             'service_id' => 'required',
             'extra_services' => 'nullable|array',

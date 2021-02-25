@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\UploaderController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB, Helper;
@@ -121,7 +122,7 @@ class UserOrderController extends Controller
 
         $validator = validator()->make($q->all(), [
             'service_delivery' => 'required',
-            'service_delivery_attachments' => 'array'
+            'service_delivery_attachments' => 'file'
         ]);
 
 
@@ -138,7 +139,14 @@ class UserOrderController extends Controller
         $Order->status = 'delivered';
         $Order->status_updated_at = date('Y-m-d H:i:s');
         $Order->service_delivery = $q->service_delivery;
-        $Order->service_delivery_attachments = $q->service_delivery_attachments;
+
+        // Upload Attachments
+        $upload = new UploaderController();
+        $upload->folder = 'orders/delivered';
+        $upload->thumbFolder = 'orders/delivered/thumbs';
+        $galleryItemResponse = $upload->uploadSingle($q->service_delivery_attachments,false);
+
+        $Order->service_delivery_attachments = $galleryItemResponse['path'];
         $Order->save();
 
         $Order = Order::where('id',$orderId)->with('Service','Extras')->first();
@@ -198,6 +206,24 @@ class UserOrderController extends Controller
         );
 
         return Helper::responseData('success',true);
+    }
+
+    public function postRating($order_id , Request  $request)
+    {
+        $validator = validator()->make($request->all(), [
+            'comment' => 'required|max:500',
+            'star' => 'required'
+        ]);
+
+
+        if($validator->fails()) {
+            return Helper::responseValidationError($validator->messages());
+        }
+
+        $order = Order::findOrFail($order_id);
+        $order->Service->Reviews()->create(['order_id' => $order->id , 'user_id' => $order->Service->user_id ,'comment' => $request->comment , 'rating' => $request->star]);
+
+        return  redirect()->back();
     }
 
 }

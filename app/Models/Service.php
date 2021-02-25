@@ -72,7 +72,7 @@ class Service extends Model
 
   /**
    * Get basic services list
-   * 
+   *
    */
   public function getBasicServicesListAttribute($value){
       return ($value) ? explode('||',$value) : [];
@@ -80,7 +80,7 @@ class Service extends Model
 
   /**
    * Set basic services list
-   * 
+   *
    */
   public function setBasicServicesListAttribute($value){
       $this->attributes['basic_services_list'] = join('||',Helper::cleanArraySeperator($value,'||'));
@@ -88,7 +88,7 @@ class Service extends Model
 
   /**
    * Get standard services list
-   * 
+   *
    */
   public function getStandardServicesListAttribute($value){
       return ($value) ? explode('||',$value) : [];
@@ -96,7 +96,7 @@ class Service extends Model
 
   /**
    * Set standard services list
-   * 
+   *
    */
   public function setStandardServicesListAttribute($value){
       $this->attributes['standard_services_list'] = join('||',Helper::cleanArraySeperator($value,'||'));
@@ -104,7 +104,7 @@ class Service extends Model
 
   /**
    * Get premium services list
-   * 
+   *
    */
   public function getPremiumServicesListAttribute($value){
       return ($value) ? explode('||',$value) : [];
@@ -112,7 +112,7 @@ class Service extends Model
 
   /**
    * Set premium services list
-   * 
+   *
    */
   public function setPremiumServicesListAttribute($value){
       $this->attributes['premium_services_list'] = join('||',Helper::cleanArraySeperator($value,'||'));
@@ -124,7 +124,7 @@ class Service extends Model
     return $this->hasOne('App\Models\ServiceGallery')->select('id','service_id','path');
     // ->whereRaw('path REGEXP "^.(jpg|jpeg|png|bmp|gif)(?:[\?\#].*)?$"');
   }
-  
+
   // Gallery
   public function Gallery(){
     return $this->hasMany('App\Models\ServiceGallery')->select('id','service_id','path');
@@ -215,5 +215,13 @@ class Service extends Model
        }
        return $qu;
      });
+   }
+
+   public function getAverageServiceRating()
+   {
+       if($this->Reviews()->count() == 0)
+           return 0;
+       else
+           return round($this->Reviews()->sum('rating') / $this->Reviews()->count() , 1);
    }
 }

@@ -19,7 +19,7 @@
             </div> --}}
         </div>
     </div>
-    <div class="user-statistics-box">
+    {{-- <div class="user-statistics-box">
         <div class="item">
             <div class="title">
                 <h5>@if($allClientsOrdersCount == 0) 0 @else {{ number_format($currentClientsOrdersCount / $allClientsOrdersCount * 100 , 2, '.', '') }}@endif%</h5>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="help-box">
         <figure>
             <img src="{{ asset('assets/site/images/dashboard/serv-question.png') }}" class="img-fluid">

@@ -83,7 +83,7 @@
 
                         <span>@lang('site.conversation') </span>
 
-                        <dt>15</dt>
+                        {{-- <dt>15</dt> --}}
                     </a>
                 </li>
                 <li class="nav-item">

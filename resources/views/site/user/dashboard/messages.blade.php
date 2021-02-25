@@ -66,9 +66,12 @@
                             <i class="fas fa-chevron-down"></i>
                         </header>
                         <div class="conversations">
+                            <input type="hidden" id="tempIdConversations">
+                            <input type="hidden" id="idMyUSer" value="{{auth()->user()->id}}">
                             @foreach ($conversations as $Conversations)
                             {{-- {{$Conversations->id}} --}}
                                 <div class="conv-item media unseen" id="{{$Conversations->id}}" onclick="getMassegeChats('{{$Conversations->id}}')">
+
                                     <figure>
                                         <img src="{{ asset('/assets\/site\/images\/user.png') }}" class="img-fluid">
                                         {{-- <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
@@ -334,7 +337,7 @@
                     <div class="messages-body-footer mt-auto d-flex align-items-center">
                         <form action="" method="POST" id="formReplayMessege">
                             @csrf
-                            <textarea class="form-control" name="message" placeholder="Type a message..."></textarea>
+                            <textarea class="form-control" id="txtAeraMessage" name="message" placeholder="Type a message..."></textarea>
                             <div class="tools d-flex align-items-center">
                                 <a href="">
                                     <svg id="Picture_Icon" data-name="Picture Icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">

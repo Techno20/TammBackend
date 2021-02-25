@@ -62,6 +62,15 @@ return [
     'cancelled_order' => 'الملغية',
     'all_order' => 'كل الطلبات',
 
+    'my_orders' => 'طلباتي',
+    'client_orders' => 'طلبات العملاء',
+    'operations' => 'العمليات',
+    'cancel_order' => 'الغاء الطلب',
+    'finish_order_delivered' => 'الانتهاء من تنفيذ الخدمة',
+    'delivered_order_message' => 'رسالة تسليم الخدمة',
+    'delivered_order_message_example' => 'مثال ، لقد قمت بإنجاز العمل الخاص بك',
+    'delivered_order_attachments' => 'مرفقات التسليم',
+
     'all' => 'الكل',
     'add_new_service' => 'اضافة خدمة جديدة',
     'save' => 'حفظ',

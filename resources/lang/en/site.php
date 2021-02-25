@@ -62,6 +62,18 @@ return [
     'cancelled_order' => 'Cancelled',
     'all_order' => 'All Orders',
     'all' => 'All',
+    'operations' => 'Operations',
+
+    'my_orders' => 'My Orders',
+    'client_orders' => 'Client Orders',
+    'cancel_order' => 'Cancel Order',
+    'finish_order_delivered' => 'Completion of the service implementation',
+    'delivered_order_message' => 'Service delivery message',
+    'delivered_order_message_example' => 'Example, you have done your work',
+    'delivered_order_attachments' => 'Delivery attachments',
+
+
+
     'add_new_service' => 'Add New Service',
     'save' => 'Save',
     'save_and_review' => 'Save And Review',

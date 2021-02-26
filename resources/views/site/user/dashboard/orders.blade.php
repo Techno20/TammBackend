@@ -1,7 +1,7 @@
 @extends('site.user.dashboard.layout.main')
 
 @section('css')
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <style>
         .actions-buttons{
             border-radius: 25px;

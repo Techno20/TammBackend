@@ -4,7 +4,7 @@
         <div class="links">
             <ul>
                 <li>
-                    <a href="">
+                    <a href="{{url('/user/getprofileupdat')}}">
                         <div class="item d-flex align-items-center">
                                                     <span class="icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19.5" height="19.5" viewBox="0 0 19.5 19.5">
@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="active">
+                    <a href="{{url('/user/me')}}" class="active">
                         <div class="item d-flex align-items-center">
                                                     <span class="icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="17.386" height="17.427" viewBox="0 0 17.386 17.427">

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('profile/{user_id}', [UserProfileController::class, 'getProfile']);
         Route::get('dashboard', [UserProfileController::class, 'getDashboard']);
         Route::get('profile', [UserProfileController::class, 'getMyProfile']);
+        Route::GET('getprofileupdat' , [UserProfileController::class, 'getMyProfileupdat']);
 
         Route::group(['middleware' => 'auth'],function(){
             Route::get('me', [AuthController::class, 'getMe']);

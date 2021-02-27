@@ -297,7 +297,7 @@
                                 </div>
 
                             </div>
-                            @if($service->user_id != auth()->id())
+                            @if(auth()->check() && $service->user_id != auth()->id())
                                 <div class="serv-question d-flex align-items-center">
                                     <img src="{{ asset('assets/site/images/services/serv-question.png') }}" class="img-fluid" alt="">
                                     <div class="data">

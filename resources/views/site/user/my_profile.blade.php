@@ -16,7 +16,7 @@
                         <!-- freelancer-profile-box -->
                         <div class="freelancer-profile-box">
                             <div class="status-bar d-flex align-items-center">
-                                <a href="" class="setting">
+                                <a href="{{url('/user/getprofileupdat')}}" class="setting">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19.315" height="19.374" viewBox="0 0 19.315 19.374">
                                         <g id="settings" transform="translate(-0.342 -0.318)">
                                             <path id="Shape" d="M9.658,19.373h0a2.453,2.453,0,0,1-1.9-.91l-.8-.908a1.127,1.127,0,0,0-.856-.395l-.081,0-1.228.11c-.068.006-.139.009-.208.009a2.487,2.487,0,0,1-1.765-.728,2.524,2.524,0,0,1-.727-1.973l.1-1.263a1.15,1.15,0,0,0-.4-.91l-.908-.791a2.491,2.491,0,0,1,0-3.809l.908-.8a1.128,1.128,0,0,0,.382-.964L2.068,4.819a2.54,2.54,0,0,1,.718-1.974,2.508,2.508,0,0,1,1.769-.736c.066,0,.135,0,.2.008l1.264.1h.051a1.118,1.118,0,0,0,.857-.4l.791-.91A2.5,2.5,0,0,1,9.623,0a2.456,2.456,0,0,1,1.9.91l.8.91a1.144,1.144,0,0,0,.857.387,1.129,1.129,0,0,0,.115-.006l1.229-.108c.079-.008.16-.012.24-.012a2.515,2.515,0,0,1,1.766.732,2.488,2.488,0,0,1,.72,2.007l-.127,1.227a1.147,1.147,0,0,0,.4.908l.908.792a2.491,2.491,0,0,1,0,3.809l-.908.8a1.129,1.129,0,0,0-.382.965l.108,1.227a2.535,2.535,0,0,1-.718,1.973,2.475,2.475,0,0,1-1.768.735c-.066,0-.135,0-.2-.008l-1.264-.1h-.036a1.15,1.15,0,0,0-.873.4l-.791.908a2.486,2.486,0,0,1-1.9.91l-.037.009ZM6.113,15.8h0a2.5,2.5,0,0,1,1.9.91l.8.91a1.126,1.126,0,0,0,.861.4h.061a1.081,1.081,0,0,0,.851-.41l.791-.91a2.488,2.488,0,0,1,1.933-.916c.061,0,.121,0,.177.006l1.227.091a1.153,1.153,0,0,0,.121.007,1.1,1.1,0,0,0,.788-.333,1.139,1.139,0,0,0,.328-.91l-.1-1.218a2.484,2.484,0,0,1,.91-2.11l.908-.8a1.123,1.123,0,0,0,.4-.864,1.089,1.089,0,0,0-.408-.909l-.91-.792a2.5,2.5,0,0,1-.91-2.109l.091-1.227A1.126,1.126,0,0,0,14.809,3.4a1.04,1.04,0,0,0-.105,0l-1.218.1c-.062,0-.126.007-.19.007a2.461,2.461,0,0,1-1.92-.916l-.8-.909a1.13,1.13,0,0,0-.8-.333,1.045,1.045,0,0,0-.119.006H9.6a1.084,1.084,0,0,0-.852.41l-.791.908a2.516,2.516,0,0,1-1.946.915c-.052,0-.106,0-.163-.005L4.622,3.49a1.129,1.129,0,0,0-.12-.007,1.109,1.109,0,0,0-.79.334,1.135,1.135,0,0,0-.328.909l.1,1.219a2.487,2.487,0,0,1-.909,2.109l-.91.8a1.127,1.127,0,0,0-.4.864,1.1,1.1,0,0,0,.41.909l.91.791a2.5,2.5,0,0,1,.908,2.109L3.4,14.755a1.128,1.128,0,0,0,1.124,1.223,1.014,1.014,0,0,0,.1,0l1.218-.1.263-.073Z" transform="translate(0.342 0.318)" fill="currentcolor"/>
@@ -40,7 +40,7 @@
                                 <h3>{{ auth()->user()->name }}</h3>
                                 <div class="brief">
                                     {{ auth()->user()->about_me }}
-                                     <a href=""><i class="fas fa-pen"></i></a>
+                                     <a href="{{url('/user/getprofileupdat')}}"><i class="fas fa-pen"></i></a>
                                 </div>
                                 <div class="actions">
                                     <a href="{{ url('user/profile/'.auth()->user()->id) }}" class="btn btn-outline-darkblue public-mode">@lang('site.view_public_mode')</a>
@@ -143,7 +143,7 @@
                             <div class="social-accounts">
                                 <header class="box-header d-flex align-items-center justify-content-between">
                                     <h3 class="m-title">@lang('site.linked_accounts')</h3>
-                                    <a href="" class="btn add-new-btn">@lang('site.add_new')</a>
+                                    <a href="{{url('/user/getprofileupdat')}}" class="btn add-new-btn">@lang('site.add_new')</a>
                                 </header>
                                 <div class="content ">
                                     <div class="accounts-links d-flex flex-wrap">
@@ -165,12 +165,12 @@
                             <div class="skills">
                                 <header class="box-header d-flex align-items-center justify-content-between">
                                     <h3 class="m-title">@lang('site.skills')</h3>
-                                    <a href="" class="btn add-new-btn">@lang('site.add_new')</a>
+                                    <a href="{{url('/user/getprofileupdat')}}" class="btn add-new-btn">@lang('site.add_new')</a>
                                 </header>
                                 <div class="content d-flex flex-wrap">
                                     @if(isset($user->skills) && !empty($user->skills) && $user->skills->count() > 0)
                                         @foreach($user->skills as $key => $value)
-                                            <span class="item">{{ $value->name }}</span>
+                                            <span class="item">{{ $value->skills }}</span>
                                         @endforeach
                                     @else
                                         <div class="alert alert-danger  text-danger">@lang('site.sorry_no_data')</div>

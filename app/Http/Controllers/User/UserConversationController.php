@@ -50,7 +50,7 @@ class UserConversationController extends Controller
      */
     public function getList()
     {
-      $Conversations = Conversation::selectCard()->authorized()->paginate(50);
+      $Conversations = Conversation::selectCard()->authorized()->orderBy('id','DESC')->paginate(50);
 //      return Helper::responseData('success',true,$Conversations);
       // return response($Conversations, 200);
        return view('site.user.dashboard.messages')->with('conversations',$Conversations);

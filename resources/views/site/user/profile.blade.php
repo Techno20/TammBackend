@@ -34,7 +34,7 @@
                                     {{ $user->about_me }}
                                 </div>
                                 <div class="actions">
-                                    <a href="" class="btn btn-yallow">@lang('site.contact_me')</a>
+                                    <button class="btn btn-yallow" data-toggle="modal" data-target="#sendMessageModal">@lang('site.contact_seller')</button>
                                 </div>
                             </div>
                             <div class="user-info form-row">
@@ -368,5 +368,102 @@
         </section>
         <!-- freelancer-user-profile-page -->
     </div>
+     <!-- send-message modal -->
+     <div class="modal fade custom-modal send-message-modal" id="sendMessageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <header class="head d-flex justify-content-between">
+                    <h3>{{__('site.contact_seller')}}</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="details">
+                                <div class="user-box">
+                                    <div class="user media">
+                                        <figure>
+                                            <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+                                            {{-- <span></span> --}}
+                                        </figure>
+                                        <div class="media-body">
+                                            <h4>{{ $user->name }}</h4>
+                                            {{-- <p>Online</p> --}}
+                                        </div>
+                                    </div>
+                                    {{-- <div class="times">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="time">
+                                                    <label>Local Time</label>
+                                                    <p>Mon 18:02</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="time">
+                                                    <label>Avg. Rspns</label>
+                                                    <p>Mon 18:02</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+                                </div>
+                                <div class="includes-box">
+                                    <p>{{ __('site.Service_information')}}</p>
+                                    <ol class="includes d-flex flex-wrap">
+                                        <li>{{__('site.Description_service') }}</li>
+                                        <li>{{__('site.Specific_information')}}</li>
+                                        <li>{{__('site.Related_files')}}</li>
+                                        <li>{{ __('site.budget')}}</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <form action="/user/conversation/send-message"  method="POST" nctype="multipart/form-data" id="formSendMassege" >
+                                @csrf
+                                <div class="message-wrapper d-flex flex-column ">
+                                    <input type="hidden" id="service_provider_id" name="service_provider_id" value="{{$user->id}}">
+                                    <textarea name="message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
+                                    {{-- <div class="attachments d-flex align-items-center flex-wrap">
+                                        <label>المرفقات:</label>
+                                        <div class="attachment">
+                                            <i class="fas fa-paperclip"></i>
+                                            <span>image.png</span>
+                                            <a href="">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </div>
+                                        <div class="attachment">
+                                            <i class="fas fa-paperclip"></i>
+                                            <span>File.docx</span>
+                                            <a href="">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div> --}}
+                                    <div class="message-controls d-flex align-items-center">
+                                        <!--<p class="counter">-->
+                                        <!--    <span class="current">87</span>-->
+                                        <!--    <span class="total">/ 2500</span>-->
+                                        <!--</p>-->
+                                        <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
+                                        <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
+
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="alertMessege">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- send-message modal -->
+
 
 @endsection

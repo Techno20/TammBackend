@@ -313,8 +313,9 @@ class AuthController extends Controller
       $User->bank_account_owner_name = $q->bank_account_owner_name;
     }
     $User->save();
+    return back()->with('success', 'تم حفظ التغيرات');
 
-    return Helper::responseData('updated',true,$User,__('auth.updated'));
+    // return Helper::responseData('updated',true,$User,__('auth.updated'));
   }
 
   /**

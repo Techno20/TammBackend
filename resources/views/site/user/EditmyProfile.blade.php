@@ -24,19 +24,15 @@
                             <div class="sec-content">
                                 <div class="setting-security-sec gray-form">
                                    
-                                    @if (isset($errorValidation))
-                                        <div class="alert alert-danger" role="alert">
-                                            تأكد من تطابق كلمة المرور 
+                                    @if (isset($success))
+                                        <div class="alert alert-success" role="alert">
+                                            {{$success}}
                                         </div>  
                                     @endif
-                                        
-                                   
-                                    
-                                    
-                                    
+ 
                                     <div class="change-password ">
-                                        <form action="{{url('user/me/update')}}" method="POST">
-                                            @method('put')
+                                        <form action="{{url('user/update')}}" method="POST">
+                                           
                                             @csrf
                                         
                                         {{-- <div class="form-row">

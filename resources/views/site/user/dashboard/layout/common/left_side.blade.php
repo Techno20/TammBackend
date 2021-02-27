@@ -9,7 +9,11 @@
         </a>
         <div class="user-info-side media align-items-center">
             <figure>
-                <img src="{{ asset('assets/site/images/user.png') }}" alt="" />
+                @if(auth()->check() && auth()->user()->avatar_full_path)
+                    <img src="{{auth()->user()->avatar_full_path}}" alt="">
+                @else
+                    <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+                @endif
             </figure>
             <div class="media-body">
                 <h5>@lang('site.welcome'), <span>{{ auth()->user()->name }}</span></h5>

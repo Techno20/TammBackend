@@ -143,7 +143,7 @@
     <div class="container position-relative">
         <nav class="navbar navbar-expand-lg">
             <a href="{{ url('/') }}" class="brand">
-            
+
                 @if(app()->getLocale() == 'ar')
                  <img src="{{ asset('assets/shared/img/logo.svg') }}">
                 @else
@@ -185,7 +185,11 @@
                 </a> --}}
                 <div class="user-quick-menu d-inline-block">
                     <a href="" class="user">
-                        <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+                        @if(auth()->check() && auth()->user()->avatar_full_path)
+                            <img src="{{auth()->user()->avatar_full_path}}" alt="">
+                        @else
+                            <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+                        @endif
                         {{-- <span></span> --}}
                     </a>
                     <div class="h-user-quick-menu-dropdown">
@@ -292,7 +296,7 @@
                 </div>
             </div>
             @endif
-            
+
         </nav>
     </div>
 </header>

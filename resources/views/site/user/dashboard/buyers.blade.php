@@ -63,8 +63,8 @@
                                 <tr>
                                     <td>
                                         <div class="media circle-img align-items-center">
-                                            @if(file_exists(asset('uploads/users/'.$value->avatar)))
-                                                <img src="{{ asset('uploads/users/'.$value->avatar) }}" class="">
+                                            @if($value->avatar_full_path)
+                                                <img src="{{ $value->avatar_full_path }}" class="">
                                             @else
                                                 <img src="{{ asset('assets/site/images/user.png') }}" class="">
                                             @endif

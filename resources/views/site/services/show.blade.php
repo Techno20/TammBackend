@@ -84,8 +84,8 @@
                                 <a href="{{$service->user ? url('user/profile/'.$service->user->id) : ''}}">
                                     <div class="serv-author media align-items-center">
                                         @if(isset($service->user) && !empty($service->user))
-                                            @if(file_exists(asset('uploads/users/'.$service->user->avatar)))
-                                                <img src="{{ asset('uploads/users/'.$service->user->avatar) }}" class="author-img">
+                                            @if($service->user->avatar_full_path)
+                                                <img src="{{ $service->user->avatar_full_path }}" class="author-img">
                                             @else
                                                 <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                             @endif
@@ -137,8 +137,8 @@
                                     <div class="header d-flex align-items-center">
                                         <a href="{{$service->user ? url('user/profile/'.$service->user->id) : ''}}">
                                             <div class="serv-author media align-items-center">
-                                                @if(file_exists(asset('uploads/users/'.$service->user->avatar)))
-                                                    <img src="{{ asset('uploads/users/'.$service->user->avatar) }}" class="author-img">
+                                                @if($service->user->avatar_full_path)
+                                                    <img src="{{ $service->user->avatar_full_path }}" class="author-img">
                                                 @else
                                                     <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                 @endif
@@ -349,8 +349,8 @@
                                     <div class="details">
                                         <a href="{{url('user/profile/'.$service->user->id)}}">
                                             <div class="serv-author media">
-                                                @if(file_exists(asset('uploads/users/'.$service->user->avatar)))
-                                                    <img src="{{ asset('uploads/users/'.$service->user->avatar) }}" class="author-img">
+                                                @if($service->user->avatar_full_path)
+                                                    <img src="{{ $service->user->avatar_full_path }}" class="author-img">
                                                 @else
                                                     <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                 @endif
@@ -400,8 +400,8 @@
                                     <div class="user media">
                                         <figure>
 
-                                            @if(auth()->check() && auth()->user()->avatar_full_path)
-                                                <img src="{{auth()->user()->avatar_full_path}}" alt="">
+                                            @if($service->user->avatar_full_path)
+                                                <img src="{{$service->user->avatar_full_path}}" alt="">
                                             @else
                                                 <img src="{{ asset('assets/site/images/user.png') }}" alt="">
                                             @endif

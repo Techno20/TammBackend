@@ -73,7 +73,11 @@
                                 <div class="conv-item media unseen" id="{{$Conversations->id}}" onclick="getMassegeChats('{{$Conversations->id}}')">
 
                                     <figure>
-                                        <img src="{{ asset('/assets\/site\/images\/user.png') }}" class="img-fluid">
+                                        @if ($Conversations->recipient->id == auth()->user()->id)
+                                            <img src="{{ $Conversations->sender ? $Conversations->sender->avatar_full_path : asset('/assets/site/images/user.png') }}" class="img-fluid">
+                                        @else
+                                            <img src="{{ $Conversations->recipient ? $Conversations->recipient->avatar_full_path : asset('/assets/site/images/user.png') }}" class="img-fluid">
+                                        @endif
                                         {{-- <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
                                             <g id="Oval" fill="#00db51" stroke="#fff" stroke-miterlimit="10" stroke-width="2">
                                                 <circle cx="6.5" cy="6.5" r="6.5" stroke="none"/>
@@ -84,11 +88,11 @@
                                     <div class="media-body">
 
 
-                                        @if ($Conversations->recipient->id == auth()->user()->id)
+                                        @if ($Conversations->recipient && $Conversations->recipient->id == auth()->user()->id)
                                             <h4>{{$Conversations->sender ? $Conversations->sender->name : ''}}</h4>
                                             <p class="text">{{$Conversations->sender ? $Conversations->sender->email : ''}}</p>
                                         @else
-                                            <h4>{{$Conversations->recipient ? $Conversations->recipient->name : ''}}</h4> 
+                                            <h4>{{$Conversations->recipient ? $Conversations->recipient->name : ''}}</h4>
                                             <p class="text">{{$Conversations->recipient ? $Conversations->recipient->email : ''}}</p>
                                         @endif
                                         {{-- <p class="date">1 WEEK AGO</p> --}}

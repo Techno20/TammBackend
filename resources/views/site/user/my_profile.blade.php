@@ -274,8 +274,8 @@
                                                     <div class="details">
                                                         <div class="serv-author media">
                                                             @if(isset($value->user) && !empty($value->user))
-                                                                @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
-                                                                    <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
+                                                                @if($value->user->avatar_full_path)
+                                                                    <img src="{{ $value->user->avatar_full_path }}" class="author-img">
                                                                 @else
                                                                     <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                                 @endif

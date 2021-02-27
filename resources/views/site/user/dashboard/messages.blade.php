@@ -88,7 +88,7 @@
                                             <h4>{{$Conversations->sender ? $Conversations->sender->name : ''}}</h4>
                                             <p class="text">{{$Conversations->sender ? $Conversations->sender->email : ''}}</p>
                                         @else
-                                            <h4>{{$Conversations->recipient ? $Conversations->recipient->name : ''}}</h4>
+                                            <h4>{{$Conversations->recipient ? $Conversations->recipient->name : ''}}</h4> 
                                             <p class="text">{{$Conversations->recipient ? $Conversations->recipient->email : ''}}</p>
                                         @endif
                                         {{-- <p class="date">1 WEEK AGO</p> --}}

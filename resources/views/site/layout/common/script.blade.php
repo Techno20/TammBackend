@@ -6,7 +6,7 @@
 <script src="{{ asset('assets/site/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/jquery-nice-select-master/js/jquery.nice-select.min.js') }}"></script>
 <script src="{{ asset('assets/site/plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.js') }}"></script>
-{{-- <script src="{{ asset('assets/site/js/customJS.js') }}"></script> --}}
+<script src="{{ asset('assets/site/js/customJS.js') }}"></script>
 
 <script src="{{ asset('assets/site/js/wow.min.js') }}"></script>
 @if(app()->getLocale() == 'ar')

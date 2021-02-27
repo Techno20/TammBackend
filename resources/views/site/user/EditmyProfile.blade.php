@@ -1,9 +1,62 @@
 @extends('site.layout.main')
 
 @section('css')
+    @if(app()->getLocale() == 'ar')
+        <link rel="stylesheet" href="{{ asset('assets/site/css/fileinput.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/site/css/fileinput-rtl.min.css') }}"/>
+    @else
+        <link rel="stylesheet" href="{{ asset('assets/site/css/fileinput.min.css') }}"/>
+    @endif
 @endsection
 
 @section('js')
+    <script src="{{ asset('assets/site/js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('assets/site/js/theme.min.js') }}"></script>
+    <script>
+        function enableFileInput(selector, init = [], init_config = [], overwrite = true, deleteBtn = false) {
+            $(selector).fileinput({
+                theme: "fas",
+                showDrag: false,
+                deleteExtraData: {
+                    '_token': '{{csrf_token()}}',
+                },
+                browseClass: "btn btn-info",
+                browseIcon: "<i class='la la-file'></i>",
+                removeClass: "btn btn-danger",
+                removeIcon: "<i class='la la-trash-o'></i>",
+                showRemove: false,
+                showCancel: false,
+                showUpload: false,
+                showPreview: true,
+                initialPreview: init,
+                initialPreviewShowDelete: deleteBtn,
+                initialPreviewAsData: true, // defaults markup
+                initialPreviewConfig: init_config,
+                initialPreviewFileType: 'image',
+                overwriteInitial: overwrite,
+                browseOnZoneClick: true,
+                maxFileCount: 6,
+                browseLabel: "@lang('site.text_browse')",
+                removeLabel: "@lang('site.text_delete')",
+                msgPlaceholder: "@lang('site.text_select_files') {files}...",
+                msgSelected: "@lang('site.text_selected') {n} {files}",
+                fileSingle: "@lang('site.text_one_files')",
+                filePlural: "@lang('site.text_multi_files')",
+                dropZoneTitle: "@lang('site.text_drag_drop_files_here') &hellip;",
+                msgZoomModalHeading: "@lang('site.text_file_details')",
+                dropZoneClickTitle: '<br>(@lang('site.text_click_to_browse'))',
+                @if(app()->getLocale() == 'ar')
+                rtl: true,
+                @endif
+            });
+        }
+
+        @if(auth()->check() && auth()->user()->avatar_full_path)
+            enableFileInput('#avatar', ['{{auth()->user()->avatar_full_path}}']);
+        @else
+            enableFileInput('#avatar');
+        @endif
+    </script>
 @endsection
 
 @section('content')
@@ -23,18 +76,18 @@
                             </header>
                             <div class="sec-content">
                                 <div class="setting-security-sec gray-form">
-                                   
+
                                     @if (isset($success))
                                         <div class="alert alert-success" role="alert">
                                             {{$success}}
-                                        </div>  
+                                        </div>
                                     @endif
- 
+
                                     <div class="change-password ">
-                                        <form action="{{url('user/update')}}" method="POST">
-                                           
+                                        <form action="{{url('user/update')}}" method="POST" enctype="multipart/form-data">
+
                                             @csrf
-                                        
+
                                         {{-- <div class="form-row">
                                             <div class="col-lg-4">
                                                 <label>Current Password</label>
@@ -64,7 +117,7 @@
                                                     <textarea type="text" class="form-control" name="about_me">{{$user->about_me}}</textarea>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-4">
@@ -94,7 +147,19 @@
                                                     <input type="email" class="form-control" name="email" value="{{$user->email}}">
                                                 </div>
                                             </div>
-                                            
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <label>الصورة الشخصية</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <input name="avatar" id="avatar" class="fileinput form-control" type='file' accept="image/*"/>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <header class="setting-body-header">
                                             <h1>روابط التواصل الاجتماعي</h1>
@@ -108,7 +173,7 @@
                                                     <input type="text" class="form-control" name="facebook_url" value="{{$user->facebook_url}}">
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-4">
@@ -119,7 +184,7 @@
                                                     <input type="text" class="form-control" name="twitter_url" value="{{$user->twitter_url}}">
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-4">
@@ -130,7 +195,7 @@
                                                     <input type="text" class="form-control" name="instagram_url" value="{{$user->instagram_url}}">
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-4">
@@ -141,7 +206,7 @@
                                                     <input type="text" class="form-control" name="linkedin_url" value="{{$user->linkedin_url}}">
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="actions text-right">
                                             <button type="submit" class="btn btn-yallow">{{__('site.Save Chages')}}</button>
@@ -197,6 +262,6 @@
             </div>
         </section>
         <!-- account-setting-page -->
-        
+
     </div>
 @endsection

@@ -399,7 +399,12 @@
                                 <div class="user-box">
                                     <div class="user media">
                                         <figure>
-                                            <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+
+                                            @if(auth()->check() && auth()->user()->avatar_full_path)
+                                                <img src="{{auth()->user()->avatar_full_path}}" alt="">
+                                            @else
+                                                <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+                                            @endif
                                             {{-- <span></span> --}}
                                         </figure>
                                         <div class="media-body">

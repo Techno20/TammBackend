@@ -1,7 +1,11 @@
 <aside class="dashboard-right-side">
     <div class="user-profile-box">
         <figure class="text-center">
-            <img src="{{ asset('assets/site/images/user.png') }}" class="img-fluid">
+            @if(auth()->check() && auth()->user()->avatar_full_path)
+                <img src="{{auth()->user()->avatar_full_path}}" alt="" class="img-fluid">
+            @else
+                <img src="{{ asset('assets/site/images/user.png') }}" alt="" class="img-fluid">
+            @endif
         </figure>
         <h3>{{ auth()->user()->name }}</h3>
         <p class="brief">{{ auth()->user()->about_me }}</p>

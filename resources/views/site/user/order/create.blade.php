@@ -653,8 +653,8 @@
                                                                             <div class="media-body">
                                                                                 <p class="description">{{ $result['service']->title }}</p>
                                                                                 <div class="total-meta d-flex align-item-center">
-                                                                                    <p class="total-rate"><i class="fas fa-star"></i> 4.7</p>
-                                                                                    <p class="total-reviews">1k+ reviews</p>
+                                                                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $result['service']->getAverageServiceRating() }}</p>
+                                                                                    <p class="total-reviews">{{ $result['service']->Reviews()->count() }} @lang('site.reviews')</p>
                                                                                 </div>
                                                                                 <div class="price-meta d-flex align-items-center">
                                                                                     <div class="price">

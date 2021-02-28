@@ -20,9 +20,93 @@
             flex: 1 1 50%;
         }
     </style>
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <style>
+        .actions-buttons{
+            border-radius: 25px;
+            font-family: var(--font700);
+            font-size: 11px !important;
+        }
+    </style>
+
+    <style>
+        .cont {
+            width: 93%;
+            max-width: 350px;
+            text-align: center;
+            margin: 4% auto;
+            padding: 30px 0;
+            background: #111;
+            color: #EEE;
+            border-radius: 5px;
+            border: thin solid #444;
+            overflow: hidden;
+        }
+
+        hr {
+            margin: 20px;
+            border: none;
+            border-bottom: thin solid rgba(255,255,255,.1);
+        }
+
+        div.title { font-size: 2em; }
+
+        h1 span {
+            font-weight: 300;
+            color: #Fd4;
+        }
+
+        div.stars {
+            width: 270px;
+            display: inline-block;
+        }
+
+        input.star { display: none; }
+
+        label.star {
+            float: right;
+            padding: 10px;
+            font-size: 36px;
+            color: #444;
+            transition: all .2s;
+        }
+
+        input.star:checked ~ label.star:before {
+            content: '\f005';
+            color: #FD4;
+            transition: all .25s;
+        }
+
+        input.star-5:checked ~ label.star:before {
+            color: #FE7;
+            text-shadow: 0 0 20px #952;
+        }
+
+        input.star-1:checked ~ label.star:before { color: #F62; }
+
+        label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome;
+        }
+    </style>
 @endsection
 
 @section('js')
+
+    @if($order->status == 'delivered' && $order->Service->user_id != auth()->user()->id)
+        @if(\App\Models\ServiceReview::where('order_id' , $order->id)->count() == 0)
+            <script type="text/javascript">
+                $(window).on('load', function() {
+                    $('#ratingModal').modal('show');
+                });
+            </script>
+        @endif
+    @endif
+
+
 @endsection
 
 @section('content')
@@ -64,8 +148,15 @@
 
         <!-- table -->
         <section class="table-list-section">
-            <header class="tl-header d-flex align-items-center justify-content-between">
+            <header class="tl-header d-flex align-items-center justify-content-between filter-cats-sec">
                 <h3 class="title">@lang('site.order_details')</h3>
+
+                @if($order->status == 'delivered' && $order->Service->user_id != auth()->user()->id)
+                    @if(\App\Models\ServiceReview::where('order_id' , $order->id)->count() == 0)
+                        <a href="#" class="item active"
+                           data-toggle="modal" data-target="#ratingModal">@lang('site.rating_service_title')</a>
+                    @endif
+                @endif
             </header>
             <div class="sec-content">
                 <div class="table-responsive">
@@ -159,4 +250,69 @@
         </section>
 
     </section>
+
+    <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@lang('site.rating_service_title')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('user.order.post.rating' , $order->id) }}"
+                      method="POST">
+                    {{ csrf_field() }}
+
+                    <div class="modal-body">
+
+                        <div class="form-row">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <input class="star star-5" id="star-5" type="radio" value="5" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" value="4" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" value="3" name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" value="2" name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" value="1" name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <label class="form-lable" for="service-title">@lang('site.rating_service_text')</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <textarea id="service-title"
+                                              name="comment"
+                                              class="form-control input_to_count title"
+                                              placeholder="@lang('site.rating_service_text_example')"
+                                              rows="2" required></textarea>
+                                    <div class="wizard-form-error"
+                                         style="display: block;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit"
+                                class="btn btn-success actions-buttons">@lang('site.rating_service')</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
 @endsection

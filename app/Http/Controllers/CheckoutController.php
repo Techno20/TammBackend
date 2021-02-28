@@ -138,7 +138,13 @@ class CheckoutController extends Controller
         $Order->paid_total = $paidTotal;
         $Order->commission_rate = $commissionRate;
         $Order->requirements_details = $q->requirements_details;
-        $Order->requirements_attachments = $q->requirements_attachments;
+
+        $upload = new UploaderController();
+        $upload->folder = 'orders';
+        $upload->thumbFolder = 'orders/thumbs';
+        $galleryItemResponse = $upload->uploadSingle($q->requirements_attachments,false);
+
+        $Order->requirements_attachments = $galleryItemResponse['path'];;
         $Order->save();
 
 

@@ -98,7 +98,7 @@
                                 </a>
                                 <div class="total-meta d-flex align-item-center">
                                     <p class="total-rate"><i class="fas fa-star"></i> {{ $service->getAverageServiceRating() }}</p>
-                                    <p class="total-reviews">1k+ @lang('site.reviews')</p>
+                                    <p class="total-reviews">{{ $service->Reviews()->count() }} @lang('site.reviews')</p>
                                 </div>
                                 <p class="orders-counts">{{ $service->Orders()->count() }} @lang('site.orders_in_queue')</p>
                             </div>
@@ -148,7 +148,7 @@
                                             </div>
                                         </a>
                                         <div class="total-meta d-flex align-item-center">
-                                            <p class="total-rate"><i class="fas fa-star"></i> {{$service->getAverageServiceRating()}}</p>
+                                            <p class="total-rate"><i class="fas fa-star"></i> {{$service->user->getUserServicesReviews()}}</p>
                                         </div>
                                     </div>
                                     <div class="summbary d-flex">

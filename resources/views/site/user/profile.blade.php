@@ -236,7 +236,7 @@
                                                                 <p>{{ $value->basic_price }} @lang('site.sar')</p>
                                                             </div>
                                                             <div class="total-meta">
-                                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->getAverageServiceRating() }}</p>
                                                                 <p class="total-sell">{{ $value->Orders()->count() }} @lang('site.sell')</p>
                                                             </div>
                                                         </div>

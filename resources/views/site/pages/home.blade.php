@@ -116,7 +116,7 @@
                                             <div class="details d-flex align-items-center">
                                                 <div class="seller">
                                                     <img src="{{ $value->user->avatar_full_path }}" class="author-img">
-                                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                    <p class="total-rate"><i class="fas fa-star"></i> {{ $value->user->getUserServicesReviews() }}</p>
                                                 </div>
                                                 <div class="content">
                                                     <h3>{{ $value->user->name }}</h3>
@@ -146,7 +146,7 @@
                                         <div class="details">
                                             <div class="seller">
                                                 <img src="{{ $value->user->avatar_full_path }}" class="author-img">
-                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->user->getUserServicesReviews() }}</p>
                                             </div>
                                             <div class="content">
                                                 <h3>{{ $value->user->name }}</h3>
@@ -202,7 +202,7 @@
                                         <div class="details">
                                             <h3>{{ $value->title }}</h3>
                                             <div class="meta d-flex align-items-center">
-                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
+                                                <p class="total-rate"><i class="fas fa-star"></i> {{ $value->user->getUserServicesReviews() }}</p>
                                                 <p class="total-sell">{{ $value->Orders()->count() }} Sell</p>
                                             </div>
                                             <p class="brief">

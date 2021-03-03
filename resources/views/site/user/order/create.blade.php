@@ -414,76 +414,102 @@
         });
 
         //pass your public key from tap's dashboard
-        // var tap = Tapjsli('pk_test_OanSHyNLEKBiFcUZMt8zDXds');
-        //
-        // var elements = tap.elements({});
-        // var style = {
-        //     base: {
-        //         color: '#535353',
-        //         lineHeight: '18px',
-        //         fontFamily: 'sans-serif',
-        //         fontSmoothing: 'antialiased',
-        //         fontSize: '16px',
-        //         '::placeholder': {
-        //             color: 'rgba(0, 0, 0, 0.26)',
-        //             fontSize: '15px'
-        //         }
-        //     },
-        //     invalid: {
-        //         color: 'red'
-        //     }
-        // };
-        // // input labels/placeholders
-        // var labels = {
-        //     cardNumber: "Card Number",
-        //     expirationDate: "MM/YY",
-        //     cvv: "CVV",
-        //     cardHolder: "Card Holder Name"
-        // };
-        // //payment options
-        // var paymentOptions = {
-        //     currencyCode: ["KWD", "USD", "SAR"],
-        //     labels: labels,
-        //     TextDirection: 'ltr'
-        // }
-        // //create element, pass style and payment options
-        // var card = elements.create('card', {style: style}, paymentOptions);
-        // //mount element
-        // // card.mount('#element-container');
-        // //card change event listener
-        // card.addEventListener('change', function (event) {
-        //     if (event.BIN) {
-        //         console.log(event.BIN)
-        //     }
-        //     if (event.loaded) {
-        //         console.log("UI loaded :" + event.loaded);
-        //         console.log("current currency is :" + card.getCurrency())
-        //     }
-        //     var displayError = document.getElementById('error-handler');
-        //     if (event.error) {
-        //         displayError.textContent = event.error.message;
-        //     } else {
-        //         displayError.textContent = '';
-        //     }
-        // });
-        //
-        // // Handle form submission
-        // var form = document.getElementById('form-container');
-        // form.addEventListener('submit', function (event) {
-        //     event.preventDefault();
-        //
-        //     tap.createToken(card).then(function (result) {
-        //         console.log(result);
-        //         if (result.error) {
-        //             // Inform the user if there was an error
-        //             var errorElement = document.getElementById('error-handler');
-        //             errorElement.textContent = result.error.message;
-        //         } else {
-        //             $('#payment_token').val(result.id);
-        //             $('#form-container').submit();
-        //         }
-        //     });
-        // });
+        var tap = Tapjsli('pk_test_EtHFV4BuPQokJT6jiROls87Y');
+
+        var elements = tap.elements({});
+        var style = {
+            base: {
+                color: '#535353',
+                lineHeight: '18px',
+                fontFamily: 'sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: 'rgba(0, 0, 0, 0.26)',
+                    fontSize:'15px'
+                }
+            },
+            invalid: {
+                color: 'red'
+            }
+        };
+        // input labels/placeholders
+        var labels = {
+            cardNumber:"Card Number",
+            expirationDate:"MM/YY",
+            cvv:"CVV",
+            cardHolder:"Card Holder Name"
+        };
+        //payment options
+        var paymentOptions = {
+            currencyCode:["KWD","USD","SAR"],
+            labels : labels,
+            TextDirection:'ltr'
+        }
+        //create element, pass style and payment options
+        var card = elements.create('card', {style: style},paymentOptions);
+        //mount element
+        card.mount('#element-container');
+        //card change event listener
+        card.addEventListener('change', function(event) {
+            if(event.BIN){
+                console.log(event.BIN)
+            }
+            if(event.loaded){
+                console.log("UI loaded :"+event.loaded);
+                console.log("current currency is :"+card.getCurrency())
+            }
+            var displayError = document.getElementById('error-handler');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission
+        var submit_btn = document.getElementById('submit_btn');
+        submit_btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            tap.createToken(card).then(function (result) {
+                console.log(result);
+                if (result.error) {
+                    // Inform the user if there was an error
+                    var errorElement = document.getElementById('error-handler');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    let data = new FormData($('#form-container').get(0));
+                    data.append('payment_token', result.id);
+                    $.ajax({
+                        url: '{{url('checkout/send-order')}}',
+                        type: "POST",
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            if (data.status && data.message == 'success') {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "نجاح",
+                                    text: "تم طلب الخدمة بنجاح",
+                                }).then((result) => {
+                                    window.location = "{{ url('/') }}";
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'خطأ',
+                                    html: 'الرجاء التأكد من البيانات المدخلة',
+                                })
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            });
+        });
 
         $('.extra-checkbox').change(function () {
             let extra_price_hidden = true;
@@ -514,90 +540,36 @@
             $('.total_price').html(total_price);
         });
 
-        $('#submit_btn').click(function () {
-            // $(this).prop('disabled', true);
-            $.ajax({
-                url: '{{url('checkout/send-order')}}',
-                type: "POST",
-                data: new FormData($('#form-container').get(0)),
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    if (data.status && data.message == 'success') {
-                        Swal.fire({
-                            icon: "success",
-                            title: "نجاح",
-                            text: "تم طلب الخدمة بنجاح",
-                        }).then((result) => {
-                            window.location = "{{ url('/') }}";
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'خطأ',
-                            html: 'الرجاء التأكد من البيانات المدخلة',
-                        })
-                    }
-                },
-                error: function (data) {
-                    console.log(data);
-                },
-            });
-            {{--Swal.fire({--}}
-            {{--    title: '@lang('constants.deleteItem')',--}}
-            {{--    text: "@lang('constants.sure')",--}}
-            {{--    type: 'warning',--}}
-            {{--    showCancelButton: true,--}}
-            {{--    confirmButtonColor: '#84dc61',--}}
-            {{--    cancelButtonColor: '#d33',--}}
-            {{--    confirmButtonText: '@lang('constants.yes')',--}}
-            {{--    cancelButtonText: '@lang('constants.no')'--}}
-            {{--}).then((result) => {--}}
-            {{--    if (result.value) {--}}
-            {{--        $.ajax({--}}
-            {{--            url: $(this).data('url'),--}}
-            {{--            type: "POST",--}}
-            {{--            data: {--}}
-            {{--                "_token": "{{ csrf_token() }}",--}}
-            {{--                'ids': data--}}
-            {{--            },--}}
-            {{--            beforeSend(){--}}
-            {{--                KTApp.blockPage({--}}
-            {{--                    overlayColor: '#000000',--}}
-            {{--                    type: 'v2',--}}
-            {{--                    state: 'success',--}}
-            {{--                    message: '@lang('constants.please_wait') ...'--}}
-            {{--                });--}}
-            {{--            },--}}
-            {{--            success: function (data) {--}}
-            {{--                if (data.success) {--}}
-            {{--                    if (here.data('table')) {--}}
-            {{--                        $(here.data('table')).DataTable().ajax.reload(null, false);--}}
-            {{--                    } else {--}}
-            {{--                        $('#items_table').DataTable().ajax.reload(null, false);--}}
-            {{--                    }--}}
-            {{--                    showAlertMessage('success', data.message);--}}
-            {{--                } else {--}}
-            {{--                    if (data.message) {--}}
-            {{--                        showAlertMessage('error', data.message);--}}
-            {{--                    } else {--}}
-            {{--                        showAlertMessage('error', '@lang('constants.unknown_error')');--}}
-            {{--                    }--}}
-            {{--                }--}}
-            {{--                KTApp.unblockPage();--}}
-            {{--            },--}}
-            {{--            error: function (data) {--}}
-            {{--                console.log(data);--}}
-            {{--            },--}}
-            {{--            statusCode: {--}}
-            {{--                500: function (data) {--}}
-            {{--                    console.log(data);--}}
-            {{--                }--}}
-            {{--            }--}}
-            {{--        });--}}
-            {{--    }--}}
-            {{--});--}}
-        });
+        {{--$('#submit_btn').click(function () {--}}
+        {{--    // $(this).prop('disabled', true);--}}
+        {{--    $.ajax({--}}
+        {{--        url: '{{url('checkout/send-order')}}',--}}
+        {{--        type: "POST",--}}
+        {{--        data: new FormData($('#form-container').get(0)),--}}
+        {{--        processData: false,--}}
+        {{--        contentType: false,--}}
+        {{--        success: function (data) {--}}
+        {{--            if (data.status && data.message == 'success') {--}}
+        {{--                Swal.fire({--}}
+        {{--                    icon: "success",--}}
+        {{--                    title: "نجاح",--}}
+        {{--                    text: "تم طلب الخدمة بنجاح",--}}
+        {{--                }).then((result) => {--}}
+        {{--                    window.location = "{{ url('/') }}";--}}
+        {{--                });--}}
+        {{--            } else {--}}
+        {{--                Swal.fire({--}}
+        {{--                    icon: 'error',--}}
+        {{--                    title: 'خطأ',--}}
+        {{--                    html: 'الرجاء التأكد من البيانات المدخلة',--}}
+        {{--                })--}}
+        {{--            }--}}
+        {{--        },--}}
+        {{--        error: function (data) {--}}
+        {{--            console.log(data);--}}
+        {{--        },--}}
+        {{--    });--}}
+        {{--});--}}
     </script>
 @endsection
 
@@ -867,15 +839,12 @@
                                                                                     <img src="{{asset('assets/site/images/payments.png')}}" class="img-fluid" alt="">
                                                                                 </div>
                                                                             </header>
-{{--                                                                            <div id="payment-1"data-parent="#paymentsAccordion" class="payment-option-content collapse show">--}}
-{{--                                                                                <div class="payment-form-wrapper">--}}
-{{--                                                                                    <div id="element-container"></div>--}}
-{{--                                                                                    <div id="error-handler" role="alert"></div>--}}
-{{--                                                                                    <div id="success" style=" display: none;;position: relative;float: left;">--}}
-{{--                                                                                        Success! Your token is <span id="token"></span>--}}
-{{--                                                                                    </div>--}}
-{{--                                                                                </div>--}}
-{{--                                                                            </div>--}}
+                                                                            <div id="payment-1"data-parent="#paymentsAccordion" class="payment-option-content collapse show">
+                                                                                <div class="payment-form-wrapper">
+                                                                                    <div id="element-container"></div>
+                                                                                    <div id="error-handler" role="alert"></div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
 {{--                                                                        <div class="payment-option-item checked">--}}
 {{--                                                                            <header class="head d-flex align-items-center" data-toggle="collapse" data-target="#payment-1">--}}

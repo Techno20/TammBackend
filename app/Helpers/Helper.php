@@ -74,54 +74,41 @@ class Helper {
         return $categories;
     }
 
-    public static function payment($user, $amount = 0) {
+    public static function payment($user, $amount = 0, $payment_token = '') {
         $url = "https://api.tap.company/v2/charges";
+
         $body = [
-            'amount' => 1,
+            'amount' => 10,
             'currency' => 'SAR',
-            'threeDSecure' => true,
-            'save_card' => false,
-            'description' => 'description',
-            'statement_descriptor' => 'statement_descriptor',
-            'metadata' => [
-                'udf1' => 'test 1',
-                'udf2' => 'test 2',
-            ],
-            'reference' => [
-                'invoice' => uniqid(),
-                'order' => uniqid(),
-            ],
-            'receipt' => [
-                'email' => true,
-                'sms' => true,
-            ],
-            'customer' => [
-                'first_name' => $user->name,
-                'middle_name' => '',
-                'last_name' => '',
-                'email' => $user->email,
-                'phone' => [
-                    'country_code' => '966',
-                    'number' => $user->phone ? ''.$user->phone : '5098465151',
-                ],
-            ],
-            'merchant' => [
-                'id' => '6824235'
-            ],
-            'source' => [
-                'id' => 'src_card'
-            ],
-            'post' => [
-                'id' => url('/')
-            ],
-            'redirect' => [
-                'id' => url('/')
-            ],
+            'customer' => array(
+                'first_name' =>  $user->name,
+                "email" => $user->email,
+                "phone" => array("country_code" => 966, "number" => '5098465151')
+            ),
+            'source' => array("id" => $payment_token),
+            'redirect' => array("url" => url('/'))
+
+//            'amount' => $amount,
+//            'currency' => 'SAR',
+//            'customer' => [
+//                'first_name' => $user->name,
+//                'email' => $user->email,
+//                'phone' => [
+//                    'country_code' => '966',
+//                    'number' => $user->phone ? ''.$user->phone : '5098465151',
+//                ],
+//            ],
+//            'source' => [
+//                'id' => $payment_token
+//            ],
+//            'redirect' => [
+//                'id' => url('/')
+//            ],
         ];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer sk_test_vCLBYaJsDTwlIGu3FS8efmtO'));
+            'Authorization:Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ'));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production

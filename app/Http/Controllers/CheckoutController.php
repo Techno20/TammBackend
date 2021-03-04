@@ -94,9 +94,9 @@ class CheckoutController extends Controller
 //            }
 //        }
 //
-//        $payment = Helper::payment(auth()->user(), $paidTotal);
+//        $payment = Helper::payment(auth()->user(), $paidTotal, $q->payment_token);
 //
-//        dd($payment);
+//        dd($q->all(), $payment);
 
         $paidTotal = 0;
 
@@ -142,9 +142,8 @@ class CheckoutController extends Controller
         $upload = new UploaderController();
         $upload->folder = 'orders';
         $upload->thumbFolder = 'orders/thumbs';
-        $galleryItemResponse = $upload->uploadSingle($q->requirements_attachments,false);
-
-        $Order->requirements_attachments = $galleryItemResponse['path'];;
+        $galleryItemResponse = $q->hasFile('requirements_attachments') ? $upload->uploadSingle($q->requirements_attachments,false) : null;
+        $Order->requirements_attachments = $galleryItemResponse ? $galleryItemResponse['path'] : null;
         $Order->save();
 
 

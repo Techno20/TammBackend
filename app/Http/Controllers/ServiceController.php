@@ -46,7 +46,6 @@ class ServiceController extends Controller
      * Get Services List
      */
     public function getList(){
-
         $validator = validator()->make(request()->all(), [
             'main_category_type' => [new \App\Rules\MainCategoryTypeRule],
             'user_id' => 'integer',
@@ -161,16 +160,19 @@ class ServiceController extends Controller
         ];
 
         // Top Rated Services
-        $topRatedServices = Service::selectCard()->orderByTopRated()->take(32)->get();
+        $topRatedServices = Service::onlyApproved()
+            ->onlyActive()->selectCard()->orderByTopRated()->take(32)->get();
         $result['top_rated_services'] = $topRatedServices;
 
         // Top Rated seller
 //        $topRatedSeller = Service::selectCard()->orderByTopRated()->groupBy('user_id')->take(32)->get();
-        $topRatedSeller = Service::selectCard()->orderByTopRated()->take(32)->get();
+        $topRatedSeller = Service::onlyApproved()
+            ->onlyActive()->selectCard()->orderByTopRated()->take(32)->get();
         $result['top_rated_seller'] = $topRatedSeller;
 
         // Top Selling Services
-        $topSellingServices = Service::selectCard()->orderByTopSelling()->take(32)->get();
+        $topSellingServices = Service::onlyApproved()
+            ->onlyActive()->selectCard()->orderByTopSelling()->take(32)->get();
         $result['top_selling_services'] = $topSellingServices;
 
         // Top Selling Services

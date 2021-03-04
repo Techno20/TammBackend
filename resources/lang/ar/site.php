@@ -270,4 +270,5 @@ return [
     'rating_service_text' => 'نص التقييم',
     'rating_service_text_example' => 'مثال ، خدمة رائعة وتسليم سريع',
 
+    'STARTING' => 'يبدأ من'
 ];

@@ -160,7 +160,7 @@
                                         @endif
                                         <div class="info">
                                             <label>@lang('site.member_since')</label>
-                                            <p>{{\Carbon\Carbon::parse($service->user->created_at)->format('Y-m')}}</p>
+                                            <p>{{ $service->user->getJoiningAt() }}</p>
                                         </div>
                                     </div>
                                     <div class="brief">

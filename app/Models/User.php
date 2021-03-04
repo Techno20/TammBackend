@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -134,9 +135,9 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /* START ATTRIBUTES */
-    public function getCreatedAtAttribute($value){
-        return date('Y-m-d H:i:s',strtotime($value));
-    }
+//    public function getCreatedAtAttribute($value){
+//        return date('Y-m-d H:i:s',strtotime($value));
+//    }
 
     public function getUpdatedAtAttribute($value){
         return date('Y-m-d H:i:s',strtotime($value));
@@ -265,5 +266,10 @@ class User extends Authenticatable implements JWTSubject
             return 0;
         else
             return round($this->ServicesReviews()->sum('rating') / $this->ServicesReviews()->count() , 1);
+    }
+
+    public function getJoiningAt()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m');
     }
 }

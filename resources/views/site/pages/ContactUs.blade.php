@@ -14,7 +14,7 @@
             <div class="col-lg-6  order-lg-last ">
                 <figure class="wow fadeInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">
                     <img src="assets/site/images/how-its-work/main-img.png" class="img-fluid">
-                   
+
                 </figure>
             </div>
             <div class="col-lg-6">
@@ -29,15 +29,15 @@
 						<form class="pt-5" action="{{ url('contactus') }}" method="POST" enctype="multipart/form-data" id="idContact">@csrf
 							<div class="form-group mb-4">
 								{{-- <label for="exampleFormControlInput1">الاسم</label> --}}
-								<input type="text" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا الاسم " name="name">
+								<input type="text" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا الاسم " name="name" required>
 							</div>
 							<div class="form-group mb-4">
 								{{-- <label for="exampleFormControlInput1">البريد الإلكتروني</label> --}}
-								<input type="email" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا البريد الإلكتروني" name="email">
+								<input type="email" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا البريد الإلكتروني" name="email" required>
 							</div>
 							<div class="form-group">
 								{{-- <label for="exampleFormControlTextarea1">موضع الرسالة</label> --}}
-								<textarea class="form-control form-control-lg name" id="exampleFormControlTextarea1" rows="3" placeholder=" اكتب رسالتك هنا" name="message"></textarea>
+								<textarea class="form-control form-control-lg name" id="exampleFormControlTextarea1" rows="3" placeholder=" اكتب رسالتك هنا" name="message" required></textarea>
 							</div>
 							<button type="submit" class="btn btn-lg btn-block btn-yallow user_register">ارسال</button>
 						</form>

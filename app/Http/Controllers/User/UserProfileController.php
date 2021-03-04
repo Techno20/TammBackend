@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\User\Account\UpdatePasswordRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,10 @@ use App\Models\UserFavouriteService;
 use App\Models\Conversation;
 use App\Models\Service;
 use App\Models\ServiceReview;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
+use Session;
 
 class UserProfileController extends Controller
 {
@@ -176,21 +180,19 @@ class UserProfileController extends Controller
         return view('site.user.EditmyProfile')->with('user',$User)->with('services',$Services);
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(UpdatePasswordRequest $request)
     {
-
-      $pass = $request->password;
-      $vPass = $request->vpassword;
-      if($pass === $vPass){
-        $user = User::find(auth()->user()->id);
-        $user->password = Hash::make($request->password);
-        $user->save();
-        return back()->with('success',trans('تم اضافة بنجاح'));
-      }else{
-        return back()
-        ->with('errorValidation','تأكد من كلمة المرور و تأكيد كلمة المرور متشابهة');
-
-      }
+        $user = Auth::user();
+        if(Hash::check($request->old_password, $user->password)) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            Session::flash('success' , Lang::get('site.password_updated'));
+            return redirect()->back();
+        }else
+        {
+            Session::flash('error' , Lang::get('site.old_password_incorrect'));
+            return redirect()->back();
+        }
     }
 
 

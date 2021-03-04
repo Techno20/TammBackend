@@ -175,7 +175,7 @@ return [
         /*
          * Package Service Providers...
          */
-        
+
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,

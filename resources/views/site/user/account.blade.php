@@ -22,49 +22,52 @@
                             </header>
                             <div class="sec-content">
                                 <div class="setting-security-sec gray-form">
-                                   
-                                    @if (isset($errorValidation))
-                                        <div class="alert alert-danger" role="alert">
-                                            تأكد من تطابق كلمة المرور 
-                                        </div>  
+
+                                    @if(count($errors) > 0)
+                                        @foreach($errors->all() as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                <strong></strong> {{ $error }}
+                                            </div>
+                                        @endforeach
                                     @endif
-                                        
-                                   
-                                    
-                                    
-                                    
+
+                                    @if(session('error'))
+                                            <div class="alert alert-danger" role="alert">
+                                                <strong></strong> {{ session('error') }}
+                                            </div>
+                                    @endif
+
+                                        @if (session('success'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+
+
+
+
+
                                     <div class="change-password ">
                                         <form action="{{url('user/me/update')}}" method="POST">
                                             @method('put')
                                             @csrf
-                                        
-                                        {{-- <div class="form-row">
-                                            <div class="col-lg-4">
-                                                <label>Current Password</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="">
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         <div class="form-row">
                                             <div class="col-lg-4">
-                                                <label>{{__('site.New Password')}}</label>
+                                                <label>{{__('site.old_password')}}</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <input type="password" class="form-control" name="password">
+                                                    <input type="password" class="form-control" name="old_password" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-4">
-                                                <label>{{__('site.Confirm Password')}}</label>
+                                                <label>{{__('site.New_Password')}}</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <input type="password" class="form-control" name="vpassword">
+                                                    <input type="password" class="form-control" name="password" required>
                                                     <small class="form-text">
                                                        {{__('site.characters_or_longer')}}
                                                     </small>
@@ -72,8 +75,22 @@
                                             </div>
                                         </div>
 
+                                            <div class="form-row">
+                                                <div class="col-lg-4">
+                                                    <label>{{__('site.Confirm Password')}}</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control" name="password_confirmation" required>
+                                                        <small class="form-text">
+                                                            {{__('site.characters_or_longer')}}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         <div class="actions text-right">
-                                            <button type="submit" class="btn btn-yallow">{{__('site.Save Chages')}}</button>
+                                            <button type="submit" class="btn btn-yallow">{{__('site.Save Changes')}}</button>
                                         </div>
                                     </form>
                                     </div>
@@ -126,6 +143,6 @@
             </div>
         </section>
         <!-- account-setting-page -->
-        
+
     </div>
 @endsection

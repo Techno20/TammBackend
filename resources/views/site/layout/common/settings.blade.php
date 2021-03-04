@@ -33,7 +33,7 @@
                                                     </span>
                             <div class="content">
                                 <h4>{{__('site.Security')}}</h4>
-                                <p>{{__('site.check your security and chage password')}}</p>
+                                <p>{{__('site.check your security and change password')}}</p>
                             </div>
                             <i class="fas fa-chevron-right arrow"></i>
                         </div>

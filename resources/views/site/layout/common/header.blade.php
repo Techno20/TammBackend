@@ -83,7 +83,7 @@
 <div class="modal fade custom-modal" id="resetPasswordModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
-            <div class="auth-modal reset-password-modal">
+            <div class="auth-modal user_forgot_password_block reset-password-modal">
                 <header class="auth-header-2 text-center">
                     <h3>{{__('site.Reset_Password')}}</h3>
                     <p>{{__('site.email_address')}}</p>
@@ -92,11 +92,11 @@
 
                 <div class="auth-form sign-in-form gray-form">
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="@lang('site.enter_your') {{__('site.email')}}" name="">
+                        <input type="email" name="email" class="form-control form-control-lg email" placeholder="@lang('site.enter_your') {{__('site.email')}}">
                     </div>
 
                     <div class="actions">
-                        <button type="button" class="btn btn-lg btn-block btn-yallow">@lang('site.continue') </button>
+                        <button type="button" class="btn btn-lg btn-block btn-yallow user_forgot_password">@lang('site.continue') </button>
                         <p class="text-center back"><a href="#signInModal" data-dismiss="modal" data-toggle="modal" class="">@lang('site.Back_to') @lang('site.sign_in')</a></p>
                     </div>
                 </div>

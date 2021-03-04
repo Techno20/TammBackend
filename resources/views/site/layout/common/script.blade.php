@@ -140,6 +140,65 @@
             });
         });
 
+        $('body').on('click','.user_forgot_password',function () {
+            var email = $('.user_forgot_password_block .email').val();
+            let data = {
+                "_token": "{{ csrf_token() }}",
+                "email": email
+            };
+
+            console.log(email);
+            $.ajax({
+                type: "POST",
+                url: '{{ url('user/password/forget') }}',
+                data: data,
+                dataType: 'json',
+                success:  function(result){
+                    Swal.fire({
+                        icon: "success",
+                        title: "نجاح",
+                        text: "تمت عملية تسجيل الدخول بنجاح",
+                        showConfirmButton : false,
+                        confirmButtonText: 'استمرار'
+                    });
+                    setTimeout(function () {
+                        window.location = "{{ url('/') }}";
+                    },3000);
+                },
+                error:  function(result){
+                    if (result.responseJSON.status == false && result.responseJSON.message == 'login_failed'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطأ',
+                            html: result.responseJSON.message_string,
+                            confirmButtonText: 'موافق'
+                        })
+                    }else if(result.responseJSON && result.responseJSON.data && result.responseJSON.data.hasOwnProperty('errors')){
+                        var errors_text = '';
+                        $.each(result.responseJSON.data.errors, function(i, item) {
+                            errors_text = errors_text+item+'<br/>';
+                        });
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطأ',
+                            // text: errors_text,
+                            html: errors_text,
+                            confirmButtonText: 'موافق'
+                        })
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'خطأ',
+                            html: 'الرجاء التأكد من البيانات المدخلة',
+                            confirmButtonText: 'موافق'
+                        })
+                    }
+
+                }
+            });
+        });
+
         $('body').on('click keyup keydown change','.input_to_count',function (){
             $('.input_text_count').text(this.value.length);
         });

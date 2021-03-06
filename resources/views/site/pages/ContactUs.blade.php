@@ -25,21 +25,23 @@
                     <div class="content">
                         نحن نساعدك بالوصول السريع لاعمالك
                     </div>
+                    
                     <div>
-						<form class="pt-5" action="{{ url('contactus') }}" method="POST" enctype="multipart/form-data" id="idContact">@csrf
+                        <div class="alert-text content">@include('site.alerts.success')</div>
+						<form class="pt-5" action="{{ url('contactus') }}" method="POST" >@csrf
 							<div class="form-group mb-4">
 								{{-- <label for="exampleFormControlInput1">الاسم</label> --}}
-								<input type="text" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا الاسم " name="name" required>
+								<input type="text" class="form-control form-control-lg name" placeholder="هنا الاسم " name="name" required>
 							</div>
 							<div class="form-group mb-4">
 								{{-- <label for="exampleFormControlInput1">البريد الإلكتروني</label> --}}
-								<input type="email" class="form-control form-control-lg name" id="exampleFormControlInput1" placeholder="هنا البريد الإلكتروني" name="email" required>
+								<input type="email" class="form-control form-control-lg name"  placeholder="هنا البريد الإلكتروني" name="email" required>
 							</div>
 							<div class="form-group">
 								{{-- <label for="exampleFormControlTextarea1">موضع الرسالة</label> --}}
-								<textarea class="form-control form-control-lg name" id="exampleFormControlTextarea1" rows="3" placeholder=" اكتب رسالتك هنا" name="message" required></textarea>
+								<textarea class="form-control form-control-lg name"  rows="3" placeholder=" اكتب رسالتك هنا" name="message" required></textarea>
 							</div>
-							<button type="submit" class="btn btn-lg btn-block btn-yallow user_register">ارسال</button>
+							<button type="submit" class="btn btn-lg btn-block btn-yallow ">ارسال</button>
 						</form>
 					</div>
                 </div>

@@ -887,7 +887,7 @@
                                                                     </div>
                                                                     <div class="delivery-time d-flex align-items-center justify-content-between">
                                                                         <div class="title">@lang('site.delivery_time')</div>
-                                                                        <div class="price">{{ $result['order_summary']['delivery_time'] }} @lang('site.days')</div>
+                                                                        <div class="price">{{ $result['order_summary']['delivery_time'] }}</div>
                                                                     </div>
 {{--                                                                    <div class="actions">--}}
 {{--                                                                        <a href="javascript:;" class="form-wizard-next-btn btn btn-yallow btn-block btn-lg">@lang('site.continue')--}}

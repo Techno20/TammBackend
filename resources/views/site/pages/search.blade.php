@@ -135,12 +135,12 @@
                                             </h3>
                                             <div class="meta d-flex align-items-center justify-content-between">
                                                 <div class="price">
-                                                    <label>STARTING</label>
-                                                    <p>{{ $value->basic_price }} SAR</p>
+                                                    <label>@lang('site.starting')</label>
+                                                    <p>{{ $value->basic_price }} @lang('site.sar')</p>
                                                 </div>
                                                 <div class="total-meta">
                                                     <p class="total-rate"><i class="fas fa-star"></i> {{ $value->rating_avg }}</p>
-                                                    <p class="total-sell">{{ $value->Orders()->count() }} Sell</p>
+                                                    <p class="total-sell">{{ $value->Orders()->count() }} @lang('site.sell')</p>
                                                 </div>
                                             </div>
                                         </div>

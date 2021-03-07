@@ -122,7 +122,7 @@ class UserOrderController extends Controller
 
         $validator = validator()->make($q->all(), [
             'service_delivery' => 'required',
-            'service_delivery_attachments' => 'file'
+            'service_delivery_attachments' => 'required|file'
         ]);
 
 

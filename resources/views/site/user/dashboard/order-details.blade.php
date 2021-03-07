@@ -120,12 +120,7 @@
                 </p>
             </div>
             <div class="page-header-btns">
-                <a href="" class="btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17.001" viewBox="0 0 17 17.001">
-                        <path class="a"
-                              d="M15.885,16.808l-3.344-3.343a7.626,7.626,0,1,1,.924-.924l3.343,3.344a.652.652,0,0,1,0,.923.65.65,0,0,1-.923,0ZM1.308,7.628A6.321,6.321,0,1,0,7.628,1.308,6.328,6.328,0,0,0,1.308,7.628Z" fill="currentcolor" />
-                    </svg>
-                </a>
+
                 <a href="" class="btn notify-spot">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17.466" height="20.396" viewBox="0 0 17.466 20.396">
                         <g transform="translate(0)">
@@ -136,9 +131,7 @@
                         </g>
                     </svg>
                 </a>
-                <a href="" class="btn main-menu-toggle" id="main-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </a>
+
             </div>
         </header>
 
@@ -217,9 +210,13 @@
                         <div class="summbary d-flex">
                             <div class="info">
                                 <label>@lang('site.requirements_attachments')</label>
-                                <p>
-                                    <a href="{{ asset($order->getRequirementsAttachmentsURL()) }}" target="_blank" class="btn btn-yallow">@lang('site.show_attachments')</a>
-                                </p>
+                                @if($order->requirements_attachments)
+                                    <p>
+                                        <a href="{{ asset($order->getRequirementsAttachmentsURL()) }}" target="_blank" class="btn btn-yallow">@lang('site.show_attachments')</a>
+                                    </p>
+                                @else
+                                    <p>-</p>
+                                @endif
                             </div>
                         </div>
 

@@ -60,7 +60,7 @@
 
                                         </div>
                                         <label>@lang('site.mbr_since')</label>
-                                        <p>{{ date('M Y',strtotime($user->created_at)) }}</p>
+                                        <p>{{ $user->getJoiningAt() }}</p>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -129,7 +129,7 @@
                                 <div class="content ">
                                     <div class="accounts-links d-flex flex-wrap">
                                         @if(!empty($user->facebook_url))
-                                            <a href="{{ $user->facebook_url }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                            <a href="{{ $user->facebook_url }}" target="_blank"><i class="fab fa-facebook-square"></i></a>
                                         @endif
                                         @if(!empty($user->instagram_url))
                                             <a href="{{ $user->instagram_url }}" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -138,7 +138,7 @@
                                             <a href="{{ $user->twitter_url }}" target="_blank"><i class="fab fa-twitter"></i></a>
                                         @endif
                                         @if(!empty($user->linkedin_url))
-                                            <a href="{{ $user->linkedin_url }}" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                                            <a href="{{ $user->linkedin_url }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                                         @endif
                                     </div>
                                 </div>
@@ -148,9 +148,9 @@
                                     <h3 class="m-title">@lang('site.skills')</h3>
                                 </header>
                                 <div class="content d-flex flex-wrap">
-                                    @if(isset($user->skills) && !empty($user->skills) && $user->skills->count() > 0)
-                                        @foreach($user->skills as $key => $value)
-                                            <span class="item">{{ $value->name }}</span>
+                                    @if($user->user_skills()->count() > 0)
+                                        @foreach($user->user_skills as $skill)
+                                            <span class="item">{{ $skill->skill()->SelectCard()->first()->name }}</span>
                                         @endforeach
                                     @else
                                         <div class="alert alert-danger  text-danger">@lang('site.sorry_no_data')</div>
@@ -216,8 +216,8 @@
                                                     <div class="details">
                                                         <div class="serv-author media">
                                                             @if(isset($value->user) && !empty($value->user))
-                                                                @if(file_exists(asset('uploads/users/'.$value->user->avatar)))
-                                                                    <img src="{{ asset('uploads/users/'.$value->user->avatar) }}" class="author-img">
+                                                                @if($value->user->avatar_full_path)
+                                                                    <img src="{{ $value->user->avatar_full_path }}" class="author-img">
                                                                 @else
                                                                     <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                                                 @endif
@@ -385,10 +385,11 @@
                                 <div class="user-box">
                                     <div class="user media">
                                         <figure>
-                                            @if(auth()->check() && auth()->user()->avatar_full_path)
-                                                <img src="{{auth()->user()->avatar_full_path}}" alt="">
+
+                                            @if($user->avatar_full_path)
+                                                <img src="{{ $user->avatar_full_path }}">
                                             @else
-                                                <img src="{{ asset('assets/site/images/user.png') }}" alt="">
+                                                <img src="{{ asset('assets/site/images/user.png') }}" class="author-img">
                                             @endif
                                             {{-- <span></span> --}}
                                         </figure>

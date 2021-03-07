@@ -100,7 +100,7 @@
                                     <p class="total-rate"><i class="fas fa-star"></i> {{ $service->getAverageServiceRating() }}</p>
                                     <p class="total-reviews">{{ $service->Reviews()->count() }} @lang('site.reviews')</p>
                                 </div>
-                                <p class="orders-counts">{{ $service->Orders()->count() }} @lang('site.orders_in_queue')</p>
+                                <p class="orders-counts">{{ $service->Orders()->where('status' , 'current')->count() }} @lang('site.orders_in_queue')</p>
                             </div>
                             @if(isset($service->Gallery) && !empty($service->Gallery) && $service->Gallery->count() > 0)
                                 <div class="serv-details-slider-wrapper">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\User\Account\UpdatePasswordRequest;
+use App\Models\Country;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -167,17 +168,24 @@ class UserProfileController extends Controller
         if(!$User){
             return Helper::responseData('user_not_found',false,false,__('default.error_message.user_not_found'),404);
         }
-        $Skills = Skill::whereHas('UserSkills',function($UserSkills) use($userId){
-            return $UserSkills->where('user_id',$userId);
-        })->selectCard()->get();
-        $User->skills = $Skills;
+//        $Skills = Skill::whereHas('UserSkills',function($UserSkills) use($userId){
+//            return $UserSkills->where('user_id',$userId);
+//        })->selectCard()->get();
+//        $User->skills = $Skills;
+
+        $allSkills = Skill::selectCard()->get();
+        $userSkills = $User->user_skills;
+
+        $countries = Country::selectcard()->get();
+
 //      return Helper::responseData('success',true,$User);
         $Services = Service::selectCard()
             ->where('user_id',auth()->user()->id)
             ->with('Category')
             ->orderBy('id','DESC')
             ->paginate(5);
-        return view('site.user.EditmyProfile')->with('user',$User)->with('services',$Services);
+        return view('site.user.EditmyProfile')->with(['user' => $User , 'services' => $Services ,
+            'allSkills' => $allSkills , 'userSkills' => $userSkills , 'countries' => $countries]);
     }
 
     public function updatePassword(UpdatePasswordRequest $request)

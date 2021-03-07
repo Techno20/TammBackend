@@ -7,6 +7,33 @@
     @else
         <link rel="stylesheet" href="{{ asset('assets/site/css/fileinput.min.css') }}"/>
     @endif
+
+    <link rel="stylesheet" href="{{ asset('assets/site/css/bootstrap-multiselect.css') }}" type="text/css">
+    <style>
+        .multiselect-native-select .btn-group.show{
+            width: 100% !important;
+        }
+
+        .dropdown-menu.show
+        {
+            width: 100% !important;
+        }
+        .multiselect-container
+        {
+            width: 100% !important;
+        }
+
+        .btn-group.show > .multiselect
+        {
+            text-align: right !important;
+        }
+
+        .multiple-select
+        {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
 @endsection
 
 @section('js')
@@ -56,6 +83,14 @@
         @else
             enableFileInput('#avatar');
         @endif
+    </script>
+
+    <script type="text/javascript" src="{{ asset('assets/site/js/bootstrap-multiselect.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example-getting-started').multiselect();
+        });
     </script>
 @endsection
 
@@ -125,7 +160,7 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <select name="standard_services_list[]" multiple="multiple" class="form-control select2 select2-keywords"
+                                                    <select name="educations[]" multiple="multiple" class="form-control select2 select2-keywords"
                                                             placeholder="@lang('site.pricing_services_list')" id="standard-pricing-services_list" style="width: 100%;">
                                                         {{-- @if($service && $service->standard_services_list && count($service->standard_services_list)) --}}
                                                             @foreach($user->educations as $item)
@@ -137,6 +172,40 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                            <div class="form-row">
+                                                <div class="col-lg-4">
+                                                    <label>المهارات</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-group multiple-select">
+                                                        <select id="example-getting-started" multiple="multiple" name="skills[]">
+                                                            @forelse($allSkills as $skill)
+                                                                <option value="{{ $skill->id }}" @if($userSkills->contains('skill_id' , $skill->id)) selected @endif>{{ $skill->name }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-row">
+                                                <div class="col-lg-4">
+                                                    <label>الدولة</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="country_id">
+                                                            @forelse($countries as $country)
+                                                                <option value="{{ $country->id }}" @if($user->country_id == $country->id) selected @endif>{{ $country->name }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         <div class="form-row">
                                             <div class="col-lg-4">
@@ -209,7 +278,7 @@
 
                                         </div>
                                         <div class="actions text-right">
-                                            <button type="submit" class="btn btn-yallow">{{__('site.Save Chages')}}</button>
+                                            <button type="submit" class="btn btn-yallow">{{__('site.Save Changes')}}</button>
                                         </div>
                                     </form>
                                     </div>

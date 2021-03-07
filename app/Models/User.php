@@ -125,6 +125,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasManyThrough('App\Models\Skill','App\Models\UserSkill','user_id','id','id','skill_id')->selectCard();
     }
 
+    public function user_skills()
+    {
+        return $this->hasMany(UserSkill::class );
+    }
+
     // Bank
     public function Bank(){
         return $this->belongsTo('App\Models\Bank')->selectCard();
@@ -193,7 +198,7 @@ class User extends Authenticatable implements JWTSubject
     /* START SCOPES */
     public function scopeSelectCard($query)
     {
-        return $query->select('id','avatar','name','email');
+        return $query->select('id','avatar','name','email' , 'created_at');
     }
 
     /**

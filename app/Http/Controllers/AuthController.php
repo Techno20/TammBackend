@@ -256,6 +256,7 @@ class AuthController extends Controller
      */
     public function postUpdateProfile(Request $q)
     {
+
         $validator = validator()->make($q->all(), [
             'email' => 'email',
             'country_id' => [new \App\Rules\CountryRule],
@@ -322,6 +323,12 @@ class AuthController extends Controller
         if ($q->bank_account_owner_name) {
             $User->bank_account_owner_name = $q->bank_account_owner_name;
         }
+
+        $User->user_skills()->delete();
+        if($q->has('skills') && count($q->skills) > 0)
+            foreach($q->skills as $key => $skill)
+                $User->user_skills()->create(['skill_id' => $skill]);
+
         $User->save();
         return back()->with('success', 'تم حفظ التغيرات');
 

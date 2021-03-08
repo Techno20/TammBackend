@@ -272,5 +272,5 @@ return [
     'rating_service_title' => 'Rating Service',
     'rating_service_text' => 'Rating text',
     'rating_service_text_example' => 'Example, great service and fast delivery',
-
+    'select_country' => 'Select Country',
 ];

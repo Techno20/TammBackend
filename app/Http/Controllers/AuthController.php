@@ -256,7 +256,7 @@ class AuthController extends Controller
      */
     public function postUpdateProfile(Request $q)
     {
-
+       
         $validator = validator()->make($q->all(), [
             'email' => 'email',
             'country_id' => [new \App\Rules\CountryRule],

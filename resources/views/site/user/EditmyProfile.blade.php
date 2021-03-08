@@ -198,6 +198,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="form-group">
                                                         <select class="form-control" name="country_id">
+                                                            <option selected disabled>@lang('site.select_country')</option>
                                                             @forelse($countries as $country)
                                                                 <option value="{{ $country->id }}" @if($user->country_id == $country->id) selected @endif>{{ $country->name }}</option>
                                                             @empty

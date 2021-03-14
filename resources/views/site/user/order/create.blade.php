@@ -480,6 +480,7 @@
                 } else {
                     let data = new FormData($('#form-container').get(0));
                     data.append('payment_token', result.id);
+                    $('#submit_btn').prop('disabled', true);
                     $.ajax({
                         url: '{{url('checkout/send-order')}}',
                         type: "POST",
@@ -487,15 +488,17 @@
                         processData: false,
                         contentType: false,
                         success: function (data) {
-                            if (data.status && data.message == 'success') {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "نجاح",
-                                    text: "تم طلب الخدمة بنجاح",
-                                }).then((result) => {
-                                    window.location = "{{ url('/') }}";
-                                });
+                            if (data.status && data.message == 'success' && data.url) {
+                                location.href = data.url;
+                                {{--Swal.fire({--}}
+                                {{--    icon: "success",--}}
+                                {{--    title: "نجاح",--}}
+                                {{--    text: "تم طلب الخدمة بنجاح",--}}
+                                {{--}).then((result) => {--}}
+                                {{--    window.location = "{{ url('/') }}";--}}
+                                {{--});--}}
                             } else {
+                                $('#submit_btn').prop('disabled', false);
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'خطأ',

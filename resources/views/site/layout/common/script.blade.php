@@ -212,5 +212,15 @@
         @if(session()->has('have_to_login') && session('have_to_login'))
             $('.btn.btn-white.sign-in').trigger('click');
         @endif
+
+        @if(session('success_payment'))
+            Swal.fire({
+                icon: "success",
+                title: "نجاح",
+                text: "تم طلب الخدمة بنجاح",
+                showConfirmButton : false,
+                confirmButtonText: 'استمرار'
+            });
+        @endif
     });
 </script>

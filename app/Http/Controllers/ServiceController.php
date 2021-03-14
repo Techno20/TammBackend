@@ -210,6 +210,11 @@ class ServiceController extends Controller
     }
 
 
+    public function success_payment(){
+        return redirect('/')->with('success_payment', 1);
+    }
+
+
 
 
 }

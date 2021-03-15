@@ -235,7 +235,6 @@ class User extends Authenticatable implements JWTSubject
             $FinancialTransaction->order_id = (isset($transactionDetails['order_id'])) ? $transactionDetails['order_id'] : null;
             $FinancialTransaction->service_id = (isset($transactionDetails['service_id'])) ? $transactionDetails['service_id'] : null;
             $FinancialTransaction->save();
-
             User::logTransactionUpdateBalance($FinancialTransaction->user_id,$FinancialTransaction->type,$FinancialTransaction->amount);
 
         }

@@ -103,6 +103,7 @@ Route::group(['middleware' => 'api-localization'],function(){
 
     Route::group(['prefix' => ''],function(){
         Route::get('/', [ServiceController::class, 'getHomeData'])->name('home');
+        Route::get('/payment_response', [ServiceController::class, 'payment_response']);
         Route::get('home', [ServiceController::class, 'getHomeData']);
         Route::get('lang/{lang}', [SiteController::class, 'changeLanguage']);
 

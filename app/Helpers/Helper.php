@@ -78,7 +78,7 @@ class Helper {
         $url = "https://api.tap.company/v2/charges";
 
         $body = [
-            'amount' => 10,
+            'amount' => $amount,
             'currency' => 'SAR',
             'customer' => array(
                 'first_name' =>  $user->name,
@@ -86,7 +86,7 @@ class Helper {
                 "phone" => array("country_code" => 966, "number" => '5098465151')
             ),
             'source' => array("id" => $payment_token),
-            'redirect' => array("url" => url('/'))
+            'redirect' => array("url" => url('/payment_response'))
 
 //            'amount' => $amount,
 //            'currency' => 'SAR',
@@ -105,38 +105,99 @@ class Helper {
 //                'id' => url('/')
 //            ],
         ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ'));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $responseData = curl_exec($ch);
-        if(curl_errno($ch)) {
-            return curl_error($ch);
-        }
-        curl_close($ch);
-        return json_decode($responseData, true);
+//        $body = '{
+//                  "amount": 1,
+//                  "currency": "KWD",
+//                  "threeDSecure": true,
+//                  "save_card": false,
+//                  "description": "Test Description",
+//                  "statement_descriptor": "Sample",
+//                  "metadata": {
+//                    "udf1": "test 1",
+//                    "udf2": "test 2"
+//                  },
+//                  "reference": {
+//                    "transaction": "txn_0001",
+//                    "order": "ord_0001"
+//                  },
+//                  "receipt": {
+//                    "email": false,
+//                    "sms": true
+//                  },
+//                  "customer": {
+//                    "first_name": "test",
+//                    "middle_name": "test",
+//                    "last_name": "test",
+//                    "email": "test@test.com",
+//                    "phone": {
+//                      "country_code": "965",
+//                      "number": "50000000"
+//                    }
+//                  },
+//                  "merchant": {
+//                    "id": ""
+//                  },
+//                  "source": {
+//                    "id": "'.$payment_token.'"
+//                  },
+//                  "post": {
+//                    "url": "http://your_website.com/post_url"
+//                  },
+//                  "redirect": {
+//                    "url": "http://your_website.com/redirect_url"
+//                  }
+//                }';
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//            'Authorization:Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ'));
+////        curl_setopt($ch, CURLOPT_POST, 1);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        $responseData = curl_exec($ch);
+//        if(curl_errno($ch)) {
+//            return curl_error($ch);
+//        }
+//        curl_close($ch);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.tap.company/v2/charges",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($body),
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ",
+                "content-type: application/json"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        return json_decode($response, true);
     }
 
     public static function payment_response($id) {
-        $url = "https://api.tap.company/v2/charges/" . $id;
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer sk_test_vCLBYaJsDTwlIGu3FS8efmtO'));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $responseData = curl_exec($ch);
-        if(curl_errno($ch)) {
-            return curl_error($ch);
-        }
-        curl_close($ch);
-        return json_decode($responseData, true);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.tap.company/v2/charges/" . $id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "{}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ"
+            ),
+        ));
+        $response = curl_exec($curl);
+        return json_decode($response, true);
     }
 
 }

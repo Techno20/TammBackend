@@ -78,7 +78,7 @@ class Helper {
         $url = "https://api.tap.company/v2/charges";
 
         $body = [
-            'amount' => 10,
+            'amount' => $amount,
             'currency' => 'SAR',
             'customer' => array(
                 'first_name' =>  $user->name,

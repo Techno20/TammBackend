@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\HowWeWork;
+use App\Models\Order;
+use App\Models\OrderExtra;
 use App\Models\Say;
+use App\Models\ServiceExtra;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
 use App\Models\User;
 use Helper;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -210,8 +215,75 @@ class ServiceController extends Controller
     }
 
 
-    public function success_payment(){
-        return redirect('/')->with('success_payment', 1);
+    public function payment_response(Request $request){
+        $response = Helper::payment_response($request['tap_id']);
+        $q = session('checkout');
+        if (isset($response['status']) && $response['status'] == 'CAPTURED' && isset($q['service_id']) && isset($q['package'])) {
+            DB::beginTransaction();
+            $Service = Service::where('id',$q['service_id'])->first();
+            $paidTotal = 0;
+
+            // Subtract package price
+            $Package = isset($q['package']) && ($q['package'] && $q['package'] != 'basic') ? $q['package'] : 'basic';
+            $paidTotal += $Service->{$Package.'_price'};
+
+            // Subtract extra services prices
+            if(isset($q['extra_services']) && is_array($q['extra_services']) && count($q['extra_services'])){
+                $insertOrderExtraServices = [];
+                foreach($q['extra_services'] as $extraServiceId){
+                    // Get extra service price
+                    $getExtraService = ServiceExtra::where([['id',$extraServiceId],['service_id',$q['service_id']]])->first();
+                    if($getExtraService){
+                        // Subtract extra service price
+                        $paidTotal += $getExtraService->price;
+                        $insertOrderExtraServices[] = [
+                            'order_id' => $getExtraService->service_id,
+//                        'service_id' => $getExtraService->service_id,
+                            'services_extra_id' => $getExtraService->id,
+                            'pay_total' => $getExtraService->price
+                        ];
+                    }
+                }
+                // Save extra services to current order
+                if(count($insertOrderExtraServices)){
+                    OrderExtra::insert($insertOrderExtraServices);
+                }
+            }
+
+            // Get commission rate from setting
+            $commissionRate = Setting::select('commission_rate')->first()->commission_rate;
+
+            $Order = new Order;
+            $Order->user_id = auth()->user()->id;
+            $Order->service_id = $Service->id;
+            $Order->package = $Package;
+            $Order->paid_total = $paidTotal;
+            $Order->commission_rate = $commissionRate;
+            $Order->requirements_details = isset($q['requirements_details']) ? $q['requirements_details'] : null;
+
+            $upload = new UploaderController();
+            $upload->folder = 'orders';
+            $upload->thumbFolder = 'orders/thumbs';
+            $galleryItemResponse = session()->has('checkout_file') ? session('checkout_file') : null;
+            $Order->requirements_attachments = $galleryItemResponse ? $galleryItemResponse['path'] : null;
+            $Order->save();
+
+            /**
+             * Log a financial transaction for both order submitter and service provider
+             */
+            User::logFinancialTransaction(
+                [
+                    'user_id' => auth()->user()->id,
+                    'type' => 'charge',
+                    'amount' => $Order->paid_total,
+                    'order_id' => $Order->id,
+                    'service_id' => $Service->id
+                ]
+            );
+            DB::commit();
+            return redirect('/')->with('success_payment', 1);
+        }
+        return redirect('/')->with('failed_payment', 1);
     }
 
 

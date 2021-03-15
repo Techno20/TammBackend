@@ -78,8 +78,6 @@ class CheckoutController extends Controller
             return Helper::responseData('service_not_found',false,false,__('default.error_message.service_not_found'),404);
         }
 
-//        session()->put('checkout', $q);
-
         $paidTotal = 0;
 
         $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic';
@@ -97,67 +95,16 @@ class CheckoutController extends Controller
         $payment = Helper::payment(auth()->user(), $paidTotal, $q->payment_token);
 
         if (isset($payment['status']) && $payment['status'] == 'INITIATED' && isset($payment['transaction']) && isset($payment['transaction']['url'])) {
-            DB::beginTransaction();
-            $paidTotal = 0;
-
-            // Subtract package price
-            $Package = ($q->package && $q->package != 'basic') ? $q->package : 'basic';
-            $paidTotal += $Service->{$Package.'_price'};
-
-            // Subtract extra services prices
-            if(is_array($q->extra_services) && count($q->extra_services)){
-                $insertOrderExtraServices = [];
-                foreach($q->extra_services as $extraServiceId){
-                    // Get extra service price
-                    $getExtraService = ServiceExtra::where([['id',$extraServiceId],['service_id',$q->service_id]])->first();
-                    if($getExtraService){
-                        // Subtract extra service price
-                        $paidTotal += $getExtraService->price;
-                        $insertOrderExtraServices[] = [
-                            'order_id' => $getExtraService->service_id,
-//                        'service_id' => $getExtraService->service_id,
-                            'services_extra_id' => $getExtraService->id,
-                            'pay_total' => $getExtraService->price
-                        ];
-                    }
-                }
-                // Save extra services to current order
-                if(count($insertOrderExtraServices)){
-                    OrderExtra::insert($insertOrderExtraServices);
-                }
+            $data = $q->toArray();
+            if ($q->hasFile('requirements_attachments')) {
+                $upload = new UploaderController();
+                $upload->folder = 'orders';
+                $upload->thumbFolder = 'orders/thumbs';
+                $galleryItemResponse = $upload->uploadSingle($q['requirements_attachments'],false);
+                session()->put('checkout_file', $galleryItemResponse);
+                unset($data['requirements_attachments']);
             }
-
-            // Get commission rate from setting
-            $commissionRate = Setting::select('commission_rate')->first()->commission_rate;
-
-            $Order = new Order;
-            $Order->user_id = auth()->user()->id;
-            $Order->service_id = $Service->id;
-            $Order->package = $Package;
-            $Order->paid_total = $paidTotal;
-            $Order->commission_rate = $commissionRate;
-            $Order->requirements_details = $q->requirements_details;
-
-            $upload = new UploaderController();
-            $upload->folder = 'orders';
-            $upload->thumbFolder = 'orders/thumbs';
-            $galleryItemResponse = $q->hasFile('requirements_attachments') ? $upload->uploadSingle($q->requirements_attachments,false) : null;
-            $Order->requirements_attachments = $galleryItemResponse ? $galleryItemResponse['path'] : null;
-            $Order->save();
-
-            /**
-             * Log a financial transaction for both order submitter and service provider
-             */
-            User::logFinancialTransaction(
-                [
-                    'user_id' => auth()->user()->id,
-                    'type' => 'charge',
-                    'amount' => $Order->paid_total,
-                    'order_id' => $Order->id,
-                    'service_id' => $Service->id
-                ]
-            );
-            DB::commit();
+            session()->put('checkout', $data);
             return response()->json([
                 'status' => true,
                 'message' => 'success',

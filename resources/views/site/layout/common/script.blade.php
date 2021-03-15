@@ -222,5 +222,14 @@
                 confirmButtonText: 'استمرار'
             });
         @endif
+
+        @if(session('failed_payment'))
+            Swal.fire({
+                icon: 'error',
+                title: 'خطأ',
+                html: 'حدثت مشكلة في عملية الدفع يرجى المحاولة مرة اخرى',
+                confirmButtonText: 'موافق'
+            })
+        @endif
     });
 </script>

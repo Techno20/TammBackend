@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Notifications\ApprovalServiceNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mail,Validator;
@@ -15,7 +16,7 @@ class AdminServiceController extends Controller
 
 	/**
 	 * Show service details
-	 * 
+	 *
 	 * @param integer $serviceId
 	 * @param object $q Request data
 	 */
@@ -30,7 +31,7 @@ class AdminServiceController extends Controller
 
 	/**
 	 * Set Service Approval
-	 * 
+	 *
 	 * @param object $q Request data
 	 */
 	public function putSetApproval($serviceId,Request $q)
@@ -42,13 +43,18 @@ class AdminServiceController extends Controller
 			return Helper::responseValidationError($validator->messages());
 		}
 		Service::where('id',$serviceId)->update(['is_approved' => $q->is_approved]);
+
+        $service = Service::find($serviceId);
+        $provider = $service->User;
+        $provider->notify(new ApprovalServiceNotification($service));
+
 		return Helper::responseData('success',true);
 	}
 
 
 	/**
 	 * Delete service
-	 * 
+	 *
 	 * @param object $q Request data
 	 */
 	public function Delete($serviceId,Request $q)

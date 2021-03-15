@@ -87,6 +87,35 @@
             }
         }
 
+        #cat-2{
+            padding-top: 0;
+            padding-bottom: 0;
+            line-height: normal !important;
+            height: 35px !important;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #fff;
+            border-radius: 25px;
+            border: solid 1px #e8e8e8;
+            box-sizing: border-box;
+            clear: both;
+            cursor: pointer;
+            display: block;
+            float: right;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: normal;
+            outline: none;
+            padding-left: 18px;
+            padding-right: 30px;
+            position: relative;
+            text-align: left !important;
+            -webkit-transition: all 0.2s ease-in-out;
+            -ms-user-select: none;
+            user-select: none;
+            white-space: nowrap;
+            width: auto;
+        }
+
     </style>
 @endsection
 
@@ -374,6 +403,32 @@
 
 
     </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#cat-1').change(function () {
+                let main_category_type = $(this).val();
+                $.ajax({
+                    url: "/user/service/get-categories/" + main_category_type,
+                    type: "get",
+                    success: function (response) {
+                        $("#cat-2").empty();
+                        $("#cat-2").append('<option>@lang('site.chose_one')</option>');
+                        $.each(response,function(key,value){
+
+                            @if(app()->getLocale() == 'ar')
+                                $("#cat-2").append('<option value="'+value.id+'">'+value.name_ar+'</option>');
+                            @else
+                            $("#cat-2").append('<option value="'+value.id+'">'+value.name_en+'</option>');
+                            @endif
+                        });
+                    },
+                });
+            });
+        });
+    </script>
+
 @endsection
 
 @section('content')
@@ -458,12 +513,12 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="cat-item">
-                                                                    <select id="cat-2" class="form-control nice-select-me category_id" name="category_id">
+                                                                    <select id="cat-2" class="form-control category_id" name="category_id" required>
                                                                         <option selected disabled>@lang('site.chose_one')</option>
-                                                                        @foreach(\Helper::getCategories() as $key => $value)
-                                                                            <option
-                                                                                {{ ($service && $service->category_id && $service->category_id == $value->id ) ? 'selected' : '' }} value="{{ $value->id }}">{{ $value->name }}</option>
-                                                                        @endforeach
+{{--                                                                        @foreach(\Helper::getCategories() as $key => $value)--}}
+{{--                                                                            <option--}}
+{{--                                                                                {{ ($service && $service->category_id && $service->category_id == $value->id ) ? 'selected' : '' }} value="{{ $value->id }}">{{ $value->name }}</option>--}}
+{{--                                                                        @endforeach--}}
                                                                     </select>
                                                                 </div>
                                                             </div>

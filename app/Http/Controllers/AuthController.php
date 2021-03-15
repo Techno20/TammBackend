@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth, Helper;
 use App\Models\User;
@@ -31,6 +36,39 @@ class AuthController extends Controller
     {
         return back()->with('have_to_login', true);
 //    return Helper::responseData('invalid_token',false,false,__('auth.invalid_token'));
+    }
+
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->save();
+
+                $user->setRememberToken(Str::random(60));
+                event(new PasswordReset($user));
+            }
+        );
+
+        if($status == Password::PASSWORD_RESET)
+            return redirect()->route('home')->with('success-json-response' , Lang::get('site.reset_password_success'));
+        else
+            return \redirect()->back()->withErrors(['email' => [__($status)]]);
+
+    }
+
+    public function getResetPassword($token)
+    {
+        return view('site.auth.reset-password' , compact('token'));
     }
 
     /**
@@ -166,27 +204,31 @@ class AuthController extends Controller
             return Helper::responseData('user_not_found', false, false, __('default.error_message.user_not_found'));
         } else {
             // Check if the code sent before and not expired
-            if ($User->password_reset_expire_at) {
-                $secondsRemains = $User->password_reset_expire_at->timestamp - \Carbon\Carbon::now()->timestamp;
-                if ($secondsRemains > 0) {
-                    return Helper::responseData('code_already_sent', true, [
-                        'user_id' => $User->id,
-                        'seconds_remains' => $secondsRemains
-                    ], __('default.success_message.code_already_sent'));
-                }
-            }
+//            if ($User->password_reset_expire_at) {
+//                $secondsRemains = $User->password_reset_expire_at->timestamp - \Carbon\Carbon::now()->timestamp;
+//                if ($secondsRemains > 0) {
+//                    return Helper::responseData('code_already_sent', true, [
+//                        'user_id' => $User->id,
+//                        'seconds_remains' => $secondsRemains
+//                    ], __('default.success_message.code_already_sent'));
+//                }
+//            }
+//
+//            // Prepare reset code and expire time
+//            $Code = mt_rand(100000, 666666);
+//            $expireDate = \Carbon\Carbon::now()->addMinutes(10);
+//            $User->password_reset_code = $Code;
+//            $User->password_reset_expire_at = $expireDate;
+//            $User->save();
+//            $secondsRemains = $User->password_reset_expire_at->timestamp - \Carbon\Carbon::now()->timestamp;
+//            \Mail::to($q->email)->send(new \App\Mail\PasswordVerificationCodeMail($Code));
 
-            // Prepare reset code and expire time
-            $Code = mt_rand(100000, 666666);
-            $expireDate = \Carbon\Carbon::now()->addMinutes(10);
-            $User->password_reset_code = $Code;
-            $User->password_reset_expire_at = $expireDate;
-            $User->save();
-            $secondsRemains = $User->password_reset_expire_at->timestamp - \Carbon\Carbon::now()->timestamp;
-            \Mail::to($q->email)->send(new \App\Mail\PasswordVerificationCodeMail($Code));
+             Password::sendResetLink(
+                $q->only('email')
+            );
+
             return Helper::responseData('reset_code_sent', true, [
                 'user_id' => $User->id,
-                'seconds_remains' => $secondsRemains
             ], __('default.success_message.reset_code_sent'));
         }
     }

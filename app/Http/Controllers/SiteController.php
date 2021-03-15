@@ -30,6 +30,18 @@ class SiteController extends Controller
         $page = Page::where('page_key','about_us')->where('lang',app()->getLocale())->first();
         return view('site.pages.about_us')->with('page',$page);
     }
+
+    public function getContentPages($page)
+    {
+        if($page == 'privacy-policy')
+            $page = Page::where('page_key','privacy_policy')->where('lang',app()->getLocale())->first();
+        elseif($page == 'terms-conditions')
+            $page = Page::where('page_key','terms_conditions')->where('lang',app()->getLocale())->first();
+        else
+            abort(404);
+        return view('site.pages.page')->with('page',$page);
+    }
+
     public function getHowItWok(){
         $how_it_work_video = Setting::select('how_it_work_video')->first()->how_it_work_video;
         $pages = Page::where('page_key','how_it_work')->where('lang',app()->getLocale())->get();

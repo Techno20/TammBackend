@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UploaderController;
+use App\Models\Category;
+use App\Notifications\NewServiceLikeNotification;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -17,6 +19,23 @@ use Illuminate\Validation\Rule;
 
 class UserServiceController extends Controller
 {
+
+    public function likeService(Request $request)
+    {
+        $user = auth()->user();
+        $service = Service::findOrFail($request->service_id);
+        if(!$service->likes->contains('user_id' , $user->id))
+        {
+            $service->likes()->create(['user_id' => $user->id]);
+            $provider = $service->User;
+            $provider->notify(new NewServiceLikeNotification($user , $service));
+
+            return response()->json(['success' => true]);
+        }
+        else
+            return response()->json(['success' => false]);
+
+    }
 
     /**
      * Get services list
@@ -283,5 +302,11 @@ class UserServiceController extends Controller
     }
     public function getPricing(Request $request){
         return view('site.user.service.pricing');
+    }
+
+    public function getCategories($main_category_type)
+    {
+        $categories = Category::where('main_category_type' , $main_category_type)->get();
+        return response()->json($categories);
     }
 }

@@ -273,4 +273,9 @@ return [
     'rating_service_text' => 'Rating text',
     'rating_service_text_example' => 'Example, great service and fast delivery',
     'select_country' => 'Select Country',
+    'reset_password' => 'Password Reset',
+    'reset_password_content' => 'Enter the new password to reset it for your account',
+    'success' => 'success',
+    'reset_password_success' => 'The password for your account has been successfully reset',
+
 ];

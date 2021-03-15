@@ -53,8 +53,8 @@
                         <ul>
                             {{--                            <li><a href="">@lang('site.careers')</a></li>--}}
                             {{--<li><a href="">@lang('site.news')</a></li>--}}
-                            <li><a href="#">@lang('site.privacy_policy')</a></li>
-                            <li><a href="#">@lang('site.terms_of_service')</a></li>
+                            <li><a href="{{ route('pages' , 'privacy-policy') }}">@lang('site.privacy_policy')</a></li>
+                            <li><a href="{{ route('pages' , 'terms-conditions') }}">@lang('site.terms_of_service')</a></li>
                         </ul>
                     </div>
                 </div>

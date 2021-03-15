@@ -776,7 +776,7 @@
 
                                                     <div class="send-message-comp">
                                                         <div class="message-wrapper d-flex flex-column ">
-                                                            <textarea name="requirements_details" class="form-control input_to_count" placeholder="Write your message"></textarea>
+                                                            <textarea name="requirements_details" class="form-control input_to_count" placeholder="@lang('site.Write_your_message')"></textarea>
                                                             {{--                                            <div class="attachments d-flex align-items-center flex-wrap">--}}
                                                             {{--                                                <label>Attachmets:</label>--}}
                                                             {{--                                                <div class="attachment">--}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\NewOrderNotification;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -160,6 +161,9 @@ class CheckoutController extends Controller
                 'service_id' => $Service->id
             ]
         );
+
+        $user = $Service->User;
+        $user->notify(new NewOrderNotification(auth()->user() , $Order));
 
         return Helper::responseData('success',true);
     }

@@ -24,5 +24,5 @@ $(document).ready(function () {
             $('body, html').css("overflow-y", "auto");
         });
     });
-    
+
 });

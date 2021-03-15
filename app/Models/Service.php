@@ -8,13 +8,14 @@ use DB, Storage,Helper;
 class Service extends Model
 {
 
-  protected $table = 'services';
+    protected $table = 'services';
 
-  protected $casts = [
-    'category_id' => 'integer',
-    'user_id' => 'integer',
-    'is_approved' => 'boolean',
-    'is_active' => 'boolean'
+
+    protected $casts = [
+        'category_id' => 'integer',
+        'user_id' => 'integer',
+        'is_approved' => 'boolean',
+        'is_active' => 'boolean'
   ];
 
   protected $appends = [
@@ -153,6 +154,11 @@ class Service extends Model
   // Orders
   public function Orders(){
     return $this->hasMany('App\Models\Order');
+  }
+
+  public function likes()
+  {
+      return $this->hasMany(ServiceLike::class);
   }
 
   /* START SCOPES */

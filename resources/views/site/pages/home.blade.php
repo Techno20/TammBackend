@@ -4,6 +4,18 @@
 @endsection
 
 @section('js')
+
+    <script>
+        @if(session('success-json-response'))
+            Swal.fire({
+                icon: "success",
+                title: "@lang('site.success')",
+                text: "{{ session('success-json-response') }}",
+                showConfirmButton : true,
+                confirmButtonText: 'ok'
+            });
+        @endif
+    </script>
 @endsection
 
 @section('content')
@@ -203,7 +215,7 @@
                                             <h3>{{ $value->title }}</h3>
                                             <div class="meta d-flex align-items-center">
                                                 <p class="total-rate"><i class="fas fa-star"></i> {{ $value->user->getUserServicesReviews() }}</p>
-                                                <p class="total-sell">{{ $value->Orders()->count() }} Sell</p>
+                                                <p class="total-sell">{{ $value->Orders()->count() }} @lang('site.sell')</p>
                                             </div>
                                             <p class="brief">
                                                 {{ \Str::limit($value->description , 70)}}

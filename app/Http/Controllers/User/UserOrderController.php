@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\UploaderController;
+use App\Notifications\DeliveryOrderNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB, Helper;
@@ -163,6 +164,10 @@ class UserOrderController extends Controller
                 'service_id' => $Order->Service->id
             ]
         );
+
+        $customer = $Order->User;
+        $customer->notify(new DeliveryOrderNotification($Order->Service->User , $Order));
+
         return  redirect()->back()->with(['success' => 'تمت العملية بنجاح']);
     }
 

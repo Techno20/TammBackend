@@ -34,15 +34,22 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('auth-invalid-token', [AuthController::class, 'getAuthInvalidToken'])->name('login');
         Route::post('register', [AuthController::class, 'postRegister']);
         Route::post('login', [AuthController::class, 'postLogin']);
+        Route::get('/reset-password/{token}' , [AuthController::class , 'getResetPassword'])
+            ->middleware('guest')->name('password.reset');
+        Route::post('reset-password' , [AuthController::class, 'resetPassword'])->name('reset.password');
         Route::group(['prefix' => 'password'], function() {
             Route::post('forget', [AuthController::class, 'postForgetPassword']);
             Route::post('verify-code', [AuthController::class, 'postVerifyForgetPasswordCode']);
             Route::post('reset', [AuthController::class, 'postResetPassword']);
         });
+
+
+
         Route::get('profile/{user_id}', [UserProfileController::class, 'getProfile']);
         Route::get('dashboard', [UserProfileController::class, 'getDashboard']);
         Route::get('profile', [UserProfileController::class, 'getMyProfile']);
         Route::GET('getprofileupdat' , [UserProfileController::class, 'getMyProfileupdat']);
+        Route::get('make-notifications-read' , [UserProfileController::class, 'makeAllUserNotificationsRead']);
 
         Route::group(['middleware' => 'auth'],function(){
             Route::get('me', [AuthController::class, 'getMe']);
@@ -53,6 +60,7 @@ Route::group(['middleware' => 'api-localization'],function(){
             Route::post('delete-skill', [AuthController::class, 'deleteSkill']);
 
             Route::group(['prefix' => 'service'],function(){
+                Route::get('get-categories/{main_category_type}', [UserServiceController::class, 'getCategories']);
                 Route::get('list', [UserServiceController::class, 'getList']);
                 Route::get('show/{service_id}', [UserServiceController::class, 'getShow']);
                 Route::get('add/{id?}', [UserServiceController::class, 'getForm']);
@@ -62,6 +70,7 @@ Route::group(['middleware' => 'api-localization'],function(){
                 Route::delete('delete/{service_id}', [UserServiceController::class, 'Delete']);
                 Route::get('pricing', [UserServiceController::class, 'getPricing']);
                 Route::get('description', [UserServiceController::class, 'getDescription']);
+                Route::post('like' , [UserServiceController::class, 'likeService']);
 //                Route::get('description', [UserServiceController::class, 'getDescription']);
             });
 
@@ -79,7 +88,7 @@ Route::group(['middleware' => 'api-localization'],function(){
             });
 
             Route::group(['prefix' => 'conversation'],function(){
-                Route::get('list', [UserConversationController::class, 'getList']);
+                Route::get('list', [UserConversationController::class, 'getList'])->name('conversation.list');
                 Route::get('messages/{conversation_id}', [UserConversationController::class, 'getMessages']);
                 Route::post('send-reply/{conversation_id}', [UserConversationController::class, 'postSendReply']);
                 Route::post('send-message', [UserConversationController::class, 'postSendMessage'])->name('user.conversation.send.message');
@@ -93,13 +102,14 @@ Route::group(['middleware' => 'api-localization'],function(){
     });
 
     Route::group(['prefix' => ''],function(){
-        Route::get('/', [ServiceController::class, 'getHomeData']);
+        Route::get('/', [ServiceController::class, 'getHomeData'])->name('home');
         Route::get('home', [ServiceController::class, 'getHomeData']);
         Route::get('lang/{lang}', [SiteController::class, 'changeLanguage']);
 
         Route::get('search', [SiteController::class, 'getSearch']);
 
         Route::get('about-us', [SiteController::class, 'getAboutUs']);
+        Route::get('pages/{page}', [SiteController::class, 'getContentPages'])->name('pages');
         Route::get('how-it-work', [SiteController::class, 'getHowItWok']);
         Route::get('logout', [SiteController::class, 'getLogout']);
     });
@@ -107,7 +117,7 @@ Route::group(['middleware' => 'api-localization'],function(){
         Route::get('categories/{main_category?}', [ServiceController::class, 'getCategories']);
         Route::get('list/{category?}', [ServiceController::class, 'getList']);
         // Route::get('show/{service_id}/recipient_id/{recipient_id}', [ServiceController::class, 'getShow']);
-        Route::get('show/{service_id}', [ServiceController::class, 'getShow']);
+        Route::get('show/{service_id}', [ServiceController::class, 'getShow'])->name('service.details');
 
         Route::get('reviews/{service_id}', [ServiceController::class, 'getReviews']);
     });

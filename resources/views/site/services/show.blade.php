@@ -1,7 +1,17 @@
 @extends('site.layout.main')
 
 @section('css')
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <style>
+        .liked
+        {
+            color: var(--danger) !important;
+        }
+    </style>
 @endsection
+
+
 
 @section('content')
 
@@ -19,11 +29,24 @@
                         {{--                        <a href="">FAQ</a>--}}
                         {{--                        <a href="">Review</a>--}}
                     </div>
-{{--                    <div class="tools d-flex align-items-center ml-auto">--}}
-{{--                        <div class="favorites-count">--}}
-{{--                            <i class="fas fa-heart"></i>--}}
-{{--                            <span>1,535</span>--}}
-{{--                        </div>--}}
+                    <div class="tools d-flex align-items-center ml-auto">
+                        <div class="favorites-count">
+                            @auth
+                                @if((!$service->likes->contains('user_id' , auth()->user()->id)) && $service->user_id != auth()->user()->id)
+                                    <button type="button" class="btn btn-link like-button">
+                                        <i class="fas fa-heart" id="heart-icon"></i>
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-link" disabled>
+                                        <i class="fas fa-heart liked" id="heart-icon"></i>
+                                    </button>
+                                @endif
+                            @else
+                                <i class="fas fa-heart"></i>
+                            @endauth
+                            <span id="ServiceLikesCount">{{ $service->likes->count() }}</span>
+                            <input type="hidden" name="service_id" value="{{ $service->id }}">
+                        </div>
 {{--                        <div class="share-list dropdown">--}}
 {{--                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">--}}
 {{--                                <i class="fas fa-share-alt"></i>--}}
@@ -33,7 +56,7 @@
 {{--                                <a class="dropdown-item" href="#">twitter</a>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
-{{--                    </div>--}}
+                    </div>
                 </div>
             </div>
         </section>
@@ -441,7 +464,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <form action="{{route('user.conversation.send.message')}}"  method="post" nctype="multipart/form-data" id="formSendMassege" >
+                            <form action="{{route('user.conversation.send.message')}}"  method="post" enctype="multipart/form-data" id="formSendMassege" >
                                 @csrf
                                 <div class="message-wrapper d-flex flex-column ">
                                     <input type="hidden" id="service_provider_id" name="service_provider_id" value="{{$service->user->id}}">
@@ -468,6 +491,7 @@
                                         <!--    <span class="current">87</span>-->
                                         <!--    <span class="total">/ 2500</span>-->
                                         <!--</p>-->
+                                        <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">
                                         <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
                                         <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
 
@@ -721,6 +745,46 @@
                         e.preventDefault();
                         var number = $(this).index();
                         sync1.data('owl.carousel').to(number, 300, true);
+                    });
+                });
+            </script>
+
+            <script>
+
+                $(".like-button").click(function(event){
+                    event.preventDefault();
+
+                    let service_id = $("input[name=service_id]").val();
+                    let _token   = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        url: "/user/service/like",
+                        type:"POST",
+                        data:{
+                            service_id:service_id,
+                            _token: _token
+                        },
+                        success:function(response){
+                            console.log(response);
+                            if(response) {
+                                if(response.success == true)
+                                {
+                                    $('#heart-icon').addClass('liked');
+                                    $('#ServiceLikesCount').text(parseInt($('#ServiceLikesCount').text()) + 1);
+                                    $('.like-button').prop("disabled", true);
+                                    $('.like-button').removeClass('like-button');
+                                }
+
+                            }
+                        },
+                    });
+                });
+            </script>
+
+            <script>
+                $(document).ready(function () {
+                    $(".attachment-btn").click(function () {
+                        $("#attachment").click();
                     });
                 });
             </script>

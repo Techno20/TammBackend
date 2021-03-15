@@ -22,6 +22,12 @@ use Session;
 
 class UserProfileController extends Controller
 {
+
+    public function makeAllUserNotificationsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+        return response()->json(['success' => true]);
+    }
     /**
      * Get user dashboard
      *

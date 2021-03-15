@@ -37,28 +37,28 @@ class ConversationMessage extends Model
 
     /**
      * Get attachments
-     * 
+     *
      */
-    public function getAttachmentsAttribute($value){
-        $fullPathAttachments = [];
-        if($value){
-            $Attachments = explode('||',$value);
-            if(is_array($Attachments) && count($Attachments)){
-                foreach($Attachments as $Attachment){
-                    $fullPathAttachments[] = Storage::url('attachments/'.$Attachment);
-                }
-            }
-        }
-        return $fullPathAttachments;
-    }
+//    public function getAttachmentsAttribute($value){
+//        $fullPathAttachments = [];
+//        if($value){
+//            $Attachments = explode('||',$value);
+//            if(is_array($Attachments) && count($Attachments)){
+//                foreach($Attachments as $Attachment){
+//                    $fullPathAttachments[] = Storage::url('attachments/'.$Attachment);
+//                }
+//            }
+//        }
+//        return $fullPathAttachments;
+//    }
 
     /**
      * Set attachments
-     * 
+     *
      */
-    public function setAttachmentsAttribute($value){
-        $this->attributes['attachments'] = join('||',Helper::cleanArraySeperator($value,'||'));
-    }
+//    public function setAttachmentsAttribute($value){
+//        $this->attributes['attachments'] = join('||',Helper::cleanArraySeperator($value,'||'));
+//    }
 
 
     // Check whether the sender is the current user
@@ -68,5 +68,10 @@ class ConversationMessage extends Model
             $isMe = true;
         }
         return $isMe;
+    }
+
+    public function getMessageAttachmentUrl()
+    {
+        return 'storage/messages/' . $this->attachments;
     }
 }

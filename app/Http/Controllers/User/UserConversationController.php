@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\UploaderController;
+use App\Notifications\NewMessageConversationNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB, Helper;
@@ -12,20 +14,21 @@ class UserConversationController extends Controller
 
     /**
      * Send message to service provider
-     * 
+     *
      * @param Request $q
      */
     public function postSendMessage(Request $q)
     {
+
         $validator = validator()->make($q->all(), [
           'service_provider_id' => ['required',new \App\Rules\UserRule],
           'message' => 'required',
-          // 'attachments' => 'array'
+            'attachment' => 'nullable'
         ]);
         if($validator->fails()) {
           return Helper::responseValidationError($validator->messages());
         }
-        
+
 
         $Conversation = new Conversation;
         $Conversation->title = "q->title";
@@ -37,16 +40,25 @@ class UserConversationController extends Controller
         $ConversationMessage->conversation_id = $Conversation->id;
         $ConversationMessage->user_id = auth()->user()->id;
         $ConversationMessage->message = $q->message;
-        $ConversationMessage->attachments = $q->attachments;
+
+        $upload = new UploaderController();
+        $upload->folder = 'messages';
+        $upload->thumbFolder = 'messages/thumbs';
+        $galleryItemResponse = $q->hasFile('attachment') ? $upload->uploadSingle($q->attachment,false) : null;
+        $ConversationMessage->attachments = $galleryItemResponse ? $galleryItemResponse['path'] : null;
         $ConversationMessage->save();
 
         $Conversation = Conversation::selectCard()->where('id',$Conversation->id)->first();
+
+        $toUser = User::find($q->service_provider_id);
+        $toUser->notify(new NewMessageConversationNotification(auth()->user()));
+
         return Helper::responseData('success',true,$Conversation);
     }
 
     /**
      * Get conversations list
-     * 
+     *
      */
     public function getList()
     {
@@ -58,7 +70,7 @@ class UserConversationController extends Controller
 
     /**
      * Get conversation messages
-     * 
+     *
      * @param integer $conversationId
      */
     public function getMessages($conversationId , Request $q)
@@ -82,7 +94,7 @@ class UserConversationController extends Controller
 
     /**
      * Send reply to conversation
-     * 
+     *
      * @param integer $conversationId
      */
     public function postSendReply(Request $q)
@@ -106,7 +118,13 @@ class UserConversationController extends Controller
       $ConversationMessage->conversation_id = $Conversation->id;
       $ConversationMessage->user_id = auth()->user()->id;
       $ConversationMessage->message = $q->message;
-      $ConversationMessage->attachments = $q->attachments;
+
+        $upload = new UploaderController();
+        $upload->folder = 'messages';
+        $upload->thumbFolder = 'messages/thumbs';
+        $galleryItemResponse = $q->hasFile('attachment') ? $upload->uploadSingle($q->attachment,false) : null;
+        $ConversationMessage->attachments = $galleryItemResponse ? $galleryItemResponse['path'] : null;
+
       $ConversationMessage->save();
 
       $ConversationMessage = ConversationMessage::where('id',$ConversationMessage->id)->with('User')->first();

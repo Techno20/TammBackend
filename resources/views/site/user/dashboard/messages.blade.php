@@ -1,24 +1,36 @@
 @extends('site.user.dashboard.layout.main')
 
 @section('css')
+    <style>
+        .another-content
+        {
+            display: inline-block;
+            padding: 8px;
+            border-radius: 20px;
+            color: #51606D;
+            font-size: 14px;
+            font-family: 'font500',sans-serif;
+            border: 1px solid #E1E1E1;
+            text-align: start;
+            max-width: 70%;
+            float: left;
+        }
+
+        .ms-contnet-another
+        {
+            margin-right: 30px;
+            display: inline-block;
+            padding: 8px;
+            border-radius: 20px;
+            background-color: #FCF8EF;
+            font-size: 14px;
+            color: #242851;
+        }
+
+    </style>
 @endsection
 
-@section('js')
-    <script>
-        $(document).ready(function() {
 
-        });
-        $(document).on('click','.messages-side-menu .conv-item',function(e){
-            e.preventDefault();
-            $('.messages-side-menu .conv-item').removeClass('active');
-            $(this).removeClass('seen unseen');
-            $(this).addClass('active');
-            $(this).find('.unseen').remove();
-            $(this).find('.seen').remove();
-            $(this).find('.badge').remove();
-        });
-    </script>
-@endsection
 
 @section('content')
     <section class="main-page-content flex-grow-1">
@@ -30,30 +42,17 @@
                     @lang('site.welcome'), {{ auth()->user()->name }} @lang('site.welcome_back')
                 </p>
             </div>
-            <div class="page-header-btns">
-
-                <a href="" class="btn notify-spot">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17.466" height="20.396" viewBox="0 0 17.466 20.396">
-                        <g transform="translate(0)">
-                            <g transform="translate(0 0)">
-                                <path class="a"
-                                      d="M5.1,17.411H.957c-.022,0-.044.008-.067.01a.756.756,0,0,1-.825-.667A10.551,10.551,0,0,1,0,15.611V11.363a8.953,8.953,0,0,1,8.009-9.2V.746a.747.747,0,0,1,1.493,0v1.41a8.4,8.4,0,0,1,5.422,2.7,9.476,9.476,0,0,1,2.537,6.507V15.6a10.55,10.55,0,0,1-.059,1.144.753.753,0,0,1-.169.394l-.007.008h0a.744.744,0,0,1-.569.264H12.416a3.732,3.732,0,0,1-7.313,0ZM8.76,18.9a2.24,2.24,0,0,0,2.112-1.492H6.649A2.24,2.24,0,0,0,8.76,18.9Zm7.2-2.984c.007-.107.012-.216.012-.328V11.363A7.959,7.959,0,0,0,13.834,5.87,6.963,6.963,0,0,0,8.76,3.612a7.511,7.511,0,0,0-7.213,7.751v4.557Z" fill="currentcolor" />
-                            </g>
-                        </g>
-                    </svg>
-                </a>
-
-            </div>
+            @include('site.user.dashboard.includes.notifications')
         </header>
 
+        <div class="messages-side-overlay"></div>
+        
         <!-- messages-section -->
         <div class="messages-section">
             <div class="wrapper d-flex">
                 <div class="messages-side-menu">
                     <div class="messages-side-content">
-                    <a href="" class="btn message-menu-toggle" id="">
-                    <i class="fas fa-align-left"></i>
-                </a>
+
                         <header class="messages-side-header d-flex align-items-center">
                             <h3>{{__('site.All_Conversations')}}</h3>
                             <i class="fas fa-chevron-down"></i>
@@ -339,31 +338,16 @@
                     </div>
 
                     <div class="messages-body-footer mt-auto d-flex align-items-center">
-                        <form action="" method="POST" id="formReplayMessege">
+                        <form action="" method="POST" id="formReplayMessege" enctype="multipart/form-data">
                             @csrf
                             <textarea class="form-control" id="txtAeraMessage" name="message" placeholder="Type a message..."></textarea>
+                            <input type="file" name="attachment" id="attachment" style="display: none;">
                             <div class="tools d-flex align-items-center">
-                                <a href="">
-                                    <svg id="Picture_Icon" data-name="Picture Icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                        <rect id="Rectangle" width="16.875" height="16.875" rx="1.125" transform="translate(0.563 0.563)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                        <circle id="Oval" cx="2.25" cy="2.25" r="2.25" transform="translate(10.125 3.375)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                        <path id="Path" d="M0,.806A6.146,6.146,0,0,1,8.771,3.918" transform="translate(2.971 10.413)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                        <path id="Path-2" data-name="Path" d="M0,.871A3.337,3.337,0,0,1,4.388.777" transform="translate(10.786 11.818)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                    </svg>
-                                </a>
-                                <a href="">
+                                <a href="" id="Attachment_Icon_action">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18.233" height="17.583" viewBox="0 0 18.233 17.583">
                                         <g id="Attachment_Icon" data-name="Attachment Icon" transform="translate(0 -0.121)">
                                             <path id="Path" d="M16.875,6.718,8.642,14.951a5.063,5.063,0,0,1-7.159-7.16L8.245,1.03A3.375,3.375,0,1,1,13.017,5.8L6.256,12.568a1.687,1.687,0,0,1-2.387-2.386l6.762-6.764" transform="translate(0.562 0.707)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
                                         </g>
-                                    </svg>
-                                </a>
-                                <a href="">
-                                    <svg id="Emoji_Icon" data-name="Emoji Icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                        <circle id="Oval" cx="8.438" cy="8.438" r="8.438" transform="translate(0.563 0.563)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                        <path id="Path" d="M.562,0a.562.562,0,0,0-.53.75A5.625,5.625,0,0,0,5.337,4.5,5.625,5.625,0,0,0,10.642.75a.563.563,0,0,0-.53-.75Z" transform="translate(3.663 10.688)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                        <path id="Path-2" data-name="Path" d="M.375.094A.281.281,0,1,1,.094.375.281.281,0,0,1,.375.094" transform="translate(12 5.813)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
-                                        <path id="Path-3" data-name="Path" d="M.375.094A.281.281,0,1,1,.094.375.281.281,0,0,1,.375.094" transform="translate(5.25 5.813)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
                                     </svg>
                                 </a>
                                 <input type="submit" id="btnReplayMessege" class="btn btn-yallow" value="ارسال">
@@ -376,4 +360,32 @@
         </div>
 
     </section>
+@endsection
+
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+
+        });
+        $(document).on('click','.messages-side-menu .conv-item',function(e){
+            e.preventDefault();
+            $('.messages-side-menu .conv-item').removeClass('active');
+            $(this).removeClass('seen unseen');
+            $(this).addClass('active');
+            $(this).find('.unseen').remove();
+            $(this).find('.seen').remove();
+            $(this).find('.badge').remove();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Attachment_Icon_action").click(function (event) {
+                event.preventDefault();
+                $("#attachment").click();
+            });
+        });
+    </script>
+
 @endsection

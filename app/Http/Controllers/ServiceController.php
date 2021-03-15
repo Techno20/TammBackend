@@ -10,6 +10,7 @@ use App\Models\OrderExtra;
 use App\Models\Say;
 use App\Models\ServiceExtra;
 use App\Models\Setting;
+use App\Notifications\NewOrderNotification;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\ServiceReview;
@@ -267,6 +268,9 @@ class ServiceController extends Controller
             $galleryItemResponse = session()->has('checkout_file') ? session('checkout_file') : null;
             $Order->requirements_attachments = $galleryItemResponse ? $galleryItemResponse['path'] : null;
             $Order->save();
+
+            $user = $Service->User;
+            $user->notify(new NewOrderNotification(auth()->user() , $Order));
 
             /**
              * Log a financial transaction for both order submitter and service provider

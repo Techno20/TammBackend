@@ -46,7 +46,7 @@
         </header>
 
         <div class="messages-side-overlay"></div>
-        
+
         <!-- messages-section -->
         <div class="messages-section">
             <div class="wrapper d-flex">

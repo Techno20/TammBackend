@@ -106,10 +106,6 @@ class CheckoutController extends Controller
                 unset($data['requirements_attachments']);
             }
 
-            $user = $Service->User;
-            $user->notify(new NewOrderNotification(auth()->user() , $Order));
-
-
             session()->put('checkout', $data);
             return response()->json([
                 'status' => true,

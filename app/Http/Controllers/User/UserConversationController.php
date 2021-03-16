@@ -29,12 +29,14 @@ class UserConversationController extends Controller
           return Helper::responseValidationError($validator->messages());
         }
 
-
-        $Conversation = new Conversation;
-        $Conversation->title = "q->title";
-        $Conversation->user_sender_id = auth()->user()->id;
-        $Conversation->user_recipient_id = $q->service_provider_id;
-        $Conversation->save();
+        $Conversation = Conversation::query()->where('user_sender_id', auth()->user()->id)->where('user_recipient_id', $q->service_provider_id)->first();
+        if (!$Conversation) {
+            $Conversation = new Conversation;
+            $Conversation->title = "q->title";
+            $Conversation->user_sender_id = auth()->user()->id;
+            $Conversation->user_recipient_id = $q->service_provider_id;
+            $Conversation->save();
+        }
 
         $ConversationMessage = new ConversationMessage;
         $ConversationMessage->conversation_id = $Conversation->id;

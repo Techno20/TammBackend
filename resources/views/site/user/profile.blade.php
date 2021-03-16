@@ -484,8 +484,8 @@
                                                 <!--    <span class="current">87</span>-->
                                                 <!--    <span class="total">/ 2500</span>-->
                                                 <!--</p>-->
-                                                <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">
-                                                <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
+{{--                                                <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">--}}
+{{--                                                <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>--}}
 
                                                 <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
 

@@ -468,7 +468,7 @@
                                 @csrf
                                 <div class="message-wrapper d-flex flex-column ">
                                     <input type="hidden" id="service_provider_id" name="service_provider_id" value="{{$service->user->id}}">
-                                    <textarea name="message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
+                                    <textarea name="message" id="contact_message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
                                     {{-- <div class="attachments d-flex align-items-center flex-wrap">
                                         <label>المرفقات:</label>
                                         <div class="attachment">
@@ -491,8 +491,8 @@
                                         <!--    <span class="current">87</span>-->
                                         <!--    <span class="total">/ 2500</span>-->
                                         <!--</p>-->
-                                        <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">
-                                        <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
+{{--                                        <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">--}}
+{{--                                        <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>--}}
                                         <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
 
                                     </div>
@@ -516,45 +516,45 @@
             <script type="text/javascript">
 
                 $(document).ready(function () {
-                      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                    {{--$("#btnSendMassage").click(function (event) {--}}
-                    {{--    event.preventDefault();--}}
-                    {{--    var form = $('#formSendMassege')[0];--}}
-                    {{--    var data = new FormData(form);--}}
-                    {{--    $.ajax({--}}
-                    {{--        type: "POST",--}}
-                    {{--        url: "{{route('user.conversation.send.message')}}",--}}
-                    {{--        data: data,--}}
-                    {{--        dataType: "json",--}}
-                    {{--        processData: false,--}}
-                    {{--        contentType: false,--}}
-                    {{--        cache: false,--}}
-                    {{--        timeout: 800000,--}}
-                    {{--        success: function (response) {--}}
-                    {{--            // console.log(response);--}}
-                    {{--            if(response.message == "success"){--}}
-                    {{--                 document.getElementById('alertMessege').innerHTML =  `--}}
-                    {{--                    <div class="alert alert-success alert-dismissible fade show" role="alert">--}}
-                    {{--                    تم ارسال الرسالة بنجاح--}}
-                    {{--                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-                    {{--                      <span aria-hidden="true">&times;</span>--}}
-                    {{--                    </button>--}}
-                    {{--                  </div>--}}
-                    {{--                    `--}}
-
-                    {{--            }--}}
-                    {{--        },--}}
-                    {{--        error: function(r) {--}}
-                    {{--            document.getElementById('alertMessege').innerHTML =  `--}}
-                    {{--            <div class="alert alert-danger alert-dismissible fade show" role="alert">--}}
-                    {{--            فشل العملية--}}
-                    {{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-                    {{--              <span aria-hidden="true">&times;</span>--}}
-                    {{--            </button>--}}
-                    {{--          </div>--}}
-                    {{--            `            }--}}
-                    {{--    });--}}
-                    {{--});--}}
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $("#btnSendMassage").click(function (event) {
+                        event.preventDefault();
+                        var form = $('#formSendMassege')[0];
+                        var data = new FormData(form);
+                        $.ajax({
+                            type: "POST",
+                            url: "{{route('user.conversation.send.message')}}",
+                            data: data,
+                            dataType: "json",
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            timeout: 800000,
+                            success: function (response) {
+                                // console.log(response);
+                                if(response.message == "success"){
+                                     document.getElementById('alertMessege').innerHTML =  `
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        تم ارسال الرسالة بنجاح
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                        `
+                                    $('#contact_message').val('');
+                                }
+                            },
+                            error: function(r) {
+                                document.getElementById('alertMessege').innerHTML =  `
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                فشل العملية
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                                `            }
+                        });
+                    });
                 });
 
                 function getMassegeChats(id) {

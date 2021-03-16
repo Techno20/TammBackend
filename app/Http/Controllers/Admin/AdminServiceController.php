@@ -42,6 +42,7 @@ class AdminServiceController extends Controller
 		if($validator->fails()) {
 			return Helper::responseValidationError($validator->messages());
 		}
+
 		Service::where('id',$serviceId)->update(['is_approved' => $q->is_approved]);
 
         $service = Service::find($serviceId);

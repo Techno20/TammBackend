@@ -48,8 +48,13 @@
                                 @elseif($notification->data['channel'] == 'messages')
                                     {{ $notification->data['title'] }} - {{ \App\Models\User::find($notification->data['user_id'])->name }}
                                 @elseif($notification->data['channel'] == 'services')
-                                    {{ \App\Models\User::find($notification->data['user_id'])->name }} {{ $notification->data['title'] }} -
-                                    {{ \App\Models\Service::find($notification->data['service_id'])->title }}
+                                    @if(isset($notification->data['user_id']))
+                                        {{ \App\Models\User::find($notification->data['user_id'])->name }} {{ $notification->data['title'] }} -
+                                        {{ \App\Models\Service::find($notification->data['service_id'])->title }}
+                                    @else
+                                        {{ $notification->data['title'] }} -
+                                        {{ \App\Models\Service::find($notification->data['service_id'])->title }}
+                                    @endif
                                 @endif
                             </p>
                         </div>

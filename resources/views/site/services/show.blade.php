@@ -516,11 +516,11 @@
             <script type="text/javascript">
 
                 $(document).ready(function () {
-                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     $("#btnSendMassage").click(function (event) {
                         event.preventDefault();
                         var form = $('#formSendMassege')[0];
                         var data = new FormData(form);
+                        data.append('_token', '{{csrf_token()}}');
                         $.ajax({
                             type: "POST",
                             url: "{{route('user.conversation.send.message')}}",
@@ -533,26 +533,27 @@
                             success: function (response) {
                                 // console.log(response);
                                 if(response.message == "success"){
-                                     document.getElementById('alertMessege').innerHTML =  `
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        تم ارسال الرسالة بنجاح
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                        `
-                                    $('#contact_message').val('');
-                                }
-                            },
+                                    document.getElementById('alertMessege').innerHTML =  `
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            تم ارسال الرسالة بنجاح
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                            `
+                                                    }
+                                $('#contact_message').val('');
+                                                },
                             error: function(r) {
-                                document.getElementById('alertMessege').innerHTML =  `
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                فشل العملية
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                                `            }
+                                                    document.getElementById('alertMessege').innerHTML =  `
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    فشل العملية
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                    `
+                            }
                         });
                     });
                 });
@@ -561,7 +562,7 @@
                     document.getElementById('tempIdConversations').value = id;
                     $.ajax({
                         type: "GET",
-                        url: "/user/conversation/messages/"+id,
+                        url: "/develop/public/user/conversation/messages/"+id,
                         data: "data",
                         dataType: "json",
                         success: function (response) {
@@ -619,7 +620,7 @@
                         var data = new FormData(form);
                         $.ajax({
                             type: "POST",
-                            url: "/user/conversation/send-reply/"+$('#tempIdConversations').val(),
+                            url: "/develop/public/user/conversation/send-reply/"+$('#tempIdConversations').val(),
                             data: data,
                             dataType: "json",
                             processData: false,

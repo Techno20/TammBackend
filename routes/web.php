@@ -89,7 +89,7 @@ Route::group(['middleware' => 'api-localization'],function(){
 
             Route::group(['prefix' => 'conversation'],function(){
                 Route::get('list', [UserConversationController::class, 'getList'])->name('conversation.list');
-                Route::get('messages/{conversation_id}', [UserConversationController::class, 'getMessages']);
+                Route::get('messages/{conversation_id?}', [UserConversationController::class, 'getMessages'])->name('conversation.get_messages');
                 Route::post('send-reply/{conversation_id}', [UserConversationController::class, 'postSendReply']);
                 Route::post('send-message', [UserConversationController::class, 'postSendMessage'])->name('user.conversation.send.message');
             });

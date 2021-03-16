@@ -18,17 +18,6 @@
     </style>
 @endsection
 
-@section('js')
-
-    <script>
-        $(document).ready(function () {
-            $(".attachment-btn").click(function () {
-                $("#attachment").click();
-            });
-        });
-    </script>
-@endsection
-
 @section('content')
     <div class="body-content">
         <!-- freelancer-user-profile-page -->
@@ -461,7 +450,7 @@
                                         @csrf
                                         <div class="message-wrapper d-flex flex-column ">
                                             <input type="hidden" id="service_provider_id" name="service_provider_id" value="{{$user->id}}">
-                                            <textarea name="message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
+                                            <textarea name="message" id="contact_message" class="form-control" placeholder="{{__('site.Write_your_message')}}"></textarea>
 {{--                                             <div class="attachments d-flex align-items-center flex-wrap">--}}
 {{--                                                <label>المرفقات:</label>--}}
 {{--                                                <div class="attachment">--}}
@@ -506,4 +495,57 @@
 
         @endif
     @endauth
+@endsection
+
+@section('js')
+
+    <script>
+        $(document).ready(function () {
+            $(".attachment-btn").click(function () {
+                $("#attachment").click();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btnSendMassage").click(function (event) {
+                event.preventDefault();
+                var form = $('#formSendMassege')[0];
+                var data = new FormData(form);
+                data.append('_token', '{{csrf_token()}}');
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('user.conversation.send.message')}}",
+                    data: data,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    success: function (response) {
+                        // console.log(response);
+                        if(response.message == "success"){
+                            document.getElementById('alertMessege').innerHTML =  `
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        تم ارسال الرسالة بنجاح
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                        `
+                        }
+                        $('#contact_message').val('');
+                    },
+                    error: function(r) {
+                        document.getElementById('alertMessege').innerHTML =  `
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                فشل العملية
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                `            }
+                });
+            });
+        });
+    </script>
 @endsection

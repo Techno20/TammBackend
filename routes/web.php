@@ -60,7 +60,7 @@ Route::group(['middleware' => 'api-localization'],function(){
             Route::post('delete-skill', [AuthController::class, 'deleteSkill']);
 
             Route::group(['prefix' => 'service'],function(){
-                Route::get('get-categories/{main_category_type}', [UserServiceController::class, 'getCategories']);
+                Route::get('get-categories', [UserServiceController::class, 'getCategories'])->name('categories');
                 Route::get('list', [UserServiceController::class, 'getList']);
                 Route::get('show/{service_id}', [UserServiceController::class, 'getShow']);
                 Route::get('add/{id?}', [UserServiceController::class, 'getForm']);
@@ -70,7 +70,7 @@ Route::group(['middleware' => 'api-localization'],function(){
                 Route::delete('delete/{service_id}', [UserServiceController::class, 'Delete']);
                 Route::get('pricing', [UserServiceController::class, 'getPricing']);
                 Route::get('description', [UserServiceController::class, 'getDescription']);
-                Route::post('like' , [UserServiceController::class, 'likeService']);
+                Route::post('like' , [UserServiceController::class, 'likeService'])->name('service.like');
 //                Route::get('description', [UserServiceController::class, 'getDescription']);
             });
 

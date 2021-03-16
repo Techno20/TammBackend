@@ -410,7 +410,7 @@
             $('#cat-1').change(function () {
                 let main_category_type = $(this).val();
                 $.ajax({
-                    url: "/user/service/get-categories/" + main_category_type,
+                    url: "{{ route('categories') }}?main_category_type=" + main_category_type,
                     type: "get",
                     success: function (response) {
                         $("#cat-2").empty();

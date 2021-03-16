@@ -13,6 +13,7 @@ use App\Models\Bank;
 use App\Models\Country;
 use App\Models\Skill;
 use Helper;
+use Illuminate\Support\Facades\Mail;
 
 class HelperController extends Controller
 {

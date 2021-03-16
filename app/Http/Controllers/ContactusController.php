@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contactus;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\ContactusMessage;
 use PhpParser\Node\Expr\AssignOp\Concat;
@@ -44,12 +45,14 @@ class ContactusController extends Controller
             'email' => 'required|max:255',
             'message' => 'required'
         ]);
-       
+
         $contactus = new ContactusMessage();
         $contactus->name = $request->name;
         $contactus->message = $request->message;
         $contactus->email = $request->email;
         $contactus->save();
+
+        \Mail::to(Setting::first()->contact_email)->send(new \App\Mail\ContactUsMail(request()));
         return back()->with('success',trans('تم ارسال الرسالة بنجاح سوف نتواصل معك في اقرب وقت'));
     }
 

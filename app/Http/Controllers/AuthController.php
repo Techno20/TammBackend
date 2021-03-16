@@ -95,7 +95,7 @@ class AuthController extends Controller
 
         $token = $this->guard()->attempt(['email' => $q->email, 'password' => $q->password]);
 
-//    \Mail::to($User->email)->send(new \App\Mail\UserRegisterWelcomeMail($User));
+        \Mail::to($User->email)->send(new \App\Mail\UserRegisterWelcomeMail($User));
         return Helper::responseData('user_created', true, ['token' => $token, 'expires_in' => (auth('api')->factory()->getTTL() * 60), 'user' => auth()->user()], __('default.success_message.user_registered'));
     }
 

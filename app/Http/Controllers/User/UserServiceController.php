@@ -304,8 +304,9 @@ class UserServiceController extends Controller
         return view('site.user.service.pricing');
     }
 
-    public function getCategories($main_category_type)
+    public function getCategories(Request $request)
     {
+        $main_category_type = $request->main_category_type;
         $categories = Category::where('main_category_type' , $main_category_type)->get();
         return response()->json($categories);
     }

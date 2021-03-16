@@ -157,7 +157,7 @@
                     Swal.fire({
                         icon: "success",
                         title: "نجاح",
-                        text: "تمت عملية تسجيل الدخول بنجاح",
+                        text: "تم ارسال بريد الكتروني لقيامك بإعادة تعيين كلمة المرور",
                         showConfirmButton : false,
                         confirmButtonText: 'استمرار'
                     });

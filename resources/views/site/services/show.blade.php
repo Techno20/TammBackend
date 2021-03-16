@@ -517,44 +517,44 @@
 
                 $(document).ready(function () {
                       var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                    $("#btnSendMassage").click(function (event) {
-                        event.preventDefault();
-                        var form = $('#formSendMassege')[0];
-                        var data = new FormData(form);
-                        $.ajax({
-                            type: "POST",
-                            url: "{{route('user.conversation.send.message')}}",
-                            data: data,
-                            dataType: "json",
-                            processData: false,
-                            contentType: false,
-                            cache: false,
-                            timeout: 800000,
-                            success: function (response) {
-                                // console.log(response);
-                                if(response.message == "success"){
-                                     document.getElementById('alertMessege').innerHTML =  `
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        تم ارسال الرسالة بنجاح
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                        `
+                    {{--$("#btnSendMassage").click(function (event) {--}}
+                    {{--    event.preventDefault();--}}
+                    {{--    var form = $('#formSendMassege')[0];--}}
+                    {{--    var data = new FormData(form);--}}
+                    {{--    $.ajax({--}}
+                    {{--        type: "POST",--}}
+                    {{--        url: "{{route('user.conversation.send.message')}}",--}}
+                    {{--        data: data,--}}
+                    {{--        dataType: "json",--}}
+                    {{--        processData: false,--}}
+                    {{--        contentType: false,--}}
+                    {{--        cache: false,--}}
+                    {{--        timeout: 800000,--}}
+                    {{--        success: function (response) {--}}
+                    {{--            // console.log(response);--}}
+                    {{--            if(response.message == "success"){--}}
+                    {{--                 document.getElementById('alertMessege').innerHTML =  `--}}
+                    {{--                    <div class="alert alert-success alert-dismissible fade show" role="alert">--}}
+                    {{--                    تم ارسال الرسالة بنجاح--}}
+                    {{--                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+                    {{--                      <span aria-hidden="true">&times;</span>--}}
+                    {{--                    </button>--}}
+                    {{--                  </div>--}}
+                    {{--                    `--}}
 
-                                }
-                            },
-                            error: function(r) {
-                                document.getElementById('alertMessege').innerHTML =  `
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                فشل العملية
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                                `            }
-                        });
-                    });
+                    {{--            }--}}
+                    {{--        },--}}
+                    {{--        error: function(r) {--}}
+                    {{--            document.getElementById('alertMessege').innerHTML =  `--}}
+                    {{--            <div class="alert alert-danger alert-dismissible fade show" role="alert">--}}
+                    {{--            فشل العملية--}}
+                    {{--            <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+                    {{--              <span aria-hidden="true">&times;</span>--}}
+                    {{--            </button>--}}
+                    {{--          </div>--}}
+                    {{--            `            }--}}
+                    {{--    });--}}
+                    {{--});--}}
                 });
 
                 function getMassegeChats(id) {
@@ -758,7 +758,7 @@
                     let _token   = $('meta[name="csrf-token"]').attr('content');
 
                     $.ajax({
-                        url: "/user/service/like",
+                        url: "{{ route('service.like') }}",
                         type:"POST",
                         data:{
                             service_id:service_id,

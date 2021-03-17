@@ -276,5 +276,8 @@ return [
     'reset_password_content' => 'قم بإدخال كلمة المرور الجديدة لاعادة تعيينها لحسابك',
     'success' => 'نجاح',
     'reset_password_success' => 'تمت اعادة تعيين كلمة المرور لحسابك بنجاح',
+    'Bank_account_information' => 'بيانات الحساب البنكي',
+    'bank_name' => 'اسم البنك',
+    'bank_account_number' => 'رقم الحساب البنكي',
 
 ];

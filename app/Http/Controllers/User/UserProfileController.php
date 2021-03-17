@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\User\Account\UpdatePasswordRequest;
+use App\Models\Bank;
 use App\Models\Country;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -183,6 +184,7 @@ class UserProfileController extends Controller
         $userSkills = $User->user_skills;
 
         $countries = Country::selectcard()->get();
+        $banks = Bank::selectcard()->get();
 
 //      return Helper::responseData('success',true,$User);
         $Services = Service::selectCard()
@@ -191,7 +193,8 @@ class UserProfileController extends Controller
             ->orderBy('id','DESC')
             ->paginate(5);
         return view('site.user.EditmyProfile')->with(['user' => $User , 'services' => $Services ,
-            'allSkills' => $allSkills , 'userSkills' => $userSkills , 'countries' => $countries]);
+            'allSkills' => $allSkills , 'userSkills' => $userSkills , 'countries' => $countries
+            , 'banks' => $banks]);
     }
 
     public function updatePassword(UpdatePasswordRequest $request)

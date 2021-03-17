@@ -277,5 +277,8 @@ return [
     'reset_password_content' => 'Enter the new password to reset it for your account',
     'success' => 'success',
     'reset_password_success' => 'The password for your account has been successfully reset',
+    'Bank_account_information' => 'Bank account information',
+    'bank_name' => 'Bank name',
+    'bank_account_number' => 'Bank account number',
 
 ];

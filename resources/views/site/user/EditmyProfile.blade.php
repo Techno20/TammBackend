@@ -278,6 +278,41 @@
                                             </div>
 
                                         </div>
+
+                                            <header class="setting-body-header">
+                                                <h1>@lang('site.Bank_account_information')</h1>
+                                            </header>
+                                            <div class="form-row">
+                                                <div class="col-lg-4">
+                                                    <label>@lang('site.bank_name')</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <select class="custom-select cs-select-style" name="bank_id">
+                                                            <option selected disabled>@lang('site.chose_one')</option>
+                                                            @forelse($banks as $bank)
+                                                                <option value="{{ $bank->id }}" @if($user->bank_id == $bank->id) selected @endif>{{ $bank->name }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="form-row">
+                                                <div class="col-lg-4">
+                                                    <label>@lang('site.bank_account_number') IBAN</label>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="bank_iban" value="{{$user->bank_iban}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
                                         <div class="actions text-right">
                                             <button type="submit" class="btn btn-yallow">{{__('site.Save Changes')}}</button>
                                         </div>

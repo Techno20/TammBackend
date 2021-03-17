@@ -341,15 +341,15 @@
                         <form action="" method="POST" id="formReplayMessege" enctype="multipart/form-data">
                             @csrf
                             <textarea class="form-control" id="txtAeraMessage" name="message" placeholder="{{__('site.Write_your_message')}}"></textarea>
-{{--                            <input type="file" name="attachment" id="attachment" style="display: none;">--}}
+                            <input type="file" name="attachment" id="attachment" style="display: none;">
                             <div class="tools d-flex align-items-center">
-{{--                                <a href="" id="Attachment_Icon_action">--}}
-{{--                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.233" height="17.583" viewBox="0 0 18.233 17.583">--}}
-{{--                                        <g id="Attachment_Icon" data-name="Attachment Icon" transform="translate(0 -0.121)">--}}
-{{--                                            <path id="Path" d="M16.875,6.718,8.642,14.951a5.063,5.063,0,0,1-7.159-7.16L8.245,1.03A3.375,3.375,0,1,1,13.017,5.8L6.256,12.568a1.687,1.687,0,0,1-2.387-2.386l6.762-6.764" transform="translate(0.562 0.707)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>--}}
-{{--                                        </g>--}}
-{{--                                    </svg>--}}
-{{--                                </a>--}}
+                                <a href="" id="Attachment_Icon_action">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18.233" height="17.583" viewBox="0 0 18.233 17.583">
+                                        <g id="Attachment_Icon" data-name="Attachment Icon" transform="translate(0 -0.121)">
+                                            <path id="Path" d="M16.875,6.718,8.642,14.951a5.063,5.063,0,0,1-7.159-7.16L8.245,1.03A3.375,3.375,0,1,1,13.017,5.8L6.256,12.568a1.687,1.687,0,0,1-2.387-2.386l6.762-6.764" transform="translate(0.562 0.707)" fill="none" stroke="#9fa1b6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.125"/>
+                                        </g>
+                                    </svg>
+                                </a>
                                 <input type="submit" id="btnReplayMessege" class="btn btn-yallow" value="ارسال">
                             </div>
                         </form>

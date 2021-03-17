@@ -75,7 +75,7 @@ class UserConversationController extends Controller
      *
      * @param integer $conversationId
      */
-    public function getMessages($conversationId , Request $q)
+    public function getMessages(Request $q)
     {
       $validator = validator()->make($q->all(), [
         'conversation_id' => 'required'

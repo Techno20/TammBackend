@@ -491,8 +491,8 @@
                                         <!--    <span class="current">87</span>-->
                                         <!--    <span class="total">/ 2500</span>-->
                                         <!--</p>-->
-{{--                                        <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">--}}
-{{--                                        <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>--}}
+                                        <input type="file" class="form-control" name="attachment" id="attachment" style="display: none;">
+                                        <button type="button" class="attachment-btn"><i class="fas fa-paperclip"></i></button>
                                         <button type="submit" class="btn btn-yallow" id="btnSendMassage">{{__('site.send')}}</button>
 
                                     </div>
@@ -562,7 +562,7 @@
                     document.getElementById('tempIdConversations').value = id;
                     $.ajax({
                         type: "GET",
-                        url: "/develop/public/user/conversation/messages/"+id,
+                        url: "{{ route('conversation.get_messages') }}?conversation_id="+id,
                         data: "data",
                         dataType: "json",
                         success: function (response) {
@@ -620,7 +620,7 @@
                         var data = new FormData(form);
                         $.ajax({
                             type: "POST",
-                            url: "/develop/public/user/conversation/send-reply/"+$('#tempIdConversations').val(),
+                            url: "{{ route('conversation.send.reply') }}?conversation_id="+$('#tempIdConversations').val(),
                             data: data,
                             dataType: "json",
                             processData: false,

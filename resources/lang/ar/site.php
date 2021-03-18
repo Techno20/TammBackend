@@ -56,6 +56,7 @@ return [
     'last_update' => 'اخر تحديث',
     'total' => 'الاجمالي',
     'status' => 'الحالة',
+    'total_after_commission' => 'الاجمالي بعد خصم العمولة',
 
     'current_order' => 'الحالية',
     'delivered_order' => 'المنتهية',
@@ -280,5 +281,5 @@ return [
     'bank_name' => 'اسم البنك',
     'bank_account_number' => 'رقم الحساب البنكي',
     'prepare_by' => 'برمجة وتنفيذ',
-    'techno2030' => ' تقنيات ريادية ',
+    'techno2030' => 'شركة تقنيات ريادية ',
 ];

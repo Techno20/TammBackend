@@ -70,7 +70,7 @@
                                 </td>
                                 <td>{{ date('M d',strtotime($value->created_at)) }}</td>
                                 <td>{{ date('M d',strtotime($value->status_updated_at)) }}</td>
-                                <td>{{ $value->paid_total }} $</td>
+                                <td>{{ number_format($value->total_after_commission, 2) }} @lang('site.sar')</td>
                                 <td><span class="stauts-label @if($value->status == 'canceled') red @endif">@lang('default.other.order_status.'.$value->status)</span></td>
                                 <td>
 

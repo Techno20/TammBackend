@@ -56,6 +56,8 @@ return [
     'last_update' => 'Last Update',
     'total' => 'Total',
     'status' => 'Status',
+    'total_after_commission' => 'Total after deducting commission',
+
 
     'current_order' => 'Current',
     'delivered_order' => 'Delivered',

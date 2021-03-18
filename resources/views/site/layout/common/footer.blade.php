@@ -76,7 +76,7 @@
                     <div class="copyright">© @lang('site.copyright'). {{ date('Y',time()) }}</div>
                 </div>
 
-                <div class="text-center text-uppercase">
+                <div class="text-center text-uppercase" style="font-size: 18px;">
                     @lang('site.prepare_by') © <a href="https://techno2030.com" target="_blank" style="color: #ff9d30;">@lang('site.techno2030')</a>
                 </div>
 

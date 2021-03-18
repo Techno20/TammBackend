@@ -91,9 +91,7 @@ class UserProfileController extends Controller
         $clientsOrdersTotalPaidCount = Order::with('Service')->whereHas('Service', function ($Service) {
             return $Service->where('user_id', auth()->user()->id);
         })->whereStatus('delivered')
-            ->sum('paid_total');
-        $clientsOrdersTotalPaidCount = $clientsOrdersTotalPaidCount - ($clientsOrdersTotalPaidCount * Setting::first()->commission_rate / 100);
-
+            ->sum('total_after_commission');
 
         $allClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
             return $Service->where('user_id', auth()->user()->id);

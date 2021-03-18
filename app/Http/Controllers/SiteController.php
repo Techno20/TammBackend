@@ -44,8 +44,8 @@ class SiteController extends Controller
 
     public function getHowItWok(){
         $how_it_work_video = Setting::select('how_it_work_video')->first()->how_it_work_video;
-        $pages = Page::where('page_key','how_it_work')->where('lang',app()->getLocale())->get();
-        return view('site.pages.how_it_work')->with('pages',$pages)->with('how_it_work_video',$how_it_work_video);
+        $page = Page::where('page_key','how_it_work')->where('lang',app()->getLocale())->first();
+        return view('site.pages.how_it_work')->with('page',$page)->with('how_it_work_video',$how_it_work_video);
     }
 
     public function getSearch(Request $request){

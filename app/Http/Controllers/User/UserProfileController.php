@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Requests\User\Account\UpdatePasswordRequest;
 use App\Models\Bank;
 use App\Models\Country;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -91,6 +92,8 @@ class UserProfileController extends Controller
             return $Service->where('user_id', auth()->user()->id);
         })->whereStatus('delivered')
             ->sum('paid_total');
+        $clientsOrdersTotalPaidCount = $clientsOrdersTotalPaidCount - ($clientsOrdersTotalPaidCount * Setting::first()->commission_rate / 100);
+
 
         $allClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
             return $Service->where('user_id', auth()->user()->id);

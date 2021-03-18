@@ -44,7 +44,7 @@
                                 <div class="balance-box">
                                     <label>@lang('site.earings_last_3_month')</label>
                                     <div class="text">
-                                        {{ number_format($clientsOrdersPaidCount , 2, '.', '') }} $
+                                        {{ number_format($clientsOrdersPaidCount , 2, '.', '') }} @lang('site.sar')
                                     </div>
                                     <div class="content">
                                         <img src="{{ asset('assets/site/images/dashboard/chart.png') }}" class="img-fluid">
@@ -82,7 +82,7 @@
                                                 <td><a href="">{{ $order->Service()->selectCard()->first()->title }}</a>
                                                 </td>
                                                 <td>{{ date('M d',strtotime($order->created_at)) }}</td>
-                                                <td>{{ $order->paid_total }} $</td>
+                                                <td>{{ $order->paid_total }} @lang('site.sar')</td>
                                                 <td><span
                                                         class="stauts-label">@lang('default.other.order_status.'.$order->status)</span>
                                                 </td>

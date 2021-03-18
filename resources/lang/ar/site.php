@@ -279,5 +279,6 @@ return [
     'Bank_account_information' => 'بيانات الحساب البنكي',
     'bank_name' => 'اسم البنك',
     'bank_account_number' => 'رقم الحساب البنكي',
-
+    'prepare_by' => 'برمجة وتنفيذ',
+    'techno2030' => ' تقنيات ريادية ',
 ];

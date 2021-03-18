@@ -15,7 +15,7 @@
         <div class="summary">
             <div class="item d-flex align-items-center justify-content-between">
                 <label>{{__('site.Earned')}}</label>
-                <p>{{ number_format($clientsOrdersTotalPaidCount , 2, '.', '') }} $</p>
+                <p>{{ number_format($clientsOrdersTotalPaidCount , 2, '.', '') }} @lang('site.sar')</p>
             </div>
             {{-- <div class="item d-flex align-items-center justify-content-between">
                 <label>Response Time</label>

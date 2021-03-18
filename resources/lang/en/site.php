@@ -280,5 +280,7 @@ return [
     'Bank_account_information' => 'Bank account information',
     'bank_name' => 'Bank name',
     'bank_account_number' => 'Bank account number',
+    'prepare_by' => 'Prepared by',
+    'techno2030' => 'Techno2030',
 
 ];

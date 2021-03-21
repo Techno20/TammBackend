@@ -86,7 +86,7 @@ class UserProfileController extends Controller
             return $Service->where('user_id', auth()->user()->id);
         })->whereStatus('delivered')
             ->whereBetween('created_at', [Carbon::now()->startOfMonth()->subMonth(3), Carbon::now()])
-            ->sum('paid_total');
+            ->sum('total_after_commission');
 
         $clientsOrdersTotalPaidCount = Order::with('Service')->whereHas('Service', function ($Service) {
             return $Service->where('user_id', auth()->user()->id);

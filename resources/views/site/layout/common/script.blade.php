@@ -262,7 +262,7 @@
                             document.getElementById('messages_body_content').innerHTML +=
                                 `
                         <div class="message-respond-item">
-                             <a target="_blank" href="/develop/public/storage/messages/${response.data.data[i].attachments}">استعراض المرفقات</a>
+                             <a target="_blank" href="{{url('storage/messages')}}/${response.data.data[i].attachments}">استعراض المرفقات</a>
                             <br>
                         </div>
 `
@@ -296,7 +296,7 @@
                             document.getElementById('messages_body_content').innerHTML +=
                                 `
                                 <div class="ms-contnet-another">
-                                <a target="_blank" href="/develop/public/storage/messages/${response.data.data[i].attachments}">استعراض المرفقات</a>
+                                <a target="_blank" href="{{url('storage/messages')}}/${response.data.data[i].attachments}">استعراض المرفقات</a>
                         </div>
                                     `
                         }

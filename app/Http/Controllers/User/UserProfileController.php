@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\User\Account\UpdatePasswordRequest;
+use App\Models\Bank;
 use App\Models\Country;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -84,12 +86,12 @@ class UserProfileController extends Controller
             return $Service->where('user_id', auth()->user()->id);
         })->whereStatus('delivered')
             ->whereBetween('created_at', [Carbon::now()->startOfMonth()->subMonth(3), Carbon::now()])
-            ->sum('paid_total');
+            ->sum('total_after_commission');
 
         $clientsOrdersTotalPaidCount = Order::with('Service')->whereHas('Service', function ($Service) {
             return $Service->where('user_id', auth()->user()->id);
         })->whereStatus('delivered')
-            ->sum('paid_total');
+            ->sum('total_after_commission');
 
         $allClientsOrdersCount = Order::with('Service')->whereHas('Service', function ($Service) {
             return $Service->where('user_id', auth()->user()->id);
@@ -183,6 +185,7 @@ class UserProfileController extends Controller
         $userSkills = $User->user_skills;
 
         $countries = Country::selectcard()->get();
+        $banks = Bank::selectcard()->get();
 
 //      return Helper::responseData('success',true,$User);
         $Services = Service::selectCard()
@@ -191,7 +194,8 @@ class UserProfileController extends Controller
             ->orderBy('id','DESC')
             ->paginate(5);
         return view('site.user.EditmyProfile')->with(['user' => $User , 'services' => $Services ,
-            'allSkills' => $allSkills , 'userSkills' => $userSkills , 'countries' => $countries]);
+            'allSkills' => $allSkills , 'userSkills' => $userSkills , 'countries' => $countries
+            , 'banks' => $banks]);
     }
 
     public function updatePassword(UpdatePasswordRequest $request)

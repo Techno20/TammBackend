@@ -173,16 +173,29 @@
                         <div class="summbary d-flex">
                             <div class="info">
                                 <label>@lang('site.total')</label>
-                                <p>{{ $order->paid_total }} $</p>
+                                <p>{{ $order->paid_total }} @lang('site.sar')</p>
                             </div>
 
 
-                            <div class="info">
-                                <label>@lang('site.commission_rate')</label>
-                                <p>{{ $order->commission_rate }} %</p>
-                            </div>
+                            @if($order->user_id != auth()->user()->id)
+                                <div class="info">
+                                    <label>@lang('site.commission_rate')</label>
+                                    <p>{{ $order->commission_rate }} %</p>
+                                </div>
+                            @endif
 
                         </div>
+
+                        @if($order->user_id != auth()->user()->id)
+                            <div class="summbary d-flex">
+                                <div class="info">
+                                    <label>@lang('site.total_after_commission')</label>
+                                    <p>{{ number_format($order->total_after_commission, 2) }} @lang('site.sar')</p>
+                                </div>
+                            </div>
+                        @endif
+
+
 
                         <div class="summbary d-flex">
                             <div class="info">

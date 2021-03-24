@@ -75,6 +75,12 @@
                     </a>
                     <div class="copyright">© @lang('site.copyright'). {{ date('Y',time()) }}</div>
                 </div>
+
+                <div class="text-center text-uppercase" style="font-size: 18px;">
+                    @lang('site.prepare_by') © <a href="https://techno2030.com" target="_blank" style="color: #ff9d30;">@lang('site.techno2030')</a>
+                </div>
+
+
                 <div class="f-social">
                     <a href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     <a href="" target="_blank"><i class="fab fa-instagram"></i></a>

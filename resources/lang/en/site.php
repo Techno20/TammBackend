@@ -56,6 +56,8 @@ return [
     'last_update' => 'Last Update',
     'total' => 'Total',
     'status' => 'Status',
+    'total_after_commission' => 'Total after deducting commission',
+
 
     'current_order' => 'Current',
     'delivered_order' => 'Delivered',
@@ -277,5 +279,10 @@ return [
     'reset_password_content' => 'Enter the new password to reset it for your account',
     'success' => 'success',
     'reset_password_success' => 'The password for your account has been successfully reset',
+    'Bank_account_information' => 'Bank account information',
+    'bank_name' => 'Bank name',
+    'bank_account_number' => 'Bank account number',
+    'prepare_by' => 'Prepared by',
+    'techno2030' => 'Techno2030',
 
 ];

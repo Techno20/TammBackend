@@ -237,7 +237,7 @@
         document.getElementById('tempIdConversations').value = id;
         $.ajax({
             type: "GET",
-            url: "/develop/public/user/conversation/messages/"+id,
+            url: "{{ route('conversation.get_messages') }}?conversation_id="+id,
             data: "data",
             dataType: "json",
             success: function (response) {
@@ -262,7 +262,7 @@
                             document.getElementById('messages_body_content').innerHTML +=
                                 `
                         <div class="message-respond-item">
-                             <a target="_blank" href="/storage/messages/${response.data.data[i].attachments}">استعراض المرفقات</a>
+                             <a target="_blank" href="/develop/public/storage/messages/${response.data.data[i].attachments}">استعراض المرفقات</a>
                             <br>
                         </div>
 `
@@ -296,7 +296,7 @@
                             document.getElementById('messages_body_content').innerHTML +=
                                 `
                                 <div class="ms-contnet-another">
-                                <a target="_blank" href="/storage/messages/${response.data.data[i].attachments}">استعراض المرفقات</a>
+                                <a target="_blank" href="/develop/public/storage/messages/${response.data.data[i].attachments}">استعراض المرفقات</a>
                         </div>
                                     `
                         }
@@ -332,7 +332,7 @@
             {
                 $.ajax({
                     type: "POST",
-                    url: "/develop/public/user/conversation/send-reply/"+$('#tempIdConversations').val(),
+                    url: "{{ route('conversation.send.reply') }}?conversation_id="+$('#tempIdConversations').val(),
                     data: data,
                     dataType: "json",
                     processData: false,

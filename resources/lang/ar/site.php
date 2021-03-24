@@ -56,6 +56,7 @@ return [
     'last_update' => 'اخر تحديث',
     'total' => 'الاجمالي',
     'status' => 'الحالة',
+    'total_after_commission' => 'الاجمالي بعد خصم العمولة',
 
     'current_order' => 'الحالية',
     'delivered_order' => 'المنتهية',
@@ -276,5 +277,9 @@ return [
     'reset_password_content' => 'قم بإدخال كلمة المرور الجديدة لاعادة تعيينها لحسابك',
     'success' => 'نجاح',
     'reset_password_success' => 'تمت اعادة تعيين كلمة المرور لحسابك بنجاح',
-
+    'Bank_account_information' => 'بيانات الحساب البنكي',
+    'bank_name' => 'اسم البنك',
+    'bank_account_number' => 'رقم الحساب البنكي',
+    'prepare_by' => 'برمجة وتنفيذ',
+    'techno2030' => 'شركة تقنيات ريادية ',
 ];

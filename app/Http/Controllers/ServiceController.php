@@ -260,6 +260,7 @@ class ServiceController extends Controller
             $Order->package = $Package;
             $Order->paid_total = $paidTotal;
             $Order->commission_rate = $commissionRate;
+            $Order->total_after_commission = $paidTotal - ($paidTotal * ($commissionRate / 100));
             $Order->requirements_details = isset($q['requirements_details']) ? $q['requirements_details'] : null;
 
             $upload = new UploaderController();

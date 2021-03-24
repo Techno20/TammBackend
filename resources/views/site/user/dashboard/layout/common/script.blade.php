@@ -134,7 +134,7 @@
         document.getElementById('tempIdConversations').value = id;
         $.ajax({
             type: "GET",
-            url: "/develop/public/user/conversation/messages/"+id,
+            url: "{{ route('conversation.get_messages') }}?conversation_id="+id,
             data: "data",
             dataType: "json",
             success: function (response) {
@@ -229,7 +229,7 @@
             {
                 $.ajax({
                     type: "POST",
-                    url: "/develop/public/user/conversation/send-reply/"+$('#tempIdConversations').val(),
+                    url: "{{ route('conversation.send.reply') }}?conversation_id="+$('#tempIdConversations').val(),
                     data: data,
                     dataType: "json",
                     processData: false,

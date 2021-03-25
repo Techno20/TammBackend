@@ -79,7 +79,7 @@
                                         <tbody>
                                         @forelse($clientsOrders as $order)
                                             <tr>
-                                                <td><a href="">{{ $order->Service()->selectCard()->first()->title }}</a>
+                                                <td><a href="{{ route('user.order.details' , $order->id) }}">{{ $order->Service()->selectCard()->first()->title }}</a>
                                                 </td>
                                                 <td>{{ date('M d',strtotime($order->created_at)) }}</td>
                                                 <td>{{ $order->paid_total }} @lang('site.sar')</td>

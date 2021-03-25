@@ -280,7 +280,7 @@
                         @foreach($result['categories'] as $key => $value)
                         <div class="item">
                             <div class="marketplace-item">
-                                <a href="">
+                                <a href="{{ url('service/list?category_id='.$value->id) }}">
                                     <figure>
                                         @if(isset($value->image) && !empty($value->image) &&file_exists(asset('uploads/categories/'.$value->image)))
                                             <img src="{{ asset('uploads/users/'.$value->image) }}" class="img-fluid">

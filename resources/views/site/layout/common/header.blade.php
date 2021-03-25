@@ -175,7 +175,7 @@
 
             @if(auth()->guard('web')->check())
             <div class="auth-header-tools">
-                <a href="" class="btn btn-gray switch-account"><span>@lang('site.welcome')</span>:{{ auth()->guard('web')->user()->name }}</a>
+                <a href="{{ url('user/profile') }}" class="btn btn-gray switch-account"><span>@lang('site.welcome')</span>:{{ auth()->guard('web')->user()->name }}</a>
                 {{-- <a href="" class="btn btn-gray notification-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13.585" height="15.863" viewBox="0 0 13.585 15.863">
                         <g id="bell" transform="translate(0)">

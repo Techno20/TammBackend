@@ -82,10 +82,10 @@
 
 
                 <div class="f-social">
-                    <a href="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="{{ $website_settings->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="{{ $website_settings->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ $website_settings->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ $website_settings->facebook }}" target="_blank"><i class="fab fa-facebook"></i></a>
                 </div>
             </div>
         </div>
